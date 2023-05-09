@@ -47,4 +47,10 @@ public class CondominiosController
     {
         return condominios.Where(c => c.Id == id);
     }
+
+    [HttpPost]
+    public void Post([FromBody] Condominio condominio)
+    {
+        condominios.Append(condominio);
+    }
 }

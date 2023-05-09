@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Adicionando o contexto do banco de dados
 builder.Services.AddDbContext<EntregaSeguraContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServerConnection")));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
