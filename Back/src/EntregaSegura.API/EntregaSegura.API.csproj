@@ -14,4 +14,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EntregaSegura.Application\EntregaSegura.Application.csproj" />
+  </ItemGroup>
+
 </Project>
