@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\EntregaSegura.Application\EntregaSegura.Application.csproj" />
+    <ProjectReference Include="..\EntregaSegura.Application\EntregaSegura.Application.csproj" />
   </ItemGroup>
 
 </Project>

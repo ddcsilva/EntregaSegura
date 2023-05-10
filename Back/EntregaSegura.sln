@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntregaSegura.Infrastructur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntregaSegura.Application", "src\EntregaSegura.Application\EntregaSegura.Application.csproj", "{DB943B92-0981-4495-8907-660A298CC3F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntregaSegura.API", "src\EntregaSegura.API\EntregaSegura.API\EntregaSegura.API.csproj", "{8DF18A15-B988-409E-8F44-48BF9402A73A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntregaSegura.API", "src\EntregaSegura.API\EntregaSegura.API.csproj", "{8DF18A15-B988-409E-8F44-48BF9402A73A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
