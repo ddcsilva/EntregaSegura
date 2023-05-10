@@ -12,4 +12,8 @@
     <Folder Include="Repositories\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

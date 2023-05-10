@@ -13,4 +13,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
+    <ProjectReference Include="..\EntregaSegura.Infrastructure\EntregaSegura.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
