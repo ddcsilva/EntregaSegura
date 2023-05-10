@@ -7,6 +7,7 @@ public sealed class Funcionario : BaseEntity
     public Funcionario()
     {
         Entregas = new List<Entrega>();
+        DataAdmissao = DateTime.Now;
     }
 
     public Guid CondominioId { get; set; }

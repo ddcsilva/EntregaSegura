@@ -47,6 +47,7 @@ public static class ModelBuilderExtensions
             CPF = "12345678901",
             Email = "morador@email.com",
             Telefone = "11999999999",
+            Ramal = "210",
             UnidadeId = unidadeId
         });
 

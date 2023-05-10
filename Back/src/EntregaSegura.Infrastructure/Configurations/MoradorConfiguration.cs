@@ -46,29 +46,35 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnType("varchar(11)")
             .HasComment("Telefone do morador");
 
+        builder.Property(m => m.Ramal)
+            .HasColumnName("MOR_RAMAL")
+            .HasColumnOrder(6)
+            .HasColumnType("varchar(5)")
+            .HasComment("Ramal do morador");
+
         builder.Property(m => m.UnidadeId)
             .HasColumnName("MOR_UNIDADE_ID")
-            .HasColumnOrder(6)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasComment("Chave estrangeira da unidade do morador");
 
         builder.Property(m => m.DataCriacao)
             .HasColumnName("MOR_DATA_CRIACAO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data de criação do morador");
 
         builder.Property(m => m.DataAtualizacao)
             .HasColumnName("MOR_DATA_ATUALIZACAO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data da última atualização do morador");
 
         builder.Property(m => m.DataExclusao)
             .HasColumnName("MOR_DATA_EXCLUSAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(10)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão do morador");
 
