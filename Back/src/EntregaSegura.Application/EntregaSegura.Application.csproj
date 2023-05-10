@@ -7,8 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
-    <ProjectReference Include="..\EntregaSegura.Infrastructure\EntregaSegura.Infrastructure.csproj" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Notificacoes\" />
+    <Folder Include="DTOs\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

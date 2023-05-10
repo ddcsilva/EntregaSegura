@@ -7,7 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
+    <Folder Include="Contexts\" />
+    <Folder Include="Configurations\" />
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>
