@@ -3,7 +3,7 @@ using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Domain.Interfaces.Repositories;
 
-public interface IRepository<TEntity> : IDisposable where TEntity : BaseEntity
+public interface IRepository<TEntity> where TEntity : BaseEntity
 {
     void Adicionar(TEntity entity);
     void Atualizar(TEntity entity);

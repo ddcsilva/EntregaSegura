@@ -46,9 +46,4 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     {
         _dbSet.Remove(new TEntity { Id = id });
     }
-
-    public void Dispose()
-    {
-        _context?.Dispose();
-    }
 }
