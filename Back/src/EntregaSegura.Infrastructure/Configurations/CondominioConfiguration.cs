@@ -94,9 +94,16 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
             .HasColumnType("varchar(2)")
             .HasComment("Estado do endereço do condomínio");
 
+        builder.Property(c => c.Excluido)
+            .HasColumnName("CND_EXCLUIDO")
+            .HasColumnOrder(13)
+            .IsRequired()
+            .HasDefaultValue(false)
+            .HasComment("Flag de exclusão do condomínio");
+
         builder.Property(c => c.DataCriacao)
             .HasColumnName("CND_DATA_CRIACAO")
-            .HasColumnOrder(13)
+            .HasColumnOrder(14)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -104,7 +111,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
 
         builder.Property(c => c.DataAtualizacao)
             .HasColumnName("CND_DATA_ATUALIZACAO")
-            .HasColumnOrder(14)
+            .HasColumnOrder(15)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -112,7 +119,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
 
         builder.Property(c => c.DataExclusao)
             .HasColumnName("CND_DATA_EXCLUSAO")
-            .HasColumnOrder(15)
+            .HasColumnOrder(16)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão do condomínio");
 

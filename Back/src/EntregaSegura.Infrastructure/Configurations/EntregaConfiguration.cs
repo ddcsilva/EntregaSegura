@@ -70,9 +70,16 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
             .IsRequired()
             .HasComment("Status da entrega");
 
+        builder.Property(e => e.Excluido)
+            .HasColumnName("ETG_EXCLUIDO")
+            .HasColumnOrder(10)
+            .IsRequired()
+            .HasDefaultValue(false)
+            .HasComment("Flag de exclusão da entrega");
+
         builder.Property(e => e.DataCriacao)
             .HasColumnName("ETG_DATA_CRIACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -80,7 +87,7 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
 
         builder.Property(e => e.DataAtualizacao)
             .HasColumnName("ETG_DATA_ATUALIZACAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(12)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -88,7 +95,7 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
 
         builder.Property(e => e.DataExclusao)
             .HasColumnName("ETG_DATA_EXCLUSAO")
-            .HasColumnOrder(12)
+            .HasColumnOrder(13)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão da entrega");
 

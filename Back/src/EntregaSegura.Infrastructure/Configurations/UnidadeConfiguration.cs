@@ -36,23 +36,30 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
             .HasColumnType("varchar(10)")
             .HasComment("Bloco da unidade");
 
+        builder.Property(u => u.Excluido)
+            .HasColumnName("UND_EXCLUIDO")
+            .HasColumnOrder(8)
+            .IsRequired()
+            .HasDefaultValue(false)
+            .HasComment("Indica se a unidade foi excluída");
+
         builder.Property(u => u.DataCriacao)
             .HasColumnName("UND_DATA_CRIACAO")
-            .HasColumnOrder(5)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de criação da unidade");
 
         builder.Property(u => u.DataAtualizacao)
             .HasColumnName("UND_DATA_ATUALIZACAO")
-            .HasColumnOrder(6)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data da última atualização da unidade");
 
         builder.Property(u => u.DataExclusao)
             .HasColumnName("UND_DATA_EXCLUSAO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(11)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão da unidade");
 

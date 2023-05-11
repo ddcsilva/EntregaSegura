@@ -5,28 +5,15 @@ public abstract class BaseEntity
     protected BaseEntity()
     {
         Id = Guid.NewGuid();
+        DataCriacao = DateTime.Now;
+        DataAtualizacao = DateTime.Now;
     }
 
     public Guid Id { get; set; }
+    public DateTime DataCriacao { get; set; }
+    public DateTime DataAtualizacao { get; set; }
+    public DateTime? DataExclusao { get; set; }
     public bool Excluido { get; set; } = false;
-    private DateTime _dataCriacao;
-    public DateTime DataCriacao
-    {
-        get => _dataCriacao.ToLocalTime();
-        set => _dataCriacao = value.ToLocalTime();
-    }
-    private DateTime _dataAtualizacao;
-    public DateTime DataAtualizacao
-    {
-        get => _dataAtualizacao.ToLocalTime();
-        set => _dataAtualizacao = value.ToLocalTime();
-    }
-    private DateTime? _dataExclusao;
-    public DateTime? DataExclusao
-    {
-        get => _dataExclusao?.ToLocalTime();
-        set => _dataExclusao = value?.ToLocalTime();
-    }
 
     public bool Equals(BaseEntity outraEntidade)
     {

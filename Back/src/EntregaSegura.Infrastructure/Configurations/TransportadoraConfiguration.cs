@@ -43,9 +43,16 @@ public class TransportadoraConfiguration : IEntityTypeConfiguration<Transportado
             .HasColumnType("varchar(100)")
             .HasComment("E-mail da transportadora");
 
+        builder.Property(e => e.Excluido)
+            .HasColumnName("TRA_EXCLUIDO")
+            .HasColumnOrder(6)
+            .IsRequired()
+            .HasDefaultValue(false)
+            .HasComment("Flag de exclusão da transportadora");
+
         builder.Property(e => e.DataCriacao)
             .HasColumnName("TRA_DATA_CRIACAO")
-            .HasColumnOrder(6)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -53,7 +60,7 @@ public class TransportadoraConfiguration : IEntityTypeConfiguration<Transportado
 
         builder.Property(e => e.DataAtualizacao)
             .HasColumnName("TRA_DATA_ATUALIZACAO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -61,7 +68,7 @@ public class TransportadoraConfiguration : IEntityTypeConfiguration<Transportado
 
         builder.Property(e => e.DataExclusao)
             .HasColumnName("TRA_DATA_EXCLUSAO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(9)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão da transportadora");
 

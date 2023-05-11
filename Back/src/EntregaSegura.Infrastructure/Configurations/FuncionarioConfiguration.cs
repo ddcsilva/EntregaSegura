@@ -65,9 +65,16 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .HasColumnType("datetime")
             .HasComment("Data de demissão do funcionário");
 
+        builder.Property(f => f.Excluido)
+            .HasColumnName("FUN_EXCLUIDO")
+            .HasColumnOrder(9)
+            .IsRequired()
+            .HasDefaultValue(false)
+            .HasComment("Indica se o funcionário foi excluído");
+
         builder.Property(f => f.DataCriacao)
             .HasColumnName("FUN_DATA_CRIACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -75,7 +82,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataAtualizacao)
             .HasColumnName("FUN_DATA_ATUALIZACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -83,13 +90,13 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataExclusao)
             .HasColumnName("FUN_DATA_EXCLUSAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(12)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão do funcionário");
 
         builder.Property(f => f.CondominioId)
             .HasColumnName("FUN_CONDOMINIO_ID")
-            .HasColumnOrder(12)
+            .HasColumnOrder(13)
             .IsRequired()
             .HasComment("Chave estrangeira do condomínio");
 
