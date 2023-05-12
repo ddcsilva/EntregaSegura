@@ -52,36 +52,42 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnType("varchar(5)")
             .HasComment("Ramal do morador");
 
+        builder.Property(m => m.Foto)
+            .HasColumnName("MOR_FOTO")
+            .HasColumnOrder(7)
+            .HasColumnType("varchar(100)")
+            .HasComment("Foto do morador");
+
         builder.Property(m => m.UnidadeId)
             .HasColumnName("MOR_UNIDADE_ID")
-            .HasColumnOrder(7)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasComment("Chave estrangeira da unidade do morador");
 
         builder.Property(m => m.Excluido)
             .HasColumnName("MOR_EXCLUIDO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasDefaultValue(false)
             .HasComment("Indica se o morador foi excluído");
 
         builder.Property(m => m.DataCriacao)
             .HasColumnName("MOR_DATA_CRIACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data de criação do morador");
 
         builder.Property(m => m.DataAtualizacao)
             .HasColumnName("MOR_DATA_ATUALIZACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data da última atualização do morador");
 
         builder.Property(m => m.DataExclusao)
             .HasColumnName("MOR_DATA_EXCLUSAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(12)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão do morador");
 

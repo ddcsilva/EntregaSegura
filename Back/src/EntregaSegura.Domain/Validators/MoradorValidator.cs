@@ -27,6 +27,10 @@ public class MoradorValidator : AbstractValidator<Morador>
             .Length(1, 5).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
             .When(c => c.Ramal != null);
 
+        RuleFor(c => c.Foto)
+            .Length(1, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
+            .When(c => c.Foto != null);
+
         RuleFor(m => m.Email)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
             .EmailAddress().WithMessage("O campo {PropertyName} fornecido é inválido")

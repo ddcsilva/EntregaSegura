@@ -13,7 +13,7 @@ public sealed class Morador : BaseEntity
     public string Email { get; set; }
     public string Telefone { get; set; }
     public string Ramal { get; set; }
-
+    public string Foto { get; set; }
 
     // Um morador pertence a apenas uma unidade
     public Unidade Unidade { get; set; }
