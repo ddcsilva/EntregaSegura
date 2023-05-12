@@ -1,4 +1,5 @@
 using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Models;
 using EntregaSegura.Infrastructure.UnitOfWork;
 using FluentValidation;
 using FluentValidation.Results;
@@ -8,10 +9,12 @@ namespace EntregaSegura.Application.Services;
 public abstract class BaseService
 {
     protected readonly IUnitOfWork _unitOfWork;
+    private readonly INotificadorErros _notificadorErros;
 
-    public BaseService(IUnitOfWork unitOfWork)
+    public BaseService(IUnitOfWork unitOfWork, INotificadorErros notificadorErros)
     {
         _unitOfWork = unitOfWork;
+        _notificadorErros = notificadorErros;
     }
 
     protected void Notificar(ValidationResult validationResult)
@@ -24,7 +27,7 @@ public abstract class BaseService
 
     protected void Notificar(string mensagem)
     {
-        
+        _notificadorErros.Handle(new NotificacaoErros(mensagem));
     }
 
     protected bool ExecutarValidacao<TV, TE>(TV validacao, TE entidade) where TV : AbstractValidator<TE> where TE : BaseEntity

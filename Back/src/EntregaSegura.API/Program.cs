@@ -1,3 +1,7 @@
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Application.Notifications;
+using EntregaSegura.Application.Services;
+using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Infrastructure.Contexts;
 using EntregaSegura.Infrastructure.Repositories;
@@ -22,6 +26,10 @@ builder.Services.AddScoped<IMoradorRepository, MoradorRepository>();
 builder.Services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();
 builder.Services.AddScoped<IUnidadeRepository, UnidadeRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<INotificadorErros, NotificadorErros>();
+
+builder.Services.AddScoped<ICondominioService, CondominioService>();
 
 var app = builder.Build();
 
