@@ -1,15 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
-    <Folder Include="Entities\" />
-    <Folder Include="Interfaces\" />
-    <Folder Include="Enums\" />
-    <Folder Include="Validators\" />
+    <Folder Include="Entities\"/>
+    <Folder Include="Interfaces\"/>
+    <Folder Include="Enums\"/>
+    <Folder Include="Validators\"/>
   </ItemGroup>
-
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.5.2"/>
+    <PackageReference Include="Polly" Version="7.2.3"/>
+  </ItemGroup>
 </Project>
