@@ -13,7 +13,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
 
     public FuncionarioService(IFuncionarioRepository funcionarioRepository,
                               IUnitOfWork unitOfWork,
-                              NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                              INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _funcionarioRepository = funcionarioRepository;
     }

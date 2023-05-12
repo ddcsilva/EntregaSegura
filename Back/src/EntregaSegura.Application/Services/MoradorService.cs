@@ -13,7 +13,7 @@ public class MoradorService : BaseService, IMoradorService
 
     public MoradorService(IMoradorRepository moradorRepository,
                           IUnitOfWork unitOfWork,
-                          NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _moradorRepository = moradorRepository;
     }

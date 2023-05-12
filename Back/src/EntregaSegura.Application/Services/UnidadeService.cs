@@ -13,7 +13,7 @@ public class UnidadeService : BaseService, IUnidadeService
 
     public UnidadeService(IUnidadeRepository unidadeRepository,
                           IUnitOfWork unitOfWork,
-                          NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _unidadeRepository = unidadeRepository;
     }

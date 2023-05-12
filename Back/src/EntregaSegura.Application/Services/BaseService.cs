@@ -11,7 +11,7 @@ public abstract class BaseService
     protected readonly IUnitOfWork _unitOfWork;
     private readonly INotificadorErros _notificadorErros;
 
-    public BaseService(IUnitOfWork unitOfWork, INotificadorErros notificadorErros)
+    protected BaseService(IUnitOfWork unitOfWork, INotificadorErros notificadorErros)
     {
         _unitOfWork = unitOfWork;
         _notificadorErros = notificadorErros;

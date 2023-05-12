@@ -13,7 +13,7 @@ public class EntregaService : BaseService, IEntregaService
 
     public EntregaService(IEntregaRepository entregaRepository,
                           IUnitOfWork unitOfWork,
-                          NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _entregaRepository = entregaRepository;
     }

@@ -13,7 +13,7 @@ public class CondominioService : BaseService, ICondominioService
 
     public CondominioService(ICondominioRepository condominioRepository,
                              IUnitOfWork unitOfWork,
-                             NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                             INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _condominioRepository = condominioRepository;
     }

@@ -13,7 +13,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
 
     public TransportadoraService(ITransportadoraRepository transportadoraRepository,
                                  IUnitOfWork unitOfWork,
-                                 NotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+                                 INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _transportadoraRepository = transportadoraRepository;
     }
