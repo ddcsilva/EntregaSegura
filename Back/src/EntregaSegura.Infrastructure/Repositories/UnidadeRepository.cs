@@ -9,6 +9,17 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
 {
     public UnidadeRepository(EntregaSeguraContext context) : base(context) { }
 
+    public async Task<Unidade> ObterUnidadeComMoradoresAsync(Guid condominioId)
+    {
+        var unidade = await _context.Unidades
+            .AsNoTracking()
+            .Include(u => u.Moradores)
+            .Where(u => u.CondominioId == condominioId)
+            .FirstOrDefaultAsync();
+
+        return unidade;
+    }
+
     public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
     {
         var unidade = await _context.Unidades

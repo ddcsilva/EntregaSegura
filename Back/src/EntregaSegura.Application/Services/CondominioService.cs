@@ -63,6 +63,31 @@ public class CondominioService : BaseService, ICondominioService
         await CommitAsync();
     }
 
+    public async Task<IEnumerable<Condominio>> ObterTodosAsync()
+    {
+        return await _condominioRepository.ObterTodosAsync();
+    }
+
+    public async Task<Condominio> ObterPorIdAsync(Guid id)
+    {
+        return await _condominioRepository.ObterPorIdAsync(id);
+    }
+
+    public async Task<Condominio> ObterPorNomeAsync(string nome)
+    {
+        return await _condominioRepository.ObterPorNomeAsync(nome);
+    }
+
+    public async Task<Condominio> ObterCondominioComFuncionariosAsync(Guid condominioId)
+    {
+        return await _condominioRepository.ObterCondominioComFuncionariosAsync(condominioId);
+    }
+
+    public async Task<Condominio> ObterCondominioComUnidadesAsync(Guid condominioId)
+    {
+        return await _condominioRepository.ObterCondominioComUnidadesAsync(condominioId);
+    }
+
     public void Dispose()
     {
         _unitOfWork?.Dispose();
