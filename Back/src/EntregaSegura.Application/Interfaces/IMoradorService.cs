@@ -4,9 +4,9 @@ namespace EntregaSegura.Application.Interfaces;
 
 public interface IMoradorService
 {
-    Task Adicionar(Morador morador);
-    Task Atualizar(Morador morador);
-    Task Remover(Guid id);
+    Task<Morador> Adicionar(Morador morador);
+    Task<Morador> Atualizar(Morador morador);
+    Task<bool> Remover(Guid id);
     Task<IEnumerable<Morador>> ObterTodosAsync();
     Task<Morador> ObterPorIdAsync(Guid id);
     Task<Morador> ObterPorNomeAsync(string nome);

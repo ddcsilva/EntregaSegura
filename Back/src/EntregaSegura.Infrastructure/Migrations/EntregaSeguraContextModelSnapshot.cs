@@ -60,7 +60,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasComment("Cidade do endereço do condomínio");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("varchar(100)")
+                        .HasColumnType("varchar(50)")
                         .HasColumnName("CND_COMPLEMENTO")
                         .HasColumnOrder(8)
                         .HasComment("Complemento do endereço do condomínio");
@@ -163,8 +163,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CNPJ = "11111111111111",
                             Cidade = "Cidade Exemplo",
                             Complemento = "Bloco A",
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1825),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1816),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3159),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3150),
                             Email = "contato@condominioexemplo.com.br",
                             Estado = "SP",
                             Excluido = false,
@@ -277,9 +277,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7"),
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2024),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2023),
-                            DataRecebimento = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2026),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3304),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3303),
+                            DataRecebimento = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3305),
                             Descricao = "Descrição da entrega",
                             Excluido = false,
                             FuncionarioId = new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"),
@@ -403,9 +403,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CPF = "98765432109",
                             Cargo = 2,
                             CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAdmissao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1950),
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1949),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1948),
+                            DataAdmissao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3281),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3280),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3279),
                             Email = "funcionario@email.com",
                             Excluido = false,
                             Nome = "Funcionario Exemplo",
@@ -432,19 +432,19 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_ATUALIZACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(11)
                         .HasComment("Data da última atualização do morador");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_CRIACAO")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(10)
                         .HasComment("Data de criação do morador");
 
                     b.Property<DateTime?>("DataExclusao")
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_EXCLUSAO")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(12)
                         .HasComment("Data da exclusão do morador");
 
                     b.Property<string>("Email")
@@ -459,8 +459,14 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("MOR_EXCLUIDO")
-                        .HasColumnOrder(8)
+                        .HasColumnOrder(9)
                         .HasComment("Indica se o morador foi excluído");
+
+                    b.Property<string>("Foto")
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("MOR_FOTO")
+                        .HasColumnOrder(7)
+                        .HasComment("Foto do morador");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -485,7 +491,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.Property<Guid>("UnidadeId")
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("MOR_UNIDADE_ID")
-                        .HasColumnOrder(7)
+                        .HasColumnOrder(8)
                         .HasComment("Chave estrangeira da unidade do morador");
 
                     b.HasKey("Id")
@@ -509,8 +515,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"),
                             CPF = "12345678901",
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1933),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1932),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3265),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3264),
                             Email = "morador@email.com",
                             Excluido = false,
                             Nome = "Morador Exemplo",
@@ -613,8 +619,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3"),
                             CNPJ = "22222222222222",
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1963),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1962),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291),
                             Email = "contato@transportadoraexemplo.com.br",
                             Excluido = false,
                             Nome = "Transportadora Exemplo",
@@ -696,8 +702,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                             Id = new Guid("68165d63-fa38-4d27-858f-ac006b1ada92"),
                             Bloco = "A",
                             CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAtualizacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1918),
-                            DataCriacao = new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1917),
+                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249),
+                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249),
                             Excluido = false,
                             Numero = "101"
                         });

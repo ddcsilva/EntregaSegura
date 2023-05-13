@@ -4,9 +4,9 @@ namespace EntregaSegura.Application.Interfaces;
 
 public interface IEntregaService : IDisposable
 {
-    Task Adicionar(Entrega entrega);
-    Task Atualizar(Entrega entrega);
-    Task Remover(Guid id);
+    Task<Entrega> Adicionar(Entrega entrega);
+    Task<Entrega> Atualizar(Entrega entrega);
+    Task<bool> Remover(Guid id);
     Task<IEnumerable<Entrega>> ObterTodosAsync();
     Task<Entrega> ObterPorIdAsync(Guid id);
     Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(Guid moradorId);

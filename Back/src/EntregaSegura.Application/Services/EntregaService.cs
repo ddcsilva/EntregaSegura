@@ -17,26 +17,59 @@ public class EntregaService : BaseService, IEntregaService
         _entregaRepository = entregaRepository;
     }
 
-    public async Task Adicionar(Entrega entrega)
+    public async Task<Entrega> Adicionar(Entrega entrega)
     {
-        if (!ExecutarValidacao(new EntregaValidator(), entrega)) return;
+        if (!ExecutarValidacao(new EntregaValidator(), entrega)) return null;
 
         await _entregaRepository.AdicionarAsync(entrega);
-        await CommitAsync();
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao salvar a entrega.");
+            return null;
+        }
+
+        return entrega;
     }
 
-    public async Task Atualizar(Entrega entrega)
+    public async Task<Entrega> Atualizar(Entrega entrega)
     {
-        if (!ExecutarValidacao(new EntregaValidator(), entrega)) return;
+        if (!ExecutarValidacao(new EntregaValidator(), entrega)) return null;
 
         _entregaRepository.Atualizar(entrega);
-        await CommitAsync();
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao atualizar a entrega.");
+            return null;
+        }
+
+        return entrega;
     }
 
-    public async Task Remover(Guid id)
+    public async Task<bool> Remover(Guid id)
     {
-        await _entregaRepository.Remover(id);
-        await CommitAsync();
+        var entrega = await _entregaRepository.ObterPorIdAsync(id);
+
+        if (entrega == null)
+        {
+            Notificar("Entrega não encontrada.");
+            return false;
+        }
+
+        _entregaRepository.Remover(entrega);
+
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao remover a entrega.");
+            return false;
+        }
+
+        return true;
     }
 
     public async Task<IEnumerable<Entrega>> ObterTodosAsync()

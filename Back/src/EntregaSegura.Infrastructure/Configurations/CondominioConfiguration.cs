@@ -63,7 +63,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
         builder.Property(e => e.Complemento)
             .HasColumnName("CND_COMPLEMENTO")
             .HasColumnOrder(8)
-            .HasColumnType("varchar(100)")
+            .HasColumnType("varchar(50)")
             .HasComment("Complemento do endereço do condomínio");
 
         builder.Property(e => e.CEP)

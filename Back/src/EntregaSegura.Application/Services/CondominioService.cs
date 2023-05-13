@@ -33,6 +33,12 @@ public class CondominioService : BaseService, ICondominioService
             return null;
         }
 
+        if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email).Result.Any())
+        {
+            Notificar("Já existe um condomínio com este e-mail.");
+            return null;
+        }
+
         await _condominioRepository.AdicionarAsync(condominio);
         var result = await CommitAsync();
 
@@ -45,25 +51,59 @@ public class CondominioService : BaseService, ICondominioService
         return condominio;
     }
 
-    public async Task<bool> Atualizar(Condominio condominio)
+    public async Task<Condominio> Atualizar(Condominio condominio)
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return false;
+        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return null;
 
         if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ && c.Id != condominio.Id).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return false;
+            return null;
+        }
+
+        if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome && c.Id != condominio.Id).Result.Any())
+        {
+            Notificar("Já existe um condomínio com este nome.");
+            return null;
+        }
+
+        if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email && c.Id != condominio.Id).Result.Any())
+        {
+            Notificar("Já existe um condomínio com este e-mail.");
+            return null;
         }
 
         _condominioRepository.Atualizar(condominio);
-        await CommitAsync();
-        return true;
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao atualizar o condomínio.");
+            return null;
+        }
+
+        return condominio;
     }
 
     public async Task <bool> Remover(Guid id)
     {
-        await _condominioRepository.Remover(id);
-        await CommitAsync();
+        var condominio = await _condominioRepository.ObterPorIdAsync(id);
+
+        if (condominio == null)
+        {
+            Notificar("Condomínio não encontrado.");
+            return false;
+        }
+
+        _condominioRepository.Remover(condominio);
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao remover o condomínio.");
+            return false;
+        }
+
         return true;
     }
 

@@ -20,7 +20,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                     CND_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "E-mail do condomínio"),
                     CND_LOGRADOURO = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Logradouro do endereço do condomínio"),
                     CND_NUMERO = table.Column<string>(type: "varchar(10)", nullable: false, comment: "Número do endereço do condomínio"),
-                    CND_COMPLEMENTO = table.Column<string>(type: "varchar(100)", nullable: true, comment: "Complemento do endereço do condomínio"),
+                    CND_COMPLEMENTO = table.Column<string>(type: "varchar(50)", nullable: true, comment: "Complemento do endereço do condomínio"),
                     CND_CEP = table.Column<string>(type: "varchar(8)", nullable: false, comment: "CEP do endereço do condomínio"),
                     CND_BAIRRO = table.Column<string>(type: "varchar(50)", nullable: false, comment: "Bairro do endereço do condomínio"),
                     CND_CIDADE = table.Column<string>(type: "varchar(50)", nullable: false, comment: "Cidade do endereço do condomínio"),
@@ -117,6 +117,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                     MOR_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do morador"),
                     MOR_TELEFONE = table.Column<string>(type: "varchar(11)", nullable: false, comment: "Telefone do morador"),
                     MOR_RAMAL = table.Column<string>(type: "varchar(5)", nullable: true, comment: "Ramal do morador"),
+                    MOR_FOTO = table.Column<string>(type: "varchar(100)", nullable: true, comment: "Foto do morador"),
                     MOR_UNIDADE_ID = table.Column<Guid>(type: "uniqueidentifier", nullable: false, comment: "Chave estrangeira da unidade do morador"),
                     MOR_EXCLUIDO = table.Column<bool>(type: "bit", nullable: false, defaultValue: false, comment: "Indica se o morador foi excluído"),
                     MOR_DATA_CRIACAO = table.Column<DateTime>(type: "datetime", nullable: false, comment: "Data de criação do morador"),
@@ -178,32 +179,32 @@ namespace EntregaSegura.Infrastructure.Migrations
             migrationBuilder.InsertData(
                 table: "TB_CONDOMINIOS",
                 columns: new[] { "CND_ID", "CND_BAIRRO", "CND_CEP", "CND_CNPJ", "CND_CIDADE", "CND_COMPLEMENTO", "CND_DATA_ATUALIZACAO", "CND_DATA_CRIACAO", "CND_DATA_EXCLUSAO", "CND_EMAIL", "CND_ESTADO", "CND_LOGRADOURO", "CND_NOME", "CND_NUMERO", "CND_TELEFONE" },
-                values: new object[] { new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), "Bairro Exemplo", "11111111", "11111111111111", "Cidade Exemplo", "Bloco A", new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1825), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1816), null, "contato@condominioexemplo.com.br", "SP", "Rua Exemplo", "Condomínio Exemplo", "100", "11999999999" });
+                values: new object[] { new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), "Bairro Exemplo", "11111111", "11111111111111", "Cidade Exemplo", "Bloco A", new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3159), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3150), null, "contato@condominioexemplo.com.br", "SP", "Rua Exemplo", "Condomínio Exemplo", "100", "11999999999" });
 
             migrationBuilder.InsertData(
                 table: "TB_TRANSPORTADORAS",
                 columns: new[] { "TRA_ID", "TRA_CNPJ", "TRA_DATA_ATUALIZACAO", "TRA_DATA_CRIACAO", "TRA_DATA_EXCLUSAO", "TRA_EMAIL", "TRA_NOME", "TRA_TELEFONE" },
-                values: new object[] { new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3"), "22222222222222", new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1963), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1962), null, "contato@transportadoraexemplo.com.br", "Transportadora Exemplo", "11988888888" });
+                values: new object[] { new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3"), "22222222222222", new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291), null, "contato@transportadoraexemplo.com.br", "Transportadora Exemplo", "11988888888" });
 
             migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
                 columns: new[] { "FUN_ID", "FUN_CPF", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_DATA_ADMISSAO", "FUN_DATA_ATUALIZACAO", "FUN_DATA_CRIACAO", "FUN_DATA_DEMISSAO", "FUN_DATA_EXCLUSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE" },
-                values: new object[] { new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"), "98765432109", 2, new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1950), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1949), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1948), null, null, "funcionario@email.com", "Funcionario Exemplo", "11999999999" });
+                values: new object[] { new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"), "98765432109", 2, new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3281), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3280), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3279), null, null, "funcionario@email.com", "Funcionario Exemplo", "11999999999" });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
                 columns: new[] { "UND_ID", "UND_BLOCO", "CON_ID", "UND_DATA_ATUALIZACAO", "UND_DATA_CRIACAO", "UND_DATA_EXCLUSAO", "UND_NUMERO" },
-                values: new object[] { new Guid("68165d63-fa38-4d27-858f-ac006b1ada92"), "A", new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1918), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1917), null, "101" });
+                values: new object[] { new Guid("68165d63-fa38-4d27-858f-ac006b1ada92"), "A", new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249), null, "101" });
 
             migrationBuilder.InsertData(
                 table: "TB_MORADORES",
-                columns: new[] { "MOR_ID", "MOR_CPF", "MOR_DATA_ATUALIZACAO", "MOR_DATA_CRIACAO", "MOR_DATA_EXCLUSAO", "MOR_EMAIL", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID" },
-                values: new object[] { new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"), "12345678901", new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1933), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(1932), null, "morador@email.com", "Morador Exemplo", "210", "11999999999", new Guid("68165d63-fa38-4d27-858f-ac006b1ada92") });
+                columns: new[] { "MOR_ID", "MOR_CPF", "MOR_DATA_ATUALIZACAO", "MOR_DATA_CRIACAO", "MOR_DATA_EXCLUSAO", "MOR_EMAIL", "MOR_FOTO", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID" },
+                values: new object[] { new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"), "12345678901", new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3265), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3264), null, "morador@email.com", null, "Morador Exemplo", "210", "11999999999", new Guid("68165d63-fa38-4d27-858f-ac006b1ada92") });
 
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_ATUALIZACAO", "ETG_DATA_CRIACAO", "ETG_DATA_EXCLUSAO", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { new Guid("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7"), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2024), new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2023), null, new DateTime(2023, 5, 11, 14, 11, 1, 399, DateTimeKind.Local).AddTicks(2026), null, "Descrição da entrega", new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"), new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"), "Observação da entrega", 1, new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3") });
+                values: new object[] { new Guid("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7"), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3304), new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3303), null, new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3305), null, "Descrição da entrega", new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"), new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"), "Observação da entrega", 1, new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3") });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",

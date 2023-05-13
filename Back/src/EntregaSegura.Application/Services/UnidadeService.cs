@@ -17,46 +17,64 @@ public class UnidadeService : BaseService, IUnidadeService
         _unidadeRepository = unidadeRepository;
     }
 
-    public async Task Adicionar(Unidade unidade)
+    public async Task<Unidade> Adicionar(Unidade unidade)
     {
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return;
+        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
 
         if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero).Result.Any())
         {
             Notificar("Já existe uma unidade com este número.");
-            return;
+            return null;
         }
 
         await _unidadeRepository.AdicionarAsync(unidade);
         await CommitAsync();
+
+        return unidade;
     }
 
-    public async Task Atualizar(Unidade unidade)
+    public async Task<Unidade> Atualizar(Unidade unidade)
     {
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return;
+        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
 
         if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Id != unidade.Id).Result.Any())
         {
             Notificar("Já existe uma unidade com este número.");
-            return;
+            return null;
         }
 
         _unidadeRepository.Atualizar(unidade);
-        await CommitAsync();
-    }
+        var result = await CommitAsync();
 
-    public async Task Remover(Guid id)
-    {
-        var unidade = await _unidadeRepository.ObterUnidadeComMoradoresAsync(id);
-
-        if (unidade.Moradores.Any())
+        if (result == 0)
         {
-            Notificar("A unidade possui moradores cadastrados.");
-            return;
+            Notificar("Ocorreu um erro ao salvar a unidade.");
+            return null;
         }
 
-        await _unidadeRepository.Remover(id);
-        await CommitAsync();
+        return unidade;
+    }
+
+    public async Task<bool> Remover(Guid id)
+    {
+        var unidade = await _unidadeRepository.ObterPorIdAsync(id);
+
+        if (unidade == null)
+        {
+            Notificar("Unidade não encontrada.");
+            return false;
+        }
+
+        _unidadeRepository.Remover(unidade);
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao remover a unidade.");
+            return false;
+        }
+
+        return true;
     }
 
     public async Task<IEnumerable<Unidade>> ObterTodosAsync()

@@ -17,50 +17,70 @@ public class FuncionarioService : BaseService, IFuncionarioService
         _funcionarioRepository = funcionarioRepository;
     }
 
-    public async Task Adicionar(Funcionario funcionario)
+    public async Task<Funcionario> Adicionar(Funcionario funcionario)
     {
-        if(!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return;
+        if(!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return null;
 
         if(_funcionarioRepository.BuscarAsync(f => f.CPF == funcionario.CPF).Result.Any())
         {
             Notificar("Já existe um funcionário com este CPF.");
-            return;
-        }
-
-        if(_funcionarioRepository.BuscarAsync(f => f.Nome == funcionario.Nome).Result.Any())
-        {
-            Notificar("Já existe um funcionário com este nome.");
-            return;
+            return null;
         }
 
         await _funcionarioRepository.AdicionarAsync(funcionario);
-        await CommitAsync();
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao salvar o funcionário.");
+            return null;
+        }
+
+        return funcionario;
     }
 
-    public async Task Atualizar(Funcionario funcionario)
+    public async Task<Funcionario> Atualizar(Funcionario funcionario)
     {
-        if(!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return;
+        if(!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return null;
 
         if(_funcionarioRepository.BuscarAsync(f => f.CPF == funcionario.CPF && f.Id != funcionario.Id).Result.Any())
         {
             Notificar("Já existe um funcionário com este CPF.");
-            return;
+            return null;
         }
 
         _funcionarioRepository.Atualizar(funcionario);
-        await CommitAsync();
-    }
+        var result = await CommitAsync();
 
-    public async Task Remover(Guid id)
-    {
-        if(_funcionarioRepository.ObterFuncionarioComEntregasAsync(id).Result.Entregas.Any())
+        if (result == 0)
         {
-            Notificar("O funcionário possui entregas cadastradas!");
-            return;
+            Notificar("Ocorreu um erro ao atualizar o funcionário.");
+            return null;
         }
 
-        await _funcionarioRepository.Remover(id);
-        await CommitAsync();
+        return funcionario;
+    }
+
+    public async Task<bool> Remover(Guid id)
+    {
+        var funcionario = await _funcionarioRepository.ObterPorIdAsync(id);
+
+        if (funcionario == null)
+        {
+            Notificar("Funcionário não encontrado.");
+            return false;
+        }
+
+        _funcionarioRepository.Remover(funcionario);
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao remover o funcionário.");
+            return false;
+        }
+
+        return true;
     }
 
     public async Task<IEnumerable<Funcionario>> ObterTodosAsync()

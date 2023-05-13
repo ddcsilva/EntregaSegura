@@ -7,7 +7,7 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
 {
     Task AdicionarAsync(TEntity entity);
     void Atualizar(TEntity entity);
-    Task Remover(Guid id);
+    void Remover(TEntity entity);
     Task<TEntity> ObterPorIdAsync(Guid id);
     Task<IEnumerable<TEntity>> ObterTodosAsync();
     Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate);

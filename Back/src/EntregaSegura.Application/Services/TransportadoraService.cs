@@ -17,50 +17,94 @@ public class TransportadoraService : BaseService, ITransportadoraService
         _transportadoraRepository = transportadoraRepository;
     }
 
-    public async Task Adicionar(Transportadora transportadora)
+    public async Task<Transportadora> Adicionar(Transportadora transportadora)
     {
-        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return;
+        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
 
         if(_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
-            return;
+            return null;
         }
 
         if(_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
-            return;
+            return null;
+        }
+
+        if(_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
+        {
+            Notificar("Já existe uma transportadora com este e-mail.");
+            return null;
         }
 
         await _transportadoraRepository.AdicionarAsync(transportadora);
-        await CommitAsync();
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao salvar a transportadora.");
+            return null;
+        }
+
+        return transportadora;
     }
 
-    public async Task Atualizar(Transportadora transportadora)
+    public async Task<Transportadora> Atualizar(Transportadora transportadora)
     {
-        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return;
+        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
 
         if(_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
-            return;
+            return null;
+        }
+
+        if(_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any())
+        {
+            Notificar("Já existe uma transportadora com este nome.");
+            return null;
+        }
+
+        if(_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any())
+        {
+            Notificar("Já existe uma transportadora com este e-mail.");
+            return null;
         }
 
         _transportadoraRepository.Atualizar(transportadora);
-        await CommitAsync();
-    }
+        var result = await CommitAsync();
 
-    public async Task Remover(Guid id)
-    {
-        if(_transportadoraRepository.ObterTransportadoraComEntregasAsync(id).Result.Entregas.Any())
+        if (result == 0)
         {
-            Notificar("A transportadora possui entregas cadastradas!");
-            return;
+            Notificar("Ocorreu um erro ao atualizar a transportadora.");
+            return null;
         }
 
-        await _transportadoraRepository.Remover(id);
-        await CommitAsync();
+        return transportadora;
+    }
+
+    public async Task<bool> Remover(Guid id)
+    {
+        var transportadora = await _transportadoraRepository.ObterPorIdAsync(id);
+
+        if (transportadora == null)
+        {
+            Notificar("Transportadora não encontrada.");
+            return false;
+        }
+
+        _transportadoraRepository.Remover(transportadora);
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao remover a transportadora.");
+            return false;
+        }
+
+        return true;
     }
 
     public async Task<IEnumerable<Transportadora>> ObterTodosAsync()

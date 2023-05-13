@@ -42,12 +42,8 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         _dbSet.Update(entity);
     }
 
-    public virtual async Task Remover(Guid id)
+    public virtual void Remover(TEntity entity)
     {
-        var entity = await ObterPorIdAsync(id);
-        if (entity != null)
-        {
-            _dbSet.Remove(entity);
-        }
+        _dbSet.Remove(entity);
     }
 }

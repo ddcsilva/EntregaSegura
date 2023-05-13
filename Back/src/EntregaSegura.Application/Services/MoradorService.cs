@@ -17,50 +17,52 @@ public class MoradorService : BaseService, IMoradorService
         _moradorRepository = moradorRepository;
     }
 
-    public async Task Adicionar(Morador morador)
+    public async Task<Morador> Adicionar(Morador morador)
     {
-        if (!ExecutarValidacao(new MoradorValidator(), morador)) return;
+        if (!ExecutarValidacao(new MoradorValidator(), morador)) return null;
 
         if (_moradorRepository.BuscarAsync(m => m.CPF == morador.CPF).Result.Any())
         {
             Notificar("Já existe um morador com este CPF.");
-            return;
-        }
-
-        if (_moradorRepository.BuscarAsync(m => m.Nome == morador.Nome).Result.Any())
-        {
-            Notificar("Já existe um morador com este nome.");
-            return;
+            return null;
         }
 
         await _moradorRepository.AdicionarAsync(morador);
         await CommitAsync();
+
+        return morador;
     }
 
-    public async Task Atualizar(Morador morador)
+    public async Task<Morador> Atualizar(Morador morador)
     {
-        if (!ExecutarValidacao(new MoradorValidator(), morador)) return;
+        if (!ExecutarValidacao(new MoradorValidator(), morador)) return null;
 
         if (_moradorRepository.BuscarAsync(m => m.CPF == morador.CPF && m.Id != morador.Id).Result.Any())
         {
             Notificar("Já existe um morador com este CPF.");
-            return;
+            return null;
         }
 
         _moradorRepository.Atualizar(morador);
         await CommitAsync();
+
+        return morador;
     }
 
-    public async Task Remover(Guid id)
+    public async Task<bool> Remover(Guid id)
     {
-        if (_moradorRepository.ObterMoradorComEntregasAsync(id).Result.Entregas.Any())
+        var morador = await _moradorRepository.ObterPorIdAsync(id);
+
+        if (morador == null)
         {
-            Notificar("O morador possui entregas cadastradas!");
-            return;
+            Notificar("Morador não encontrado.");
+            return false;
         }
 
-        await _moradorRepository.Remover(id);
+        _moradorRepository.Remover(morador);
         await CommitAsync();
+
+        return true;
     }
 
     public async Task<IEnumerable<Morador>> ObterTodosAsync()
