@@ -41,6 +41,11 @@ public abstract class BaseService
         return false;
     }
 
+    public bool TemNotificacoes()
+    {
+        return _notificadorErros.TemNotificacoes();
+    }
+
     public async Task<int> CommitAsync()
     {
         return await _unitOfWork.CommitAsync();

@@ -22,7 +22,7 @@ public class NotificadorErros : INotificadorErros
         return _notificacoes;
     }
     
-    public bool TemNotificacao()
+    public bool TemNotificacoes()
     {
         return _notificacoes.Any();
     }

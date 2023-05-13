@@ -17,7 +17,7 @@ public class MainController : ControllerBase
 
     protected bool OperacaoValida()
     {
-        return !_notificadorErros.TemNotificacao();
+        return !_notificadorErros.TemNotificacoes();
     }
 
     protected ActionResult CustomResponse(object result = null)

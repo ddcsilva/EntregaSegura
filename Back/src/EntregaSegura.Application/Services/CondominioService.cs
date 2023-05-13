@@ -24,20 +24,19 @@ public class CondominioService : BaseService, ICondominioService
         if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return null;
         }
 
         if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome).Result.Any())
         {
             Notificar("Já existe um condomínio com este nome.");
-            return null;
         }
 
         if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email).Result.Any())
         {
             Notificar("Já existe um condomínio com este e-mail.");
-            return null;
         }
+
+        if (TemNotificacoes()) return null;
 
         await _condominioRepository.AdicionarAsync(condominio);
         var result = await CommitAsync();
@@ -63,13 +62,13 @@ public class CondominioService : BaseService, ICondominioService
 
         if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome && c.Id != condominio.Id).Result.Any())
         {
-            Notificar("Já existe um condomínio com este nome.");
+            Notificar("Já existe um condomínio com este Nome.");
             return null;
         }
 
         if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email && c.Id != condominio.Id).Result.Any())
         {
-            Notificar("Já existe um condomínio com este e-mail.");
+            Notificar("Já existe um condomínio com este E-mail.");
             return null;
         }
 

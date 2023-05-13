@@ -6,5 +6,5 @@ public interface INotificadorErros
 {
     void Handle(NotificacaoErros notificacao);
     List<NotificacaoErros> ObterNotificacoes();
-    bool TemNotificacao();
+    bool TemNotificacoes();
 }
