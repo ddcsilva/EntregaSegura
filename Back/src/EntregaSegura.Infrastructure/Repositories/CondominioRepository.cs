@@ -37,4 +37,15 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
 
         return condominio;
     }
+
+    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId)
+    {
+        var condominio = await _context.Condominios
+            .AsNoTracking()
+            .Include(c => c.Unidades)
+            .Include(c => c.Funcionarios)
+            .FirstOrDefaultAsync(c => c.Id == condominioId);
+
+        return condominio;
+    }
 }

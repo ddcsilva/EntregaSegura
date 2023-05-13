@@ -18,49 +18,52 @@ public class CondominioService : BaseService, ICondominioService
         _condominioRepository = condominioRepository;
     }
 
-    public async Task Adicionar(Condominio condominio)
+    public async Task<bool> Adicionar(Condominio condominio)
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return;
+        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return false;
 
         if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return;
+            return false;
         }
 
         if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome).Result.Any())
         {
             Notificar("Já existe um condomínio com este nome.");
-            return;
+            return false;
         }
 
         _condominioRepository.Adicionar(condominio);
         await CommitAsync();
+        return true;
     }
 
-    public async Task Atualizar(Condominio condominio)
+    public async Task<bool> Atualizar(Condominio condominio)
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return;
+        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return false;
 
         if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ && c.Id != condominio.Id).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return;
+            return false;
         }
 
         _condominioRepository.Atualizar(condominio);
         await CommitAsync();
+        return true;
     }
 
-    public async Task Remover(Guid id)
+    public async Task <bool> Remover(Guid id)
     {
         if(_condominioRepository.ObterCondominioComUnidadesAsync(id).Result.Unidades.Any())
         {
             Notificar("O condomínio possui unidades cadastradas!");
-            return;
+            return false;
         }
         _condominioRepository.Remover(id);
         await CommitAsync();
+        return true;
     }
 
     public async Task<IEnumerable<Condominio>> ObterTodosAsync()
@@ -86,6 +89,11 @@ public class CondominioService : BaseService, ICondominioService
     public async Task<Condominio> ObterCondominioComUnidadesAsync(Guid condominioId)
     {
         return await _condominioRepository.ObterCondominioComUnidadesAsync(condominioId);
+    }
+
+    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId)
+    {
+        return await _condominioRepository.ObterCondominioComUnidadesEFuncionariosAsync(condominioId);
     }
 
     public void Dispose()
