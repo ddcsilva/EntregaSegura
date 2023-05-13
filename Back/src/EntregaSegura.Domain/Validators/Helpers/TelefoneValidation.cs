@@ -1,5 +1,4 @@
 namespace EntregaSegura.Domain.Validators.Helpers;
-
 using System.Text.RegularExpressions;
 
 public static class TelefoneValidation
@@ -11,8 +10,18 @@ public static class TelefoneValidation
         if (string.IsNullOrWhiteSpace(telefone))
             return false;
             
-        telefone = Regex.Replace(telefone, @"[^\d]", "");
+        telefone = RemoverCaracteresNaoNumericos(telefone);
 
+        return NumeroTelefoneEhValido(telefone);
+    }
+
+    private static string RemoverCaracteresNaoNumericos(string telefone)
+    {
+        return Regex.Replace(telefone, @"[^\d]", "");
+    }
+
+    private static bool NumeroTelefoneEhValido(string telefone)
+    {
         return _regexTelefone.IsMatch(telefone);
     }
 }

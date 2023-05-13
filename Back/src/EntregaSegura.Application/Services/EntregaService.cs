@@ -1,5 +1,4 @@
 using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Domain.Validators;
@@ -22,7 +21,7 @@ public class EntregaService : BaseService, IEntregaService
     {
         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return;
 
-        _entregaRepository.Adicionar(entrega);
+        await _entregaRepository.AdicionarAsync(entrega);
         await CommitAsync();
     }
 
@@ -36,7 +35,7 @@ public class EntregaService : BaseService, IEntregaService
 
     public async Task Remover(Guid id)
     {
-        _entregaRepository.Remover(id);
+        await _entregaRepository.Remover(id);
         await CommitAsync();
     }
 

@@ -1,4 +1,3 @@
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Application.Services;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
@@ -34,7 +33,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return;
         }
 
-        _funcionarioRepository.Adicionar(funcionario);
+        await _funcionarioRepository.AdicionarAsync(funcionario);
         await CommitAsync();
     }
 
@@ -60,7 +59,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return;
         }
 
-        _funcionarioRepository.Remover(id);
+        await _funcionarioRepository.Remover(id);
         await CommitAsync();
     }
 

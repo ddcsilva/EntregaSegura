@@ -1,5 +1,4 @@
 using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Domain.Validators;
@@ -28,7 +27,7 @@ public class UnidadeService : BaseService, IUnidadeService
             return;
         }
 
-        _unidadeRepository.Adicionar(unidade);
+        await _unidadeRepository.AdicionarAsync(unidade);
         await CommitAsync();
     }
 
@@ -56,7 +55,7 @@ public class UnidadeService : BaseService, IUnidadeService
             return;
         }
 
-        _unidadeRepository.Remover(id);
+        await _unidadeRepository.Remover(id);
         await CommitAsync();
     }
 

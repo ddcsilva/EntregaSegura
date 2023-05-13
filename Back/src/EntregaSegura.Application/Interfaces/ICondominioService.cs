@@ -4,7 +4,7 @@ namespace EntregaSegura.Application.Interfaces;
 
 public interface ICondominioService : IDisposable
 {
-    Task<bool> Adicionar(Condominio condominio);
+    Task<Condominio> Adicionar(Condominio condominio);
     Task<bool> Atualizar(Condominio condominio);
     Task<bool> Remover(Guid id);
     Task<IEnumerable<Condominio>> ObterTodosAsync();

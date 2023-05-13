@@ -51,8 +51,8 @@ public class CondominioValidator : AbstractValidator<Condominio>
 
         RuleFor(c => c.CEP)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
-            .MustAsync(async (cep, cancellation) => await CEPValidation.ValidarCEP(cep))
-            .WithMessage("O campo {PropertyName} fornecido não é um CEP válido");
+            .Matches("^[0-9]*$").WithMessage("O campo {PropertyName} deve conter apenas números.")
+            .Length(8).WithMessage("O campo {PropertyName} deve ter exatamente {TotalLength} caracteres");
 
         RuleFor(c => c.Complemento)
             .MaximumLength(100).WithMessage("O campo {PropertyName} deve ter no máximo {MaxLength} caracteres")

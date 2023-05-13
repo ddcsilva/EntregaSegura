@@ -41,8 +41,8 @@ public abstract class BaseService
         return false;
     }
 
-    public async Task CommitAsync()
+    public async Task<int> CommitAsync()
     {
-        await _unitOfWork.CommitAsync();
+        return await _unitOfWork.CommitAsync();
     }
 }

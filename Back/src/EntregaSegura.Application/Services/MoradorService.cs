@@ -1,5 +1,4 @@
 using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Domain.Validators;
@@ -34,7 +33,7 @@ public class MoradorService : BaseService, IMoradorService
             return;
         }
 
-        _moradorRepository.Adicionar(morador);
+        await _moradorRepository.AdicionarAsync(morador);
         await CommitAsync();
     }
 
@@ -60,7 +59,7 @@ public class MoradorService : BaseService, IMoradorService
             return;
         }
 
-        _moradorRepository.Remover(id);
+        await _moradorRepository.Remover(id);
         await CommitAsync();
     }
 

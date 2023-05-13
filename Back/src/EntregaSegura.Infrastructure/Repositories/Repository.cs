@@ -32,9 +32,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         return await _dbSet.FindAsync(id);
     }
 
-    public virtual void Adicionar(TEntity entity)
+    public virtual async Task AdicionarAsync(TEntity entity)
     {
-        _dbSet.Add(entity);
+        await _dbSet.AddAsync(entity);
     }
 
     public virtual void Atualizar(TEntity entity)
@@ -42,8 +42,12 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         _dbSet.Update(entity);
     }
 
-    public virtual void Remover(Guid id)
+    public virtual async Task Remover(Guid id)
     {
-        _dbSet.Remove(new TEntity { Id = id });
+        var entity = await ObterPorIdAsync(id);
+        if (entity != null)
+        {
+            _dbSet.Remove(entity);
+        }
     }
 }

@@ -20,33 +20,33 @@ public static class CEPValidation
         return true;
     }
 
-    public static async Task<bool> ValidarCEP(string cep)
+    public static bool ValidarCEP(string cep)
     {
         if (!ValidarFormatoCEP(cep))
             return false;
 
-        try
-        {
-            await _timeoutPolicy.ExecuteAsync(async token =>
-            {
-                using (var client = new HttpClient())
-                {
-                    var response = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/", token);
-                    if (!response.IsSuccessStatusCode)
-                    {
-                        throw new Exception("CEP não encontrado");
-                    }
-                }
-            }, CancellationToken.None);
-        }
-        catch (TimeoutRejectedException)
-        {
-            return true;
-        }
-        catch (Exception)
-        {
-            return false;
-        }
+        //try
+        //{
+        //    await _timeoutPolicy.ExecuteAsync(async token =>
+        //    {
+        //        using (var client = new HttpClient())
+        //        {
+        //            var response = await client.GetAsync($"https://viacep.com.br/ws/{cep}/json/", token);
+        //            if (!response.IsSuccessStatusCode)
+        //            {
+        //                throw new Exception("CEP não encontrado");
+        //            }
+        //        }
+        //    }, CancellationToken.None);
+        //}
+        //catch (TimeoutRejectedException)
+        //{
+        //    return true;
+        //}
+        //catch (Exception)
+        //{
+        //    return false;
+        //}
 
         return true;
     }

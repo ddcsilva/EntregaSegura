@@ -1,5 +1,4 @@
 using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Domain.Validators;
@@ -34,7 +33,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return;
         }
 
-        _transportadoraRepository.Adicionar(transportadora);
+        await _transportadoraRepository.AdicionarAsync(transportadora);
         await CommitAsync();
     }
 
@@ -60,7 +59,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return;
         }
 
-        _transportadoraRepository.Remover(id);
+        await _transportadoraRepository.Remover(id);
         await CommitAsync();
     }
 

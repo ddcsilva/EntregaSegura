@@ -13,7 +13,8 @@ public class CondominiosController : MainController
     private readonly IMapper _mapper;
 
     public CondominiosController(ICondominioService condominioService,
-                                 IMapper mapper)
+                                 IMapper mapper,
+                                 INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _condominioService = condominioService;
         _mapper = mapper;
@@ -32,7 +33,7 @@ public class CondominiosController : MainController
     {
         var condominioDTO = await ObterCondominioComUnidadesEFuncionarios(id);
 
-        if(condominioDTO == null) return NotFound();
+        if (condominioDTO == null) return NotFound();
 
         return Ok(condominioDTO);
     }
@@ -40,41 +41,45 @@ public class CondominiosController : MainController
     [HttpPost]
     public async Task<ActionResult<CondominioDTO>> Adicionar(CondominioDTO condominioDTO)
     {
-        if(!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         var condominio = _mapper.Map<Condominio>(condominioDTO);
-        var condominioAdicionado = await _condominioService.Adicionar(condominio);
+        var novoCondominio = await _condominioService.Adicionar(condominio);
 
-        if(!condominioAdicionado) return BadRequest();
+        if (novoCondominio == null) return CustomResponse(ModelState);
 
-        return Ok(condominioDTO);
+        condominioDTO = _mapper.Map<CondominioDTO>(novoCondominio);
+
+        return CustomResponse(condominioDTO);
     }
 
     [HttpPut("{id:guid}")]
     public async Task<ActionResult<CondominioDTO>> Atualizar(Guid id, CondominioDTO condominioDTO)
     {
-        if(id != condominioDTO.Id) return BadRequest();
+        if (id != condominioDTO.Id)
+        {
+            NotificarErro("Erro ao atualizar condomínio: Id da requisição difere do Id do objeto");
+            return CustomResponse(condominioDTO);
+        }
 
-        if(!ModelState.IsValid) return BadRequest();
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         var condominio = _mapper.Map<Condominio>(condominioDTO);
-        var condominioAtualizado = await _condominioService.Atualizar(condominio);
+        await _condominioService.Atualizar(condominio);
 
-        if(!condominioAtualizado) return BadRequest();
-
-        return Ok(condominioDTO);
+        return CustomResponse(condominioDTO);
     }
 
     [HttpDelete("{id:guid}")]
-    public async Task<ActionResult<CondominioDTO>> Remover(Guid id)
+    public async Task<ActionResult> Remover(Guid id)
     {
         var condominioDTO = await ObterCondominio(id);
 
-        if(condominioDTO == null) return NotFound();
+        if (condominioDTO == null) return NotFound();
 
         await _condominioService.Remover(id);
 
-        return Ok(condominioDTO);
+        return NoContent();
     }
 
     private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(Guid condominioId)

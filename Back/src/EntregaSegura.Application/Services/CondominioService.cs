@@ -1,5 +1,4 @@
 using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Application.Notifications;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
 using EntregaSegura.Domain.Validators;
@@ -18,25 +17,32 @@ public class CondominioService : BaseService, ICondominioService
         _condominioRepository = condominioRepository;
     }
 
-    public async Task<bool> Adicionar(Condominio condominio)
+    public async Task<Condominio> Adicionar(Condominio condominio)
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return false;
+        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return null;
 
         if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return false;
+            return null;
         }
 
         if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome).Result.Any())
         {
             Notificar("Já existe um condomínio com este nome.");
-            return false;
+            return null;
         }
 
-        _condominioRepository.Adicionar(condominio);
-        await CommitAsync();
-        return true;
+        await _condominioRepository.AdicionarAsync(condominio);
+        var result = await CommitAsync();
+
+        if (result == 0)
+        {
+            Notificar("Ocorreu um erro ao salvar o condomínio.");
+            return null;
+        }
+
+        return condominio;
     }
 
     public async Task<bool> Atualizar(Condominio condominio)
@@ -56,12 +62,7 @@ public class CondominioService : BaseService, ICondominioService
 
     public async Task <bool> Remover(Guid id)
     {
-        if(_condominioRepository.ObterCondominioComUnidadesAsync(id).Result.Unidades.Any())
-        {
-            Notificar("O condomínio possui unidades cadastradas!");
-            return false;
-        }
-        _condominioRepository.Remover(id);
+        await _condominioRepository.Remover(id);
         await CommitAsync();
         return true;
     }

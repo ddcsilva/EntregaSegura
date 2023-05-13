@@ -12,12 +12,23 @@ public class CondominioDTO
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(14, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 14)]
+    [StringLength(14, ErrorMessage = "O campo deve ter {1} caracteres.")]
+    [RegularExpression("^[0-9]*$", ErrorMessage = "O CEP deve conter apenas números.")]
     public string CNPJ { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(8, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.")]
+    [StringLength(8, ErrorMessage = "O campo deve ter {1} caracteres.")]
+    [RegularExpression("^[0-9]*$", ErrorMessage = "O CEP deve conter apenas números.")]
     public string CEP { get; set; }
+
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    [StringLength(11, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 10)]
+    [RegularExpression("^[0-9]*$", ErrorMessage = "O CEP deve conter apenas números.")]
+    public string Telefone { get; set; }
+
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
+    public string Email { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
