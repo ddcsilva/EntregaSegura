@@ -18,6 +18,24 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("Development",
+        builder =>
+            builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+    options.AddPolicy("Production",
+        builder =>
+            builder
+                .WithMethods("GET")
+                .WithOrigins("http://localhost:5000")
+                .SetIsOriginAllowedToAllowWildcardSubdomains()
+                .AllowAnyHeader());
+});
+
 builder.Services.ResolveDependencies();
 
 builder.Services.AddAutoMapper(typeof(Program));
@@ -30,6 +48,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors("Development");
 
 app.UseHttpsRedirection();
 
