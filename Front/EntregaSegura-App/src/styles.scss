@@ -1,0 +1,237 @@
+/* You can add global styles to this file, and also import other style files */
+
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+@import "~bootstrap/scss/bootstrap";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~perfect-scrollbar/css/perfect-scrollbar.css";
+
+// hide button in mobile page
+@media (min-width: 576px) {
+  .d-sm-inline {
+    display: unset !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.m-left-0 {
+  margin-left: 0px !important;
+}
+
+.m-right-10 {
+  margin-right: 10px !important;
+}
+
+.m-right-5 {
+  margin-right: 5px !important;
+}
+
+.m-top-10 {
+  margin-top: 10px !important;
+}
+
+.m-bottom-10 {
+  margin-bottom: 10px !important;
+}
+
+.m-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+.margin-left-10 {
+  margin-left: 10px;
+}
+
+.p-top-10 {
+  padding-top: 10px !important;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.table-container {
+  position: relative;
+  overflow: auto;
+  max-height: calc(100vh - 150px);
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  font-weight: bold !important;
+  font-size: medium;
+}
+
+.content-header {
+  color: #3c8dbc;
+}
+
+.flexbox {
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+  /* this */
+  flex-wrap: wrap;
+}
+
+.column {
+  flex: 1 1 15%;
+  text-align: center;
+  margin: 5px;
+  background-color: #1976d2;
+  padding: 20px;
+  display: flex;
+  color: #fff;
+  border: 1px solid#1976d2;
+  flex-direction: column;
+  max-width: 15%;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #fff;
+    border: 1px solid #cacaca;
+    color: #1976d2;
+
+    .column-text {
+      color: blue;
+    }
+  }
+
+  i {
+    font-size: 40px;
+  }
+
+  .column-text {
+    font-weight: 600;
+    color: #fff;
+
+    &:hover {
+      color: blue;
+    }
+  }
+}
+
+tr.mat-row {
+  height: 38px !important;
+}
+
+tr.mat-header-row {
+  height: 45px !important;
+}
+
+.full-width {
+  width: 100% !important;
+}
+
+.table th,
+.table td {
+  padding: 0.2rem;
+}
+
+// mat toggle css
+.mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: #1976d2 !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-slide-toggle-bar {
+  background-color: rgb(25 118 210 / 31%) !important;
+}
+
+.mat-slide-toggle.mat-checked .mat-ripple-element {
+  background-color: #1976d2 !important;
+}
+
+.table td,
+.table th {
+  vertical-align: middle !important;
+}
+
+body {
+  font-size: 0.9rem;
+}
+
+.ps__thumb-y {
+  background-color: #fff !important;
+  width: 6px !important;
+  border-radius: 0px !important;
+  opacity: 0.5;
+}
+
+.close-btn-modal {
+  cursor: pointer;
+  width: 24px;
+  background-color: #e41e26;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  right: -10px;
+  top: -11px;
+  z-index: 55555;
+  overflow: hidden;
+  border-radius: 50%;
+  color: #fff;
+  margin-left: auto;
+
+  i {
+    font-size: 14px;
+  }
+}
+
+.mat-dialog-container {
+  overflow: initial !important;
+  padding: 0 0 20px 0 !important;
+}
+
+.box.box-primary {
+  border-top-color: #3c8dbc;
+}
+
+.box {
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  border-top: 3px solid #d2d6de;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
+}
+
+.box-body {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 3px;
+  border-bottom-left-radius: 3px;
+  padding: 10px;
+}
+
+.content-header h1 {
+  font-size: 1.5rem !important;
+}
+.w-90 {
+  width: 90% !important;
+}

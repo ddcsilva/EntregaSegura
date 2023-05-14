@@ -1,0 +1,300 @@
+.left-sidenav {
+  min-width         : 100px;
+  max-width         : 100px;
+  background-color  : #fff;
+  min-height        : calc(100vh - 70px);
+  -webkit-box-shadow: 0 0 3px rgba(31, 30, 47, 0.05);
+  box-shadow        : 0 0 3px rgba(31, 30, 47, 0.05);
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+}
+
+.smooth-animation {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+}
+
+.toggled .left-sidenav {
+  margin-left       : -100px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+}
+
+.toggled .main-menu-inner {
+  margin-left       : -100px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+}
+
+.toggled .topbar .topbar-left {
+  margin-left       : 0;
+  width             : 100px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+}
+
+.main-menu-inner {
+  width             : 100px;
+  height            : 100%;
+  background-color  : $white;
+  border-right      : 0;
+  box-shadow        : 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+  position          : fixed;
+  overflow          : auto;
+  top               : 0;
+  left              : 0;
+  z-index           : 600;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition   : all 0.5s ease;
+  -o-transition     : all 0.5s ease;
+  transition        : all 0.5s ease;
+
+  .nav-item {
+    position     : relative;
+    display      : block;
+    width        : 100%;
+    color        : $gray;
+    cursor       : pointer;
+    border-bottom: 1px solid #dee2e6;
+    text-align   : center;
+  }
+
+  .nav-item.active {
+    background-color: #1976d2;
+    color           : #fff;
+  }
+
+  .nav-item-hold {
+    width  : 100%;
+    padding: 8px 0;
+  }
+
+  .nav-item-hold:focus,
+  .nav-item:focus {
+    outline: none;
+  }
+
+  .nav-icon {
+    font-size: 32px;
+    height   : 32px;
+    width    : 32px;
+    display  : block;
+    margin   : 0 auto 0;
+  }
+
+  .nav-text {
+    font-size  : 13px;
+    display    : block;
+    font-weight: 400;
+  }
+
+  .nav-item.active .triangle {
+    position    : absolute;
+    width       : 0;
+    height      : 0;
+    right       : 0;
+    bottom      : 0;
+    border-style: solid;
+    border-width: 0 0 30px 30px;
+    border-color: transparent transparent $primary;
+  }
+}
+
+.main-menu-inner .menu-body {
+  padding   : 20px 0;
+  height    : calc(100vh - 68px) !important;
+  margin-top: 35px;
+}
+
+.main-menu-inner .menu-body .nav {
+  -webkit-box-orient   : vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction   : column;
+  flex-direction       : column;
+}
+
+.btn-back {
+  float       : left;
+  max-height  : 16px;
+  margin-top  : 1px;
+  margin-right: 15px;
+}
+
+.dropdown-menu li {
+  display: block;
+}
+
+.dropdown-menu li a i {
+  font-size     : 18px;
+  margin-right  : 8px;
+  vertical-align: middle;
+  color         : #70657b;
+}
+
+.dropdown-menu {
+  z-index   : 89;
+  padding   : 0.75rem 0;
+  transition: all 0.24s ease-in-out;
+  background: #fff;
+  box-shadow: 0 4px 20px 1px rgba(0, 0, 0, 0.06), 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.dropdown-menu li a {
+  color         : #332e38;
+  text-transform: capitalize;
+  display       : flex;
+  align-items   : center;
+  font-size     : 14px;
+  cursor        : pointer;
+  padding       : 12px 24px;
+  vertical-align: middle;
+  font-weight   : 400;
+  transition    : 0.15s all ease-in;
+}
+
+@media (min-width: 150px) and (max-width: 600px) {
+  .logo-lg {
+    max-height: 35px;
+  }
+
+  .navbar-custom .nav-link {
+    padding: 0 0.15rem 0 0;
+    width  : max-content;
+  }
+
+  .main-icon-menu .nav-link.active:before {
+    left: 46px;
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-nav {
+    display: inline;
+  }
+
+  .navbar-default .navbar-brand {
+    display: inline;
+  }
+
+  .navbar-default .navbar-toggle .icon-bar {
+    background-color: #fff;
+  }
+
+  .navbar-default .navbar-nav .dropdown-menu>li>a {
+    color           : red;
+    background-color: #ccc;
+    border-radius   : 4px;
+    margin-top      : 2px;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a {
+    color: #333;
+  }
+
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:hover,
+  .navbar-default .navbar-nav .open .dropdown-menu>li>a:focus {
+    background-color: #ccc;
+  }
+
+  .navbar-nav .open .dropdown-menu {
+    border-bottom: 1px solid white;
+    border-radius: 0;
+  }
+
+  .dropdown-menu {
+    padding-left: 10px;
+  }
+
+  .dropdown-menu .dropdown-menu {
+    padding-left: 20px;
+  }
+
+  .dropdown-menu .dropdown-menu .dropdown-menu {
+    padding-left: 30px;
+  }
+
+  li.dropdown.open {
+    border: 0px solid red;
+  }
+}
+
+@media (min-width: 768px) {
+  ul.nav li:hover>ul.dropdown-menu {
+    display      : block;
+    left         : 100px !important;
+    position     : fixed !important;
+    height       : calc(100vh - 55px);
+    top          : 55px !important;
+    border       : 0;
+    border-radius: 0;
+    width        : 200px !important;
+  }
+
+  #navbar {
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  ul.nav li:hover>ul.dropdown-menu {
+    display      : block;
+    left         : 100px !important;
+    position     : fixed !important;
+    height       : calc(100vh - 55px);
+    top          : 55px !important;
+    border       : 0;
+    border-radius: 0;
+    width        : 200px !important;
+    transform    : translate3d(0px, 0px, 0px) !important;
+  }
+
+  #navbar {
+    text-align: center;
+  }
+}
+
+@media (min-width: 150px) and (max-width: 1024px) {
+
+  .left-sidenav,
+  .main-menu-inner {
+    margin-left: -100px;
+    min-height : auto;
+  }
+
+  .toggled .left-sidenav {
+    margin-left: 0;
+    display    : block;
+  }
+
+  .toggled .main-menu-inner {
+    margin-left: 0;
+  }
+
+  .topbar .topbar-left {
+    width      : 100px;
+    margin-left: 0px;
+  }
+
+  .toggled .topbar .topbar-left {
+    width      : 100px;
+    margin-left: 0px;
+  }
+
+  .main-icon-menu {
+    margin-top: 1px;
+  }
+
+  .main-menu-inner {
+    width: 100px;
+  }
+}

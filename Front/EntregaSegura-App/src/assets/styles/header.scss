@@ -1,0 +1,235 @@
+.waves-effect {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button-menu-mobile {
+  border: none;
+  color: $white;
+  width: auto;
+  float: right;
+  background-color: transparent;
+  cursor: pointer;
+  i {
+    font-size: 22px;
+    line-height: 53px;
+    color: $white;
+  }
+}
+
+.navbar-toggler-icon {
+  height: auto;
+  width: auto;
+  i {
+    color: $gray;
+  }
+}
+
+button:focus {
+  outline: none;
+}
+
+.logo-lg {
+  max-height: 59px;
+  min-width: 94px !important;
+  background-color: #fff !important;
+}
+
+.topbar {
+  left: 260px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  .topbar-left {
+    background-color: $white;
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+    float: left;
+    text-align: left;
+    height: 55px;
+    position: relative;
+    width: 240px;
+    padding-left: 20px;
+    z-index: 1;
+    margin-left: 0;
+    .logo {
+      line-height: 46px;
+      float: left;
+    }
+  }
+}
+
+.navbar-custom {
+  background: #1e88e5;
+  padding: 0px !important;
+  margin-left: 0;
+  min-height: 55px;
+  position: relative;
+  /* box-shadow: 0 1px 15px rgba(0,0,0,.04), 0 1px 6px rgba(0,0,0,.04); */
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3);
+  .topbar-nav li {
+    float: left;
+  }
+  .nav-link {
+    padding: 0 0.75rem;
+    color: $white !important;
+    line-height: 53px;
+    max-height: 55px;
+    font-size: 14px;
+    .fs-19 {
+      font-size: 18px;
+    }
+  }
+}
+
+.topbar-nav-right {
+  li {
+    color: $gray;
+    cursor: pointer;
+    border-right: 1px solid $light-gray;
+    padding: 0 20px;
+  }
+  li:last-child {
+    border-right: none;
+  }
+  .left-fa-icon {
+    float: left;
+    padding: 2px 4px 0;
+  }
+  .right-fa-icon {
+    float: right;
+    padding: 0 0 0 8px;
+  }
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.app-search {
+  position: relative;
+  padding-top: 0;
+  margin-left: 0;
+  color: $gray;
+
+  .form-control,
+  .form-control:focus {
+    border: none;
+    font-size: 14px;
+    height: 34px;
+    color: $gray;
+    padding-left: 20px;
+    padding-right: 40px;
+    background: #fff;
+    -webkit-box-shadow: none;
+    border: 1px solid $light-gray;
+    box-shadow: none;
+    border-radius: 3px;
+    width: 300px;
+  }
+  a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    height: 34px;
+    line-height: 34px;
+    font-size: 20px;
+    width: 34px;
+    text-align: center;
+    border-radius: 50%;
+    color: $gray;
+    transform: rotate(280deg);
+  }
+}
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+.navbar-custom {
+  background: #1976d2;
+  padding: 0 0 0 0;
+  margin-left: 0;
+  min-height: 55px;
+  position: relative;
+  box-shadow: 0 1px 15px rgba(0, 0, 0, 0.04), 0 1px 6px rgba(0, 0, 0, 0.04);
+  .topbar-nav li {
+    float: left;
+  }
+  .nav-link {
+    padding: 0 0.75rem;
+    color: $white !important;
+    line-height: 53px;
+    max-height: 55px;
+    font-size: 14px;
+    .fs-19 {
+      font-size: 18px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .topbar-nav-right {
+    li {
+      border-right: none;
+      display: block;
+      flex: 0 1 auto;
+      list-style-type: none;
+    }
+  }
+  .list-unstyled {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  .app-search {
+    width: 100%;
+    .form-control,
+    .form-control:focus {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+  .navbar-custom {
+    padding-right: 0;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .navbar-nav {
+    margin-top: 10px;
+  }
+  .nav-link {
+    margin-left: 5px;
+    width: max-content;
+  }
+  .user-pic-sm {
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+  // .toggled .hide-when-toogle {
+  //   display: none;
+  // }
+  .notification-count {
+    padding: 1px 3px 2px;
+    line-height: 10px;
+    font-size: 8px;
+  }
+  .topbar-nav-right {
+    li {
+      border-right: none;
+      padding: 0 10px;
+      width: 100%;
+    }
+  }
+}
