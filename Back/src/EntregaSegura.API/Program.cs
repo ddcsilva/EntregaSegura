@@ -8,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<EntregaSeguraContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+//builder.Services.AddIdentityConfiguration(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -53,6 +54,7 @@ app.UseCors("Development");
 
 app.UseHttpsRedirection();
 
+//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

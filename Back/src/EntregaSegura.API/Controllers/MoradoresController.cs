@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaSegura.API.Controllers;
 
+[Route("api/moradores")]
 public class MoradoresController : MainController
 {
     private readonly IMoradorService _moradorService;
