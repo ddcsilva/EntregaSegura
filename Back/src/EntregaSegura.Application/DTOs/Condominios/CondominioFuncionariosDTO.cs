@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregaSegura.Application.DTOs;
+namespace EntregaSegura.Application.DTOs.Condominios;
 
-public class CondominioDTO
+public class CondominioFuncionariosDTO
 {
     [Key]
     public Guid Id { get; set; }
@@ -52,8 +52,6 @@ public class CondominioDTO
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [StringLength(2, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
     public string Estado { get; set; }
-
-    public IEnumerable<UnidadeDTO> Unidades { get; set; }
 
     public IEnumerable<FuncionarioDTO> Funcionarios { get; set; }
 }

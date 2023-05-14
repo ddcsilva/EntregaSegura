@@ -9,13 +9,23 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
 {
     public UnidadeRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<Unidade> ObterUnidadeComMoradoresAsync(Guid condominioId)
+    public async Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync()
+    {
+        var unidades = await _context.Unidades
+            .AsNoTracking()
+            .Include(u => u.Condominio)
+            .ToListAsync();
+
+        return unidades;
+    }
+
+    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(Guid id)
     {
         var unidade = await _context.Unidades
             .AsNoTracking()
+            .Include(u => u.Condominio)
             .Include(u => u.Moradores)
-            .Where(u => u.CondominioId == condominioId)
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(u => u.Id == id);
 
         return unidade;
     }

@@ -87,6 +87,16 @@ public class UnidadeService : BaseService, IUnidadeService
         return await _unidadeRepository.ObterPorIdAsync(id);
     }
 
+    public async Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync()
+    {
+        return await _unidadeRepository.ObterUnidadesComCondominioAsync();
+    }
+
+    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(Guid id)
+    {
+        return await _unidadeRepository.ObterUnidadePorIdComCondominioEMoradoresAsync(id);
+    }
+
     public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
     {
         return await _unidadeRepository.ObterPorUnidadePorCondominioBlocoNumeroAsync(condominioId, bloco, numero);

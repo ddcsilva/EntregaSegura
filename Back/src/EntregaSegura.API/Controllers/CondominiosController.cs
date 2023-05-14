@@ -1,5 +1,6 @@
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.DTOs.Condominios;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +24,7 @@ public class CondominiosController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodos()
     {
-        var condominiosDTO = _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosAsync());
+        var condominiosDTO = await ObterCondominios();
 
         return Ok(condominiosDTO);
     }
@@ -65,7 +66,11 @@ public class CondominiosController : MainController
         if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         var condominio = _mapper.Map<Condominio>(condominioDTO);
-        await _condominioService.Atualizar(condominio);
+        var condominioAtualizado = await _condominioService.Atualizar(condominio);
+
+        if (condominioAtualizado == null) return CustomResponse(ModelState);
+
+        condominioDTO = _mapper.Map<CondominioDTO>(condominioAtualizado);
 
         return CustomResponse(condominioDTO);
     }
@@ -82,13 +87,18 @@ public class CondominiosController : MainController
         return NoContent();
     }
 
-    private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(Guid condominioId)
+    private async Task<IEnumerable<CondominioDTO>> ObterCondominios()
     {
-        return _mapper.Map<CondominioDTO>(await _condominioService.ObterCondominioComUnidadesEFuncionariosAsync(condominioId));
+        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosAsync());
     }
 
     private async Task<CondominioDTO> ObterCondominio(Guid condominioId)
     {
         return _mapper.Map<CondominioDTO>(await _condominioService.ObterPorIdAsync(condominioId));
+    }
+
+    private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(Guid condominioId)
+    {
+        return _mapper.Map<CondominioDTO>(await _condominioService.ObterCondominioComUnidadesEFuncionariosAsync(condominioId));
     }
 }
