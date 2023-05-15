@@ -1,1 +1,16 @@
-<p>condominios works!</p>
+<h2>Componente Condomínio</h2>
+
+<div *ngFor="let condominio of condominios">
+    <p>Nome: {{condominio.nome}}</p>
+    <p>CNPJ: {{condominio.cnpj}}</p>
+    <p>Telefone: {{condominio.telefone}}</p>
+    <p>E-mail: {{condominio.email}}</p>
+    <p>Logradouro: {{condominio.logradouro}}</p>
+    <p>Número: {{condominio.numero}}</p>
+    <p>Complemento: {{condominio.complemento}}</p>
+    <p>Bairro: {{condominio.bairro}}</p>
+    <p>Cidade: {{condominio.cidade}}</p>
+    <p>Estado: {{condominio.estado}}</p>
+    <p>CEP: {{condominio.cep}}</p>
+    <hr>
+</div>
