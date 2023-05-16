@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody *ngIf="condominios && condominios.length > 0">
-        <tr *ngFor="let condominio of condominios">
+        <tr *ngFor="let condominio of condominiosFiltrados">
             <td>{{condominio.cnpj}}</td>
             <td>{{condominio.nome}}</td>
             <td>{{condominio.telefone}}</td>
