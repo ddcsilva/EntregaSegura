@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CondominiosComponent implements OnInit {
 
-  public condominios: any;
+  public condominios: any = [];
 
   constructor(private http: HttpClient) { }
 

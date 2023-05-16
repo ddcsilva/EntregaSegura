@@ -1,16 +1,38 @@
-<h2>Componente Condomínio</h2>
+<h2>Condomínios</h2>
+<hr>
 
-<div *ngFor="let condominio of condominios">
-    <p><b>Nome:</b> {{condominio.nome}}</p>
-    <p><b>CNPJ:</b> {{condominio.cnpj}}</p>
-    <p><b>Telefone:</b> {{condominio.telefone}}</p>
-    <p><b>E-mail:</b> {{condominio.email}}</p>
-    <p><b>Logradouro:</b> {{condominio.logradouro}}</p>
-    <p><b>Número:</b> {{condominio.numero}}</p>
-    <p><b>Complemento:</b> {{condominio.complemento}}</p>
-    <p><b>Bairro:</b> {{condominio.bairro}}</p>
-    <p><b>Cidade:</b> {{condominio.cidade}}</p>
-    <p><b>Estado:</b> {{condominio.estado}}</p>
-    <p><b>CEP:</b> {{condominio.cep}}</p>
-    <hr>
-</div>
+<form action="" class="form-inline">
+    <div class="form-group mb-2">
+        <input type="text" class="form-control mr-2" placeholder="Buscar">
+        <button class="btn btn-outline-success">Buscar</button>
+    </div>
+</form>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>CNPJ</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>Bairro</th>
+            <th>Cidade</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="condominios && condominios.length > 0">
+        <tr *ngFor="let condominio of condominios">
+            <td>{{condominio.cnpj}}</td>
+            <td>{{condominio.nome}}</td>
+            <td>{{condominio.telefone}}</td>
+            <td>{{condominio.bairro}}</td>
+            <td>{{condominio.cidade}}</td>
+            <td>{{condominio.estado}}</td>
+        </tr>
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="6" *ngIf="condominios.length == 0">
+                Nenhum condomínio cadastrado.
+            </td>
+        </tr>
+    </tfoot>
+</table>
