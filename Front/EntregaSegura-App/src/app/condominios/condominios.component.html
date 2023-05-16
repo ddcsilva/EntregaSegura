@@ -3,11 +3,10 @@
 
 <div class="form-inline">
     <div class="form-group mb-2">
+        <label class="mr-2">Filtro:</label>
         <input type="text" class="form-control mr-2" placeholder="Buscar" [(ngModel)]="filtro">
-        <button class="btn btn-outline-success">Buscar</button>
     </div>
 </div>
-<h3>Filtro: {{filtro}}</h3>
 <table class="table table-striped">
     <thead class="thead-dark">
         <tr>
@@ -17,6 +16,7 @@
             <th>Bairro</th>
             <th>Cidade</th>
             <th>Estado</th>
+            <th>Opções</th>
         </tr>
     </thead>
     <tbody *ngIf="condominios && condominios.length > 0">
@@ -27,6 +27,10 @@
             <td>{{condominio.bairro}}</td>
             <td>{{condominio.cidade}}</td>
             <td>{{condominio.estado}}</td>
+            <td>
+                <button class="btn btn-sm btn-primary mr-2" >Editar</button>
+                <button class="btn btn-sm btn-danger" >Excluir</button>
+            </td>
         </tr>
     </tbody>
     <tfoot>
