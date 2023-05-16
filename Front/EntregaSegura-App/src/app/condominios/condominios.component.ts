@@ -9,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class CondominiosComponent implements OnInit {
 
   public condominios: any = [];
+  public filtro: string = '';
 
   constructor(private http: HttpClient) { }
 
