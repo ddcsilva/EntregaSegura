@@ -46,4 +46,9 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
     {
         _dbSet.Remove(entity);
     }
+
+    public virtual void RemoverSerie(IEnumerable<TEntity> entities)
+    {
+        _dbSet.RemoveRange(entities);
+    }
 }

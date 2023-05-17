@@ -29,13 +29,16 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
         return condominio;
     }
 
-    public async Task<Condominio> ObterPorNomeAsync(string nome)
+    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPorNomeAsync(string nome)
     {
-        var condominio = await _context.Condominios
-            .AsNoTracking()
-            .FirstOrDefaultAsync(c => c.Nome == nome);
+        nome = nome ?? string.Empty;
 
-        return condominio;
+        var condominios = await _context.Condominios
+            .AsNoTracking()
+            .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+            .ToListAsync();
+
+        return condominios;
     }
 
     public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId)

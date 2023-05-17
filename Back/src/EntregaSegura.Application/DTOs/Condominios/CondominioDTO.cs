@@ -8,6 +8,18 @@ public class CondominioDTO
     public Guid Id { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    [Range(1, 1000, ErrorMessage = "O campo {0} deve estar entre {1} e {2}.")]
+    public int QuantidadeUnidades { get; set; }
+    
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    [Range(1, 50, ErrorMessage = "O campo {0} deve estar entre {1} e {2}.")]
+    public int QuantidadeAndares { get; set; }
+    
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    [Range(1, 50, ErrorMessage = "O campo {0} deve estar entre {1} e {2}.")]
+    public int QuantidadeBlocos { get; set; }
+    
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
     public string Nome { get; set; }
 

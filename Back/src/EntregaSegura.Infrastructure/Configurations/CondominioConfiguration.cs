@@ -18,92 +18,113 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
             .HasColumnOrder(1)
             .HasComment("Chave primária do condomínio");
 
+        builder.Property(c => c.QuantidadeUnidades)
+            .HasColumnName("CND_QTD_UNIDADES")
+            .HasColumnOrder(2)
+            .IsRequired()
+            .HasColumnType("int")
+            .HasComment("Quantidade de unidades do condomínio");
+
+        builder.Property(c => c.QuantidadeBlocos)
+            .HasColumnName("CND_QTD_BLOCOS")
+            .HasColumnOrder(3)
+            .IsRequired()
+            .HasColumnType("int")
+            .HasComment("Quantidade de blocos do condomínio");
+
+        builder.Property(c => c.QuantidadeAndares)
+            .HasColumnName("CND_QTD_ANDARES")
+            .HasColumnOrder(4)
+            .IsRequired()
+            .HasColumnType("int")
+            .HasComment("Quantidade de andares do condomínio");
+
         builder.Property(c => c.Nome)
             .HasColumnName("CND_NOME")
-            .HasColumnOrder(2)
+            .HasColumnOrder(5)
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasComment("Nome do condomínio");
 
         builder.Property(c => c.CNPJ)
             .HasColumnName("CND_CNPJ")
-            .HasColumnOrder(3)
+            .HasColumnOrder(6)
             .IsRequired()
             .HasColumnType("varchar(14)")
             .HasComment("CNPJ do condomínio"); ;
 
         builder.Property(c => c.Telefone)
             .HasColumnName("CND_TELEFONE")
-            .HasColumnOrder(4)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasColumnType("varchar(11)")
             .HasComment("Telefone do condomínio");
 
         builder.Property(c => c.Email)
             .HasColumnName("CND_EMAIL")
-            .HasColumnOrder(5)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasComment("E-mail do condomínio");
 
         builder.Property(e => e.Logradouro)
             .HasColumnName("CND_LOGRADOURO")
-            .HasColumnOrder(6)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("varchar(100)")
             .HasComment("Logradouro do endereço do condomínio");
 
         builder.Property(e => e.Numero)
             .HasColumnName("CND_NUMERO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("varchar(10)")
             .HasComment("Número do endereço do condomínio");
 
         builder.Property(e => e.Complemento)
             .HasColumnName("CND_COMPLEMENTO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(11)
             .HasColumnType("varchar(50)")
             .HasComment("Complemento do endereço do condomínio");
 
         builder.Property(e => e.CEP)
             .HasColumnName("CND_CEP")
-            .HasColumnOrder(9)
+            .HasColumnOrder(12)
             .IsRequired()
             .HasColumnType("varchar(8)")
             .HasComment("CEP do endereço do condomínio");
 
         builder.Property(e => e.Bairro)
             .HasColumnName("CND_BAIRRO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(13)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasComment("Bairro do endereço do condomínio");
 
         builder.Property(e => e.Cidade)
             .HasColumnName("CND_CIDADE")
-            .HasColumnOrder(11)
+            .HasColumnOrder(14)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasComment("Cidade do endereço do condomínio");
 
         builder.Property(e => e.Estado)
             .HasColumnName("CND_ESTADO")
-            .HasColumnOrder(12)
+            .HasColumnOrder(15)
             .IsRequired()
             .HasColumnType("varchar(2)")
             .HasComment("Estado do endereço do condomínio");
 
         builder.Property(c => c.Excluido)
             .HasColumnName("CND_EXCLUIDO")
-            .HasColumnOrder(13)
+            .HasColumnOrder(16)
             .IsRequired()
             .HasDefaultValue(false)
             .HasComment("Flag de exclusão do condomínio");
 
         builder.Property(c => c.DataCriacao)
             .HasColumnName("CND_DATA_CRIACAO")
-            .HasColumnOrder(14)
+            .HasColumnOrder(17)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -111,7 +132,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
 
         builder.Property(c => c.DataAtualizacao)
             .HasColumnName("CND_DATA_ATUALIZACAO")
-            .HasColumnOrder(15)
+            .HasColumnOrder(18)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -119,7 +140,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
 
         builder.Property(c => c.DataExclusao)
             .HasColumnName("CND_DATA_EXCLUSAO")
-            .HasColumnOrder(16)
+            .HasColumnOrder(19)
             .HasColumnType("datetime")
             .HasComment("Data da exclusão do condomínio");
 

@@ -8,6 +8,9 @@ public sealed class Condominio : Empresa
         Funcionarios = new List<Funcionario>();
     }
 
+    public int QuantidadeBlocos { get; set; }
+    public int QuantidadeUnidades { get; set; }
+    public int QuantidadeAndares { get; set; }
     public string Logradouro { get; set; }
     public string Numero { get; set; }
     public string Complemento { get; set; }

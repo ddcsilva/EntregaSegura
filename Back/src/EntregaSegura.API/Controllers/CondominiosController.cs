@@ -39,6 +39,14 @@ public class CondominiosController : MainController
         return Ok(condominioDTO);
     }
 
+    [HttpGet("por-nome/{nome}")]
+    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterPorNome(string nome)
+    {
+        var condominiosDTO = await ObterCondominiosPorNome(nome);
+
+        return Ok(condominiosDTO);
+    }
+
     [HttpPost]
     public async Task<ActionResult<CondominioDTO>> Adicionar(CondominioDTO condominioDTO)
     {
@@ -100,5 +108,10 @@ public class CondominiosController : MainController
     private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(Guid condominioId)
     {
         return _mapper.Map<CondominioDTO>(await _condominioService.ObterCondominioComUnidadesEFuncionariosAsync(condominioId));
+    }
+
+    private async Task<IEnumerable<CondominioDTO>> ObterCondominiosPorNome(string nome)
+    {
+        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosCondominiosPorNomeAsync(nome));
     }
 }

@@ -111,14 +111,14 @@ public class CondominioService : BaseService, ICondominioService
         return await _condominioRepository.ObterTodosAsync();
     }
 
+    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPorNomeAsync(string nome)
+    {
+        return await _condominioRepository.ObterTodosCondominiosPorNomeAsync(nome);
+    }
+
     public async Task<Condominio> ObterPorIdAsync(Guid id)
     {
         return await _condominioRepository.ObterPorIdAsync(id);
-    }
-
-    public async Task<Condominio> ObterPorNomeAsync(string nome)
-    {
-        return await _condominioRepository.ObterPorNomeAsync(nome);
     }
 
     public async Task<Condominio> ObterCondominioComFuncionariosAsync(Guid condominioId)

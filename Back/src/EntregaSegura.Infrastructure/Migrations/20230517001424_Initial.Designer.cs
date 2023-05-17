@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntregaSegura.Infrastructure.Migrations
 {
     [DbContext(typeof(EntregaSeguraContext))]
-    [Migration("20230513161332_Initial")]
+    [Migration("20230517001424_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,41 +37,41 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("CND_BAIRRO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(13)
                         .HasComment("Bairro do endereço do condomínio");
 
                     b.Property<string>("CEP")
                         .IsRequired()
                         .HasColumnType("varchar(8)")
                         .HasColumnName("CND_CEP")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(12)
                         .HasComment("CEP do endereço do condomínio");
 
                     b.Property<string>("CNPJ")
                         .IsRequired()
                         .HasColumnType("varchar(14)")
                         .HasColumnName("CND_CNPJ")
-                        .HasColumnOrder(3)
+                        .HasColumnOrder(6)
                         .HasComment("CNPJ do condomínio");
 
                     b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("varchar(50)")
                         .HasColumnName("CND_CIDADE")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(14)
                         .HasComment("Cidade do endereço do condomínio");
 
                     b.Property<string>("Complemento")
                         .HasColumnType("varchar(50)")
                         .HasColumnName("CND_COMPLEMENTO")
-                        .HasColumnOrder(8)
+                        .HasColumnOrder(11)
                         .HasComment("Complemento do endereço do condomínio");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("CND_DATA_ATUALIZACAO")
-                        .HasColumnOrder(15)
+                        .HasColumnOrder(18)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do condomínio");
 
@@ -79,28 +79,28 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("CND_DATA_CRIACAO")
-                        .HasColumnOrder(14)
+                        .HasColumnOrder(17)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do condomínio");
 
                     b.Property<DateTime?>("DataExclusao")
                         .HasColumnType("datetime")
                         .HasColumnName("CND_DATA_EXCLUSAO")
-                        .HasColumnOrder(16)
+                        .HasColumnOrder(19)
                         .HasComment("Data da exclusão do condomínio");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("CND_EMAIL")
-                        .HasColumnOrder(5)
+                        .HasColumnOrder(8)
                         .HasComment("E-mail do condomínio");
 
                     b.Property<string>("Estado")
                         .IsRequired()
                         .HasColumnType("varchar(2)")
                         .HasColumnName("CND_ESTADO")
-                        .HasColumnOrder(12)
+                        .HasColumnOrder(15)
                         .HasComment("Estado do endereço do condomínio");
 
                     b.Property<bool>("Excluido")
@@ -108,35 +108,53 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(false)
                         .HasColumnName("CND_EXCLUIDO")
-                        .HasColumnOrder(13)
+                        .HasColumnOrder(16)
                         .HasComment("Flag de exclusão do condomínio");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("CND_LOGRADOURO")
-                        .HasColumnOrder(6)
+                        .HasColumnOrder(9)
                         .HasComment("Logradouro do endereço do condomínio");
 
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("CND_NOME")
-                        .HasColumnOrder(2)
+                        .HasColumnOrder(5)
                         .HasComment("Nome do condomínio");
 
                     b.Property<string>("Numero")
                         .IsRequired()
                         .HasColumnType("varchar(10)")
                         .HasColumnName("CND_NUMERO")
-                        .HasColumnOrder(7)
+                        .HasColumnOrder(10)
                         .HasComment("Número do endereço do condomínio");
+
+                    b.Property<int>("QuantidadeAndares")
+                        .HasColumnType("int")
+                        .HasColumnName("CND_QTD_ANDARES")
+                        .HasColumnOrder(4)
+                        .HasComment("Quantidade de andares do condomínio");
+
+                    b.Property<int>("QuantidadeBlocos")
+                        .HasColumnType("int")
+                        .HasColumnName("CND_QTD_BLOCOS")
+                        .HasColumnOrder(3)
+                        .HasComment("Quantidade de blocos do condomínio");
+
+                    b.Property<int>("QuantidadeUnidades")
+                        .HasColumnType("int")
+                        .HasColumnName("CND_QTD_UNIDADES")
+                        .HasColumnOrder(2)
+                        .HasComment("Quantidade de unidades do condomínio");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("varchar(11)")
                         .HasColumnName("CND_TELEFONE")
-                        .HasColumnOrder(4)
+                        .HasColumnOrder(7)
                         .HasComment("Telefone do condomínio");
 
                     b.HasKey("Id")
@@ -165,14 +183,17 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CNPJ = "11111111111111",
                             Cidade = "Cidade Exemplo",
                             Complemento = "Bloco A",
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3159),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3150),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5397),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5386),
                             Email = "contato@condominioexemplo.com.br",
                             Estado = "SP",
                             Excluido = false,
                             Logradouro = "Rua Exemplo",
                             Nome = "Condomínio Exemplo",
                             Numero = "100",
+                            QuantidadeAndares = 0,
+                            QuantidadeBlocos = 0,
+                            QuantidadeUnidades = 0,
                             Telefone = "11999999999"
                         });
                 });
@@ -279,9 +300,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         new
                         {
                             Id = new Guid("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7"),
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3304),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3303),
-                            DataRecebimento = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3305),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5542),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5542),
+                            DataRecebimento = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5544),
                             Descricao = "Descrição da entrega",
                             Excluido = false,
                             FuncionarioId = new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"),
@@ -405,9 +426,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CPF = "98765432109",
                             Cargo = 2,
                             CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAdmissao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3281),
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3280),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3279),
+                            DataAdmissao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5514),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5513),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5513),
                             Email = "funcionario@email.com",
                             Excluido = false,
                             Nome = "Funcionario Exemplo",
@@ -517,8 +538,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"),
                             CPF = "12345678901",
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3265),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3264),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5497),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5496),
                             Email = "morador@email.com",
                             Excluido = false,
                             Nome = "Morador Exemplo",
@@ -621,8 +642,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3"),
                             CNPJ = "22222222222222",
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3291),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5528),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5527),
                             Email = "contato@transportadoraexemplo.com.br",
                             Excluido = false,
                             Nome = "Transportadora Exemplo",
@@ -704,8 +725,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                             Id = new Guid("68165d63-fa38-4d27-858f-ac006b1ada92"),
                             Bloco = "A",
                             CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAtualizacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249),
-                            DataCriacao = new DateTime(2023, 5, 13, 13, 13, 32, 649, DateTimeKind.Local).AddTicks(3249),
+                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5484),
+                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5483),
                             Excluido = false,
                             Numero = "101"
                         });
