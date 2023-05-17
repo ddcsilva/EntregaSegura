@@ -1,5 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { CondominioService } from '../services/condominio.service';
 
 @Component({
   selector: 'app-condominios',
@@ -31,21 +31,21 @@ export class CondominiosComponent implements OnInit {
     );
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private condominioService: CondominioService) { }
 
   ngOnInit(): void {
     this.getCondominios();
   }
 
   public getCondominios(): void {
-    this.http.get('https://localhost:5001/api/condominios').subscribe({
-      next: response => {
+    this.condominioService.getCondominios().subscribe(
+      (response: any) => {
         this.condominios = response;
-        this.condominiosFiltrados = this.condominios;
+        this.condominiosFiltrados = response;
       },
-      error: error => {
+      (error: any) => {
         console.log(error);
       }
-    });
+    );
   }
 }
