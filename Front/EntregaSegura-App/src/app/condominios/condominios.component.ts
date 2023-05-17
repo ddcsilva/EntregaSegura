@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CondominioService } from '../services/condominio.service';
+import { Condominio } from '../models/Condominio';
 
 @Component({
   selector: 'app-condominios',
@@ -8,16 +9,16 @@ import { CondominioService } from '../services/condominio.service';
 })
 export class CondominiosComponent implements OnInit {
 
-  public condominios: any = [];
-  public condominiosFiltrados: any = [];
+  public condominios: Condominio[] = [];
+  public condominiosFiltrados: Condominio[] = [];
 
-  private _filtro: string = '';
+  private filtroAtual: string = '';
 
   public get filtro(): string {
-    return this._filtro;
+    return this.filtroAtual;
   }
   public set filtro(value: string) {
-    this._filtro = value;
+    this.filtroAtual = value;
     this.condominiosFiltrados = this.filtro ? this.filtrarCondominios(this.filtro) : this.condominios;
   }
 
@@ -38,14 +39,14 @@ export class CondominiosComponent implements OnInit {
   }
 
   public getCondominios(): void {
-    this.condominioService.getCondominios().subscribe(
-      (response: any) => {
-        this.condominios = response;
-        this.condominiosFiltrados = response;
+    this.condominioService.getCondominios().subscribe({
+      next: (dadosCondominios: Condominio[]) => {
+        this.condominios = dadosCondominios;
+        this.condominiosFiltrados = this.condominios;
       },
-      (error: any) => {
+      error: (error: any) => {
         console.log(error);
       }
-    );
+    });
   }
 }
