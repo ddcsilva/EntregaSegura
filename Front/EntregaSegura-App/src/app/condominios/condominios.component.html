@@ -21,15 +21,19 @@
     </thead>
     <tbody *ngIf="condominios && condominios.length > 0">
         <tr *ngFor="let condominio of condominiosFiltrados">
-            <td>{{condominio.cnpj}}</td>
+            <td>{{condominio.cnpj | formatCnpj}}</td>
             <td>{{condominio.nome}}</td>
-            <td>{{condominio.telefone}}</td>
+            <td>{{condominio.telefone | formatTelefone}}</td>
             <td>{{condominio.bairro}}</td>
             <td>{{condominio.cidade}}</td>
             <td>{{condominio.estado}}</td>
             <td>
-                <button class="btn btn-sm btn-primary mr-2" >Editar</button>
-                <button class="btn btn-sm btn-danger" >Excluir</button>
+                <button class="btn btn-sm btn-primary mr-2">
+                    <i class="fa fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i>
+                </button>
             </td>
         </tr>
     </tbody>

@@ -11,12 +11,16 @@ import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { FormsModule } from '@angular/forms';
 import { CondominioService } from './services/condominio.service';
+import { FormatCnpjPipe } from './helpers/format-cnpj.pipe';
+import { FormatTelefonePipe } from './helpers/format-telefone.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CondominiosComponent,
-    NavComponent
+    NavComponent,
+    FormatCnpjPipe,
+    FormatTelefonePipe
   ],
   imports: [
     BrowserModule,
