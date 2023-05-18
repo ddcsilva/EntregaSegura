@@ -28,12 +28,16 @@
             <td>{{condominio.cidade}}</td>
             <td>{{condominio.estado}}</td>
             <td>
-                <button class="btn btn-sm btn-primary mr-2">
-                    <i class="fa fa-edit"></i>
-                </button>
-                <button class="btn btn-sm btn-danger">
-                    <i class="fa fa-trash"></i>
-                </button>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-primary mr-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Editar">
+                        <i class="fa fa-edit"></i>
+                    </button>
+                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Excluir">
+                        <i class="fa fa-trash"></i>
+                    </button>
+                </div>
             </td>
         </tr>
     </tbody>

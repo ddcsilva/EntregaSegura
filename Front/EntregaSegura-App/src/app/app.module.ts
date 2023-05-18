@@ -9,6 +9,9 @@ import { CondominiosComponent } from './condominios/condominios.component';
 import { NavComponent } from './nav/nav.component';
 
 import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+
 import { FormsModule } from '@angular/forms';
 import { CondominioService } from './services/condominio.service';
 import { FormatCnpjPipe } from './helpers/format-cnpj.pipe';
@@ -27,8 +30,10 @@ import { FormatTelefonePipe } from './helpers/format-telefone.pipe';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    FormsModule,
     CollapseModule.forRoot(),
-    FormsModule
+    TooltipModule.forRoot(),
+    BsDropdownModule.forRoot()
   ],
   providers: [CondominioService],
   bootstrap: [AppComponent]
