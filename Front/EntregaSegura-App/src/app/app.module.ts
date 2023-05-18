@@ -11,6 +11,7 @@ import { NavComponent } from './nav/nav.component';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { FormsModule } from '@angular/forms';
 import { CondominioService } from './services/condominio.service';
@@ -33,7 +34,8 @@ import { FormatTelefonePipe } from './helpers/format-telefone.pipe';
     FormsModule,
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [CondominioService],
   bootstrap: [AppComponent]

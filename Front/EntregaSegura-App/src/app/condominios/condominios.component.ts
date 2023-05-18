@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CondominioService } from '../services/condominio.service';
 import { Condominio } from '../models/Condominio';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-condominios',
@@ -8,6 +9,7 @@ import { Condominio } from '../models/Condominio';
   styleUrls: ['./condominios.component.scss']
 })
 export class CondominiosComponent implements OnInit {
+  modalRef = {} as BsModalRef;
 
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
@@ -32,7 +34,10 @@ export class CondominiosComponent implements OnInit {
     );
   }
 
-  constructor(private condominioService: CondominioService) { }
+  constructor(
+    private condominioService: CondominioService,
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
     this.getCondominios();
@@ -48,5 +53,17 @@ export class CondominiosComponent implements OnInit {
         console.log(error);
       }
     });
+  }
+
+  public openModal(template: TemplateRef<any>): void {
+    this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
+  }
+
+  public confirmarExclusao(): void {
+    this.modalRef.hide();
+  }
+
+  public negarExclusao(): void {
+    this.modalRef.hide();
   }
 }

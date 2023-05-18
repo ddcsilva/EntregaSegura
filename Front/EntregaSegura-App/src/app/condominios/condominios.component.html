@@ -34,7 +34,7 @@
                         <i class="fa fa-edit"></i>
                     </button>
                     <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Excluir">
+                        title="Excluir" (click)="openModal(template)">
                         <i class="fa fa-trash"></i>
                     </button>
                 </div>
@@ -49,3 +49,16 @@
         </tr>
     </tfoot>
 </table>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Confirmação de Exclusão</h5>
+    </div>
+    <div class="modal-body text-center">
+        <p>Você tem certeza que deseja excluir este condomínio?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="confirmarExclusao()">Sim</button>
+        <button type="button" class="btn btn-primary" (click)="negarExclusao()">Não</button>
+    </div>
+</ng-template>
