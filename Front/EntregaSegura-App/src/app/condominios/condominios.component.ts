@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { CondominioService } from '../services/condominio.service';
 import { Condominio } from '../models/Condominio';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-condominios',
@@ -36,7 +37,8 @@ export class CondominiosComponent implements OnInit {
 
   constructor(
     private condominioService: CondominioService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit(): void {
@@ -55,12 +57,13 @@ export class CondominiosComponent implements OnInit {
     });
   }
 
-  public openModal(template: TemplateRef<any>): void {
+  public abrirModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   public confirmarExclusao(): void {
     this.modalRef.hide();
+    this.toastr.success('Condomínio excluído com sucesso!', 'Exclusão');
   }
 
   public negarExclusao(): void {

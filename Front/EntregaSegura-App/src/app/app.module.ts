@@ -13,6 +13,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+import { ToastrModule } from 'ngx-toastr';
+
 import { FormsModule } from '@angular/forms';
 import { CondominioService } from './services/condominio.service';
 import { FormatCnpjPipe } from './helpers/format-cnpj.pipe';
@@ -35,7 +37,15 @@ import { FormatTelefonePipe } from './helpers/format-telefone.pipe';
     CollapseModule.forRoot(),
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    ToastrModule.forRoot(
+      {
+        timeOut: 3000,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true,
+        progressBar: true
+      }
+    )
   ],
   providers: [CondominioService],
   bootstrap: [AppComponent]

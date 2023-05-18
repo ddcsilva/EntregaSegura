@@ -10,7 +10,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^14.2.0",
+    "@angular/animations": "^14.3.0",
     "@angular/common": "^14.2.0",
     "@angular/compiler": "^14.2.0",
     "@angular/core": "^14.2.0",
@@ -21,6 +21,7 @@
     "@fortawesome/fontawesome-free": "^6.4.0",
     "bootstrap": "4.6",
     "ngx-bootstrap": "^9.0.0",
+    "ngx-toastr": "^15.2.2",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
