@@ -1,6 +1,13 @@
+// Angular imports
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { CondominioService } from '../services/condominio.service';
+
+// Model imports
 import { Condominio } from '../models/Condominio';
+
+// Service imports
+import { CondominioService } from '../services/condominio.service';
+
+// Library imports
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -11,30 +18,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./condominios.component.scss']
 })
 export class CondominiosComponent implements OnInit {
-  modalRef = {} as BsModalRef;
-
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
-
   private filtroAtual: string = '';
-
-  public get filtro(): string {
-    return this.filtroAtual;
-  }
-  public set filtro(value: string) {
-    this.filtroAtual = value;
-    this.condominiosFiltrados = this.filtro ? this.filtrarCondominios(this.filtro) : this.condominios;
-  }
-
-  public filtrarCondominios(filtrarPor: string): any {
-    filtrarPor = filtrarPor.toLocaleLowerCase();
-    return this.condominios.filter(
-      (condominio: { cnpj: string; nome: string; cidade: string }) =>
-        condominio.cnpj.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-        condominio.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-        condominio.cidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1
-    );
-  }
+  modalRef = {} as BsModalRef;
 
   constructor(
     private condominioService: CondominioService,
@@ -46,6 +33,15 @@ export class CondominiosComponent implements OnInit {
   ngOnInit(): void {
     this.spinner.show();
     this.getCondominios();
+  }
+
+  public get filtro(): string {
+    return this.filtroAtual;
+  }
+
+  public set filtro(value: string) {
+    this.filtroAtual = value;
+    this.condominiosFiltrados = this.filtro ? this.filtrarCondominios(this.filtro) : this.condominios;
   }
 
   public getCondominios(): void {
@@ -60,6 +56,16 @@ export class CondominiosComponent implements OnInit {
       },
       complete: () => this.spinner.hide()
     });
+  }
+
+  public filtrarCondominios(filtrarPor: string): any {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.condominios.filter(
+      (condominio: { cnpj: string; nome: string; cidade: string }) =>
+        condominio.cnpj.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        condominio.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
+        condominio.cidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
   }
 
   public abrirModal(template: TemplateRef<any>): void {
