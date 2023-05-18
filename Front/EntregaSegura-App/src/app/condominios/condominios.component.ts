@@ -3,6 +3,7 @@ import { CondominioService } from '../services/condominio.service';
 import { Condominio } from '../models/Condominio';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-condominios',
@@ -38,10 +39,12 @@ export class CondominiosComponent implements OnInit {
   constructor(
     private condominioService: CondominioService,
     private modalService: BsModalService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
+    this.spinner.show();
     this.getCondominios();
   }
 
@@ -52,8 +55,10 @@ export class CondominiosComponent implements OnInit {
         this.condominiosFiltrados = this.condominios;
       },
       error: (error: any) => {
-        console.log(error);
-      }
+        this.spinner.hide();
+        this.toastr.error('Erro ao carregar os condomínios', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
     });
   }
 
