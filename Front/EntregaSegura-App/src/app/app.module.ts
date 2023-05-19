@@ -7,16 +7,16 @@ import { FormsModule } from '@angular/forms';
 
 // Components imports
 import { AppComponent } from './app.component';
+import { NavComponent } from './shared/nav/nav.component';
+import { TituloComponent } from './shared/titulo/titulo.component';
 import { CondominiosComponent } from './components/condominios/condominios.component';
-import { NavComponent } from './nav/nav.component';
 import { UnidadesComponent } from './components/unidades/unidades.component';
 import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 import { MoradoresComponent } from './components/moradores/moradores.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
-import { ContatoComponent } from './components/contato/contato.component';
+import { ContatosComponent } from './components/contatos/contatos.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
-import { TituloComponent } from './shared/titulo/titulo.component';
 
 // Service imports
 import { CondominioService } from './services/condominio.service';
@@ -46,7 +46,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     MoradoresComponent,
     EntregasComponent,
     TransportadorasComponent,
-    ContatoComponent,
+    ContatosComponent,
     PerfilComponent,
     FormatCnpjPipe,
     FormatTelefonePipe,

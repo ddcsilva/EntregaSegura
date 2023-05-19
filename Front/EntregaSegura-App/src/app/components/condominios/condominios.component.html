@@ -1,63 +1,77 @@
-<app-titulo [titulo]="'Condomínios'"></app-titulo>
-
-<div class="form-inline">
-    <div class="form-group mb-2">
-        <label class="mr-2">Filtro:</label>
-        <input type="text" class="form-control mr-2" placeholder="Buscar" [(ngModel)]="filtro">
+<div class="row">
+    <div class="col-12">
+        <app-titulo [titulo]="'Condomínios'"></app-titulo>
+        <div class="row">
+            <div class="col-12 col-md-6 mb-3">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Filtro</span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
+                        aria-describedby="inputGroup-sizing-default" [(ngModel)]="filtro">
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th class="d-none d-lg-table-cell" scope="col">CNPJ</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Telefone</th>
+                        <th class="d-none d-md-table-cell" scope="col">Bairro</th>
+                        <th scope="col">Cidade</th>
+                        <th class="d-none d-lg-table-cell" scope="col">Estado</th>
+                        <th scope="col">Opções</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="condominios && condominios.length > 0">
+                    <tr *ngFor="let condominio of condominiosFiltrados">
+                        <td class="d-none d-lg-table-cell">{{condominio.cnpj | formatCnpj}}</td>
+                        <td>{{condominio.nome}}</td>
+                        <td>{{condominio.telefone | formatTelefone}}</td>
+                        <td class="d-none d-md-table-cell">{{condominio.bairro}}</td>
+                        <td>{{condominio.cidade}}</td>
+                        <td class="d-none d-lg-table-cell">{{condominio.estado}}</td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-sm btn-primary mr-2" data-bs-toggle="tooltip"
+                                    data-bs-placement="top" title="Editar">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="Excluir" (click)="abrirModal(template)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" *ngIf="condominios.length == 0">
+                            Nenhum condomínio cadastrado.
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
     </div>
 </div>
-<table class="table table-striped">
-    <thead class="thead-dark">
-        <tr>
-            <th>CNPJ</th>
-            <th>Nome</th>
-            <th>Telefone</th>
-            <th>Bairro</th>
-            <th>Cidade</th>
-            <th>Estado</th>
-            <th>Opções</th>
-        </tr>
-    </thead>
-    <tbody *ngIf="condominios && condominios.length > 0">
-        <tr *ngFor="let condominio of condominiosFiltrados">
-            <td>{{condominio.cnpj | formatCnpj}}</td>
-            <td>{{condominio.nome}}</td>
-            <td>{{condominio.telefone | formatTelefone}}</td>
-            <td>{{condominio.bairro}}</td>
-            <td>{{condominio.cidade}}</td>
-            <td>{{condominio.estado}}</td>
-            <td>
-                <div class="btn-group">
-                    <button class="btn btn-sm btn-primary mr-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Editar">
-                        <i class="fa fa-edit"></i>
-                    </button>
-                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip" data-bs-placement="top"
-                        title="Excluir" (click)="abrirModal(template)">
-                        <i class="fa fa-trash"></i>
-                    </button>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-    <tfoot>
-        <tr>
-            <td colspan="6" *ngIf="condominios.length == 0">
-                Nenhum condomínio cadastrado.
-            </td>
-        </tr>
-    </tfoot>
-</table>
 
 <ng-template #template>
     <div class="modal-header">
         <h5 class="modal-title">Confirmação de Exclusão</h5>
     </div>
     <div class="modal-body text-center">
-        <p>Você tem certeza que deseja excluir este condomínio?</p>
+        <p>Você tem certeza que deseja excluir este condomínio? Essa ação não pode ser desfeita.</p>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="confirmarExclusao()">Sim</button>
-        <button type="button" class="btn btn-primary" (click)="negarExclusao()">Não</button>
+        <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">
+            <i class="fa fa-trash"></i> Sim
+        </button>
+        <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+            <i class="fa fa-times"></i> Não
+        </button>
     </div>
 </ng-template>
