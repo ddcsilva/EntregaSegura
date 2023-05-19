@@ -7,6 +7,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TituloComponent implements OnInit {
   @Input() titulo = '';
+  @Input() classeIcone = 'fa fa-building';
+  @Input() subtitulo = 'Sistema de Gerenciamento de Entregas em Condomínios';
+  @Input() botaoListar = false;
 
   constructor() { }
 
