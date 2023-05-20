@@ -1,5 +1,6 @@
 // Angular imports
-import { Component, Input, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Router } from '@angular/router';
 
 // Model imports
 import { Condominio } from 'src/app/models/Condominio';
@@ -33,6 +34,7 @@ export class CondominioListaComponent implements OnInit {
   modalRef = {} as BsModalRef;
 
   constructor(
+    private router: Router,
     private _condominioService: CondominioService,
     private modalService: BsModalService,
     private toastr: ToastrService,
@@ -76,6 +78,11 @@ export class CondominioListaComponent implements OnInit {
         condominio.cidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1
     );
   }
+
+  public editarCondominio(id: string): void {
+    this.router.navigate(['condominios/detalhe', id]);
+  }
+  
 
   public abrirModal(template: TemplateRef<any>): void {
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });

@@ -15,7 +15,7 @@
                     <a class="d-flex btn btn-outline-secondary" routerLink="detalhe">
                         <i class="fa fa-plus-circle my-1"></i>
                         <b class="ml-1 d-none d-sm-block">Novo</b>
-                      </a>                      
+                    </a>
                 </div>
 
             </div>
@@ -43,7 +43,8 @@
                             <td class="options-column">
                                 <div class="btn-group">
                                     <button class="btn btn-sm btn-secondary mr-2" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Editar">
+                                        data-bs-placement="top" title="Editar"
+                                        (click)="editarCondominio(condominio.id)">
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip"

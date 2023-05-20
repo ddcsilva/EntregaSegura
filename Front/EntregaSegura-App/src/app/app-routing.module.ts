@@ -18,6 +18,7 @@ const routes: Routes = [
     children: [
       { path: '', component: CondominioListaComponent },
       { path: 'detalhe', component: CondominioDetalheComponent },
+      { path: 'detalhe/:id', component: CondominioDetalheComponent }
     ]
   },
   { path: 'contatos', component: ContatosComponent},
