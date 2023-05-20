@@ -16,7 +16,7 @@ import { MoradoresComponent } from './components/moradores/moradores.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { PerfilComponent } from './components/usuarios/perfil/perfil.component';
 
 // Service imports
 import { CondominioService } from './services/condominio.service';
@@ -36,6 +36,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
 import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
+import { RegistroComponent } from './components/usuarios/registro/registro.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +57,10 @@ import { CondominioDetalheComponent } from './components/condominios/condominio-
     FormatTelefonePipe,
     DashboardComponent,
     CondominioListaComponent,
-    CondominioDetalheComponent
+    CondominioDetalheComponent,
+    UsuariosComponent,
+    LoginComponent,
+    RegistroComponent
   ],
   imports: [
     BrowserModule,
