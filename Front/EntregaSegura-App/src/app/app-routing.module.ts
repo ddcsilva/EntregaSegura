@@ -9,9 +9,17 @@ import { MoradoresComponent } from './components/moradores/moradores.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
 import { UnidadesComponent } from './components/unidades/unidades.component';
+import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
+import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
 
 const routes: Routes = [
-  { path: 'condominios', component: CondominiosComponent},
+  { 
+    path: 'condominios', component: CondominiosComponent,
+    children: [
+      { path: '', component: CondominioListaComponent },
+      { path: 'detalhe', component: CondominioDetalheComponent },
+    ]
+  },
   { path: 'contatos', component: ContatosComponent},
   { path: 'dashboard', component: DashboardComponent},
   { path: 'entregas', component: EntregasComponent},

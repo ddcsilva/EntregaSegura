@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card rounded shadow-sm p-3">
+            <div class="d-flex">
+                <div class="flex-fill pr-3">
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">Filtro: </div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
+                            aria-describedby="inputGroup-sizing-default" [(ngModel)]="filtro">
+                    </div>
+                </div>
+                <div>
+                    <a class="d-flex btn btn-outline-secondary" routerLink="detalhe">
+                        <i class="fa fa-plus-circle my-1"></i>
+                        <b class="ml-1 d-none d-sm-block">Novo</b>
+                      </a>                      
+                </div>
+
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped custom-table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="d-none d-lg-table-cell" scope="col">CNPJ</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Telefone</th>
+                            <th class="d-none d-md-table-cell" scope="col">Bairro</th>
+                            <th scope="col">Cidade</th>
+                            <th class="d-none d-lg-table-cell" scope="col">Estado</th>
+                            <th class="options-column" scope="col">Opções</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="condominios && condominios.length > 0">
+                        <tr *ngFor="let condominio of condominiosFiltrados">
+                            <td class="d-none d-lg-table-cell">{{condominio.cnpj | formatCnpj}}</td>
+                            <td>{{condominio.nome}}</td>
+                            <td>{{condominio.telefone | formatTelefone}}</td>
+                            <td class="d-none d-md-table-cell">{{condominio.bairro}}</td>
+                            <td>{{condominio.cidade}}</td>
+                            <td class="d-none d-lg-table-cell">{{condominio.estado}}</td>
+                            <td class="options-column">
+                                <div class="btn-group">
+                                    <button class="btn btn-sm btn-secondary mr-2" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Editar">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" title="Excluir" (click)="abrirModal(template)">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" *ngIf="condominios.length == 0">
+                                Nenhum condomínio cadastrado.
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<ng-template #template>
+    <div class="modal-header">
+        <h5 class="modal-title">Confirmação de Exclusão</h5>
+    </div>
+    <div class="modal-body text-center">
+        <p>Você tem certeza que deseja excluir este condomínio? Essa ação não pode ser desfeita.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">
+            <i class="fa fa-trash"></i> Sim
+        </button>
+        <button type="button" class="btn btn-primary" (click)="negarExclusao()">
+            <i class="fa fa-times"></i> Não
+        </button>
+    </div>
+</ng-template>

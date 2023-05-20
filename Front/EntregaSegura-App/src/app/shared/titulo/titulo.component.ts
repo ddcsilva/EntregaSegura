@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-titulo',
@@ -10,10 +11,15 @@ export class TituloComponent implements OnInit {
   @Input() classeIcone = 'fa fa-building';
   @Input() subtitulo = 'Sistema de Gerenciamento de Entregas em Condomínios';
   @Input() botaoListar = false;
+  @Input() rotaBotaoListar = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  navegarParaRotaBotaoListar(): void {
+    this.router.navigate([this.rotaBotaoListar]);
   }
 
 }

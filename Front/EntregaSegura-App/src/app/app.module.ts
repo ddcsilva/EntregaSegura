@@ -34,6 +34,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
+import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
     PerfilComponent,
     FormatCnpjPipe,
     FormatTelefonePipe,
-    DashboardComponent
+    DashboardComponent,
+    CondominioListaComponent,
+    CondominioDetalheComponent
   ],
   imports: [
     BrowserModule,
