@@ -3,10 +3,10 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 // Model imports
-import { Condominio } from 'src/app/models/Condominio';
+import { Condominio } from '@app/models/Condominio';
 
 // Service imports
-import { CondominioService } from 'src/app/services/condominio.service';
+import { CondominioService } from '@app/services/condominio.service';
 
 // Library imports
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
