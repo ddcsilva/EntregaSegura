@@ -2,3 +2,8 @@
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~bootswatch/dist/Cosmo/bootstrap.min.css";
 
+$font-family: 'Roboto', sans-serif;
+
+body {
+  font-family: $font-family;
+}
