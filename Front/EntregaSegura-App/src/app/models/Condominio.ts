@@ -14,7 +14,6 @@ export interface Condominio {
     bairro: string;
     cidade: string;
     estado: string;
-    pais: string;
     dataCriacao: Date;
     dataAtualizacao: Date;
     ativo: boolean;
