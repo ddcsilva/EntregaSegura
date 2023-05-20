@@ -16,10 +16,10 @@ export class CondominioDetalheComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    this.validacao();
+    this.validarFormulario();
   }
 
-  public validacao(): void {
+  public validarFormulario(): void {
     this.formulario = this.formBuilder.group({
       quantidadeUnidades: ['', Validators.required],
       quantidadeAndares: ['', Validators.required],
@@ -30,15 +30,22 @@ export class CondominioDetalheComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       logradouro: ['', Validators.required],
       numero: ['', Validators.required],
-      complemento: ['', Validators.required ],
+      complemento: ['', Validators.required],
       cep: ['', Validators.required],
       bairro: ['', Validators.required],
       cidade: ['', Validators.required],
-      estado: ['',Validators.required]
+      estado: ['', Validators.required]
     });
   }
 
-  public reiniciarFormulario(): void {
+  public reiniciarFormulario(event: any): void {
+    event.preventDefault();
     this.formulario.reset();
+  }
+
+  public submeterFormulario(): void {
+    if (this.formulario.invalid) {
+      return;
+    }
   }
 }
