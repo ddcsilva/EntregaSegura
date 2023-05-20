@@ -150,10 +150,10 @@
                 </div>
                 <div class="card-footer">
                     <div class="d-flex">
-                        <button class="btn btn-outline-secondary mr-auto border">
+                        <button class="btn btn-outline-secondary mr-auto border" (click)="reiniciarFormulario()">
                             Cancelar Alteração
                         </button>
-                        <button class="btn btn-success">
+                        <button class="btn btn-success" [disabled]="formulario.invalid">
                             Salvar Condomínio
                         </button>
                     </div>

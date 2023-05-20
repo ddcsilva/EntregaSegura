@@ -37,4 +37,8 @@ export class CondominioDetalheComponent implements OnInit {
       estado: ['',Validators.required]
     });
   }
+
+  public reiniciarFormulario(): void {
+    this.formulario.reset();
+  }
 }
