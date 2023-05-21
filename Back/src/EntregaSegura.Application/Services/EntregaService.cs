@@ -21,7 +21,7 @@ public class EntregaService : BaseService, IEntregaService
     {
         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return null;
 
-        await _entregaRepository.AdicionarAsync(entrega);
+        _entregaRepository.Adicionar(entrega);
         var result = await CommitAsync();
 
         if (result == 0)

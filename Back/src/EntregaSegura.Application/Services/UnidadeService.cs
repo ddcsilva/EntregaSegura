@@ -27,7 +27,7 @@ public class UnidadeService : BaseService, IUnidadeService
             return null;
         }
 
-        await _unidadeRepository.AdicionarAsync(unidade);
+        _unidadeRepository.Adicionar(unidade);
         await CommitAsync();
 
         return unidade;

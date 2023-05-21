@@ -38,7 +38,7 @@ public class CondominioService : BaseService, ICondominioService
 
         if (TemNotificacoes()) return null;
 
-        await _condominioRepository.AdicionarAsync(condominio);
+        _condominioRepository.Adicionar(condominio);
         var result = await CommitAsync();
 
         if (result == 0)

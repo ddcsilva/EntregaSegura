@@ -39,7 +39,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return null;
         }
 
-        await _transportadoraRepository.AdicionarAsync(transportadora);
+        _transportadoraRepository.Adicionar(transportadora);
         var result = await CommitAsync();
 
         if (result == 0)

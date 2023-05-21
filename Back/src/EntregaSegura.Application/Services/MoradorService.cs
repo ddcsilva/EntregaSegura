@@ -27,7 +27,7 @@ public class MoradorService : BaseService, IMoradorService
             return null;
         }
 
-        await _moradorRepository.AdicionarAsync(morador);
+        _moradorRepository.Adicionar(morador);
         await CommitAsync();
 
         return morador;

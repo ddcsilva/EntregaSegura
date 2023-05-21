@@ -27,7 +27,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return null;
         }
 
-        await _funcionarioRepository.AdicionarAsync(funcionario);
+        _funcionarioRepository.Adicionar(funcionario);
         var result = await CommitAsync();
 
         if (result == 0)
