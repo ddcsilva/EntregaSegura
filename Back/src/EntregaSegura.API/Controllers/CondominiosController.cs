@@ -1,5 +1,4 @@
 using AutoMapper;
-using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.DTOs.Condominios;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
@@ -21,32 +20,6 @@ public class CondominiosController : MainController
         _mapper = mapper;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodos()
-    {
-        var condominiosDTO = await ObterCondominios();
-
-        return Ok(condominiosDTO);
-    }
-
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<CondominioDTO>> ObterPorId(Guid id)
-    {
-        var condominioDTO = await ObterCondominioComUnidadesEFuncionarios(id);
-
-        if (condominioDTO == null) return NotFound();
-
-        return Ok(condominioDTO);
-    }
-
-    [HttpGet("por-nome/{nome}")]
-    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterPorNome(string nome)
-    {
-        var condominiosDTO = await ObterCondominiosPorNome(nome);
-
-        return Ok(condominiosDTO);
-    }
-
     [HttpPost]
     public async Task<ActionResult<CondominioDTO>> Adicionar(CondominioDTO condominioDTO)
     {
@@ -60,6 +33,30 @@ public class CondominiosController : MainController
         condominioDTO = _mapper.Map<CondominioDTO>(novoCondominio);
 
         return CustomResponse(condominioDTO);
+    }
+
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodos()
+    {
+        var condominiosDTO = await ObterCondominios();
+        
+        return Ok(condominiosDTO);
+    }
+
+    [HttpGet("{id:guid}")]
+    public async Task<ActionResult<CondominioDTO>> ObterPorId(Guid id)
+    {
+        var condominioDTO = await ObterCondominioComUnidadesEFuncionarios(id);
+
+        return condominioDTO == null ? NotFound() : Ok(condominioDTO);
+    }
+
+    [HttpGet("por-nome/{nome}")]
+    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterPorNome(string nome)
+    {
+        var condominiosDTO = await ObterCondominiosPorNome(nome);
+
+        return Ok(condominiosDTO);
     }
 
     [HttpPut("{id:guid}")]
