@@ -11,4 +11,7 @@ export class CondominioService {
     return this.http.get(this.urlBase);
   }
 
+  public getCondominio(id: string): any {
+    return this.http.get(`${this.urlBase}/${id}`);
+  }
 }

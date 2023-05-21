@@ -7,7 +7,7 @@
                         <div class="form-group col-md-6">
                             <label>Nome</label>
                             <input type="text" class="form-control" formControlName="nome"
-                                [ngClass]="{'is-invalid': formControl.nome?.errors && formControl.nome?.touched}"
+                                [ngClass]="gerarClassesValidacao(formControl.nome)"
                                 placeholder="Insira o nome do condomínio">
                             <div *ngIf="formControl.nome?.hasError('required')" class="invalid-feedback">
                                 Nome obrigatório
@@ -16,7 +16,7 @@
                         <div class="form-group col-md-6">
                             <label>CNPJ</label>
                             <input type="text" class="form-control" formControlName="cnpj"
-                                [ngClass]="{'is-invalid': formControl.cnpj?.errors && formControl.cnpj?.touched}"
+                                [ngClass]="gerarClassesValidacao(formControl.cnpj)"
                                 placeholder="Insira o CNPJ do condomínio">
                             <div *ngIf="formControl.cnpj?.hasError('required')" class="invalid-feedback">
                                 CNPJ obrigatório
@@ -25,33 +25,27 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label>Quantidade de Unidades</label>
-                            <input type="number" class="form-control" formControlName="quantidadeUnidades"
-                                [ngClass]="{'is-invalid': formControl.quantidadeUnidades?.errors && formControl.quantidadeUnidades?.touched}"
-                                placeholder="">
-                            <div *ngIf="formControl.quantidadeUnidades?.hasError('required')"
-                                class="invalid-feedback">
-                                Quantidade de unidades obrigatório
+                            <label>Quantidade de Blocos</label>
+                            <input type="number" class="form-control" formControlName="quantidadeBlocos"
+                                [ngClass]="gerarClassesValidacao(formControl.quantidadeBlocos)" placeholder="">
+                            <div *ngIf="formControl.quantidadeBlocos?.hasError('required')" class="invalid-feedback">
+                                Quantidade de blocos obrigatório
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Quantidade de Andares</label>
+                            <label>Quantidade de Andares por Blocos</label>
                             <input type="number" class="form-control" formControlName="quantidadeAndares"
-                                [ngClass]="{'is-invalid': formControl.quantidadeAndares?.errors && formControl.quantidadeAndares?.touched}"
-                                placeholder="">
-                            <div *ngIf="formControl.quantidadeAndares?.hasError('required')"
-                                class="invalid-feedback">
+                                [ngClass]="gerarClassesValidacao(formControl.quantidadeAndares)" placeholder="">
+                            <div *ngIf="formControl.quantidadeAndares?.hasError('required')" class="invalid-feedback">
                                 Quantidade de andares obrigatório
                             </div>
                         </div>
                         <div class="form-group col-md-4">
-                            <label>Quantidade de Blocos</label>
-                            <input type="number" class="form-control" formControlName="quantidadeBlocos"
-                                [ngClass]="{'is-invalid': formControl.quantidadeBlocos?.errors && formControl.quantidadeBlocos?.touched}"
-                                placeholder="">
-                            <div *ngIf="formControl.quantidadeBlocos?.hasError('required')"
-                                class="invalid-feedback">
-                                Quantidade de blocos obrigatório
+                            <label>Quantidade de Unidades por Andar</label>
+                            <input type="number" class="form-control" formControlName="quantidadeUnidades"
+                                [ngClass]="gerarClassesValidacao(formControl.quantidadeUnidades)" placeholder="">
+                            <div *ngIf="formControl.quantidadeUnidades?.hasError('required')" class="invalid-feedback">
+                                Quantidade de unidades obrigatório
                             </div>
                         </div>
                     </div>
@@ -59,8 +53,7 @@
                         <div class="form-group col-md-6">
                             <label>Telefone</label>
                             <input type="text" class="form-control" formControlName="telefone"
-                                [ngClass]="{'is-invalid': formControl.telefone?.errors && formControl.telefone?.touched}"
-                                placeholder="(00) 90000-0000">
+                                [ngClass]="gerarClassesValidacao(formControl.telefone)" placeholder="(00) 90000-0000">
                             <div *ngIf="formControl.telefone?.hasError('required')" class="invalid-feedback">
                                 Telefone obrigatório
                             </div>
@@ -68,8 +61,7 @@
                         <div class="form-group col-md-6">
                             <label>Email</label>
                             <input type="email" class="form-control" formControlName="email"
-                                [ngClass]="{'is-invalid': formControl.email?.errors && formControl.email?.touched}"
-                                placeholder="e-mail">
+                                [ngClass]="gerarClassesValidacao(formControl.email)" placeholder="e-mail">
                             <div *ngIf="formControl.email?.hasError('required')" class="invalid-feedback">
                                 Email obrigatório
                             </div>
@@ -82,8 +74,7 @@
                         <div class="form-group col-md-8">
                             <label>Logradouro</label>
                             <input type="text" class="form-control" formControlName="logradouro"
-                                [ngClass]="{'is-invalid': formControl.logradouro?.errors && formControl.logradouro?.touched}"
-                                placeholder="">
+                                [ngClass]="gerarClassesValidacao(formControl.logradouro)" placeholder="">
                             <div *ngIf="formControl.logradouro?.hasError('required')" class="invalid-feedback">
                                 Logradouro obrigatório
                             </div>
@@ -91,60 +82,54 @@
                         <div class="form-group col-md-4">
                             <label>Número</label>
                             <input type="text" class="form-control" formControlName="numero"
-                                [ngClass]="{'is-invalid': formControl.numero?.errors && formControl.numero?.touched}"
-                                placeholder="">
-                                <div *ngIf="formControl.numero?.hasError('required')" class="invalid-feedback">
-                                    Número obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.numero)" placeholder="">
+                            <div *ngIf="formControl.numero?.hasError('required')" class="invalid-feedback">
+                                Número obrigatório
                             </div>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label>Complemento</label>
                             <input type="text" class="form-control" formControlName="complemento"
-                                [ngClass]="{'is-invalid': formControl.complemento?.errors && formControl.complemento?.touched}"
-                                placeholder="">
-                                <div *ngIf="formControl.complemento?.hasError('required')" class="invalid-feedback">
-                                    Complemento obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.complemento)" placeholder="">
+                            <div *ngIf="formControl.complemento?.hasError('required')" class="invalid-feedback">
+                                Complemento obrigatório
                             </div>
+                        </div>
                         <div class="form-group col-md-4">
                             <label>CEP</label>
                             <input type="text" class="form-control" formControlName="cep"
-                                [ngClass]="{'is-invalid': formControl.cep?.errors && formControl.cep?.touched}"
-                                placeholder="">
-                                <div *ngIf="formControl.cep?.hasError('required')" class="invalid-feedback">
-                                    CEP obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.cep)" placeholder="">
+                            <div *ngIf="formControl.cep?.hasError('required')" class="invalid-feedback">
+                                CEP obrigatório
                             </div>
+                        </div>
                         <div class="form-group col-md-4">
                             <label>Bairro</label>
                             <input type="text" class="form-control" formControlName="bairro"
-                                [ngClass]="{'is-invalid': formControl.bairro?.errors && formControl.bairro?.touched}"
-                                placeholder="">
-                                <div *ngIf="formControl.bairro?.hasError('required')" class="invalid-feedback">
-                                    Bairro obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.bairro)" placeholder="">
+                            <div *ngIf="formControl.bairro?.hasError('required')" class="invalid-feedback">
+                                Bairro obrigatório
                             </div>
+                        </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Cidade</label>
                             <input type="text" class="form-control" formControlName="cidade"
-                                [ngClass]="{'is-invalid': formControl.cidade?.errors && formControl.cidade?.touched}"
-                                placeholder="cidade">
-                                <div *ngIf="formControl.cidade?.hasError('required')" class="invalid-feedback">
-                                    Cidade obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.cidade)" placeholder="cidade">
+                            <div *ngIf="formControl.cidade?.hasError('required')" class="invalid-feedback">
+                                Cidade obrigatório
                             </div>
+                        </div>
                         <div class="form-group col-md-6">
                             <label>Estado</label>
                             <input type="text" class="form-control" formControlName="estado"
-                                [ngClass]="{'is-invalid': formControl.estado?.errors && formControl.estado?.touched}"
-                                placeholder="estado">
-                                <div *ngIf="formControl.estado?.hasError('required')" class="invalid-feedback">
-                                    Estado obrigatório
-                                </div>
+                                [ngClass]="gerarClassesValidacao(formControl.estado)" placeholder="estado">
+                            <div *ngIf="formControl.estado?.hasError('required')" class="invalid-feedback">
+                                Estado obrigatório
+                            </div>
                         </div>
                     </div>
                 </div>
