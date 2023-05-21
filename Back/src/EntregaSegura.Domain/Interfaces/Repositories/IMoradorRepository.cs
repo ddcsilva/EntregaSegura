@@ -5,7 +5,7 @@ namespace EntregaSegura.Domain.Interfaces.Repositories;
 public interface IMoradorRepository : IRepository<Morador>
 {
     Task<Morador> ObterPorNomeAsync(string nome);
-    Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(Guid unidadeId);
-    Task<Morador> ObterMoradorComEntregasAsync(Guid id);
-    Task<Morador> ObterMoradorComUnidadeAsync(Guid id);
+    Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId);
+    Task<Morador> ObterMoradorComEntregasAsync(int id);
+    Task<Morador> ObterMoradorComUnidadeAsync(int id);
 }

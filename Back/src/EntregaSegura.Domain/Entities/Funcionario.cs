@@ -10,7 +10,7 @@ public sealed class Funcionario : BaseEntity
         DataAdmissao = DateTime.Now;
     }
 
-    public Guid CondominioId { get; set; }
+    public int CondominioId { get; set; }
     public string Nome { get; set; }
     public string CPF { get; set; }
     public string Email { get; set; }

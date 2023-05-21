@@ -16,6 +16,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
         builder.Property(m => m.Id)
             .HasColumnName("MOR_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária do morador");
 
         builder.Property(m => m.Nome)

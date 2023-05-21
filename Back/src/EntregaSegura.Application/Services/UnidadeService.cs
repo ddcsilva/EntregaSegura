@@ -55,7 +55,7 @@ public class UnidadeService : BaseService, IUnidadeService
         return unidade;
     }
 
-    public async Task<bool> Remover(Guid id)
+    public async Task<bool> Remover(int id)
     {
         var unidade = await _unidadeRepository.ObterPorIdAsync(id);
 
@@ -82,7 +82,7 @@ public class UnidadeService : BaseService, IUnidadeService
         return await _unidadeRepository.ObterTodosAsync();
     }
 
-    public async Task<Unidade> ObterPorIdAsync(Guid id)
+    public async Task<Unidade> ObterPorIdAsync(int id)
     {
         return await _unidadeRepository.ObterPorIdAsync(id);
     }
@@ -92,22 +92,22 @@ public class UnidadeService : BaseService, IUnidadeService
         return await _unidadeRepository.ObterUnidadesComCondominioAsync();
     }
 
-    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(Guid id)
+    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id)
     {
         return await _unidadeRepository.ObterUnidadePorIdComCondominioEMoradoresAsync(id);
     }
 
-    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         return await _unidadeRepository.ObterPorUnidadePorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }
 
-    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         return await _unidadeRepository.ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }
 
-    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         return await _unidadeRepository.ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }

@@ -84,7 +84,7 @@ public class CondominioService : BaseService, ICondominioService
         return condominio;
     }
 
-    public async Task <bool> Remover(Guid id)
+    public async Task <bool> Remover(int id)
     {
         var condominio = await _condominioRepository.ObterPorIdAsync(id);
 
@@ -116,22 +116,22 @@ public class CondominioService : BaseService, ICondominioService
         return await _condominioRepository.ObterTodosCondominiosPorNomeAsync(nome);
     }
 
-    public async Task<Condominio> ObterPorIdAsync(Guid id)
+    public async Task<Condominio> ObterPorIdAsync(int id)
     {
         return await _condominioRepository.ObterPorIdAsync(id);
     }
 
-    public async Task<Condominio> ObterCondominioComFuncionariosAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComFuncionariosAsync(int condominioId)
     {
         return await _condominioRepository.ObterCondominioComFuncionariosAsync(condominioId);
     }
 
-    public async Task<Condominio> ObterCondominioComUnidadesAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComUnidadesAsync(int condominioId)
     {
         return await _condominioRepository.ObterCondominioComUnidadesAsync(condominioId);
     }
 
-    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(int condominioId)
     {
         return await _condominioRepository.ObterCondominioComUnidadesEFuncionariosAsync(condominioId);
     }

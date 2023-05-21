@@ -16,6 +16,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
         builder.Property(c => c.Id)
             .HasColumnName("CND_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária do condomínio");
 
         builder.Property(c => c.QuantidadeUnidades)

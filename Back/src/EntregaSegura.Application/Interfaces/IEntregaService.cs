@@ -6,13 +6,13 @@ public interface IEntregaService : IDisposable
 {
     Task<Entrega> Adicionar(Entrega entrega);
     Task<Entrega> Atualizar(Entrega entrega);
-    Task<bool> Remover(Guid id);
+    Task<bool> Remover(int id);
     Task<IEnumerable<Entrega>> ObterTodosAsync();
-    Task<Entrega> ObterPorIdAsync(Guid id);
-    Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(Guid moradorId);
-    Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(Guid funcionarioId);
-    Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(Guid transportadoraId);
-    Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(Guid moradorId);
-    Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(Guid moradorId);
-    Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(Guid funcionarioId);
+    Task<Entrega> ObterPorIdAsync(int id);
+    Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId);
+    Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId);
+    Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId);
+    Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId);
+    Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId);
+    Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId);
 }

@@ -5,7 +5,7 @@ namespace EntregaSegura.Application.DTOs.Condominios;
 public class CondominioDTO
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [Range(1, 1000, ErrorMessage = "O campo {0} deve estar entre {1} e {2}.")]

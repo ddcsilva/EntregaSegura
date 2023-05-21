@@ -16,6 +16,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
         builder.Property(f => f.Id)
             .HasColumnName("FUN_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária do funcionário");
 
         builder.Property(f => f.Nome)

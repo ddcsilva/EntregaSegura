@@ -9,7 +9,7 @@ public interface IRepository<TEntity> where TEntity : BaseEntity
     void Atualizar(TEntity entity);
     void Remover(TEntity entity);
     void RemoverSerie(IEnumerable<TEntity> entities);
-    Task<TEntity> ObterPorIdAsync(Guid id);
+    Task<TEntity> ObterPorIdAsync(int id);
     Task<IEnumerable<TEntity>> ObterTodosAsync();
     Task<IEnumerable<TEntity>> BuscarAsync(Expression<Func<TEntity, bool>> predicate);
 }

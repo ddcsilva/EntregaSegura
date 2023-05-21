@@ -49,7 +49,7 @@ public class MoradorService : BaseService, IMoradorService
         return morador;
     }
 
-    public async Task<bool> Remover(Guid id)
+    public async Task<bool> Remover(int id)
     {
         var morador = await _moradorRepository.ObterPorIdAsync(id);
 
@@ -70,7 +70,7 @@ public class MoradorService : BaseService, IMoradorService
         return await _moradorRepository.ObterTodosAsync();
     }
 
-    public async Task<Morador> ObterPorIdAsync(Guid id)
+    public async Task<Morador> ObterPorIdAsync(int id)
     {
         return await _moradorRepository.ObterPorIdAsync(id);
     }
@@ -80,17 +80,17 @@ public class MoradorService : BaseService, IMoradorService
         return await _moradorRepository.ObterPorNomeAsync(nome);
     }
 
-    public async Task<Morador> ObterMoradorComEntregasAsync(Guid moradorId)
+    public async Task<Morador> ObterMoradorComEntregasAsync(int moradorId)
     {
         return await _moradorRepository.ObterMoradorComEntregasAsync(moradorId);
     }
 
-    public async Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(Guid unidadeId)
+    public async Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId)
     {
         return await _moradorRepository.ObterMoradoresPorUnidadeAsync(unidadeId);
     }
 
-    public async Task<Morador> ObterMoradorComUnidadeAsync(Guid moradorId)
+    public async Task<Morador> ObterMoradorComUnidadeAsync(int moradorId)
     {
         return await _moradorRepository.ObterMoradorComUnidadeAsync(moradorId);
     }

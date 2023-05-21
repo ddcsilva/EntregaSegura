@@ -24,15 +24,7 @@ public class UnitOfWork : IUnitOfWork
             {
                 foreach (var entry in _context.ChangeTracker.Entries<BaseEntity>())
                 {
-                    if (entry.State == EntityState.Added)
-                    {
-                        entry.Entity.DataCriacao = DateTime.Now;
-                        entry.Entity.DataAtualizacao = DateTime.Now;
-                    }
-                    else if (entry.State == EntityState.Modified)
-                    {
-                        entry.Entity.DataAtualizacao = DateTime.Now;
-                    }
+                    entry.Entity.Atualizar();
                 }
 
                 var linhasAfetadas = await _context.SaveChangesAsync();

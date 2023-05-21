@@ -7,7 +7,7 @@ public class Unidade : BaseEntity
         Moradores = new List<Morador>();
     }
 
-    public Guid CondominioId { get; set; }
+    public int CondominioId { get; set; }
     public string Numero { get; set; }
     public string Bloco { get; set; }
     

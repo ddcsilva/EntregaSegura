@@ -9,7 +9,7 @@ public class FuncionarioRepository : Repository<Funcionario>, IFuncionarioReposi
 {
     public FuncionarioRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<Funcionario> ObterFuncionarioComEntregasAsync(Guid funcionarioId)
+    public async Task<Funcionario> ObterFuncionarioComEntregasAsync(int funcionarioId)
     {
         var funcionario = await _context.Funcionarios
             .AsNoTracking()

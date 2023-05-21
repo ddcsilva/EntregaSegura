@@ -9,7 +9,7 @@ public class TransportadoraRepository : Repository<Transportadora>, ITransportad
 {
     public TransportadoraRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<Transportadora> ObterTransportadoraComEntregasAsync(Guid transportadoraId)
+    public async Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId)
     {
         var transportadora = await _context.Transportadoras
             .AsNoTracking()

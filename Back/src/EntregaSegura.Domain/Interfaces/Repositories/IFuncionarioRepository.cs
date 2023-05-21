@@ -5,5 +5,5 @@ namespace EntregaSegura.Domain.Interfaces.Repositories;
 public interface IFuncionarioRepository : IRepository<Funcionario>
 {
     Task<Funcionario> ObterPorNomeAsync(string nome);
-    Task<Funcionario> ObterFuncionarioComEntregasAsync(Guid id);
+    Task<Funcionario> ObterFuncionarioComEntregasAsync(int id);
 }

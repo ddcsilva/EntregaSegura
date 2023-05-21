@@ -27,7 +27,7 @@ public class Repository<TEntity> : IRepository<TEntity> where TEntity : BaseEnti
         return await _dbSet.AsNoTracking().ToListAsync();
     }
 
-    public virtual async Task<TEntity> ObterPorIdAsync(Guid id)
+    public virtual async Task<TEntity> ObterPorIdAsync(int id)
     {
         return await _dbSet.FindAsync(id);
     }

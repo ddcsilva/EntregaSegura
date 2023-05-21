@@ -19,7 +19,7 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
         return unidades;
     }
 
-    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(Guid id)
+    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id)
     {
         var unidade = await _context.Unidades
             .AsNoTracking()
@@ -30,7 +30,7 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
         return unidade;
     }
 
-    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         var unidade = await _context.Unidades
             .AsNoTracking()
@@ -39,7 +39,7 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
         return unidade;
     }
 
-    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         var unidade = await _context.Unidades
             .AsNoTracking()
@@ -50,7 +50,7 @@ public class UnidadeRepository : Repository<Unidade>, IUnidadeRepository
         return unidade;
     }
 
-    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(Guid condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
     {
         var unidade = await _context.Unidades
             .AsNoTracking()

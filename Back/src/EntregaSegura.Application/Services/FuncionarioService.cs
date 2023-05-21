@@ -61,7 +61,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return funcionario;
     }
 
-    public async Task<bool> Remover(Guid id)
+    public async Task<bool> Remover(int id)
     {
         var funcionario = await _funcionarioRepository.ObterPorIdAsync(id);
 
@@ -88,7 +88,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return await _funcionarioRepository.ObterTodosAsync();
     }
 
-    public async Task<Funcionario> ObterPorIdAsync(Guid id)
+    public async Task<Funcionario> ObterPorIdAsync(int id)
     {
         return await _funcionarioRepository.ObterPorIdAsync(id);
     }
@@ -98,7 +98,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return await _funcionarioRepository.ObterPorNomeAsync(nome);
     }
 
-    public async Task<Funcionario> ObterFuncionarioComEntregasAsync(Guid funcionarioId)
+    public async Task<Funcionario> ObterFuncionarioComEntregasAsync(int funcionarioId)
     {
         return await _funcionarioRepository.ObterFuncionarioComEntregasAsync(funcionarioId);
     }

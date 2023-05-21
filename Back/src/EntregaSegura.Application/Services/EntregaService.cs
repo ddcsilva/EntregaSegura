@@ -49,7 +49,7 @@ public class EntregaService : BaseService, IEntregaService
         return entrega;
     }
 
-    public async Task<bool> Remover(Guid id)
+    public async Task<bool> Remover(int id)
     {
         var entrega = await _entregaRepository.ObterPorIdAsync(id);
 
@@ -77,37 +77,37 @@ public class EntregaService : BaseService, IEntregaService
         return await _entregaRepository.ObterTodosAsync();
     }
 
-    public async Task<Entrega> ObterPorIdAsync(Guid id)
+    public async Task<Entrega> ObterPorIdAsync(int id)
     {
         return await _entregaRepository.ObterPorIdAsync(id);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId)
     {
         return await _entregaRepository.ObterEntregasPorMoradorAsync(moradorId);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(Guid funcionarioId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId)
     {
         return await _entregaRepository.ObterEntregasPorFuncionarioAsync(funcionarioId);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(Guid transportadoraId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId)
     {
         return await _entregaRepository.ObterEntregasPorTransportadoraAsync(transportadoraId);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId)
     {
         return await _entregaRepository.ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(moradorId);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId)
     {
         return await _entregaRepository.ObterEntregasComStatusRetiradaPorMoradorAsync(moradorId);
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(Guid funcionarioId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId)
     {
         return await _entregaRepository.ObterEntregasRecebidasPorFuncionarioAsync(funcionarioId);
     }

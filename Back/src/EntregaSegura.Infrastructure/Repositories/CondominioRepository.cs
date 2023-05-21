@@ -9,7 +9,7 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
 {
     public CondominioRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<Condominio> ObterCondominioComFuncionariosAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComFuncionariosAsync(int condominioId)
     {
         var condominio = await _context.Condominios
             .AsNoTracking()
@@ -19,7 +19,7 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
         return condominio;
     }
 
-    public async Task<Condominio> ObterCondominioComUnidadesAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComUnidadesAsync(int condominioId)
     {
         var condominio = await _context.Condominios
             .AsNoTracking()
@@ -41,7 +41,7 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
         return condominios;
     }
 
-    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId)
+    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(int condominioId)
     {
         var condominio = await _context.Condominios
             .AsNoTracking()

@@ -16,6 +16,7 @@ public class TransportadoraConfiguration : IEntityTypeConfiguration<Transportado
         builder.Property(e => e.Id)
             .HasColumnName("TRA_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária da transportadora");
 
         builder.Property(e => e.Nome)

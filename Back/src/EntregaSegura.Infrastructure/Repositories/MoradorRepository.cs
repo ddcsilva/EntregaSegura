@@ -9,7 +9,7 @@ public class MoradorRepository : Repository<Morador>, IMoradorRepository
 {
     public MoradorRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<Morador> ObterMoradorComEntregasAsync(Guid moradorId)
+    public async Task<Morador> ObterMoradorComEntregasAsync(int moradorId)
     {
         var morador = await _context.Moradores
             .AsNoTracking()
@@ -19,7 +19,7 @@ public class MoradorRepository : Repository<Morador>, IMoradorRepository
         return morador;
     }
 
-    public async Task<Morador> ObterMoradorComUnidadeAsync(Guid moradorId)
+    public async Task<Morador> ObterMoradorComUnidadeAsync(int moradorId)
     {
         var morador = await _context.Moradores
             .AsNoTracking()
@@ -29,7 +29,7 @@ public class MoradorRepository : Repository<Morador>, IMoradorRepository
         return morador;
     }
 
-    public async Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(Guid unidadeId)
+    public async Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId)
     {
         var moradores = await _context.Moradores
             .AsNoTracking()

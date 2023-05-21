@@ -8,79 +8,160 @@ public static class ModelBuilderExtensions
 {
     public static void SeedData(this ModelBuilder modelBuilder)
     {
-        var condominioId = Guid.Parse("f26355b2-c097-4582-8a4a-4a9ecbfc7f09");
-        var enderecoId = Guid.Parse("ebdebdf0-2c0c-4db5-aff9-f6e583c7fb5b");
-        var unidadeId = Guid.Parse("68165d63-fa38-4d27-858f-ac006b1ada92");
-        var moradorId = Guid.Parse("7b3b9132-0eae-4ba1-8519-347d92873868");
-        var funcionarioId = Guid.Parse("f1e28b7e-674f-41dd-868c-c245e35de929");
-        var transportadoraId = Guid.Parse("5cc12493-0012-43aa-aac0-76cbc18bedb3");
-        var entregaId = Guid.Parse("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7");
-
-        modelBuilder.Entity<Condominio>().HasData(new Condominio
+        var condominio1 = new Condominio
         {
-            Id = condominioId,
-            Nome = "Condomínio Exemplo",
-            CNPJ = "11111111111111",
-            Telefone = "11999999999",
-            Email = "contato@condominioexemplo.com.br",
-            Logradouro = "Rua Exemplo",
-            Numero = "100",
-            Complemento = "Bloco A",
-            CEP = "11111111",
-            Bairro = "Bairro Exemplo",
-            Cidade = "Cidade Exemplo",
+            Nome = "Condominio Teste 1",
+            CNPJ = "12345678912345",
+            Telefone = "1234567890",
+            Email = "condominio1@teste.com",
+            QuantidadeBlocos = 3,
+            QuantidadeUnidades = 90,
+            QuantidadeAndares = 3,
+            Logradouro = "Rua Teste",
+            Numero = "123",
+            CEP = "12345678",
+            Bairro = "Bairro Teste",
+            Cidade = "Cidade Teste",
             Estado = "SP"
-        });
+        };
 
-        modelBuilder.Entity<Unidade>().HasData(new Unidade
+        var condominio2 = new Condominio
         {
-            Id = unidadeId,
-            CondominioId = condominioId,
+            Nome = "Condominio Teste 2",
+            CNPJ = "12345678912346",
+            Telefone = "1234567891",
+            Email = "condominio2@teste.com",
+            QuantidadeBlocos = 2,
+            QuantidadeUnidades = 60,
+            QuantidadeAndares = 2,
+            Logradouro = "Avenida Teste",
+            Numero = "456",
+            CEP = "12345679",
+            Bairro = "Bairro Teste 2",
+            Cidade = "Cidade Teste",
+            Estado = "SP"
+        };
+        
+        condominio1.DefinirId(1);
+        condominio2.DefinirId(2);
+
+        modelBuilder.Entity<Condominio>().HasData(condominio1, condominio2);
+
+        var unidade1 = new Unidade
+        {
+            CondominioId = 1,
             Numero = "101",
             Bloco = "A"
-        });
+        };
 
-        modelBuilder.Entity<Morador>().HasData(new Morador
+        var unidade2 = new Unidade
         {
-            Id = moradorId,
-            Nome = "Morador Exemplo",
+            CondominioId = 1,
+            Numero = "102",
+            Bloco = "A"
+        };
+
+        unidade1.DefinirId(1);
+        unidade2.DefinirId(2);
+
+        modelBuilder.Entity<Unidade>().HasData(unidade1, unidade2);
+
+        var morador1 = new Morador
+        {
+            UnidadeId = 1,
+            Nome = "Morador Teste 1",
             CPF = "12345678901",
-            Email = "morador@email.com",
-            Telefone = "11999999999",
-            Ramal = "210",
-            UnidadeId = unidadeId
-        });
+            Email = "morador1@teste.com",
+            Telefone = "1234567890",
+            Ramal = "123",
+            Foto = "foto1.jpg"
+        };
 
-        modelBuilder.Entity<Funcionario>().HasData(new Funcionario
+        var morador2 = new Morador
         {
-            Id = funcionarioId,
-            Nome = "Funcionario Exemplo",
-            CPF = "98765432109",
-            Email = "funcionario@email.com",
-            Telefone = "11999999999",
-            Cargo = CargoFuncionario.Porteiro,
-            CondominioId = condominioId
-        });
+            UnidadeId = 2,
+            Nome = "Morador Teste 2",
+            CPF = "12345678902",
+            Email = "morador2@teste.com",
+            Telefone = "1234567891",
+            Ramal = "456",
+            Foto = "foto2.jpg"
+        };
 
-        modelBuilder.Entity<Transportadora>().HasData(new Transportadora
-        {
-            Id = transportadoraId,
-            Nome = "Transportadora Exemplo",
-            CNPJ = "22222222222222",
-            Telefone = "11988888888",
-            Email = "contato@transportadoraexemplo.com.br"
-        });
+        morador1.DefinirId(1);
+        morador2.DefinirId(2);
 
-        modelBuilder.Entity<Entrega>().HasData(new Entrega
+        modelBuilder.Entity<Morador>().HasData(morador1, morador2);
+
+        var funcionario1 = new Funcionario
         {
-            Id = entregaId,
-            DataRecebimento = DateTime.Now,
-            Descricao = "Descrição da entrega",
-            Observacao = "Observação da entrega",
+            CondominioId = 1,
+            Nome = "Funcionario Teste 1",
+            CPF = "12345678903",
+            Email = "funcionario1@teste.com",
+            Telefone = "1234567892",
+            Cargo = CargoFuncionario.Zelador
+        };
+
+        var funcionario2 = new Funcionario
+        {
+            CondominioId = 2,
+            Nome = "Funcionario Teste 2",
+            CPF = "12345678904",
+            Email = "funcionario2@teste.com",
+            Telefone = "1234567893",
+            Cargo = CargoFuncionario.Porteiro
+        };
+
+        funcionario1.DefinirId(1);
+        funcionario2.DefinirId(2);
+
+        modelBuilder.Entity<Funcionario>().HasData(funcionario1, funcionario2);
+
+        var transportadora1 = new Transportadora
+        {
+            Nome = "Transportadora Teste 1",
+            CNPJ = "12345678912347",
+            Telefone = "1234567894",
+            Email = "transportadora1@teste.com"
+        };
+
+        var transportadora2 = new Transportadora
+        {
+            Nome = "Transportadora Teste 2",
+            CNPJ = "12345678912348",
+            Telefone = "1234567895",
+            Email = "transportadora2@teste.com"
+        };
+
+        transportadora1.DefinirId(1);
+        transportadora2.DefinirId(2);
+
+        modelBuilder.Entity<Transportadora>().HasData(transportadora1, transportadora2);
+
+        var entrega1 = new Entrega
+        {
+            TransportadoraId = 1,
+            MoradorId = 1,
+            FuncionarioId = 1,
+            Descricao = "Entrega Teste 1",
+            Observacao = "Observação Teste 1",
             Status = StatusEntrega.Recebida,
-            TransportadoraId = transportadoraId,
-            MoradorId = moradorId,
-            FuncionarioId = funcionarioId
-        });
+        };
+
+        var entrega2 = new Entrega
+        {
+            TransportadoraId = 2,
+            MoradorId = 2,
+            FuncionarioId = 2,
+            Descricao = "Entrega Teste 2",
+            Observacao = "Observação Teste 2",
+            Status = StatusEntrega.Recebida,
+        };
+
+        entrega1.DefinirId(1);
+        entrega2.DefinirId(2);
+
+        modelBuilder.Entity<Entrega>().HasData(entrega1, entrega2);
     }
 }

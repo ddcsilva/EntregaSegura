@@ -4,38 +4,29 @@ public abstract class BaseEntity
 {
     protected BaseEntity()
     {
-        Id = Guid.NewGuid();
         DataCriacao = DateTime.Now;
         DataAtualizacao = DateTime.Now;
     }
 
-    public Guid Id { get; set; }
-    public DateTime DataCriacao { get; set; }
-    public DateTime DataAtualizacao { get; set; }
-    public DateTime? DataExclusao { get; set; }
-    public bool Excluido { get; set; } = false;
+    public int Id { get; protected set; }
+    public DateTime DataCriacao { get; private set; }
+    public DateTime DataAtualizacao { get; private set; }
+    public DateTime? DataExclusao { get; private set; }
+    public bool Excluido { get; private set; } = false;
 
-    public bool Equals(BaseEntity outraEntidade)
+    public void Atualizar()
     {
-        if (outraEntidade == null)
-            return false;
-
-        if (ReferenceEquals(this, outraEntidade))
-            return true;
-
-        if (GetType() != outraEntidade.GetType())
-            return false;
-
-        return Id == outraEntidade.Id;
+        DataAtualizacao = DateTime.Now;
     }
 
-    public override int GetHashCode()
+    public void Excluir()
     {
-        return Id.GetHashCode();
+        Excluido = true;
+        DataExclusao = DateTime.Now;
     }
 
-    public override string ToString()
+    public void DefinirId(int id)
     {
-        return $"{GetType().Name} [Id={Id}]";
+        Id = id;
     }
 }

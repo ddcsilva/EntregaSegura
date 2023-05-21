@@ -43,8 +43,8 @@ public class CondominiosController : MainController
         return Ok(condominiosDTO);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<CondominioDTO>> ObterPorId(Guid id)
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<CondominioDTO>> ObterPorId(int id)
     {
         var condominioDTO = await ObterCondominioComUnidadesEFuncionarios(id);
 
@@ -59,8 +59,8 @@ public class CondominiosController : MainController
         return Ok(condominiosDTO);
     }
 
-    [HttpPut("{id:guid}")]
-    public async Task<ActionResult<CondominioDTO>> Atualizar(Guid id, CondominioDTO condominioDTO)
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<CondominioDTO>> Atualizar(int id, CondominioDTO condominioDTO)
     {
         if (id != condominioDTO.Id)
         {
@@ -80,8 +80,8 @@ public class CondominiosController : MainController
         return CustomResponse(condominioDTO);
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<ActionResult> Remover(Guid id)
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Remover(int id)
     {
         var condominioDTO = await ObterCondominio(id);
 
@@ -102,12 +102,12 @@ public class CondominiosController : MainController
         return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosAsync());
     }
 
-    private async Task<CondominioDTO> ObterCondominio(Guid condominioId)
+    private async Task<CondominioDTO> ObterCondominio(int condominioId)
     {
         return _mapper.Map<CondominioDTO>(await _condominioService.ObterPorIdAsync(condominioId));
     }
 
-    private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(Guid condominioId)
+    private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(int condominioId)
     {
         return _mapper.Map<CondominioDTO>(await _condominioService.ObterCondominioComUnidadesEFuncionariosAsync(condominioId));
     }

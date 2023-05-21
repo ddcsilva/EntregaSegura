@@ -16,6 +16,7 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
         builder.Property(u => u.Id)
             .HasColumnName("UND_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária da unidade");
 
         builder.Property(u => u.CondominioId)

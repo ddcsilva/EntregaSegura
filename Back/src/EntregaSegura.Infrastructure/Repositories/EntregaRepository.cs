@@ -10,7 +10,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
 {
     public EntregaRepository(EntregaSeguraContext context) : base(context) { }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()
@@ -21,7 +21,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
         return entregas;
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()
@@ -32,7 +32,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
         return entregas;
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(Guid funcionarioId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()
@@ -43,7 +43,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
         return entregas;
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(Guid moradorId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()
@@ -54,7 +54,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
         return entregas;
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(Guid transportadoraId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()
@@ -65,7 +65,7 @@ public class EntregaRepository : Repository<Entrega>, IEntregaRepository
         return entregas;
     }
 
-    public async Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(Guid funcionarioId)
+    public async Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId)
     {
         var entregas = await _context.Entregas
             .AsNoTracking()

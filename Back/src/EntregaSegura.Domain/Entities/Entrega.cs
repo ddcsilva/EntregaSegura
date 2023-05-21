@@ -10,9 +10,9 @@ public sealed class Entrega : BaseEntity
         Status = StatusEntrega.Recebida;        
     }
 
-    public Guid TransportadoraId { get; set; }
-    public Guid MoradorId { get; set; }
-    public Guid FuncionarioId { get; set; }
+    public int TransportadoraId { get; set; }
+    public int MoradorId { get; set; }
+    public int FuncionarioId { get; set; }
     public DateTime DataRecebimento { get; set; }
     public DateTime? DataRetirada { get; set; }
     public string Descricao { get; set; }

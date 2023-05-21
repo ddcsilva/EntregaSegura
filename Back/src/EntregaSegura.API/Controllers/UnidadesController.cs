@@ -28,8 +28,8 @@ public class UnidadesController : MainController
         return Ok(unidadesDTO);
     }
 
-    [HttpGet("{id:guid}")]
-    public async Task<ActionResult<UnidadeDTO>> ObterPorId(Guid id)
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<UnidadeDTO>> ObterPorId(int id)
     {
         var unidadeDTO = await ObterUnidadePorIdComMoradores(id);
 
@@ -53,8 +53,8 @@ public class UnidadesController : MainController
         return CustomResponse(unidadeDTO);
     }
 
-    [HttpPut("{id:guid}")]
-    public async Task<ActionResult<UnidadeDTO>> Atualizar(Guid id, UnidadeDTO unidadeDTO)
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<UnidadeDTO>> Atualizar(int id, UnidadeDTO unidadeDTO)
     {
         if (id != unidadeDTO.Id)
         {
@@ -74,8 +74,8 @@ public class UnidadesController : MainController
         return CustomResponse(unidadeDTO);
     }
 
-    [HttpDelete("{id:guid}")]
-    public async Task<ActionResult<UnidadeDTO>> Excluir(Guid id)
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<UnidadeDTO>> Excluir(int id)
     {
         var unidadeDTO = await ObterUnidade(id);
 
@@ -91,12 +91,12 @@ public class UnidadesController : MainController
         return _mapper.Map<IEnumerable<UnidadeDTO>>(await _unidadeService.ObterUnidadesComCondominioAsync());
     }
 
-    private async Task<UnidadeDTO> ObterUnidade(Guid id)
+    private async Task<UnidadeDTO> ObterUnidade(int id)
     {
         return _mapper.Map<UnidadeDTO>(await _unidadeService.ObterPorIdAsync(id));
     }
 
-    private async Task<UnidadeDTO> ObterUnidadePorIdComMoradores(Guid id)
+    private async Task<UnidadeDTO> ObterUnidadePorIdComMoradores(int id)
     {
         return _mapper.Map<UnidadeDTO>(await _unidadeService.ObterUnidadePorIdComCondominioEMoradoresAsync(id));
     }

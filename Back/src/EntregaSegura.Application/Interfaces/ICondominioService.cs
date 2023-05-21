@@ -6,11 +6,11 @@ public interface ICondominioService : IDisposable
 {
     Task<Condominio> Adicionar(Condominio condominio);
     Task<Condominio> Atualizar(Condominio condominio);
-    Task<bool> Remover(Guid id);
+    Task<bool> Remover(int id);
     Task<IEnumerable<Condominio>> ObterTodosAsync();
     Task<IEnumerable<Condominio>> ObterTodosCondominiosPorNomeAsync(string nome);
-    Task<Condominio> ObterPorIdAsync(Guid id);
-    Task<Condominio> ObterCondominioComFuncionariosAsync(Guid condominioId);
-    Task<Condominio> ObterCondominioComUnidadesAsync(Guid condominioId);
-    Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(Guid condominioId);
+    Task<Condominio> ObterPorIdAsync(int id);
+    Task<Condominio> ObterCondominioComFuncionariosAsync(int condominioId);
+    Task<Condominio> ObterCondominioComUnidadesAsync(int condominioId);
+    Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(int condominioId);
 }

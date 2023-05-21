@@ -5,7 +5,7 @@ namespace EntregaSegura.Application.DTOs;
 public class MoradorDTO
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
@@ -32,7 +32,7 @@ public class MoradorDTO
     public string FotoBase64 { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    public Guid UnidadeId { get; set; }
+    public int UnidadeId { get; set; }
 
     public string BlocoUnidade { get; set; }
 

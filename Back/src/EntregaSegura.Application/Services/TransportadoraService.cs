@@ -85,7 +85,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
         return transportadora;
     }
 
-    public async Task<bool> Remover(Guid id)
+    public async Task<bool> Remover(int id)
     {
         var transportadora = await _transportadoraRepository.ObterPorIdAsync(id);
 
@@ -112,7 +112,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
         return await _transportadoraRepository.ObterTodosAsync();
     }
 
-    public async Task<Transportadora> ObterPorIdAsync(Guid id)
+    public async Task<Transportadora> ObterPorIdAsync(int id)
     {
         return await _transportadoraRepository.ObterPorIdAsync(id);
     }
@@ -122,7 +122,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
         return await _transportadoraRepository.ObterPorNomeAsync(nome);
     }
 
-    public async Task<Transportadora> ObterTransportadoraComEntregasAsync(Guid transportadoraId)
+    public async Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId)
     {
         return await _transportadoraRepository.ObterTransportadoraComEntregasAsync(transportadoraId);
     }    

@@ -5,7 +5,7 @@ namespace EntregaSegura.Application.DTOs;
 public class FuncionarioDTO
 {
     [Key]
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
@@ -29,7 +29,7 @@ public class FuncionarioDTO
 
     public DateTime? DataDemissao { get; set; }
 
-    public Guid CondominioId { get; set; }
+    public int CondominioId { get; set; }
 
     public string NomeCondominio { get; set; }
 

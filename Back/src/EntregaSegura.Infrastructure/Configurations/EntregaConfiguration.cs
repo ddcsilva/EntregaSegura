@@ -19,6 +19,7 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
         builder.Property(e => e.Id)
             .HasColumnName("ETG_ID")
             .HasColumnOrder(1)
+            .ValueGeneratedOnAdd()
             .HasComment("Chave primária da entrega");
 
         builder.Property(e => e.TransportadoraId)

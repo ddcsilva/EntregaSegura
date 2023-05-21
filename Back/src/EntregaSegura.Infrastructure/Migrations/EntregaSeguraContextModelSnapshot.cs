@@ -24,12 +24,14 @@ namespace EntregaSegura.Infrastructure.Migrations
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Condominio", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("CND_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária do condomínio");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Bairro")
                         .IsRequired()
@@ -175,35 +177,56 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            Bairro = "Bairro Exemplo",
-                            CEP = "11111111",
-                            CNPJ = "11111111111111",
-                            Cidade = "Cidade Exemplo",
-                            Complemento = "Bloco A",
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5397),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5386),
-                            Email = "contato@condominioexemplo.com.br",
+                            Id = 1,
+                            Bairro = "Bairro Teste",
+                            CEP = "12345678",
+                            CNPJ = "12345678912345",
+                            Cidade = "Cidade Teste",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(4992),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(4984),
+                            Email = "condominio1@teste.com",
                             Estado = "SP",
                             Excluido = false,
-                            Logradouro = "Rua Exemplo",
-                            Nome = "Condomínio Exemplo",
-                            Numero = "100",
-                            QuantidadeAndares = 0,
-                            QuantidadeBlocos = 0,
-                            QuantidadeUnidades = 0,
-                            Telefone = "11999999999"
+                            Logradouro = "Rua Teste",
+                            Nome = "Condominio Teste 1",
+                            Numero = "123",
+                            QuantidadeAndares = 3,
+                            QuantidadeBlocos = 3,
+                            QuantidadeUnidades = 90,
+                            Telefone = "1234567890"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bairro = "Bairro Teste 2",
+                            CEP = "12345679",
+                            CNPJ = "12345678912346",
+                            Cidade = "Cidade Teste",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5003),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5002),
+                            Email = "condominio2@teste.com",
+                            Estado = "SP",
+                            Excluido = false,
+                            Logradouro = "Avenida Teste",
+                            Nome = "Condominio Teste 2",
+                            Numero = "456",
+                            QuantidadeAndares = 2,
+                            QuantidadeBlocos = 2,
+                            QuantidadeUnidades = 60,
+                            Telefone = "1234567891"
                         });
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Entrega", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("ETG_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária da entrega");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<DateTime>("DataAtualizacao")
                         .ValueGeneratedOnAdd()
@@ -253,14 +276,14 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(10)
                         .HasComment("Flag de exclusão da entrega");
 
-                    b.Property<Guid>("FuncionarioId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("FuncionarioId")
+                        .HasColumnType("int")
                         .HasColumnName("FUN_ID")
                         .HasColumnOrder(3)
                         .HasComment("Chave estrangeira do funcionário");
 
-                    b.Property<Guid>("MoradorId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("MoradorId")
+                        .HasColumnType("int")
                         .HasColumnName("MOR_ID")
                         .HasColumnOrder(4)
                         .HasComment("Chave estrangeira do morador");
@@ -277,8 +300,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(9)
                         .HasComment("Status da entrega");
 
-                    b.Property<Guid>("TransportadoraId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("TransportadoraId")
+                        .HasColumnType("int")
                         .HasColumnName("TRP_ID")
                         .HasColumnOrder(2)
                         .HasComment("Chave estrangeira da transportadora");
@@ -297,28 +320,44 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("8a6b4827-15d3-4d9c-a567-a14a6a0c8ce7"),
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5542),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5542),
-                            DataRecebimento = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5544),
-                            Descricao = "Descrição da entrega",
+                            Id = 1,
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
+                            DataRecebimento = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
+                            Descricao = "Entrega Teste 1",
                             Excluido = false,
-                            FuncionarioId = new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"),
-                            MoradorId = new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"),
-                            Observacao = "Observação da entrega",
+                            FuncionarioId = 1,
+                            MoradorId = 1,
+                            Observacao = "Observação Teste 1",
                             Status = 1,
-                            TransportadoraId = new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3")
+                            TransportadoraId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5221),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5221),
+                            DataRecebimento = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5222),
+                            Descricao = "Entrega Teste 2",
+                            Excluido = false,
+                            FuncionarioId = 2,
+                            MoradorId = 2,
+                            Observacao = "Observação Teste 2",
+                            Status = 1,
+                            TransportadoraId = 2
                         });
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Funcionario", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("FUN_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária do funcionário");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -333,8 +372,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(6)
                         .HasComment("Cargo do funcionário");
 
-                    b.Property<Guid>("CondominioId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("CondominioId")
+                        .HasColumnType("int")
                         .HasColumnName("FUN_CONDOMINIO_ID")
                         .HasColumnOrder(13)
                         .HasComment("Chave estrangeira do condomínio");
@@ -420,28 +459,44 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("f1e28b7e-674f-41dd-868c-c245e35de929"),
-                            CPF = "98765432109",
-                            Cargo = 2,
-                            CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAdmissao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5514),
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5513),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5513),
-                            Email = "funcionario@email.com",
+                            Id = 1,
+                            CPF = "12345678903",
+                            Cargo = 3,
+                            CondominioId = 1,
+                            DataAdmissao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5186),
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5185),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5184),
+                            Email = "funcionario1@teste.com",
                             Excluido = false,
-                            Nome = "Funcionario Exemplo",
-                            Telefone = "11999999999"
+                            Nome = "Funcionario Teste 1",
+                            Telefone = "1234567892"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CPF = "12345678904",
+                            Cargo = 2,
+                            CondominioId = 2,
+                            DataAdmissao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5189),
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5188),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5188),
+                            Email = "funcionario2@teste.com",
+                            Excluido = false,
+                            Nome = "Funcionario Teste 2",
+                            Telefone = "1234567893"
                         });
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Morador", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("MOR_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária do morador");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CPF")
                         .IsRequired()
@@ -509,8 +564,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(5)
                         .HasComment("Telefone do morador");
 
-                    b.Property<Guid>("UnidadeId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("UnidadeId")
+                        .HasColumnType("int")
                         .HasColumnName("MOR_UNIDADE_ID")
                         .HasColumnOrder(8)
                         .HasComment("Chave estrangeira da unidade do morador");
@@ -534,27 +589,44 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7b3b9132-0eae-4ba1-8519-347d92873868"),
+                            Id = 1,
                             CPF = "12345678901",
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5497),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5496),
-                            Email = "morador@email.com",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5166),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5166),
+                            Email = "morador1@teste.com",
                             Excluido = false,
-                            Nome = "Morador Exemplo",
-                            Ramal = "210",
-                            Telefone = "11999999999",
-                            UnidadeId = new Guid("68165d63-fa38-4d27-858f-ac006b1ada92")
+                            Foto = "foto1.jpg",
+                            Nome = "Morador Teste 1",
+                            Ramal = "123",
+                            Telefone = "1234567890",
+                            UnidadeId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CPF = "12345678902",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5170),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5169),
+                            Email = "morador2@teste.com",
+                            Excluido = false,
+                            Foto = "foto2.jpg",
+                            Nome = "Morador Teste 2",
+                            Ramal = "456",
+                            Telefone = "1234567891",
+                            UnidadeId = 2
                         });
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Transportadora", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("TRA_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária da transportadora");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("CNPJ")
                         .HasColumnType("varchar(14)")
@@ -638,25 +710,38 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5cc12493-0012-43aa-aac0-76cbc18bedb3"),
-                            CNPJ = "22222222222222",
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5528),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5527),
-                            Email = "contato@transportadoraexemplo.com.br",
+                            Id = 1,
+                            CNPJ = "12345678912347",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5205),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5205),
+                            Email = "transportadora1@teste.com",
                             Excluido = false,
-                            Nome = "Transportadora Exemplo",
-                            Telefone = "11988888888"
+                            Nome = "Transportadora Teste 1",
+                            Telefone = "1234567894"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CNPJ = "12345678912348",
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5207),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5207),
+                            Email = "transportadora2@teste.com",
+                            Excluido = false,
+                            Nome = "Transportadora Teste 2",
+                            Telefone = "1234567895"
                         });
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Unidade", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("UND_ID")
                         .HasColumnOrder(1)
                         .HasComment("Chave primária da unidade");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Bloco")
                         .HasColumnType("varchar(10)")
@@ -664,8 +749,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(4)
                         .HasComment("Bloco da unidade");
 
-                    b.Property<Guid>("CondominioId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("CondominioId")
+                        .HasColumnType("int")
                         .HasColumnName("CON_ID")
                         .HasColumnOrder(2)
                         .HasComment("Chave estrangeira do condomínio");
@@ -720,13 +805,23 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("68165d63-fa38-4d27-858f-ac006b1ada92"),
+                            Id = 1,
                             Bloco = "A",
-                            CondominioId = new Guid("f26355b2-c097-4582-8a4a-4a9ecbfc7f09"),
-                            DataAtualizacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5484),
-                            DataCriacao = new DateTime(2023, 5, 16, 21, 14, 24, 80, DateTimeKind.Local).AddTicks(5483),
+                            CondominioId = 1,
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5106),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5106),
                             Excluido = false,
                             Numero = "101"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Bloco = "A",
+                            CondominioId = 1,
+                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5109),
+                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5109),
+                            Excluido = false,
+                            Numero = "102"
                         });
                 });
 

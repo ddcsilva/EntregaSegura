@@ -7,7 +7,7 @@ public sealed class Morador : BaseEntity
         Entregas = new List<Entrega>();
     }
 
-    public Guid UnidadeId { get; set; }
+    public int UnidadeId { get; set; }
     public string Nome { get; set; }
     public string CPF { get; set; }
     public string Email { get; set; }
