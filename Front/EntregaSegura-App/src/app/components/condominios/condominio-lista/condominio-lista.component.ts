@@ -30,7 +30,8 @@ export class CondominioListaComponent implements OnInit {
 
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
-  public nomeCondominio: string = '';
+  public id: string = '';
+  public nome: string = '';
   private filtroAtual: string = '';
   modalRef = {} as BsModalRef;
 
@@ -44,7 +45,7 @@ export class CondominioListaComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinner.show();
-    this.getCondominios();
+    this.carregarCondominios();
   }
 
   public get filtro(): string {
@@ -56,8 +57,8 @@ export class CondominioListaComponent implements OnInit {
     this.condominiosFiltrados = this.filtro ? this.filtrarCondominios(this.filtro) : this.condominios;
   }
 
-  public getCondominios(): void {
-    this.condominioService.getCondominios().subscribe({
+  public carregarCondominios(): void {
+    this.condominioService.obterTodos().subscribe({
       next: (dadosCondominios: Condominio[]) => {
         this.condominios = dadosCondominios;
         this.condominiosFiltrados = this.condominios;
@@ -85,15 +86,32 @@ export class CondominioListaComponent implements OnInit {
   }
   
 
-  public abrirModal(event: any, template: TemplateRef<any>, nomeCondominio: string): void {
+  public abrirModal(event: any, template: TemplateRef<any>, nome: string, id: string): void {
     event.stopPropagation();
-    this.nomeCondominio = nomeCondominio;
+    this.id = id;
+    this.nome = nome;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 
   public confirmarExclusao(): void {
     this.modalRef.hide();
-    this.toastr.success('Condomínio excluído com sucesso!', 'Exclusão');
+    this.spinner.show();
+    
+    console.log('id' + this.id);
+    this.condominioService.excluir(this.id).subscribe({
+      next: (retorno: string) => {
+        console.log(retorno);
+        this.toastr.success('Condomínio excluído com sucesso!', 'Exclusão');
+        this.spinner.hide();
+        this.carregarCondominios();
+      },
+      error: (error: any) => {
+        console.error(error);
+        this.spinner.hide();
+        this.toastr.error('Erro ao excluir o condomínio', 'Erro!');
+      },
+      complete: () => this.spinner.hide()
+    });
   }
 
   public negarExclusao(): void {

@@ -39,7 +39,7 @@ public class CondominiosController : MainController
     public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodos()
     {
         var condominiosDTO = await ObterCondominios();
-        
+
         return Ok(condominiosDTO);
     }
 
@@ -87,9 +87,14 @@ public class CondominiosController : MainController
 
         if (condominioDTO == null) return NotFound();
 
-        await _condominioService.Remover(id);
+        var remocaoBemSucedida = await _condominioService.Remover(id);
 
-        return NoContent();
+        if (!remocaoBemSucedida)
+        {
+            return CustomResponse();
+        }
+
+        return CustomResponse(condominioDTO);
     }
 
     private async Task<IEnumerable<CondominioDTO>> ObterCondominios()

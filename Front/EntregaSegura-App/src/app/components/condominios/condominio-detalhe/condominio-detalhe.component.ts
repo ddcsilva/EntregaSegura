@@ -36,7 +36,7 @@ export class CondominioDetalheComponent implements OnInit {
     if (id) {
       this.spinner.show();
 
-      this.condominioService.getCondominio(id).subscribe({
+      this.condominioService.obterPorId(id).subscribe({
         next: (condominio: Condominio) => {
           this.condominio = { ...condominio };
           this.formulario.patchValue(this.condominio);
