@@ -30,6 +30,7 @@ export class CondominioListaComponent implements OnInit {
 
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
+  public nomeCondominio: string = '';
   private filtroAtual: string = '';
   modalRef = {} as BsModalRef;
 
@@ -84,7 +85,9 @@ export class CondominioListaComponent implements OnInit {
   }
   
 
-  public abrirModal(template: TemplateRef<any>): void {
+  public abrirModal(event: any, template: TemplateRef<any>, nomeCondominio: string): void {
+    event.stopPropagation();
+    this.nomeCondominio = nomeCondominio;
     this.modalRef = this.modalService.show(template, { class: 'modal-sm' });
   }
 

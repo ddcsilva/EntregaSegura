@@ -48,7 +48,7 @@
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Excluir" (click)="abrirModal(template)">
+                                        data-bs-placement="top" title="Excluir" (click)="abrirModal($event, template, condominio.nome)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>
@@ -68,14 +68,12 @@
     </div>
 </div>
 
-
-
 <ng-template #template>
     <div class="modal-header">
         <h5 class="modal-title">Confirmação de Exclusão</h5>
     </div>
     <div class="modal-body text-center">
-        <p>Você tem certeza que deseja excluir este condomínio? Essa ação não pode ser desfeita.</p>
+        <p>Você tem certeza que deseja excluir o {{nomeCondominio}}?</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-danger" (click)="confirmarExclusao()">
