@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControlOptions, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ValidadorCampos } from '@app/helpers/ValidadorCampos';
 
 @Component({
@@ -33,5 +33,12 @@ export class RegistroComponent implements OnInit {
       senha: ['', [Validators.required, Validators.minLength(6)]],
       confirmarSenha: ['', Validators.required]
     }, opcoesFormulario);
+  }
+
+  public gerarClassesValidacao(campoFormulario: FormControl): any {
+    return {
+      'is-invalid': campoFormulario.errors && campoFormulario.touched,
+      'is-valid': !campoFormulario.errors && campoFormulario.touched
+    };
   }
 }

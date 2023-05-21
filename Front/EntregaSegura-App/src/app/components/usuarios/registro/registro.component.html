@@ -15,7 +15,8 @@
                     <!-- Nome -->
                     <div class="form-group col-sm-6">
                         <label>Nome</label>
-                        <input type="text" class="form-control" formControlName="nome" placeholder="Insira o Nome" />
+                        <input type="text" class="form-control" formControlName="nome"
+                            [ngClass]="gerarClassesValidacao(formControl.nome)" placeholder="Insira o Nome" />
                         <div *ngIf="formControl.nome?.errors && formControl.nome?.touched" class="text-danger">
                             <small *ngIf="formControl.nome?.errors.required">Nome é obrigatório</small>
                         </div>
@@ -23,8 +24,10 @@
                     <!-- Sobrenome -->
                     <div class="form-group col-sm-6">
                         <label>Sobrenome</label>
-                        <input type="text" class="form-control" formControlName="sobrenome" placeholder="Insira o Sobrenome" />
-                        <div *ngIf="formControl.sobrenome?.errors && formControl.sobrenome?.touched" class="text-danger">
+                        <input type="text" class="form-control" formControlName="sobrenome"
+                            [ngClass]="gerarClassesValidacao(formControl.sobrenome)" placeholder="Insira o Sobrenome" />
+                        <div *ngIf="formControl.sobrenome?.errors && formControl.sobrenome?.touched"
+                            class="text-danger">
                             <small *ngIf="formControl.sobrenome?.errors.required">Sobrenome é obrigatório</small>
                         </div>
                     </div>
@@ -32,7 +35,8 @@
                 <!-- Email -->
                 <div class="form-group">
                     <label>Email:</label>
-                    <input class="form-control" type="text" formControlName="email" placeholder="Insira o E-Mail" />
+                    <input class="form-control" type="text" formControlName="email"
+                        [ngClass]="gerarClassesValidacao(formControl.email)" placeholder="Insira o E-Mail" />
                     <div *ngIf="formControl.email?.errors && formControl.email?.touched" class="text-danger">
                         <small *ngIf="formControl.email?.errors.required">Email é obrigatório</small>
                         <small *ngIf="formControl.email?.errors.email">Email inválido</small>
@@ -41,7 +45,9 @@
                 <!-- Usuario -->
                 <div class="form-group">
                     <label>Usuario:</label>
-                    <input class="form-control" type="text" formControlName="usuario" placeholder="Insira o nome de Usuário" />
+                    <input class="form-control" type="text" formControlName="usuario"
+                        [ngClass]="gerarClassesValidacao(formControl.usuario)"
+                        placeholder="Insira o nome de Usuário" />
                     <div *ngIf="formControl.usuario?.errors && formControl.usuario?.touched" class="text-danger">
                         <small *ngIf="formControl.usuario?.errors.required">Usuário é obrigatório</small>
                     </div>
@@ -50,18 +56,25 @@
                     <!-- Senha -->
                     <div class="form-group col-sm-6">
                         <label>Senha:</label>
-                        <input class="form-control" type="password" formControlName="senha" placeholder="Digite uma Senha" />
+                        <input class="form-control" type="password" formControlName="senha"
+                            [ngClass]="gerarClassesValidacao(formControl.senha)"
+                            placeholder="Digite uma Senha" />
                         <div *ngIf="formControl.senha?.errors && formControl.senha?.touched" class="text-danger">
                             <small *ngIf="formControl.senha?.errors.required">Senha obrigatório</small>
-                            <small *ngIf="formControl.senha?.errors.minlength">Senha deve ter no mínimo 6 caracteres</small>
+                            <small *ngIf="formControl.senha?.errors.minlength">Senha deve ter no mínimo 6
+                                caracteres</small>
                         </div>
                     </div>
                     <!-- Confirmar Senha -->
                     <div class="form-group col-sm-6">
                         <label>Confirmar Senha:</label>
-                        <input class="form-control" type="password" formControlName="confirmarSenha" placeholder="Confirme a Senha" />
-                        <div *ngIf="formControl.confirmarSenha?.errors && formControl.confirmarSenha?.touched" class="text-danger">
-                            <small *ngIf="formControl.confirmarSenha?.errors.required">Confirmação de Senha é obrigatório</small>
+                        <input class="form-control" type="password" formControlName="confirmarSenha"
+                            [ngClass]="gerarClassesValidacao(formControl.confirmarSenha)"
+                            placeholder="Confirme a Senha" />
+                        <div *ngIf="formControl.confirmarSenha?.errors && formControl.confirmarSenha?.touched"
+                            class="text-danger">
+                            <small *ngIf="formControl.confirmarSenha?.errors.required">Confirmação de Senha é
+                                obrigatório</small>
                             <small *ngIf="formControl.confirmarSenha?.errors.deveSerIgual">Senhas não conferem</small>
                         </div>
                     </div>
@@ -70,7 +83,8 @@
                 <div class="form-group">
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="customCheck1">
-                        <label class="custom-control-label" for="customCheck1">Eu concordo com os <a href="#">Termos de Uso</a>.</label>
+                        <label class="custom-control-label" for="customCheck1">Eu concordo com os <a href="#">Termos de
+                                Uso</a>.</label>
                     </div>
                 </div>
                 <!-- Botões -->

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +8,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   formulario: FormGroup = new FormGroup({});
+
+  get formControl(): any {
+    return this.formulario.controls;
+  }
 
   constructor(private formBuilder: FormBuilder) { }
 
@@ -22,7 +26,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get formControl(): any {
-    return this.formulario.controls;
+  public gerarClassesValidacao(campoFormulario: FormControl): any {
+    return {
+      'is-invalid': campoFormulario.errors && campoFormulario.touched,
+      'is-valid': !campoFormulario.errors && campoFormulario.touched
+    };
   }
 }
