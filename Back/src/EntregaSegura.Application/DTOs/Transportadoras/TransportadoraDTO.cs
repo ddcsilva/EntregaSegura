@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregaSegura.Application.DTOs;
+namespace EntregaSegura.Application.DTOs.Transportadoras;
 
 public class TransportadoraDTO
 {
@@ -19,6 +19,4 @@ public class TransportadoraDTO
 
     [StringLength(11, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 11)]
     public string Telefone { get; set; }
-
-    public IEnumerable<EntregaDTO> Entregas { get; set; }
 }
