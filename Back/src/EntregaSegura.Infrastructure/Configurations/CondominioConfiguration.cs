@@ -1,5 +1,6 @@
 using EntregaSegura.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EntregaSegura.Infrastructure.Configurations;
@@ -116,34 +117,23 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
             .HasColumnType("varchar(2)")
             .HasComment("Estado do endereço do condomínio");
 
-        builder.Property(c => c.Excluido)
-            .HasColumnName("CND_EXCLUIDO")
-            .HasColumnOrder(16)
-            .IsRequired()
-            .HasDefaultValue(false)
-            .HasComment("Flag de exclusão do condomínio");
-
         builder.Property(c => c.DataCriacao)
             .HasColumnName("CND_DATA_CRIACAO")
+            .HasColumnOrder(16)
+            .IsRequired()
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("GETDATE()")
+            .HasComment("Data de criação do condomínio")
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+
+        builder.Property(c => c.DataAtualizacao)
+            .HasColumnName("CND_DATA_ATUALIZACAO")
             .HasColumnOrder(17)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data de criação do condomínio");
-
-        builder.Property(c => c.DataAtualizacao)
-            .HasColumnName("CND_DATA_ATUALIZACAO")
-            .HasColumnOrder(18)
-            .IsRequired()
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data da última atualização do condomínio");
-
-        builder.Property(c => c.DataExclusao)
-            .HasColumnName("CND_DATA_EXCLUSAO")
-            .HasColumnOrder(19)
-            .HasColumnType("datetime")
-            .HasComment("Data da exclusão do condomínio");
+            .HasComment("Data da última atualização do condomínio")
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
         // Um condomínio possui várias unidades e uma unidade pertence a um condomínio
         builder.HasMany(c => c.Unidades)

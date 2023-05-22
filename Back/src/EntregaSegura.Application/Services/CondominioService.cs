@@ -95,11 +95,20 @@ public class CondominioService : BaseService, ICondominioService
         }
 
         _condominioRepository.Remover(condominio);
-        var result = await CommitAsync();
 
-        if (result == 0)
+        try
         {
-            Notificar("Ocorreu um erro ao remover o condomínio.");
+            var result = await CommitAsync();
+
+            if (result == 0)
+            {
+                Notificar("Ocorreu um erro ao remover o condomínio.");
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Notificar(ex.Message);
             return false;
         }
 

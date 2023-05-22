@@ -1,5 +1,6 @@
 using EntregaSegura.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EntregaSegura.Infrastructure.Configurations;
@@ -71,34 +72,23 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
             .IsRequired()
             .HasComment("Status da entrega");
 
-        builder.Property(e => e.Excluido)
-            .HasColumnName("ETG_EXCLUIDO")
-            .HasColumnOrder(10)
-            .IsRequired()
-            .HasDefaultValue(false)
-            .HasComment("Flag de exclusão da entrega");
-
         builder.Property(e => e.DataCriacao)
             .HasColumnName("ETG_DATA_CRIACAO")
+            .HasColumnOrder(10)
+            .IsRequired()
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("GETDATE()")
+            .HasComment("Data de criação da entrega")
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+
+        builder.Property(e => e.DataAtualizacao)
+            .HasColumnName("ETG_DATA_ATUALIZACAO")
             .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data de criação da entrega");
-
-        builder.Property(e => e.DataAtualizacao)
-            .HasColumnName("ETG_DATA_ATUALIZACAO")
-            .HasColumnOrder(12)
-            .IsRequired()
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data da última atualização da entrega");
-
-        builder.Property(e => e.DataExclusao)
-            .HasColumnName("ETG_DATA_EXCLUSAO")
-            .HasColumnOrder(13)
-            .HasColumnType("datetime")
-            .HasComment("Data da exclusão da entrega");
+            .HasComment("Data da última atualização da entrega")
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
         // Uma entrega pertence a apenas uma transportadora e uma transportadora pode ter várias entregas
         builder.HasOne(e => e.Transportadora)

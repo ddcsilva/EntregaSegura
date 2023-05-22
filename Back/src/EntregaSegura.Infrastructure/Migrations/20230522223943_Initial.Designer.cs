@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntregaSegura.Infrastructure.Migrations
 {
     [DbContext(typeof(EntregaSeguraContext))]
-    [Migration("20230521162118_Initial")]
+    [Migration("20230522223943_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,7 +73,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("CND_DATA_ATUALIZACAO")
-                        .HasColumnOrder(18)
+                        .HasColumnOrder(17)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do condomínio");
 
@@ -81,15 +81,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("CND_DATA_CRIACAO")
-                        .HasColumnOrder(17)
+                        .HasColumnOrder(16)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do condomínio");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("CND_DATA_EXCLUSAO")
-                        .HasColumnOrder(19)
-                        .HasComment("Data da exclusão do condomínio");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -104,14 +98,6 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnName("CND_ESTADO")
                         .HasColumnOrder(15)
                         .HasComment("Estado do endereço do condomínio");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("CND_EXCLUIDO")
-                        .HasColumnOrder(16)
-                        .HasComment("Flag de exclusão do condomínio");
 
                     b.Property<string>("Logradouro")
                         .IsRequired()
@@ -184,11 +170,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CEP = "12345678",
                             CNPJ = "12345678912345",
                             Cidade = "Cidade Teste",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(4992),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(4984),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6653),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6644),
                             Email = "condominio1@teste.com",
                             Estado = "SP",
-                            Excluido = false,
                             Logradouro = "Rua Teste",
                             Nome = "Condominio Teste 1",
                             Numero = "123",
@@ -204,11 +189,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CEP = "12345679",
                             CNPJ = "12345678912346",
                             Cidade = "Cidade Teste",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5003),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5002),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6659),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6659),
                             Email = "condominio2@teste.com",
                             Estado = "SP",
-                            Excluido = false,
                             Logradouro = "Avenida Teste",
                             Nome = "Condominio Teste 2",
                             Numero = "456",
@@ -234,7 +218,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("ETG_DATA_ATUALIZACAO")
-                        .HasColumnOrder(12)
+                        .HasColumnOrder(11)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização da entrega");
 
@@ -242,15 +226,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("ETG_DATA_CRIACAO")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(10)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação da entrega");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("ETG_DATA_EXCLUSAO")
-                        .HasColumnOrder(13)
-                        .HasComment("Data da exclusão da entrega");
 
                     b.Property<DateTime>("DataRecebimento")
                         .HasColumnType("datetime")
@@ -269,14 +247,6 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnName("ETG_DESCRICAO")
                         .HasColumnOrder(7)
                         .HasComment("Descrição da entrega");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("ETG_EXCLUIDO")
-                        .HasColumnOrder(10)
-                        .HasComment("Flag de exclusão da entrega");
 
                     b.Property<int>("FuncionarioId")
                         .HasColumnType("int")
@@ -323,11 +293,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
-                            DataRecebimento = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5219),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6816),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6815),
+                            DataRecebimento = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6816),
                             Descricao = "Entrega Teste 1",
-                            Excluido = false,
                             FuncionarioId = 1,
                             MoradorId = 1,
                             Observacao = "Observação Teste 1",
@@ -337,11 +306,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                         new
                         {
                             Id = 2,
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5221),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5221),
-                            DataRecebimento = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5222),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6818),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6818),
+                            DataRecebimento = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6819),
                             Descricao = "Entrega Teste 2",
-                            Excluido = false,
                             FuncionarioId = 2,
                             MoradorId = 2,
                             Observacao = "Observação Teste 2",
@@ -377,7 +345,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.Property<int>("CondominioId")
                         .HasColumnType("int")
                         .HasColumnName("FUN_CONDOMINIO_ID")
-                        .HasColumnOrder(13)
+                        .HasColumnOrder(11)
                         .HasComment("Chave estrangeira do condomínio");
 
                     b.Property<DateTime>("DataAdmissao")
@@ -390,7 +358,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_ATUALIZACAO")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(10)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do funcionário");
 
@@ -398,7 +366,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_CRIACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(9)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do funcionário");
 
@@ -408,26 +376,12 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnOrder(8)
                         .HasComment("Data de demissão do funcionário");
 
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("FUN_DATA_EXCLUSAO")
-                        .HasColumnOrder(12)
-                        .HasComment("Data da exclusão do funcionário");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("FUN_EMAIL")
                         .HasColumnOrder(4)
                         .HasComment("Email do funcionário");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("FUN_EXCLUIDO")
-                        .HasColumnOrder(9)
-                        .HasComment("Indica se o funcionário foi excluído");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -465,11 +419,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CPF = "12345678903",
                             Cargo = 3,
                             CondominioId = 1,
-                            DataAdmissao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5186),
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5185),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5184),
+                            DataAdmissao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6789),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6788),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6788),
                             Email = "funcionario1@teste.com",
-                            Excluido = false,
                             Nome = "Funcionario Teste 1",
                             Telefone = "1234567892"
                         },
@@ -479,11 +432,10 @@ namespace EntregaSegura.Infrastructure.Migrations
                             CPF = "12345678904",
                             Cargo = 2,
                             CondominioId = 2,
-                            DataAdmissao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5189),
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5188),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5188),
+                            DataAdmissao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6792),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6791),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6791),
                             Email = "funcionario2@teste.com",
-                            Excluido = false,
                             Nome = "Funcionario Teste 2",
                             Telefone = "1234567893"
                         });
@@ -510,20 +462,14 @@ namespace EntregaSegura.Infrastructure.Migrations
                     b.Property<DateTime>("DataAtualizacao")
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_ATUALIZACAO")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(10)
                         .HasComment("Data da última atualização do morador");
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_CRIACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(9)
                         .HasComment("Data de criação do morador");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("MOR_DATA_EXCLUSAO")
-                        .HasColumnOrder(12)
-                        .HasComment("Data da exclusão do morador");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -531,14 +477,6 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .HasColumnName("MOR_EMAIL")
                         .HasColumnOrder(4)
                         .HasComment("Email do morador");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("MOR_EXCLUIDO")
-                        .HasColumnOrder(9)
-                        .HasComment("Indica se o morador foi excluído");
 
                     b.Property<string>("Foto")
                         .HasColumnType("varchar(100)")
@@ -593,10 +531,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = 1,
                             CPF = "12345678901",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5166),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5166),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6772),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6772),
                             Email = "morador1@teste.com",
-                            Excluido = false,
                             Foto = "foto1.jpg",
                             Nome = "Morador Teste 1",
                             Ramal = "123",
@@ -607,10 +544,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = 2,
                             CPF = "12345678902",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5170),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5169),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6776),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6775),
                             Email = "morador2@teste.com",
-                            Excluido = false,
                             Foto = "foto2.jpg",
                             Nome = "Morador Teste 2",
                             Ramal = "456",
@@ -640,7 +576,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("TRA_DATA_ATUALIZACAO")
-                        .HasColumnOrder(8)
+                        .HasColumnOrder(7)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização da transportadora");
 
@@ -648,29 +584,15 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("TRA_DATA_CRIACAO")
-                        .HasColumnOrder(7)
+                        .HasColumnOrder(6)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação da transportadora");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("TRA_DATA_EXCLUSAO")
-                        .HasColumnOrder(9)
-                        .HasComment("Data da exclusão da transportadora");
 
                     b.Property<string>("Email")
                         .HasColumnType("varchar(100)")
                         .HasColumnName("TRA_EMAIL")
                         .HasColumnOrder(5)
                         .HasComment("E-mail da transportadora");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("TRA_EXCLUIDO")
-                        .HasColumnOrder(6)
-                        .HasComment("Flag de exclusão da transportadora");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -714,10 +636,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = 1,
                             CNPJ = "12345678912347",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5205),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5205),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6803),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6803),
                             Email = "transportadora1@teste.com",
-                            Excluido = false,
                             Nome = "Transportadora Teste 1",
                             Telefone = "1234567894"
                         },
@@ -725,10 +646,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         {
                             Id = 2,
                             CNPJ = "12345678912348",
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5207),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5207),
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6805),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6804),
                             Email = "transportadora2@teste.com",
-                            Excluido = false,
                             Nome = "Transportadora Teste 2",
                             Telefone = "1234567895"
                         });
@@ -761,7 +681,7 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasColumnName("UND_DATA_ATUALIZACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(6)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização da unidade");
 
@@ -769,23 +689,9 @@ namespace EntregaSegura.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
                         .HasColumnName("UND_DATA_CRIACAO")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(5)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação da unidade");
-
-                    b.Property<DateTime?>("DataExclusao")
-                        .HasColumnType("datetime")
-                        .HasColumnName("UND_DATA_EXCLUSAO")
-                        .HasColumnOrder(11)
-                        .HasComment("Data da exclusão da unidade");
-
-                    b.Property<bool>("Excluido")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("UND_EXCLUIDO")
-                        .HasColumnOrder(8)
-                        .HasComment("Indica se a unidade foi excluída");
 
                     b.Property<string>("Numero")
                         .IsRequired()
@@ -810,9 +716,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                             Id = 1,
                             Bloco = "A",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5106),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5106),
-                            Excluido = false,
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6755),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6754),
                             Numero = "101"
                         },
                         new
@@ -820,9 +725,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                             Id = 2,
                             Bloco = "A",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5109),
-                            DataCriacao = new DateTime(2023, 5, 21, 13, 21, 17, 880, DateTimeKind.Local).AddTicks(5109),
-                            Excluido = false,
+                            DataAtualizacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6757),
+                            DataCriacao = new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6757),
                             Numero = "102"
                         });
                 });

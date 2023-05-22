@@ -1,5 +1,6 @@
 using EntregaSegura.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EntregaSegura.Infrastructure.Configurations;
@@ -44,34 +45,23 @@ public class TransportadoraConfiguration : IEntityTypeConfiguration<Transportado
             .HasColumnType("varchar(100)")
             .HasComment("E-mail da transportadora");
 
-        builder.Property(e => e.Excluido)
-            .HasColumnName("TRA_EXCLUIDO")
-            .HasColumnOrder(6)
-            .IsRequired()
-            .HasDefaultValue(false)
-            .HasComment("Flag de exclusão da transportadora");
-
         builder.Property(e => e.DataCriacao)
             .HasColumnName("TRA_DATA_CRIACAO")
+            .HasColumnOrder(6)
+            .IsRequired()
+            .HasColumnType("datetime")
+            .HasDefaultValueSql("GETDATE()")
+            .HasComment("Data de criação da transportadora")
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
+
+        builder.Property(e => e.DataAtualizacao)
+            .HasColumnName("TRA_DATA_ATUALIZACAO")
             .HasColumnOrder(7)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data de criação da transportadora");
-
-        builder.Property(e => e.DataAtualizacao)
-            .HasColumnName("TRA_DATA_ATUALIZACAO")
-            .HasColumnOrder(8)
-            .IsRequired()
-            .HasColumnType("datetime")
-            .HasDefaultValueSql("GETDATE()")
-            .HasComment("Data da última atualização da transportadora");
-
-        builder.Property(e => e.DataExclusao)
-            .HasColumnName("TRA_DATA_EXCLUSAO")
-            .HasColumnOrder(9)
-            .HasColumnType("datetime")
-            .HasComment("Data da exclusão da transportadora");
+            .HasComment("Data da última atualização da transportadora")
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
         // Uma transportadora possui várias entregas e uma entrega possui uma transportadora
         builder.HasMany(t => t.Entregas)

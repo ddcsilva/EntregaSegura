@@ -1,5 +1,6 @@
 using EntregaSegura.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace EntregaSegura.Infrastructure.Configurations;
@@ -65,32 +66,21 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .IsRequired()
             .HasComment("Chave estrangeira da unidade do morador");
 
-        builder.Property(m => m.Excluido)
-            .HasColumnName("MOR_EXCLUIDO")
-            .HasColumnOrder(9)
-            .IsRequired()
-            .HasDefaultValue(false)
-            .HasComment("Indica se o morador foi excluído");
-
         builder.Property(m => m.DataCriacao)
             .HasColumnName("MOR_DATA_CRIACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
-            .HasComment("Data de criação do morador");
+            .HasComment("Data de criação do morador")
+            .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
         builder.Property(m => m.DataAtualizacao)
             .HasColumnName("MOR_DATA_ATUALIZACAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
-            .HasComment("Data da última atualização do morador");
-
-        builder.Property(m => m.DataExclusao)
-            .HasColumnName("MOR_DATA_EXCLUSAO")
-            .HasColumnOrder(12)
-            .HasColumnType("datetime")
-            .HasComment("Data da exclusão do morador");
+            .HasComment("Data da última atualização do morador")
+            .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 
         builder.HasOne(m => m.Unidade)
             .WithMany(u => u.Moradores)

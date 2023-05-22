@@ -2,6 +2,7 @@ using EntregaSegura.Infrastructure.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using EntregaSegura.Domain.Entities;
+using Microsoft.Data.SqlClient;
 
 namespace EntregaSegura.Infrastructure.UnitOfWork;
 
@@ -22,11 +23,6 @@ public class UnitOfWork : IUnitOfWork
         {
             try
             {
-                foreach (var entry in _context.ChangeTracker.Entries<BaseEntity>())
-                {
-                    entry.Entity.Atualizar();
-                }
-
                 var linhasAfetadas = await _context.SaveChangesAsync();
                 await transaction.CommitAsync();
 
@@ -35,9 +31,17 @@ public class UnitOfWork : IUnitOfWork
             catch (Exception ex)
             {
                 await transaction.RollbackAsync();
-                _logger.LogError(ex, $"Ocorreu um erro ao salvar as alterações no banco de dados: {ex.Message}");
 
-                return 0;
+                if (ex is DbUpdateException dbEx && dbEx.InnerException is SqlException sqlEx && (sqlEx.Number == 547 || sqlEx.Number == 2627))
+                {
+                    _logger.LogError(ex, $"Ocorreu um erro de restrição de chave estrangeira ao salvar as alterações no banco de dados: {ex.Message}");
+                    throw new Exception("Este condomínio não pode ser excluído, pois está em uso.");
+                }
+                else
+                {
+                    _logger.LogError(ex, $"Ocorreu um erro ao salvar as alterações no banco de dados: {ex.Message}");
+                    return 0;
+                }
             }
         }
     }
