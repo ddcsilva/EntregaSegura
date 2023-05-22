@@ -1,7 +1,7 @@
 // Angular imports
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,9 +17,16 @@ import { EntregasComponent } from './components/entregas/entregas.component';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
 import { ContatosComponent } from './components/contatos/contatos.component';
 import { PerfilComponent } from './components/usuarios/perfil/perfil.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
+import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { LoginComponent } from './components/usuarios/login/login.component';
+import { RegistroComponent } from './components/usuarios/registro/registro.component';
 
 // Service imports
 import { CondominioService } from './services/condominio.service';
+import { TratamentoErrosService } from './services/tratamento-erros.service';
 
 // Pipe imports
 import { FormatCnpjPipe } from './helpers/format-cnpj.pipe';
@@ -33,12 +40,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
-import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
-import { UsuariosComponent } from './components/usuarios/usuarios.component';
-import { LoginComponent } from './components/usuarios/login/login.component';
-import { RegistroComponent } from './components/usuarios/registro/registro.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { RegistroComponent } from './components/usuarios/registro/registro.compo
     TooltipModule.forRoot(),
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
+    NgxMaskModule.forRoot(),
     ToastrModule.forRoot(
       {
         timeOut: 3000,
@@ -83,7 +86,7 @@ import { RegistroComponent } from './components/usuarios/registro/registro.compo
     ),
     NgxSpinnerModule
   ],
-  providers: [CondominioService],
+  providers: [CondominioService, TratamentoErrosService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

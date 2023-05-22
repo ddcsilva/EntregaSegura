@@ -23,14 +23,14 @@ export class CondominioListaComponent implements OnInit {
   public get condominioService(): CondominioService {
     return this._condominioService;
   }
-  
+
   public set condominioService(value: CondominioService) {
     this._condominioService = value;
   }
 
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
-  public id: string = '';
+  public id: number | undefined;
   public nome: string = '';
   private filtroAtual: string = '';
   modalRef = {} as BsModalRef;
@@ -81,12 +81,12 @@ export class CondominioListaComponent implements OnInit {
     );
   }
 
-  public editarCondominio(id: string): void {
+  public editarCondominio(id: number): void {
     this.router.navigate(['condominios/detalhe', id]);
   }
-  
 
-  public abrirModal(event: any, template: TemplateRef<any>, nome: string, id: string): void {
+
+  public abrirModal(event: any, template: TemplateRef<any>, nome: string, id: number): void {
     event.stopPropagation();
     this.id = id;
     this.nome = nome;
@@ -96,11 +96,11 @@ export class CondominioListaComponent implements OnInit {
   public confirmarExclusao(): void {
     this.modalRef.hide();
     this.spinner.show();
-    
+
     console.log('id' + this.id);
-    this.condominioService.excluir(this.id).subscribe({
-      next: (retorno: string) => {
-        console.log(retorno);
+
+    this.condominioService.excluir(String(this.id)).subscribe({
+      next: () => {
         this.toastr.success('Condomínio excluído com sucesso!', 'Exclusão');
         this.spinner.hide();
         this.carregarCondominios();

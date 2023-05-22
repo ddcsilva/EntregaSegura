@@ -1,5 +1,5 @@
 export interface Condominio {
-    id: string;
+    id: number;
     quantidadeUnidades: number;
     quantidadeAndares: number;
     quantidadeBlocos: number;

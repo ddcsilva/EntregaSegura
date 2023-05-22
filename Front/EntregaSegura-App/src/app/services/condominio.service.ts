@@ -1,54 +1,45 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Condominio } from '@app/models/Condominio';
-import { Observable, catchError, tap, throwError } from 'rxjs';
+import { Observable, catchError, retry } from 'rxjs';
+import { TratamentoErrosService } from './tratamento-erros.service';
 
 @Injectable()
 export class CondominioService {
   urlBase: string = 'https://localhost:5001/api/condominios';
 
-  constructor(private http: HttpClient) { }
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  public obterTodos(): any {
-    return this.http.get(this.urlBase);
+  constructor(private http: HttpClient, private errorHandlerService: TratamentoErrosService) { }
+
+  public obterTodos(): Observable<Condominio[]> {
+    return this.fazerRequisicao(() => this.http.get<Condominio[]>(this.urlBase));
   }
 
-  public obterPorId(id: string): any {
-    return this.http.get(`${this.urlBase}/${id}`);
+  public obterPorId(id: string): Observable<Condominio> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.get<Condominio>(url));
   }
 
   public criar(condominio: Condominio): Observable<Condominio> {
-    return this.http.post<Condominio>(this.urlBase, condominio);
+    return this.fazerRequisicao(() => this.http.post<Condominio>(this.urlBase, condominio, this.httpOptions));
   }
 
-  public atualizar(id: string): Observable<Condominio> {
-    return this.http.put<Condominio>(`${this.urlBase}/${id}`, id);
+  public atualizar(id: string, condominio: Condominio): Observable<Condominio> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.put<Condominio>(url, condominio, this.httpOptions));
   }
 
-  public excluir(id: string): Observable<any> {
-    return this.http.delete(`${this.urlBase}/${id}`).pipe(
-      tap({
-        next: (response: any) => {
-          if (response.success) {
-            console.log('Condominio removido com sucesso');
-          } else {
-            this.handleError(response);
-          }
-        },
-        error: (error: any) => this.handleError(error)
-      })
+  public excluir(id: string): Observable<void> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.delete<void>(url));
+  }  
+
+  private fazerRequisicao(operacaoHttp: Function): Observable<any> {
+    return operacaoHttp().pipe(
+      catchError(this.errorHandlerService.tratarErro)
     );
   }
-
-  private handleError(error: HttpErrorResponse) {
-    if (error.error instanceof ErrorEvent) {
-      console.error('An error occurred:', error.error.message);
-    } else {
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
-    }
-    return throwError(() => 'Something bad happened; please try again later.');
-  }
-
 }
