@@ -16,5 +16,4 @@ export interface Condominio {
     estado: string;
     dataCriacao: Date;
     dataAtualizacao: Date;
-    ativo: boolean;
 }

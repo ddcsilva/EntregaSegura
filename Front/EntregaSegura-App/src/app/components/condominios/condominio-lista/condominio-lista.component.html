@@ -8,7 +8,9 @@
                             <div class="input-group-text">Filtro: </div>
                         </div>
                         <input type="text" class="form-control" placeholder="Buscar" aria-label="Buscar"
-                            aria-describedby="inputGroup-sizing-default" [(ngModel)]="filtro">
+                            aria-describedby="inputGroup-sizing-default" [ngModel]="filtroAtual"
+                            (ngModelChange)="aplicarFiltro($event)">
+
                     </div>
                 </div>
                 <div>
@@ -48,7 +50,8 @@
                                         <i class="fa fa-edit"></i>
                                     </button>
                                     <button class="btn btn-sm btn-danger" data-bs-toggle="tooltip"
-                                        data-bs-placement="top" title="Excluir" (click)="abrirModal($event, template, condominio.nome, condominio.id)">
+                                        data-bs-placement="top" title="Excluir"
+                                        (click)="abrirModal($event, template, condominio.nome, condominio.id)">
                                         <i class="fa fa-trash"></i>
                                     </button>
                                 </div>

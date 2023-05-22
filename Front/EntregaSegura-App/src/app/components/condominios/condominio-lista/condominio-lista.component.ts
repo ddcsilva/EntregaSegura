@@ -19,25 +19,16 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./condominio-lista.component.scss']
 })
 export class CondominioListaComponent implements OnInit {
-
-  public get condominioService(): CondominioService {
-    return this._condominioService;
-  }
-
-  public set condominioService(value: CondominioService) {
-    this._condominioService = value;
-  }
-
   public condominios: Condominio[] = [];
   public condominiosFiltrados: Condominio[] = [];
   public id: number | undefined;
   public nome: string = '';
-  private filtroAtual: string = '';
+  public filtroAtual: string = '';
   modalRef = {} as BsModalRef;
 
   constructor(
     private router: Router,
-    private _condominioService: CondominioService,
+    private condominioService: CondominioService,
     private modalService: BsModalService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService
@@ -48,13 +39,9 @@ export class CondominioListaComponent implements OnInit {
     this.carregarCondominios();
   }
 
-  public get filtro(): string {
-    return this.filtroAtual;
-  }
-
-  public set filtro(value: string) {
+  public aplicarFiltro(value: string): void {
     this.filtroAtual = value;
-    this.condominiosFiltrados = this.filtro ? this.filtrarCondominios(this.filtro) : this.condominios;
+    this.condominiosFiltrados = this.filtroAtual ? this.filtrarCondominios(this.filtroAtual) : this.condominios;
   }
 
   public carregarCondominios(): void {
@@ -71,20 +58,19 @@ export class CondominioListaComponent implements OnInit {
     });
   }
 
-  public filtrarCondominios(filtrarPor: string): any {
+  public filtrarCondominios(filtrarPor: string): Condominio[] {
     filtrarPor = filtrarPor.toLocaleLowerCase();
     return this.condominios.filter(
-      (condominio: { cnpj: string; nome: string; cidade: string }) =>
-        condominio.cnpj.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-        condominio.nome.toLocaleLowerCase().indexOf(filtrarPor) !== -1 ||
-        condominio.cidade.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+      (condominio: Condominio) =>
+        condominio.cnpj.toLocaleLowerCase().includes(filtrarPor) ||
+        condominio.nome.toLocaleLowerCase().includes(filtrarPor) ||
+        condominio.cidade.toLocaleLowerCase().includes(filtrarPor)
     );
   }
 
   public editarCondominio(id: number): void {
     this.router.navigate(['condominios/detalhe', id]);
   }
-
 
   public abrirModal(event: any, template: TemplateRef<any>, nome: string, id: number): void {
     event.stopPropagation();
@@ -97,21 +83,20 @@ export class CondominioListaComponent implements OnInit {
     this.modalRef.hide();
     this.spinner.show();
 
-    console.log('id' + this.id);
-
     this.condominioService.excluir(String(this.id)).subscribe({
       next: () => {
         this.toastr.success('Condomínio excluído com sucesso!', 'Exclusão');
-        this.spinner.hide();
         this.carregarCondominios();
       },
       error: (error: any) => {
-        console.error(error);
         this.spinner.hide();
-        this.toastr.error('Erro ao excluir o condomínio', 'Erro!');
-      },
-      complete: () => this.spinner.hide()
-    });
+        if (Array.isArray(error)) {
+          error.forEach((mensagemErro: string) => this.toastr.error(mensagemErro, 'Erro de Validação!'));
+        } else {
+          this.toastr.error(error, 'Erro!');
+        }
+      }      
+    }).add(() => this.spinner.hide());
   }
 
   public negarExclusao(): void {
