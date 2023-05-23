@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 })
 export class NavComponent implements OnInit {
   isCollapsed = true;
+  notificationCount = 7;
+  userImagePath = '/assets/foto.jpg';
 
   constructor(private router: Router) { }
 
@@ -17,4 +19,16 @@ export class NavComponent implements OnInit {
   public exibirMenu(): boolean {
     return this.router.url !== '/usuarios/login';
   }
+
+  getUserInitials() {
+    let name = "Danilo Silva"; //Substitua isso com a variável real do nome do usuário
+    let names = name.split(' '),
+        initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+        initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
+}
+
 }

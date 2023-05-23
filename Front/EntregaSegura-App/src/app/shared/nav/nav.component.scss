@@ -18,3 +18,25 @@
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
+
+.user-initials {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    padding: 5px;
+    /* Isso adiciona um pouco de espaço extra ao redor do texto */
+    background: #aaa;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+}
+
+.dropdown-header {
+    font-size: 1rem;
+    color: #212529;
+    background-color: #f8f9fa;
+    padding: 0.5rem 1rem;
+    /* Exemplo de espaçamento interno */
+}
