@@ -38,9 +38,11 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
+import { AppLayoutComponent } from './shared/app-layout/app-layout.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { NgxMaskModule } from 'ngx-mask';
     CondominioDetalheComponent,
     UsuariosComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    AppLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -84,7 +87,8 @@ import { NgxMaskModule } from 'ngx-mask';
         progressBar: true
       }
     ),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    PopoverModule.forRoot()
   ],
   providers: [CondominioService, TratamentoErrosService],
   bootstrap: [AppComponent],

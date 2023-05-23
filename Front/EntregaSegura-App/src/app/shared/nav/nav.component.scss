@@ -1,42 +1,84 @@
 .navbar-custom {
-    background-color: #1b6ec2;
+  background-color: #394a6d;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .navbar-top {
+    display: flex;
+    align-items: center;
+
+    .navbar-brand {
+      margin-right: 20px;
+    }
+
+    .navbar-icons {
+      display: flex;
+
+      .nav-item {
+        margin-right: 15px;
+
+        &:last-child {
+          margin-right: 0;
+        }
+      }
+    }
+  }
 }
 
-.navbar-custom .navbar-nav .nav-link {
-    color: #ffffff;
+.sidebar {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 1px 0 5px rgba(0, 0, 0, .1);
+  width: 250px;
+  overflow-y: auto;
+  background-color: #f2f2f2;
 }
 
-.navbar-custom .nav-item.active .nav-link,
-.navbar-custom .nav-item:hover .nav-link {
-    color: #d4e5f9;
+.sidebar-nav {
+  padding: 20px;
 }
 
-.navbar-custom .navbar-collapse {
-    justify-content: space-between;
+.nav-item {
+  padding: 10px 0;
 }
 
-.navbar-toggler-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+.nav-link {
+  color: #333;
+
+  &:hover {
+    color: #007bff;
+    text-decoration: none;
+  }
+}
+
+.navbar-bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
 }
 
 .user-initials {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    padding: 5px;
-    /* Isso adiciona um pouco de espaço extra ao redor do texto */
-    background: #aaa;
-    color: white;
-    border-radius: 50%;
-    font-size: 20px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  color: #fff;
+  background-color: #007bff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 40px;
+  font-weight: bold;
 }
 
-.dropdown-header {
-    font-size: 1rem;
-    color: #212529;
-    background-color: #f8f9fa;
-    padding: 0.5rem 1rem;
-    /* Exemplo de espaçamento interno */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    position: static;
+  }
 }
