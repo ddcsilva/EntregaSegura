@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,10 +23,22 @@ import { MatListModule} from '@angular/material/list';
 import { MatExpansionModule} from '@angular/material/expansion';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatBadgeModule} from '@angular/material/badge';
+import { CondominioService } from './services/condominio/condominio.service';
+import { TratamentoErrosService } from './shared/services/tratamento-erros/tratamento-erros.service';
+import { CondominiosComponent } from './components/condominios/condominios.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
+import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
+import { TituloComponent } from './shared/components/titulo/titulo.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CondominiosComponent,
+    DashboardComponent,
+    CondominioListaComponent,
+    CondominioDetalheComponent,
+    TituloComponent
   ],
   imports: [
     BrowserModule,
@@ -52,8 +64,9 @@ import { MatBadgeModule} from '@angular/material/badge';
     MatMenuModule,
     MatBadgeModule
   ],
-  providers: [],
+  providers: [CondominioService, TratamentoErrosService],
   bootstrap: [AppComponent],
-  exports: [CdkTableModule, MatTableModule]
+  exports: [CdkTableModule, MatTableModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
