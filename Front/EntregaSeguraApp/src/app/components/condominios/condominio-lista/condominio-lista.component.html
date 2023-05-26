@@ -1,1 +1,74 @@
-<p>condominio-lista works!</p>
+<div class="row">
+    <div class="col-md-2">
+        <button mat-raised-button routerLink="detalhe">
+            <mat-icon>add</mat-icon>
+            Novo
+        </button>
+    </div>
+    <div class="col-md-4 offset-md-6">
+        <mat-form-field>
+            <mat-label>Buscar por...</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+        </mat-form-field>
+    </div>
+</div>
+
+<br>
+<div class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <!-- Index Column -->
+        <ng-container matColumnDef="key">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.key}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Telefone Column -->
+        <ng-container matColumnDef="phoneNumber">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+            <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>
+        </ng-container>
+
+        <!-- Bairro Column -->
+        <ng-container matColumnDef="bairro">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bairro </th>
+            <td mat-cell *matCellDef="let element"> {{element.bairro}} </td>
+        </ng-container>
+
+        <!-- Cidade Column -->
+        <ng-container matColumnDef="cidade">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cidade </th>
+            <td mat-cell *matCellDef="let element"> {{element.cidade}} </td>
+        </ng-container>
+
+        <!-- Estado Column -->
+        <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
+            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        </ng-container>
+
+        <!-- actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

@@ -11,6 +11,46 @@ table {
     flex: 1 1 auto;
 }
 
+.content {
+    margin: 82px auto 32px;
+    align-items: center;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+    .mat-card-actions {
+        display: table-cell;
+        padding: 20px 0;
+    }
+    .mat-form-field {
+        display: block;
+    }
+    mat-card-title {
+        margin-bottom: 20px;
+    }
+    .mat-card-content {
+        margin-top: 20px;
+    }
+    .mat-radio-button {
+        margin: 0 12px;
+    }
+}
+
+.form-content {
+    margin: 0 auto;
+}
+
+.mat-form-field {
+    width: 100%;
+}
+
+.mat-form-field-invalid .mat-icon {
+    color: #f44336;
+}
+
+.actions-btns {
+    button {
+        margin: 3px;
+    }
+}
+
 .navbar-principal {
     box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
     position: fixed;
