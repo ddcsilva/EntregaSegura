@@ -1,1 +1,22 @@
-<p>dashboard works!</p>
+<div class="dashboard">
+    <mat-card class="card">
+      <mat-card-title>Total de entregas no ano</mat-card-title>
+      <mat-card-content>
+        <h2>{{ totalEntregas }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-title>Entregas pendentes</mat-card-title>
+      <mat-card-content>
+        <h2>{{ entregasPendentes }}</h2>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="card">
+      <mat-card-title>Unidades ocupadas</mat-card-title>
+      <mat-card-content>
+        <h2>{{ unidadesOcupadas }}</h2>
+      </mat-card-content>
+    </mat-card>
+  </div>
