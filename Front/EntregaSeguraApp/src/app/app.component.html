@@ -28,7 +28,7 @@
         <span>Sair</span>
       </button>
     </mat-menu>
-    
+
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -36,16 +36,16 @@
   <mat-sidenav #sidenav [opened]="true" [mode]="!mediaQueryDispositivoMovel.matches ? 'side' : 'over'"
     [fixedInViewport]="mediaQueryDispositivoMovel.matches" fixedTopGap="112" style="width: 240px;">
     <div class="secao-perfil">
-        <div class="avatar">
-            <span *ngIf="!fotoPerfilUsuario">{{ iniciaisUsuario }}</span>
-        </div>
-        <h4 matLine>Danilo</h4>
-        <p matLine class="email">danilo@email.com</p>
-        <div class="icones-perfil">
-            <mat-icon class="icone-pequeno">person</mat-icon>
-            <mat-icon class="icone-pequeno">edit</mat-icon>
-            <mat-icon class="icone-pequeno">logout</mat-icon>
-        </div>
+      <div class="avatar">
+        <span *ngIf="!fotoPerfilUsuario">{{ iniciaisUsuario }}</span>
+      </div>
+      <h4 matLine>Danilo</h4>
+      <p matLine class="email">danilo@email.com</p>
+      <div class="icones-perfil">
+        <mat-icon class="icone-pequeno">person</mat-icon>
+        <mat-icon class="icone-pequeno">edit</mat-icon>
+        <mat-icon class="icone-pequeno">logout</mat-icon>
+      </div>
     </div>
     <mat-divider></mat-divider>
     <mat-nav-list>
@@ -93,20 +93,6 @@
         <h4 matLine>Suporte</h4>
       </a>
       <mat-divider></mat-divider>
-      <!-- <mat-expansion-panel [class.mat-elevation-z0]="true">
-        <mat-expansion-panel-header>
-          <mat-icon>data_array</mat-icon>
-          <span>CRUD Exemplo</span>
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-list-item [routerLink]="'/items-static-data'">
-            <span>Lista de Clientes</span>
-          </a>
-          <a mat-list-item [routerLink]="'/item-static-data'">
-            <span>Novo Cliente</span>
-          </a>
-        </mat-nav-list>
-      </mat-expansion-panel> -->
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -115,3 +101,8 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true"
+  [delay]="500">
+  <p style="color: white" [innerHTML]="mensagemDeCarregamento"></p>
+</ngx-spinner>

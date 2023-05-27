@@ -47,4 +47,19 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
+
+  public mensagensDeCarregamento: string[] = [
+    'Preparando tudo para você...',
+    'Quase lá...',
+    'Trabalhando duro...',
+    'Quase pronto...',
+    'Só um momento...',
+    'Finalizando os últimos detalhes...'
+  ];
+
+  public get mensagemDeCarregamento(): string {
+    const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
+    return this.mensagensDeCarregamento[index];
+  }
+
 }

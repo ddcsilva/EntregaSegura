@@ -1,1 +1,193 @@
-<p>condominio-detalhe works!</p>
+<app-titulo [icone]="'home'" [titulo]="titulo"></app-titulo>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="condominioForm" (ngSubmit)="onSubmit()" class="form-content lg-form">
+                        <div class="row">
+                            <h2>Informações Gerais</h2>
+                            <!-- Campo Nome -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Nome</mat-label>
+                                    <input formControlName="nome" matInput placeholder="Nome" required>
+                                    <mat-icon matSuffix>person</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('nome')?.invalid">
+                                        Por favor, insira o nome do condomínio.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <!-- Campo CNPJ -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>CNPJ</mat-label>
+                                    <input formControlName="cnpj" matInput placeholder="CNPJ" mask="00.000.000/0000-00"
+                                        required>
+                                    <mat-icon matSuffix>business</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('cnpj')?.invalid">
+                                        Por favor, insira um CNPJ válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo E-mail -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>E-mail</mat-label>
+                                    <input formControlName="email" matInput placeholder="E-mail" required email>
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('email')?.invalid">
+                                        Por favor, insira um e-mail válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Telefone -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Telefone</mat-label>
+                                    <input formControlName="telefone" matInput placeholder="Telefone"
+                                        mask="(00) 0000-0000" required>
+                                    <mat-icon matSuffix>phone</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('telefone')?.invalid">
+                                        Por favor, insira um telefone válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <h2>Endereço</h2>
+                            <!-- Campo CEP -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>CEP</mat-label>
+                                    <input formControlName="cep" matInput placeholder="CEP" mask="00000-000"
+                                        (blur)="buscarCep()" required>
+                                    <mat-icon matSuffix>map</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('cep')?.invalid">
+                                        Por favor, insira um CEP válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Logradouro -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Logradouro</mat-label>
+                                    <input formControlName="logradouro" matInput placeholder="Logradouro" required>
+                                    <mat-icon matSuffix>location_on</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('logradouro')?.invalid">
+                                        Por favor, insira o logradouro.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Numero -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Numero</mat-label>
+                                    <input formControlName="numero" matInput placeholder="Numero" required>
+                                    <mat-icon matSuffix>home</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('numero')?.invalid">
+                                        Por favor, insira o número.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Bairro -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Bairro</mat-label>
+                                    <input formControlName="bairro" matInput placeholder="Bairro" required>
+                                    <mat-icon matSuffix>location_city</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('bairro')?.invalid">
+                                        Por favor, insira o bairro.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Cidade -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Cidade</mat-label>
+                                    <input formControlName="cidade" matInput placeholder="Cidade" required>
+                                    <mat-icon matSuffix>location_city</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('cidade')?.invalid">
+                                        Por favor, insira a cidade.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Estado -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Estado</mat-label>
+                                    <input formControlName="estado" matInput placeholder="Estado" required>
+                                    <mat-icon matSuffix>location_city</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('estado')?.invalid">
+                                        Por favor, insira o estado.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <h2>Detalhes do Condomínio</h2>
+
+                            <!-- Campo Quantidade Unidades -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Quantidade Unidades</mat-label>
+                                    <input formControlName="quantidadeUnidades" matInput
+                                        placeholder="Quantidade Unidades" required>
+                                    <mat-icon matSuffix>apartment</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('quantidadeUnidades')?.invalid">
+                                        Por favor, insira a quantidade de unidades.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Quantidade Andares -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Quantidade Andares</mat-label>
+                                    <input formControlName="quantidadeAndares" matInput placeholder="Quantidade Andares"
+                                        required>
+                                    <mat-icon matSuffix>stairs</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('quantidadeAndares')?.invalid">
+                                        Por favor, insira a quantidade de andares.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Quantidade Blocos -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Quantidade Blocos</mat-label>
+                                    <input formControlName="quantidadeBlocos" matInput placeholder="Quantidade Blocos"
+                                        required>
+                                    <mat-icon matSuffix>apartment</mat-icon>
+                                    <mat-error *ngIf="condominioForm.get('quantidadeBlocos')?.invalid">
+                                        Por favor, insira a quantidade de blocos.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button mat-button color="primary" type="button" [routerLink]="['']"
+                                            style="width: 100%">Voltar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button mat-raised-button color="primary" type="submit"
+                                            style="width: 100%">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -39,7 +39,7 @@ export class CondominioService {
 
   private fazerRequisicao(operacaoHttp: Function): Observable<any> {
     return operacaoHttp().pipe(
-      catchError(this.tratamentoErrosService.tratarErro)
+      catchError(this.tratamentoErrosService.tratarErro.bind(this.tratamentoErrosService))
     );
   }
 }

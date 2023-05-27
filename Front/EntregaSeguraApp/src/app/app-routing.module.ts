@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'condominios', component: CondominiosComponent,
     children: [
-      { path: '', component: CondominioListaComponent, data: { titulo: 'Lista de Condominios' } },
+      { path: '', component: CondominioListaComponent },
       { path: 'detalhe', component: CondominioDetalheComponent },
       { path: 'detalhe/:id', component: CondominioDetalheComponent }
     ],

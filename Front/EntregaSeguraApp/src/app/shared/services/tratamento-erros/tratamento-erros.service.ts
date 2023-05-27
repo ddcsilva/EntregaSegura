@@ -4,23 +4,34 @@ import { throwError } from 'rxjs';
 
 @Injectable()
 export class TratamentoErrosService {
-
   public tratarErro(erro: HttpErrorResponse) {
-    if (erro.error instanceof ErrorEvent) {
-      // Um erro do lado do cliente ou problema de rede ocorreu. Trate-o de acordo.
-      console.error('Ocorreu um erro:', erro.error.message);
-      return throwError(erro.error.message);
+    let mensagemErro: string;
+  
+    if (this.apiEstaForaDoAr(erro)) {
+      mensagemErro = 'Nosso serviço está temporariamente indisponível. Por favor, tente novamente mais tarde.';
+    } else if (this.erroDeClienteOuRede(erro)) {
+      mensagemErro = erro.error.message;
+    } else if (this.erroDoBackendComCorpoResposta(erro)) {
+      mensagemErro = erro.error.errors;
     } else {
-      // O backend retornou um código de resposta malsucedido.
-      // O corpo da resposta pode conter pistas sobre o que deu errado.
-      if (erro.error && erro.error.errors) {
-        return throwError(erro.error.errors);
-      } else {
-        const mensagemErro = `Código do Erro: ${erro.status}\nMensagem: ${erro.message}`;
-        return throwError(mensagemErro);
-      }
+      mensagemErro = `Código do Erro: ${erro.status}\nMensagem: ${erro.message}`;
     }
+  
+    return throwError(() => new Error(mensagemErro));
   }
   
+
+  private apiEstaForaDoAr(erro: HttpErrorResponse): boolean {
+    return erro.status === 0;
+  }
+
+  private erroDeClienteOuRede(erro: HttpErrorResponse): boolean {
+    return erro.error instanceof ErrorEvent;
+  }
+
+  private erroDoBackendComCorpoResposta(erro: HttpErrorResponse): boolean {
+    return erro.error && erro.error.errors;
+  }
 }
+
 

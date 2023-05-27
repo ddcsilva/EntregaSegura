@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Exclusão</h2>
+<mat-dialog-content class="mat-typography">
+    <p><strong>Você tem certeza de que deseja excluir <span class="text-primary">este item</span>?</strong></p>
+    <p>Todas as informações associadas a este item serão permanentemente excluídas.
+        <span class="text-danger">Esta operação não pode ser desfeita.</span>
+    </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancelar</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Confirmar</button>
+</mat-dialog-actions>

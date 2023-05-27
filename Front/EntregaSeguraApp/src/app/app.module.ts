@@ -33,6 +33,11 @@ import { TituloComponent } from './shared/components/titulo/titulo.component';
 import { registerLocaleData } from '@angular/common';
 import ptBr from '@angular/common/locales/pt';
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
+import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exclusao-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { NgxMaskModule } from 'ngx-mask';
 
 registerLocaleData(ptBr)
 
@@ -43,7 +48,8 @@ registerLocaleData(ptBr)
     DashboardComponent,
     CondominioListaComponent,
     CondominioDetalheComponent,
-    TituloComponent
+    TituloComponent,
+    ExclusaoDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -51,6 +57,8 @@ registerLocaleData(ptBr)
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
@@ -67,7 +75,10 @@ registerLocaleData(ptBr)
     MatListModule,
     MatExpansionModule,
     MatMenuModule,
-    MatBadgeModule
+    MatBadgeModule,
+    HttpClientModule,
+    NgxSpinnerModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [
     { 
