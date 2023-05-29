@@ -1,8 +1,19 @@
-.row, .form-row {
+.row,
+.form-row {
     align-items: center;
     margin-top: 20px;
 }
 
 .mat-card {
     margin-top: 20px;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group button {
+    position: absolute;
+    right: 0;
+    top: 0;
 }

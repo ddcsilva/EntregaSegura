@@ -46,6 +46,7 @@ import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/u
 import { SuporteComponent } from './components/suporte/suporte.component';
 
 // Custom services imports
+import { CepService } from './shared/services/cep/cep.service';
 import { CondominioService } from './services/condominio/condominio.service';
 import { TransportadoraService } from './services/transportadora/transportadora.service';
 import { TratamentoErrosService } from './shared/services/tratamento-erros/tratamento-erros.service';
@@ -56,7 +57,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
-
 
 registerLocaleData(ptBr)
 
@@ -124,9 +124,10 @@ registerLocaleData(ptBr)
     },
 
     // Custom providers
+    CepService,
     CondominioService,
     TransportadoraService,
-    TratamentoErrosService,
+    TratamentoErrosService
   ],
   bootstrap: [AppComponent],
   exports: [
