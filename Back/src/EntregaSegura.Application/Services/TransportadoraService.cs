@@ -125,7 +125,12 @@ public class TransportadoraService : BaseService, ITransportadoraService
     public async Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId)
     {
         return await _transportadoraRepository.ObterTransportadoraComEntregasAsync(transportadoraId);
-    }    
+    }
+
+    public async Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome)
+    {
+        return await _transportadoraRepository.ObterTodasTransportadorasPeloNomeAsync(nome);
+    }
 
     public void Dispose()
     {

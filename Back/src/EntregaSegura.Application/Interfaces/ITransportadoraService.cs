@@ -11,4 +11,5 @@ public interface ITransportadoraService : IDisposable
     Task<Transportadora> ObterPorIdAsync(int id);
     Task<Transportadora> ObterPorNomeAsync(string nome);
     Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId);
+    Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome);
 }

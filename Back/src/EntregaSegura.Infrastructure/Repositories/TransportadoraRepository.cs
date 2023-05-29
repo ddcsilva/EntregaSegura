@@ -27,4 +27,16 @@ public class TransportadoraRepository : Repository<Transportadora>, ITransportad
 
         return transportadora;
     }    
+
+    public async Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome)
+    {
+        nome = nome ?? string.Empty;
+
+        var transportadoras = await _context.Transportadoras
+            .AsNoTracking()
+            .Where(c => c.Nome.ToLower().Contains(nome.ToLower()))
+            .ToListAsync();
+
+        return transportadoras;
+    }
 }

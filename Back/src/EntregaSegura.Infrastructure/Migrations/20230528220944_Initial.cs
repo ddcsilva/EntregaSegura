@@ -24,7 +24,6 @@ namespace EntregaSegura.Infrastructure.Migrations
                     CND_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "E-mail do condomínio"),
                     CND_LOGRADOURO = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Logradouro do endereço do condomínio"),
                     CND_NUMERO = table.Column<string>(type: "varchar(10)", nullable: false, comment: "Número do endereço do condomínio"),
-                    CND_COMPLEMENTO = table.Column<string>(type: "varchar(50)", nullable: true, comment: "Complemento do endereço do condomínio"),
                     CND_CEP = table.Column<string>(type: "varchar(8)", nullable: false, comment: "CEP do endereço do condomínio"),
                     CND_BAIRRO = table.Column<string>(type: "varchar(50)", nullable: false, comment: "Bairro do endereço do condomínio"),
                     CND_CIDADE = table.Column<string>(type: "varchar(50)", nullable: false, comment: "Cidade do endereço do condomínio"),
@@ -175,11 +174,11 @@ namespace EntregaSegura.Infrastructure.Migrations
 
             migrationBuilder.InsertData(
                 table: "TB_CONDOMINIOS",
-                columns: new[] { "CND_ID", "CND_BAIRRO", "CND_CEP", "CND_CNPJ", "CND_CIDADE", "CND_COMPLEMENTO", "CND_DATA_ATUALIZACAO", "CND_DATA_CRIACAO", "CND_EMAIL", "CND_ESTADO", "CND_LOGRADOURO", "CND_NOME", "CND_NUMERO", "CND_QTD_ANDARES", "CND_QTD_BLOCOS", "CND_QTD_UNIDADES", "CND_TELEFONE" },
+                columns: new[] { "CND_ID", "CND_BAIRRO", "CND_CEP", "CND_CNPJ", "CND_CIDADE", "CND_DATA_ATUALIZACAO", "CND_DATA_CRIACAO", "CND_EMAIL", "CND_ESTADO", "CND_LOGRADOURO", "CND_NOME", "CND_NUMERO", "CND_QTD_ANDARES", "CND_QTD_BLOCOS", "CND_QTD_UNIDADES", "CND_TELEFONE" },
                 values: new object[,]
                 {
-                    { 1, "Bairro Teste", "12345678", "12345678912345", "Cidade Teste", null, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6653), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6644), "condominio1@teste.com", "SP", "Rua Teste", "Condominio Teste 1", "123", 3, 3, 90, "1234567890" },
-                    { 2, "Bairro Teste 2", "12345679", "12345678912346", "Cidade Teste", null, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6659), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6659), "condominio2@teste.com", "SP", "Avenida Teste", "Condominio Teste 2", "456", 2, 2, 60, "1234567891" }
+                    { 1, "Jardim Paulistano", "04567010", "17540623000150", "São Paulo", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2851), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2842), "contato@boavista.com.br", "SP", "Rua das Acácias", "Condomínio Boa Vista", "55", 10, 5, 4, "1140028922" },
+                    { 2, "Copacabana", "22021001", "27004428000169", "Rio de Janeiro", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2857), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2857), "contato@raiodesol.com.br", "RJ", "Avenida Atlântica", "Condomínio Raio de Sol", "700", 10, 5, 8, "2130033211" }
                 });
 
             migrationBuilder.InsertData(
@@ -187,8 +186,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                 columns: new[] { "TRA_ID", "TRA_CNPJ", "TRA_DATA_ATUALIZACAO", "TRA_DATA_CRIACAO", "TRA_EMAIL", "TRA_NOME", "TRA_TELEFONE" },
                 values: new object[,]
                 {
-                    { 1, "12345678912347", new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6803), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6803), "transportadora1@teste.com", "Transportadora Teste 1", "1234567894" },
-                    { 2, "12345678912348", new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6805), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6804), "transportadora2@teste.com", "Transportadora Teste 2", "1234567895" }
+                    { 1, "12345678912347", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3008), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3007), "transportadora1@teste.com", "Transportadora Teste 1", "1234567894" },
+                    { 2, "12345678912348", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3010), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3009), "transportadora2@teste.com", "Transportadora Teste 2", "1234567895" }
                 });
 
             migrationBuilder.InsertData(
@@ -196,8 +195,8 @@ namespace EntregaSegura.Infrastructure.Migrations
                 columns: new[] { "FUN_ID", "FUN_CPF", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_DATA_ADMISSAO", "FUN_DATA_ATUALIZACAO", "FUN_DATA_CRIACAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE" },
                 values: new object[,]
                 {
-                    { 1, "12345678903", 3, 1, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6789), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6788), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6788), null, "funcionario1@teste.com", "Funcionario Teste 1", "1234567892" },
-                    { 2, "12345678904", 2, 2, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6792), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6791), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6791), null, "funcionario2@teste.com", "Funcionario Teste 2", "1234567893" }
+                    { 1, "12345678903", 3, 1, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2993), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2992), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2992), null, "funcionario1@teste.com", "Funcionario Teste 1", "1234567892" },
+                    { 2, "12345678904", 2, 2, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2996), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2995), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2995), null, "funcionario2@teste.com", "Funcionario Teste 2", "1234567893" }
                 });
 
             migrationBuilder.InsertData(
@@ -205,29 +204,29 @@ namespace EntregaSegura.Infrastructure.Migrations
                 columns: new[] { "UND_ID", "UND_BLOCO", "CON_ID", "UND_DATA_ATUALIZACAO", "UND_DATA_CRIACAO", "UND_NUMERO" },
                 values: new object[,]
                 {
-                    { 1, "A", 1, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6755), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6754), "101" },
-                    { 2, "A", 1, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6757), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6757), "102" }
+                    { 1, "A", 1, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2957), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2956), "101" },
+                    { 2, "A", 1, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2959), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2959), "102" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TB_MORADORES",
                 columns: new[] { "MOR_ID", "MOR_CPF", "MOR_DATA_ATUALIZACAO", "MOR_DATA_CRIACAO", "MOR_EMAIL", "MOR_FOTO", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID" },
-                values: new object[] { 1, "12345678901", new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6772), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6772), "morador1@teste.com", "foto1.jpg", "Morador Teste 1", "123", "1234567890", 1 });
+                values: new object[] { 1, "12345678901", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2976), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2975), "morador1@teste.com", "foto1.jpg", "Morador Teste 1", "123", "1234567890", 1 });
 
             migrationBuilder.InsertData(
                 table: "TB_MORADORES",
                 columns: new[] { "MOR_ID", "MOR_CPF", "MOR_DATA_ATUALIZACAO", "MOR_DATA_CRIACAO", "MOR_EMAIL", "MOR_FOTO", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID" },
-                values: new object[] { 2, "12345678902", new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6776), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6775), "morador2@teste.com", "foto2.jpg", "Morador Teste 2", "456", "1234567891", 2 });
+                values: new object[] { 2, "12345678902", new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2979), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(2979), "morador2@teste.com", "foto2.jpg", "Morador Teste 2", "456", "1234567891", 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_ATUALIZACAO", "ETG_DATA_CRIACAO", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { 1, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6816), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6815), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6816), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 1, 1 });
+                values: new object[] { 1, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3024), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3023), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3024), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 1, 1 });
 
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_ATUALIZACAO", "ETG_DATA_CRIACAO", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { 2, new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6818), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6818), new DateTime(2023, 5, 22, 19, 39, 43, 503, DateTimeKind.Local).AddTicks(6819), null, "Entrega Teste 2", 2, 2, "Observação Teste 2", 1, 2 });
+                values: new object[] { 2, new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3026), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3026), new DateTime(2023, 5, 28, 19, 9, 44, 345, DateTimeKind.Local).AddTicks(3027), null, "Entrega Teste 2", 2, 2, "Observação Teste 2", 1, 2 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",

@@ -83,43 +83,37 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
             .HasColumnType("varchar(10)")
             .HasComment("Número do endereço do condomínio");
 
-        builder.Property(e => e.Complemento)
-            .HasColumnName("CND_COMPLEMENTO")
-            .HasColumnOrder(11)
-            .HasColumnType("varchar(50)")
-            .HasComment("Complemento do endereço do condomínio");
-
         builder.Property(e => e.CEP)
             .HasColumnName("CND_CEP")
-            .HasColumnOrder(12)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("varchar(8)")
             .HasComment("CEP do endereço do condomínio");
 
         builder.Property(e => e.Bairro)
             .HasColumnName("CND_BAIRRO")
-            .HasColumnOrder(13)
+            .HasColumnOrder(12)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasComment("Bairro do endereço do condomínio");
 
         builder.Property(e => e.Cidade)
             .HasColumnName("CND_CIDADE")
-            .HasColumnOrder(14)
+            .HasColumnOrder(13)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasComment("Cidade do endereço do condomínio");
 
         builder.Property(e => e.Estado)
             .HasColumnName("CND_ESTADO")
-            .HasColumnOrder(15)
+            .HasColumnOrder(14)
             .IsRequired()
             .HasColumnType("varchar(2)")
             .HasComment("Estado do endereço do condomínio");
 
         builder.Property(c => c.DataCriacao)
             .HasColumnName("CND_DATA_CRIACAO")
-            .HasColumnOrder(16)
+            .HasColumnOrder(15)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -128,7 +122,7 @@ public class CondominioConfiguration : IEntityTypeConfiguration<Condominio>
 
         builder.Property(c => c.DataAtualizacao)
             .HasColumnName("CND_DATA_ATUALIZACAO")
-            .HasColumnOrder(17)
+            .HasColumnOrder(16)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")

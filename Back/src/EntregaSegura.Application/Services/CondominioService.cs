@@ -120,9 +120,9 @@ public class CondominioService : BaseService, ICondominioService
         return await _condominioRepository.ObterTodosAsync();
     }
 
-    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPorNomeAsync(string nome)
+    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPeloNomeAsync(string nome)
     {
-        return await _condominioRepository.ObterTodosCondominiosPorNomeAsync(nome);
+        return await _condominioRepository.ObterTodosCondominiosPeloNomeAsync(nome);
     }
 
     public async Task<Condominio> ObterPorIdAsync(int id)

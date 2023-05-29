@@ -114,6 +114,6 @@ public class CondominiosController : MainController
 
     private async Task<IEnumerable<CondominioDTO>> ObterCondominiosPorNome(string nome)
     {
-        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosCondominiosPorNomeAsync(nome));
+        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosCondominiosPeloNomeAsync(nome));
     }
 }

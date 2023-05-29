@@ -29,7 +29,7 @@ public class CondominioRepository : Repository<Condominio>, ICondominioRepositor
         return condominio;
     }
 
-    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPorNomeAsync(string nome)
+    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPeloNomeAsync(string nome)
     {
         nome = nome ?? string.Empty;
 

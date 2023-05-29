@@ -54,9 +54,5 @@ public class CondominioValidator : AbstractValidator<Condominio>
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
             .Matches("^[0-9]*$").WithMessage("O campo {PropertyName} deve conter apenas números.")
             .Length(8).WithMessage("O campo {PropertyName} deve ter exatamente {TotalLength} caracteres");
-
-        RuleFor(c => c.Complemento)
-            .MaximumLength(50).WithMessage("O campo {PropertyName} deve ter no máximo {MaxLength} caracteres")
-            .When(c => c.Complemento != null);
     }
 }

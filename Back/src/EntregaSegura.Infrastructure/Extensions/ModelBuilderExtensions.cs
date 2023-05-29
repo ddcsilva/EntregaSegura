@@ -10,36 +10,36 @@ public static class ModelBuilderExtensions
     {
         var condominio1 = new Condominio
         {
-            Nome = "Condominio Teste 1",
-            CNPJ = "12345678912345",
-            Telefone = "1234567890",
-            Email = "condominio1@teste.com",
-            QuantidadeBlocos = 3,
-            QuantidadeUnidades = 90,
-            QuantidadeAndares = 3,
-            Logradouro = "Rua Teste",
-            Numero = "123",
-            CEP = "12345678",
-            Bairro = "Bairro Teste",
-            Cidade = "Cidade Teste",
+            Nome = "Condomínio Boa Vista",
+            CNPJ = "17540623000150",
+            Telefone = "1140028922",
+            Email = "contato@boavista.com.br",
+            QuantidadeBlocos = 5,
+            QuantidadeUnidades = 4,
+            QuantidadeAndares = 10,
+            Logradouro = "Rua das Acácias",
+            Numero = "55",
+            CEP = "04567010",
+            Bairro = "Jardim Paulistano",
+            Cidade = "São Paulo",
             Estado = "SP"
         };
 
         var condominio2 = new Condominio
         {
-            Nome = "Condominio Teste 2",
-            CNPJ = "12345678912346",
-            Telefone = "1234567891",
-            Email = "condominio2@teste.com",
-            QuantidadeBlocos = 2,
-            QuantidadeUnidades = 60,
-            QuantidadeAndares = 2,
-            Logradouro = "Avenida Teste",
-            Numero = "456",
-            CEP = "12345679",
-            Bairro = "Bairro Teste 2",
-            Cidade = "Cidade Teste",
-            Estado = "SP"
+            Nome = "Condomínio Raio de Sol",
+            CNPJ = "27004428000169",
+            Telefone = "2130033211",
+            Email = "contato@raiodesol.com.br",
+            QuantidadeBlocos = 5,
+            QuantidadeUnidades = 8,
+            QuantidadeAndares = 10,
+            Logradouro = "Avenida Atlântica",
+            Numero = "700",
+            CEP = "22021001",
+            Bairro = "Copacabana",
+            Cidade = "Rio de Janeiro",
+            Estado = "RJ"
         };
         
         condominio1.DefinirId(1);
