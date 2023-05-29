@@ -1,0 +1,19 @@
+<app-titulo [icone]="'mail'" [titulo]="'Suporte'"></app-titulo>
+
+<form [formGroup]="suporteForm" (ngSubmit)="enviarMensagem()">
+    <mat-form-field>
+        <mat-label>Assunto</mat-label>
+        <mat-select formControlName="assunto">
+            <mat-option *ngFor="let assunto of assuntos" [value]="assunto.value">
+                {{assunto.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="mensagem-field">
+        <mat-label>Mensagem</mat-label>
+        <textarea matInput formControlName="mensagem"></textarea>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit">Enviar</button>
+</form>

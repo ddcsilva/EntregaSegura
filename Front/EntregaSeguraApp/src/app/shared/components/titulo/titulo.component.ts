@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class TituloComponent implements OnInit {
   @Input() titulo: string = '';
   @Input() icone: string = '';
+  @Input() exibirVoltar: boolean = false;
+  @Input() rotaVoltar: string = '';
 
   constructor() { }
 

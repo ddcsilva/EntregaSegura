@@ -1,4 +1,4 @@
-<app-titulo [icone]="'home'" [titulo]="titulo"></app-titulo>
+<app-titulo [icone]="'home'" [titulo]="titulo" [exibirVoltar]="true" [rotaVoltar]="'/condominios'"></app-titulo>
 
 <div class="container">
     <div class="row">
@@ -174,15 +174,11 @@
 
                             <div class="col-md-12">
                                 <div class="row">
-                                    <div class="col-md-4">
-                                        <button mat-button color="primary" type="button" [routerLink]="['/condominios']"
-                                            style="width: 100%">Voltar</button>
-                                    </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <button mat-button color="accent" type="button" (click)="condominioForm.reset()"
                                             style="width: 100%">Limpar</button>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <button mat-raised-button color="primary" type="submit"
                                             style="width: 100%">Salvar</button>
                                     </div>

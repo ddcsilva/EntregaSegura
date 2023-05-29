@@ -4,5 +4,10 @@
             <mat-icon>{{icone}}</mat-icon>
             {{titulo}}
         </span>
+        <span class="spacer"></span>
+        <button *ngIf="exibirVoltar" mat-button class="btn-voltar" type="button" [routerLink]="[rotaVoltar]">
+            <mat-icon>arrow_back</mat-icon>
+            Voltar
+        </button>
     </mat-toolbar-row>
 </mat-toolbar>

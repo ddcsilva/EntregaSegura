@@ -6,10 +6,10 @@ import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 
 // Model imports
-import { Condominio } from 'src/app/models/condominio';
+import { Transportadora } from 'src/app/models/transportadora';
 
 // Service imports
-import { CondominioService } from 'src/app/services/condominio/condominio.service';
+import { TransportadoraService } from 'src/app/services/transportadora/transportadora.service';
 
 // Component imports
 import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
@@ -20,23 +20,23 @@ import { Subject, takeUntil } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
-  selector: 'app-condominio-lista',
-  templateUrl: './condominio-lista.component.html',
-  styleUrls: ['./condominio-lista.component.scss']
+  selector: 'app-transportadora-lista',
+  templateUrl: './transportadora-lista.component.html',
+  styleUrls: ['./transportadora-lista.component.scss']
 })
-export class CondominioListaComponent implements OnInit, OnDestroy {
-  public titulo: string = 'Lista de Condomínios';
-  public colunasExibidas: string[] = ['id', 'nome', 'telefone', 'bairro', 'cidade', 'estado', 'actions'];
-  private listaCondominios: Condominio[] = [];
-  public dataSource = new MatTableDataSource<Condominio>(this.listaCondominios);
+export class TransportadoraListaComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Lista de Transportadoras';
+  public colunasExibidas: string[] = ['id', 'nome', 'telefone', 'cnpj', 'email', 'actions'];
+  private listaTransportadoras: Transportadora[] = [];
+  public dataSource = new MatTableDataSource<Transportadora>(this.listaTransportadoras);
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  @ViewChild(MatTable, { static: true }) table!: MatTable<Condominio>;
+  @ViewChild(MatTable, { static: true }) table!: MatTable<Transportadora>;
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
-    private condominioService: CondominioService,
+    private transportadoraService: TransportadoraService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     public dialog: MatDialog
@@ -54,10 +54,10 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
   }
 
   private obterLista() {
-    this.condominioService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (condominios: Condominio[]) => {
-        this.listaCondominios = condominios;
-        this.dataSource = new MatTableDataSource<Condominio>(this.listaCondominios);
+    this.transportadoraService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
+      next: (transportadoras: Transportadora[]) => {
+        this.listaTransportadoras = transportadoras;
+        this.dataSource = new MatTableDataSource<Transportadora>(this.listaTransportadoras);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
         this.table.renderRows();
@@ -68,15 +68,15 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
         this.spinner.hide();
       }
     });
-  }  
-
-  public excluirCondominio(id: number) {
+  }
+  
+  public excluirTransportadora(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
     dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
       if (confirmacaoExclusao) {
-        this.condominioService.excluir(id.toString()).subscribe({
+        this.transportadoraService.excluir(id.toString()).subscribe({
           next: () => {
-            this.toastr.success('Condomínio excluído com sucesso', 'Sucesso!');
+            this.toastr.success('Transportadora excluída com sucesso', 'Sucesso!');
             this.obterLista();
           },
           error: (error: any) => {

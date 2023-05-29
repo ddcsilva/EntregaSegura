@@ -1,4 +1,4 @@
-<app-titulo [icone]="'apartment'" [titulo]="titulo"></app-titulo>
+<app-titulo [icone]="'local_shipping'" [titulo]="titulo"></app-titulo>
 
 <div class="row">
     <div class="col-md-2">
@@ -38,22 +38,16 @@
             <td mat-cell *matCellDef="let element"> {{element.telefone}} </td>
         </ng-container>
 
-        <!-- Bairro Column -->
-        <ng-container matColumnDef="bairro">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bairro </th>
-            <td mat-cell *matCellDef="let element"> {{element.bairro}} </td>
+        <!-- CNPJ Column -->
+        <ng-container matColumnDef="cnpj">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CNPJ </th>
+            <td mat-cell *matCellDef="let element"> {{element.cnpj}} </td>
         </ng-container>
 
-        <!-- Cidade Column -->
-        <ng-container matColumnDef="cidade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cidade </th>
-            <td mat-cell *matCellDef="let element"> {{element.cidade}} </td>
-        </ng-container>
-
-        <!-- Estado Column -->
-        <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-            <td mat-cell *matCellDef="let element"> {{element.estado}} </td>
+        <!-- E-mail Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
         </ng-container>
 
         <!-- actions Column -->
@@ -63,7 +57,7 @@
                 <button mat-icon-button color="primary">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button color="warn" (click)="excluirCondominio(element.id)">
+                <button mat-icon-button color="warn" (click)="excluirTransportadora(element.id)">
                     <mat-icon>delete</mat-icon>
                 </button>
             </td>

@@ -7,14 +7,14 @@ import { Observable } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 // Models
-import { Condominio } from 'src/app/models/condominio';
+import { Transportadora } from 'src/app/models/transportadora';
 
 // Services
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
 
 @Injectable()
-export class CondominioService {
-  private urlBase: string = 'https://localhost:5001/api/condominios';
+export class TransportadoraService {
+  private urlBase: string = 'https://localhost:5001/api/transportadoras';
   
   private httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -22,13 +22,13 @@ export class CondominioService {
 
   constructor(private http: HttpClient, private tratamentoErrosService: TratamentoErrosService) { }
 
-  public criar(condominio: Condominio): Observable<Condominio> {
-    return this.fazerRequisicao(() => this.http.post<Condominio>(this.urlBase, condominio, this.httpOptions));
+  public criar(transportadora: Transportadora): Observable<Transportadora> {
+    return this.fazerRequisicao(() => this.http.post<Transportadora>(this.urlBase, transportadora, this.httpOptions));
   }
 
-  public atualizar(id: string, condominio: Condominio): Observable<Condominio> {
+  public atualizar(id: string, transportadora: Transportadora): Observable<Transportadora> {
     const url = `${this.urlBase}/${id}`;
-    return this.fazerRequisicao(() => this.http.put<Condominio>(url, condominio, this.httpOptions));
+    return this.fazerRequisicao(() => this.http.put<Transportadora>(url, transportadora, this.httpOptions));
   }
 
   public excluir(id: string): Observable<void> {
@@ -36,13 +36,13 @@ export class CondominioService {
     return this.fazerRequisicao(() => this.http.delete<void>(url));
   }
 
-  public obterTodos(): Observable<Condominio[]> {
-    return this.fazerRequisicao(() => this.http.get<Condominio[]>(this.urlBase));
+  public obterTodos(): Observable<Transportadora[]> {
+    return this.fazerRequisicao(() => this.http.get<Transportadora[]>(this.urlBase));
   }
 
-  public obterPorId(id: string): Observable<Condominio> {
+  public obterPorId(id: string): Observable<Transportadora> {
     const url = `${this.urlBase}/${id}`;
-    return this.fazerRequisicao(() => this.http.get<Condominio>(url));
+    return this.fazerRequisicao(() => this.http.get<Transportadora>(url));
   }
 
   private fazerRequisicao(operacaoHttp: Function): Observable<any> {

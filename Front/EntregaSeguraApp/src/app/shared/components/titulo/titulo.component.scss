@@ -1,14 +1,14 @@
 .mat-toolbar.mat-primary {
     background: transparent;
-    color: #123456; // Escolha uma cor que se harmonize com o resto do seu design.
-    border-bottom: 1px solid #ccc; // Adiciona uma linha divisória.
+    color: #123456; 
+    border-bottom: 1px solid #ccc; 
 }
 
 .mat-toolbar-row {
     justify-content: space-between;
     font-size: 24px;
-    font-weight: 600; // torna a fonte mais ousada
-    padding: 20px 10px; // Adiciona espaço em torno do título
+    font-weight: 600; 
+    padding: 20px 10px; 
 
     span {
         display: flex;
@@ -16,6 +16,26 @@
     }
 
     .mat-icon {
-        margin-right: 10px; // espaço entre o ícone e o título
+        margin-right: 10px; 
+    }
+}
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+.btn-voltar {
+    color: #1b6ec2;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 10px;
+
+    &:hover {
+        background-color: #1b6ec2;
+        color: #ffffff;
+    }
+
+    .mat-icon {
+        margin-right: 5px;
     }
 }

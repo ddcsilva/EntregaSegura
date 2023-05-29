@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+  public mensagemDeCarregamentoSelecionada: string = '';
   public mediaQueryDispositivoMovel: MediaQueryList;
   public fotoPerfilUsuario: string = '';
   public iniciaisUsuario: string = '';
@@ -34,6 +35,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnInit(): void {
     this.definirIniciaisUsuario();
+    this.selecionarMensagemDeCarregamento();
   }
 
   ngAfterViewInit(): void {
@@ -48,6 +50,11 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     throw new Error('Method not implemented.');
   }
 
+  selecionarMensagemDeCarregamento(): void {
+    const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
+    this.mensagemDeCarregamentoSelecionada = this.mensagensDeCarregamento[index];
+  }
+
   public mensagensDeCarregamento: string[] = [
     'Preparando tudo para você...',
     'Quase lá...',
@@ -58,8 +65,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   ];
 
   public get mensagemDeCarregamento(): string {
-    const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
-    return this.mensagensDeCarregamento[index];
+    return this.mensagemDeCarregamentoSelecionada;
   }
 
 }
