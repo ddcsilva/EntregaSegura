@@ -23,6 +23,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatSelectModule } from '@angular/material/select';
 import { CdkTableModule } from '@angular/cdk/table';
 
 // Angular custom imports
@@ -42,6 +43,7 @@ import { TransportadoraDetalheComponent } from './components/transportadoras/tra
 import { UnidadesComponent } from './components/unidades/unidades.component';
 import { UnidadeListaComponent } from './components/unidades/unidade-lista/unidade-lista.component';
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
+import { SuporteComponent } from './components/suporte/suporte.component';
 
 // Custom services imports
 import { CondominioService } from './services/condominio/condominio.service';
@@ -54,7 +56,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
-import { SuporteComponent } from './components/suporte/suporte.component';
+
 
 registerLocaleData(ptBr)
 
@@ -107,7 +109,8 @@ registerLocaleData(ptBr)
     MatSlideToggleModule,
     MatSortModule,
     MatTableModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
   ],
   providers: [
     // Angular providers
