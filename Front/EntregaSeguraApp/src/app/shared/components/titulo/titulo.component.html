@@ -1,13 +1,13 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <span>
-            <mat-icon>{{icone}}</mat-icon>
-            {{titulo}}
-        </span>
-        <span class="spacer"></span>
         <button *ngIf="exibirVoltar" mat-button class="btn-voltar" type="button" [routerLink]="[rotaVoltar]">
             <mat-icon>arrow_back</mat-icon>
             Voltar
         </button>
+        <span class="spacer"></span>
+        <span>
+            {{titulo}}
+            <mat-icon>{{icone}}</mat-icon>
+        </span>
     </mat-toolbar-row>
 </mat-toolbar>
