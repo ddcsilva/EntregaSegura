@@ -58,6 +58,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
+import { UnidadeService } from './services/unidade/unidade.service';
 
 registerLocaleData(ptBr)
 
@@ -128,6 +129,7 @@ registerLocaleData(ptBr)
     // Custom providers
     CepService,
     CondominioService,
+    UnidadeService,
     TransportadoraService,
     TratamentoErrosService
   ],

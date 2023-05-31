@@ -1,3 +1,4 @@
+import { UnidadeService } from './../../../services/unidade/unidade.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
 import { Condominio } from 'src/app/models/condominio';
+import { UnidadesEmMassa } from 'src/app/models/unidadesEmMassa';
 import { CondominioService } from 'src/app/services/condominio/condominio.service';
 import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
@@ -30,6 +32,7 @@ export class CondominioDetalheComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private condominioService: CondominioService,
+    private unidadeService: UnidadeService,
     private cepService: CepService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
@@ -106,7 +109,19 @@ export class CondominioDetalheComponent implements OnInit {
 
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
-              this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
+              const unidadesEmMassaDTO: UnidadesEmMassa = {
+                condominioId: this.id ? this.id : 0,
+                quantidadeBlocos: condominio.quantidadeBlocos ? condominio.quantidadeBlocos : 0,
+                quantidadeAndaresPorBloco: condominio.quantidadeAndares ? condominio.quantidadeAndares : 0,
+                quantidadeUnidadesPorAndar: condominio.quantidadeUnidades ? condominio.quantidadeUnidades : 0
+              };
+
+              this.unidadeService.adicionarEmMassa(unidadesEmMassaDTO).subscribe({
+                next: () => {
+                  this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
+                },
+                error: (error: any) => this.tratarErros(error)
+              });
             }
           });
         }
