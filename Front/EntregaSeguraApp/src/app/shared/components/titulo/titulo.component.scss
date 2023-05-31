@@ -13,10 +13,10 @@
     span {
         display: flex;
         align-items: center;
+    }
 
-        .mat-icon {
-            margin-left: 10px; 
-        }
+    .mat-icon {
+        margin-right: 10px; 
     }
 }
 
@@ -28,6 +28,7 @@
     color: #1b6ec2;
     border-radius: 4px;
     transition: background-color 0.3s ease, color 0.3s ease;
+    margin-left: 10px;
 
     &:hover {
         background-color: #1b6ec2;

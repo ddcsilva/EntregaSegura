@@ -57,6 +57,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
+import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 
 registerLocaleData(ptBr)
 
@@ -76,7 +77,8 @@ registerLocaleData(ptBr)
     UnidadeDetalheComponent,
     UnidadeListaComponent,
     UnidadesComponent,
-    SuporteComponent
+    SuporteComponent,
+    ConfirmacaoDialogComponent
   ],
   imports: [
     // Angular modules

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -7,6 +8,8 @@ import { Observable } from 'rxjs';
 import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
 import { Condominio } from 'src/app/models/condominio';
 import { CondominioService } from 'src/app/services/condominio/condominio.service';
+import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
+import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
 import { CepService } from 'src/app/shared/services/cep/cep.service';
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
 
@@ -30,17 +33,14 @@ export class CondominioDetalheComponent implements OnInit {
     private cepService: CepService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private tratamentoErrosService: TratamentoErrosService) { }
+    private tratamentoErrosService: TratamentoErrosService,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.params['id']);
 
     this.validarformulario();
     this.carregarCondominio();
-
-    if (this.id > 0) {
-      this.titulo = 'Edição do Condomínio: ' + this.condominio.nome;
-    }
 
     this.formControl.telefone.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);
@@ -59,7 +59,7 @@ export class CondominioDetalheComponent implements OnInit {
         next: (condominio: Condominio) => {
           this.condominio = { ...condominio };
           this.formulario.patchValue(this.condominio);
-          this.titulo = 'Edição do Condomínio: ' + this.condominio.nome;
+          this.titulo = 'Edição: ' + this.condominio.nome;
         },
         error: (error: any) => {
           this.spinner.hide();
@@ -89,7 +89,28 @@ export class CondominioDetalheComponent implements OnInit {
     }
 
     operacao.subscribe({
-      next: (condominio: Condominio) => {
+      next: () => {
+
+        if (this.id) {
+          const dialogConfig = {
+            data: {
+              titulo: 'Confirmação de Criação de Unidades',
+              mensagem: `Para o condomínio "${condominio.nome}", você está prestes a criar ${condominio.quantidadeBlocos} blocos. Cada bloco terá ${condominio.quantidadeAndares} andares com ${condominio.quantidadeUnidades} unidades por andar. Deseja continuar?`,
+              informacaoAdicional: 'Esta operação não pode ser desfeita.',
+              textoBotaoCancelar: 'Cancelar',
+              textoBotaoConfirmar: 'Confirmar',
+            } as InformacoesConfirmacaoDialog
+          };
+
+          const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
+
+          dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+              this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
+            }
+          });
+        }
+
         this.toastr.success(`Condomínio ${this.id ? 'atualizado' : 'criado'} com sucesso!`, 'Sucesso');
         this.router.navigate(['/condominios']);
       },
