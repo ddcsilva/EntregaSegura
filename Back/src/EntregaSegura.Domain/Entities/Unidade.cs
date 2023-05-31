@@ -9,6 +9,7 @@ public class Unidade : BaseEntity
 
     public int CondominioId { get; set; }
     public string Numero { get; set; }
+    public int Andar { get; set; }
     public string Bloco { get; set; }
     
     // Uma unidade pertence a apenas um condomínio

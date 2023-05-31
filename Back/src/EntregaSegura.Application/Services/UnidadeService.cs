@@ -1,3 +1,4 @@
+using EntregaSegura.Application.DTOs.Unidades;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces.Repositories;
@@ -31,6 +32,30 @@ public class UnidadeService : BaseService, IUnidadeService
         await CommitAsync();
 
         return unidade;
+    }
+
+    public async Task<bool> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO)
+    {
+        for (int bloco = 1; bloco <= unidadesDTO.QuantidadeBlocos; bloco++)
+        {
+            for (int andar = 1; andar <= unidadesDTO.QuantidadeAndaresPorBloco; andar++)
+            {
+                for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
+                {
+                    var unidadeParaAdicionar = new Unidade
+                    {
+                        CondominioId = unidadesDTO.CondominioId,
+                        Bloco = bloco.ToString(),
+                        Andar = andar,
+                        Numero = unidade.ToString()
+                    };
+                    
+                    _unidadeRepository.Adicionar(unidadeParaAdicionar);
+                }
+            }
+        }
+        var resultado = await CommitAsync();
+        return resultado > 0;
     }
 
     public async Task<Unidade> Atualizar(Unidade unidade)

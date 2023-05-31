@@ -2,6 +2,7 @@ using AutoMapper;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.DTOs.Condominios;
 using EntregaSegura.Application.DTOs.Transportadoras;
+using EntregaSegura.Application.DTOs.Unidades;
 using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.API.Configurations;

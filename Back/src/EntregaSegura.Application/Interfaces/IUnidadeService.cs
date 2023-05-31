@@ -1,3 +1,4 @@
+using EntregaSegura.Application.DTOs.Unidades;
 using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Application.Interfaces;
@@ -5,6 +6,7 @@ namespace EntregaSegura.Application.Interfaces;
 public interface IUnidadeService : IDisposable
 {
     Task<Unidade> Adicionar(Unidade unidade);
+    Task<bool> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO);
     Task<Unidade> Atualizar(Unidade unidade);
     Task<bool> Remover(int id);
     Task<IEnumerable<Unidade>> ObterTodosAsync();

@@ -32,15 +32,21 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
             .HasColumnType("varchar(10)")
             .HasComment("Número da unidade");
 
+        builder.Property(u => u.Andar)
+            .HasColumnName("UND_ANDAR")
+            .HasColumnOrder(4)
+            .HasColumnType("varchar(10)")
+            .HasComment("Andar da unidade");
+
         builder.Property(u => u.Bloco)
             .HasColumnName("UND_BLOCO")
-            .HasColumnOrder(4)
+            .HasColumnOrder(5)
             .HasColumnType("varchar(10)")
             .HasComment("Bloco da unidade");
 
         builder.Property(u => u.DataCriacao)
             .HasColumnName("UND_DATA_CRIACAO")
-            .HasColumnOrder(5)
+            .HasColumnOrder(6)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de criação da unidade")
@@ -48,7 +54,7 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
 
         builder.Property(u => u.DataAtualizacao)
             .HasColumnName("UND_DATA_ATUALIZACAO")
-            .HasColumnOrder(6)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data da última atualização da unidade")
@@ -67,7 +73,6 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasIndex(u => new { u.CondominioId, u.Numero, u.Bloco })
-            .HasDatabaseName("IX_UNIDADES_CONDOMINIO_NUMERO_BLOCO")
-            .IsUnique();
+            .HasDatabaseName("IX_UNIDADES_CONDOMINIO_NUMERO_BLOCO");
     }
 }

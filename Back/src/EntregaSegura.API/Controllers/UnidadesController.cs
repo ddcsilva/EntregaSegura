@@ -1,5 +1,5 @@
 using AutoMapper;
-using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.DTOs.Unidades;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -51,6 +51,18 @@ public class UnidadesController : MainController
         unidadeDTO = _mapper.Map<UnidadeDTO>(novaUnidade);
 
         return CustomResponse(unidadeDTO);
+    }
+
+    [HttpPost("em-massa")]
+    public async Task<ActionResult> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO)
+    {
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+        var resultado = await _unidadeService.AdicionarUnidadesEmMassa(unidadesDTO);
+
+        if (!resultado) return CustomResponse(ModelState);
+
+        return CustomResponse();
     }
 
     [HttpPut("{id:int}")]
