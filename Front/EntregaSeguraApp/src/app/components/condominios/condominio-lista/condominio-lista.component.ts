@@ -1,4 +1,5 @@
 // Angular imports
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -36,6 +37,7 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
+    private router: Router,
     private condominioService: CondominioService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
@@ -52,23 +54,6 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
-  private obterLista() {
-    this.condominioService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (condominios: Condominio[]) => {
-        this.listaCondominios = condominios;
-        this.dataSource = new MatTableDataSource<Condominio>(this.listaCondominios);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.renderRows();
-        this.spinner.hide();
-      },
-      error: (error: any) => {
-        this.exibirErros(error);
-        this.spinner.hide();
-      }
-    });
-  }  
 
   public excluirCondominio(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
@@ -87,16 +72,49 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
     });
   }
 
+  public editarCondominio(id: number): void {
+    this.router.navigate(['condominios/detalhe', id]);
+  }
+
+  public aplicarFiltro(evento: Event) {
+    const filtro = (evento.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }
+
+  private obterLista() {
+    this.condominioService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
+      next: (condominios: Condominio[]) => {
+        this.listaCondominios = condominios;
+        this.dataSource = new MatTableDataSource<Condominio>(this.listaCondominios);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.table.renderRows();
+        this.spinner.hide();
+      },
+      error: (error: any) => {
+        this.exibirErros(error);
+        this.spinner.hide();
+      }
+    });
+  }
+
   private exibirErros(erro: any) {
     if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir item', 'Erro!');
     }
-  }  
+  }
 
-  public aplicarFiltro(evento: Event) {
-    const filtro = (evento.target as HTMLInputElement).value;
-    this.dataSource.filter = filtro.trim().toLowerCase();
+  public formatarTelefone(numero: string): string {
+    let telefoneFormatado = numero.replace(/\D/g, '');
+  
+    if (telefoneFormatado.length === 10) {
+      telefoneFormatado = telefoneFormatado.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
+    } else if (telefoneFormatado.length === 11) {
+      telefoneFormatado = telefoneFormatado.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    }
+  
+    return telefoneFormatado;
   }
 }

@@ -14,7 +14,7 @@ export class TratamentoErrosService {
     } else if (this.erroDoBackendComCorpoResposta(erro)) {
       mensagemErro = erro.error.errors;
     } else {
-      mensagemErro = `Código do Erro: ${erro.status}\nMensagem: ${erro.message}`;
+      mensagemErro = `${erro.message}`;
     }
   
     return throwError(() => new Error(mensagemErro));
