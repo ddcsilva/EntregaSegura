@@ -94,7 +94,7 @@ export class CondominioDetalheComponent implements OnInit {
     operacao.subscribe({
       next: () => {
 
-        if (this.id) {
+        if (!this.id) {
           const dialogConfig = {
             data: {
               titulo: 'Confirmação de Criação de Unidades',

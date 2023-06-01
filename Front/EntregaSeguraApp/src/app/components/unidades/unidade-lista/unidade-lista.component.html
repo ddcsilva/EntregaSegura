@@ -1,1 +1,87 @@
-<p>unidade-lista works!</p>
+    <app-titulo [icone]="'apartment'" [titulo]="titulo"></app-titulo>
+
+    <div class="row">
+        <div class="col-md-2">
+            <button mat-raised-button routerLink="detalhe">
+                <mat-icon>add</mat-icon>
+                Nova Unidade
+            </button>
+        </div>
+        <div class="col-md-2 offset-md-4">
+            <mat-form-field>
+                <mat-label>Condomínio</mat-label>
+                <mat-select [(value)]="condominioSelecionado" (selectionChange)="aplicarFiltroPorCondominio($event)">
+                    <mat-option [value]="null">Todos</mat-option> <!-- Nova opção adicionada -->
+                    <mat-option *ngFor="let condominio of condominios" [value]="condominio.id">
+                        {{condominio.nome}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-md-4">
+            <mat-form-field>
+                <mat-label>Buscar por...</mat-label>
+                <input matInput (keyup)="aplicarFiltro($event)" placeholder="Buscar..." #input>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <br>
+
+    <div class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource" matSort>
+
+            <!-- ID Column -->
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.id}} </mat-cell>
+            </ng-container>
+
+            <!-- Bloco Column -->
+            <ng-container matColumnDef="bloco">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Bloco </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.bloco}} </mat-cell>
+            </ng-container>
+
+            <!-- Andar Column -->
+            <ng-container matColumnDef="andar">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Andar </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.andar}} </mat-cell>
+            </ng-container>
+
+            <!-- Número Column -->
+            <ng-container matColumnDef="numero">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Número </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.numero}} </mat-cell>
+            </ng-container>
+
+            <!-- Condominio ID Column -->
+            <ng-container matColumnDef="condominioId">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Condomínio ID </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.condominioId}} </mat-cell>
+            </ng-container>
+
+            <!-- Nome Condominio Column -->
+            <ng-container matColumnDef="nomeCondominio">
+                <mat-header-cell *matHeaderCellDef mat-sort-header> Nome Condomínio </mat-header-cell>
+                <mat-cell *matCellDef="let unidade"> {{unidade.nomeCondominio}} </mat-cell>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+                <mat-cell *matCellDef="let unidade">
+                    <button mat-icon-button color="primary" (click)="editarUnidade(unidade.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="excluirUnidade(unidade.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="colunasExibidas"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: colunasExibidas;"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+    </div>
