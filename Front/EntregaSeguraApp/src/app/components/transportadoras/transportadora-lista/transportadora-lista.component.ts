@@ -1,5 +1,6 @@
 // Angular imports
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -36,6 +37,7 @@ export class TransportadoraListaComponent implements OnInit, OnDestroy {
   @ViewChild(MatSort) sort!: MatSort;
 
   constructor(
+    private router: Router,
     private transportadoraService: TransportadoraService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
@@ -51,6 +53,32 @@ export class TransportadoraListaComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.destroy$.next();
     this.destroy$.complete();
+  }
+
+  public excluirTransportadora(id: number) {
+    const dialogRef = this.dialog.open(ExclusaoDialogComponent);
+    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+      if (confirmacaoExclusao) {
+        this.transportadoraService.excluir(id.toString()).subscribe({
+          next: () => {
+            this.toastr.success('Transportadora excluída com sucesso', 'Sucesso!');
+            this.obterLista();
+          },
+          error: (error: any) => {
+            this.exibirErros(error);
+          }
+        });
+      }
+    });
+  }
+
+  public editarTransportadora(id: number): void {
+    this.router.navigate(['transportadoras/detalhe', id]);
+  }
+
+  public aplicarFiltro(evento: Event) {
+    const filtro = (evento.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
   }
 
   private obterLista() {
@@ -69,34 +97,12 @@ export class TransportadoraListaComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
-  public excluirTransportadora(id: number) {
-    const dialogRef = this.dialog.open(ExclusaoDialogComponent);
-    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
-      if (confirmacaoExclusao) {
-        this.transportadoraService.excluir(id.toString()).subscribe({
-          next: () => {
-            this.toastr.success('Transportadora excluída com sucesso', 'Sucesso!');
-            this.obterLista();
-          },
-          error: (error: any) => {
-            this.exibirErros(error);
-          }
-        });
-      }
-    });
-  }
 
   private exibirErros(erro: any) {
     if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir item', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
-  }  
-
-  public aplicarFiltro(evento: Event) {
-    const filtro = (evento.target as HTMLInputElement).value;
-    this.dataSource.filter = filtro.trim().toLowerCase();
   }
 }

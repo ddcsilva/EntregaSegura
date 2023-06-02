@@ -4,6 +4,4 @@ export interface Transportadora {
     cnpj: string;
     email: string;
     telefone: string;
-    dataCriacao: Date;
-    dataAtualizacao: Date;
 }

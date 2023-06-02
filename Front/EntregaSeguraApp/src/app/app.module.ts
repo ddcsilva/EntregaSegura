@@ -59,6 +59,7 @@ import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { UnidadeService } from './services/unidade/unidade.service';
+import { FormatarTelefonePipe } from './shared/pipes/formatar-telefone.pipe';
 
 registerLocaleData(ptBr)
 
@@ -79,7 +80,8 @@ registerLocaleData(ptBr)
     UnidadeListaComponent,
     UnidadesComponent,
     SuporteComponent,
-    ConfirmacaoDialogComponent
+    ConfirmacaoDialogComponent,
+    FormatarTelefonePipe
   ],
   imports: [
     // Angular modules

@@ -102,19 +102,7 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
     if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir item', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
-  }
-
-  public formatarTelefone(numero: string): string {
-    let telefoneFormatado = numero.replace(/\D/g, '');
-  
-    if (telefoneFormatado.length === 10) {
-      telefoneFormatado = telefoneFormatado.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
-    } else if (telefoneFormatado.length === 11) {
-      telefoneFormatado = telefoneFormatado.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-    }
-  
-    return telefoneFormatado;
   }
 }

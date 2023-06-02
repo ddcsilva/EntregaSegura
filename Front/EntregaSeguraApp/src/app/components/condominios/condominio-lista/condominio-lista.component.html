@@ -35,7 +35,7 @@
         <!-- Telefone Column -->
         <ng-container matColumnDef="telefone">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
-            <td mat-cell *matCellDef="let element"> {{formatarTelefone(element.telefone)}} </td>
+            <td mat-cell *matCellDef="let element"> {{ element.telefone | formatarTelefone }} </td>
         </ng-container>
 
 
