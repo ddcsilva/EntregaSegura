@@ -19,21 +19,21 @@ public class TransportadoraService : BaseService, ITransportadoraService
 
     public async Task<Transportadora> Adicionar(Transportadora transportadora)
     {
-        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
+        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
 
-        if(_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
             return null;
         }
 
-        if(_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
             return null;
         }
 
-        if(_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
             return null;
@@ -53,21 +53,21 @@ public class TransportadoraService : BaseService, ITransportadoraService
 
     public async Task<Transportadora> Atualizar(Transportadora transportadora)
     {
-        if(!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
+        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
 
-        if(_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ && c.Id != transportadora.Id).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
             return null;
         }
 
-        if(_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
             return null;
         }
 
-        if(_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any())
+        if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
             return null;
@@ -96,11 +96,20 @@ public class TransportadoraService : BaseService, ITransportadoraService
         }
 
         _transportadoraRepository.Remover(transportadora);
-        var result = await CommitAsync();
 
-        if (result == 0)
+        try
         {
-            Notificar("Ocorreu um erro ao remover a transportadora.");
+            var result = await CommitAsync();
+
+            if (result == 0)
+            {
+                Notificar("Ocorreu um erro ao remover a transportadora.");
+                return false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Notificar(ex.Message);
             return false;
         }
 
