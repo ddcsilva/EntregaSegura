@@ -6,8 +6,8 @@ namespace EntregaSegura.Domain.Interfaces.Repositories
     {
         Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync();
         Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id);
-        Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero);
-        Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero);
-        Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero);
+        Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
+        Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
+        Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
     }
 }

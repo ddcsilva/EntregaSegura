@@ -47,7 +47,7 @@ public class UnidadeService : BaseService, IUnidadeService
                         CondominioId = unidadesDTO.CondominioId,
                         Bloco = bloco.ToString(),
                         Andar = andar,
-                        Numero = unidade.ToString()
+                        Numero = unidade
                     };
                     
                     _unidadeRepository.Adicionar(unidadeParaAdicionar);
@@ -122,17 +122,17 @@ public class UnidadeService : BaseService, IUnidadeService
         return await _unidadeRepository.ObterUnidadePorIdComCondominioEMoradoresAsync(id);
     }
 
-    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
     {
         return await _unidadeRepository.ObterPorUnidadePorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }
 
-    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
     {
         return await _unidadeRepository.ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }
 
-    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, string numero)
+    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
     {
         return await _unidadeRepository.ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
     }

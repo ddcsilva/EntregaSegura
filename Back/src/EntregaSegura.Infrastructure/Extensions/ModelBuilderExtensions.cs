@@ -14,9 +14,9 @@ public static class ModelBuilderExtensions
             CNPJ = "17540623000150",
             Telefone = "1140028922",
             Email = "contato@boavista.com.br",
-            QuantidadeBlocos = 5,
+            QuantidadeBlocos = 2,
             QuantidadeUnidades = 4,
-            QuantidadeAndares = 10,
+            QuantidadeAndares = 7,
             Logradouro = "Rua das Acácias",
             Numero = "55",
             CEP = "04567010",
@@ -31,7 +31,7 @@ public static class ModelBuilderExtensions
             CNPJ = "27004428000169",
             Telefone = "2130033211",
             Email = "contato@raiodesol.com.br",
-            QuantidadeBlocos = 5,
+            QuantidadeBlocos = 3,
             QuantidadeUnidades = 8,
             QuantidadeAndares = 10,
             Logradouro = "Avenida Atlântica",
@@ -41,30 +41,55 @@ public static class ModelBuilderExtensions
             Cidade = "Rio de Janeiro",
             Estado = "RJ"
         };
-        
+
         condominio1.DefinirId(1);
         condominio2.DefinirId(2);
 
         modelBuilder.Entity<Condominio>().HasData(condominio1, condominio2);
 
-        var unidade1 = new Unidade
+        var unidades = new List<Unidade>();
+
+        for (int bloco = 1; bloco <= condominio1.QuantidadeBlocos; bloco++)
         {
-            CondominioId = 1,
-            Numero = "101",
-            Bloco = "A"
-        };
+            for (int andar = 1; andar <= condominio1.QuantidadeAndares; andar++)
+            {
+                for (int unidade = 1; unidade <= condominio1.QuantidadeUnidades; unidade++)
+                {
+                    unidades.Add(new Unidade
+                    {
+                        CondominioId = 1,
+                        Numero = unidade,
+                        Andar = andar,
+                        Bloco = bloco.ToString()
+                    });
+                }
+            }
+        }
 
-        var unidade2 = new Unidade
+        for (int bloco = 1; bloco <= condominio2.QuantidadeBlocos; bloco++)
         {
-            CondominioId = 1,
-            Numero = "102",
-            Bloco = "A"
-        };
+            for (int andar = 1; andar <= condominio2.QuantidadeAndares; andar++)
+            {
+                for (int unidade = 1; unidade <= condominio2.QuantidadeUnidades; unidade++)
+                {
+                    unidades.Add(new Unidade
+                    {
+                        CondominioId = 2,
+                        Numero = unidade,
+                        Andar = andar,
+                        Bloco = bloco.ToString()
+                    });
+                }
+            }
+        }
 
-        unidade1.DefinirId(1);
-        unidade2.DefinirId(2);
+        // Define os IDs para as Unidades criadas
+        for (int i = 0; i < unidades.Count; i++)
+        {
+            unidades[i].DefinirId(i + 1);
+        }
 
-        modelBuilder.Entity<Unidade>().HasData(unidade1, unidade2);
+        modelBuilder.Entity<Unidade>().HasData(unidades.ToArray());
 
         var morador1 = new Morador
         {

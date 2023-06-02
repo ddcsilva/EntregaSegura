@@ -35,7 +35,7 @@ public class UnitOfWork : IUnitOfWork
                 if (ex is DbUpdateException dbEx && dbEx.InnerException is SqlException sqlEx && (sqlEx.Number == 547 || sqlEx.Number == 2627))
                 {
                     _logger.LogError(ex, $"Ocorreu um erro de restrição de chave estrangeira ao salvar as alterações no banco de dados: {ex.Message}");
-                    throw new Exception("Este condomínio não pode ser excluído, pois está em uso.");
+                    throw new Exception("Esta entidade não pode ser excluída, pois está em uso.");
                 }
                 else
                 {
