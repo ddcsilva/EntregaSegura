@@ -92,30 +92,31 @@ export class CondominioDetalheComponent implements OnInit {
     }
 
     operacao.subscribe({
-      next: () => {
-
+      next: (response: any) => {
+        this.condominio = response.data;
+    
         if (!this.id) {
           const dialogConfig = {
             data: {
               titulo: 'Confirmação de Criação de Unidades',
-              mensagem: `Para o condomínio "${condominio.nome}", você está prestes a criar ${condominio.quantidadeBlocos} blocos. Cada bloco terá ${condominio.quantidadeAndares} andares com ${condominio.quantidadeUnidades} unidades por andar. Deseja continuar?`,
+              mensagem: `Para o condomínio "${this.condominio.nome}", você está prestes a criar ${this.condominio.quantidadeBlocos} blocos. Cada bloco terá ${this.condominio.quantidadeAndares} andares com ${this.condominio.quantidadeUnidades} unidades por andar. Deseja continuar?`,
               informacaoAdicional: 'Esta operação não pode ser desfeita.',
               textoBotaoCancelar: 'Cancelar',
               textoBotaoConfirmar: 'Confirmar',
             } as InformacoesConfirmacaoDialog
           };
-
+    
           const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
-
+    
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
               const unidadesEmMassaDTO: UnidadesEmMassa = {
-                condominioId: this.id ? this.id : 0,
-                quantidadeBlocos: condominio.quantidadeBlocos ? condominio.quantidadeBlocos : 0,
-                quantidadeAndaresPorBloco: condominio.quantidadeAndares ? condominio.quantidadeAndares : 0,
-                quantidadeUnidadesPorAndar: condominio.quantidadeUnidades ? condominio.quantidadeUnidades : 0
+                condominioId: this.condominio.id ? this.condominio.id : 0,
+                quantidadeBlocos: this.condominio.quantidadeBlocos ? this.condominio.quantidadeBlocos : 0,
+                quantidadeAndaresPorBloco: this.condominio.quantidadeAndares ? this.condominio.quantidadeAndares : 0,
+                quantidadeUnidadesPorAndar: this.condominio.quantidadeUnidades ? this.condominio.quantidadeUnidades : 0
               };
-
+    
               this.unidadeService.adicionarEmMassa(unidadesEmMassaDTO).subscribe({
                 next: () => {
                   this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
@@ -125,13 +126,13 @@ export class CondominioDetalheComponent implements OnInit {
             }
           });
         }
-
+    
         this.toastr.success(`Condomínio ${this.id ? 'atualizado' : 'criado'} com sucesso!`, 'Sucesso');
         this.router.navigate(['/condominios']);
       },
       error: (error: any) => this.tratarErros(error),
       complete: () => this.spinner.hide()
-    });
+    });    
   }
 
   public reiniciarFormulario(event: any): void {
