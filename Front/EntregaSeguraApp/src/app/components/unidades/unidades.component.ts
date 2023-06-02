@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-unidades',
-  templateUrl: './unidades.component.html'
+  template: '<router-outlet></router-outlet>'
 })
 export class UnidadesComponent implements OnInit {
 
