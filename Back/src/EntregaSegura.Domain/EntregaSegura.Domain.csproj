@@ -10,6 +10,5 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.5.2" />
-    <PackageReference Include="Polly" Version="7.2.3" />
   </ItemGroup>
 </Project>

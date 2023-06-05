@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregaSegura.Application.DTOs.Unidades;
+namespace EntregaSegura.Application.DTOs;
 
 public class UnidadeDTO
 {

@@ -1,4 +1,4 @@
-using EntregaSegura.Application.DTOs.Unidades;
+using EntregaSegura.Application.DTOs;
 using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Application.Interfaces;

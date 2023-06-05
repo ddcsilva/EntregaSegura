@@ -1,5 +1,5 @@
 using AutoMapper;
-using EntregaSegura.Application.DTOs.Condominios;
+using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -10,53 +10,47 @@ namespace EntregaSegura.API.Controllers;
 public class CondominiosController : MainController
 {
     private readonly ICondominioService _condominioService;
-    private readonly IMapper _mapper;
 
     public CondominiosController(ICondominioService condominioService,
-                                 IMapper mapper,
                                  INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _condominioService = condominioService;
-        _mapper = mapper;
-    }
-
-    [HttpPost]
-    public async Task<ActionResult<CondominioDTO>> Adicionar(CondominioDTO condominioDTO)
-    {
-        if (!ModelState.IsValid) return CustomResponse(ModelState);
-
-        var condominio = _mapper.Map<Condominio>(condominioDTO);
-        var novoCondominio = await _condominioService.Adicionar(condominio);
-
-        if (novoCondominio == null) return CustomResponse(ModelState);
-
-        condominioDTO = _mapper.Map<CondominioDTO>(novoCondominio);
-
-        return CustomResponse(condominioDTO);
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodos()
+    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodosCondominios()
     {
-        var condominiosDTO = await ObterCondominios();
+        var condominios = await _condominioService.ObterTodosCondominiosAsync();
 
-        return Ok(condominiosDTO);
+        if (condominios == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(condominios);
     }
 
-    [HttpGet("{id:int}")]
-    public async Task<ActionResult<CondominioDTO>> ObterPorId(int id)
+    [HttpGet("{id:int}", Name = "ObterCondominio")]
+    public async Task<ActionResult<CondominioDTO>> ObterCondominioPorId(int id)
     {
-        var condominioDTO = await ObterCondominioComUnidadesEFuncionarios(id);
+        var condominio = await _condominioService.ObterCondominioPorIdAsync(id);
 
-        return condominioDTO == null ? NotFound() : Ok(condominioDTO);
+        if (condominio == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(condominio);
     }
 
-    [HttpGet("por-nome/{nome}")]
-    public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterPorNome(string nome)
+    [HttpPost]
+    public async Task<ActionResult> Adicionar([FromBody] CondominioDTO condominioDTO)
     {
-        var condominiosDTO = await ObterCondominiosPorNome(nome);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-        return Ok(condominiosDTO);
+        await _condominioService.AdicionarAsync(condominioDTO);
+
+        return new CreatedAtRouteResult("ObterCondominio", new { id = condominioDTO.Id }, condominioDTO);
     }
 
     [HttpPut("{id:int}")]
@@ -70,12 +64,7 @@ public class CondominiosController : MainController
 
         if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-        var condominio = _mapper.Map<Condominio>(condominioDTO);
-        var condominioAtualizado = await _condominioService.Atualizar(condominio);
-
-        if (condominioAtualizado == null) return CustomResponse(ModelState);
-
-        condominioDTO = _mapper.Map<CondominioDTO>(condominioAtualizado);
+        await _condominioService.AtualizarAsync(condominioDTO);
 
         return CustomResponse(condominioDTO);
     }
@@ -83,37 +72,12 @@ public class CondominiosController : MainController
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Remover(int id)
     {
-        var condominioDTO = await ObterCondominio(id);
+        var condominioDTO = await _condominioService.ObterCondominioPorIdAsync(id);
 
-        if (condominioDTO == null) return NotFound();
+        if (condominioDTO == null) return NotFound("Condomínio não encontrado.");
 
-        var remocaoBemSucedida = await _condominioService.Remover(id);
-
-        if (!remocaoBemSucedida)
-        {
-            return CustomResponse();
-        }
+        await _condominioService.RemoverAsync(id);
 
         return CustomResponse(condominioDTO);
-    }
-
-    private async Task<IEnumerable<CondominioDTO>> ObterCondominios()
-    {
-        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosAsync());
-    }
-
-    private async Task<CondominioDTO> ObterCondominio(int condominioId)
-    {
-        return _mapper.Map<CondominioDTO>(await _condominioService.ObterPorIdAsync(condominioId));
-    }
-
-    private async Task<CondominioDTO> ObterCondominioComUnidadesEFuncionarios(int condominioId)
-    {
-        return _mapper.Map<CondominioDTO>(await _condominioService.ObterCondominioComUnidadesEFuncionariosAsync(condominioId));
-    }
-
-    private async Task<IEnumerable<CondominioDTO>> ObterCondominiosPorNome(string nome)
-    {
-        return _mapper.Map<IEnumerable<CondominioDTO>>(await _condominioService.ObterTodosCondominiosPeloNomeAsync(nome));
     }
 }

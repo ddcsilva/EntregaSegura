@@ -1,144 +1,144 @@
-using EntregaSegura.Application.DTOs.Unidades;
-using EntregaSegura.Application.Interfaces;
-using EntregaSegura.Domain.Entities;
-using EntregaSegura.Domain.Interfaces.Repositories;
-using EntregaSegura.Domain.Validators;
-using EntregaSegura.Infrastructure.UnitOfWork;
+// using EntregaSegura.Application.DTOs.Unidades;
+// using EntregaSegura.Application.Interfaces;
+// using EntregaSegura.Domain.Entities;
+// using EntregaSegura.Domain.Interfaces.Repositories;
+// using EntregaSegura.Domain.Validators;
+// using EntregaSegura.Infrastructure.UnitOfWork;
 
-namespace EntregaSegura.Application.Services;
+// namespace EntregaSegura.Application.Services;
 
-public class UnidadeService : BaseService, IUnidadeService
-{
-    private readonly IUnidadeRepository _unidadeRepository;
+// public class UnidadeService : BaseService, IUnidadeService
+// {
+//     private readonly IUnidadeRepository _unidadeRepository;
 
-    public UnidadeService(IUnidadeRepository unidadeRepository,
-                          IUnitOfWork unitOfWork,
-                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
-    {
-        _unidadeRepository = unidadeRepository;
-    }
+//     public UnidadeService(IUnidadeRepository unidadeRepository,
+//                           IUnitOfWork unitOfWork,
+//                           INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+//     {
+//         _unidadeRepository = unidadeRepository;
+//     }
 
-    public async Task<Unidade> Adicionar(Unidade unidade)
-    {
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
+//     public async Task<Unidade> Adicionar(Unidade unidade)
+//     {
+//         if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
 
-        if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero).Result.Any())
-        {
-            Notificar("Já existe uma unidade com este número.");
-            return null;
-        }
+//         if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero).Result.Any())
+//         {
+//             Notificar("Já existe uma unidade com este número.");
+//             return null;
+//         }
 
-        _unidadeRepository.Adicionar(unidade);
-        await CommitAsync();
+//         _unidadeRepository.Adicionar(unidade);
+//         await CommitAsync();
 
-        return unidade;
-    }
+//         return unidade;
+//     }
 
-    public async Task<bool> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO)
-    {
-        for (int bloco = 1; bloco <= unidadesDTO.QuantidadeBlocos; bloco++)
-        {
-            for (int andar = 1; andar <= unidadesDTO.QuantidadeAndaresPorBloco; andar++)
-            {
-                for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
-                {
-                    var unidadeParaAdicionar = new Unidade
-                    {
-                        CondominioId = unidadesDTO.CondominioId,
-                        Bloco = bloco.ToString(),
-                        Andar = andar,
-                        Numero = unidade
-                    };
+//     public async Task<bool> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO)
+//     {
+//         for (int bloco = 1; bloco <= unidadesDTO.QuantidadeBlocos; bloco++)
+//         {
+//             for (int andar = 1; andar <= unidadesDTO.QuantidadeAndaresPorBloco; andar++)
+//             {
+//                 for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
+//                 {
+//                     var unidadeParaAdicionar = new Unidade
+//                     {
+//                         CondominioId = unidadesDTO.CondominioId,
+//                         Bloco = bloco.ToString(),
+//                         Andar = andar,
+//                         Numero = unidade
+//                     };
                     
-                    _unidadeRepository.Adicionar(unidadeParaAdicionar);
-                }
-            }
-        }
-        var resultado = await CommitAsync();
-        return resultado > 0;
-    }
+//                     _unidadeRepository.Adicionar(unidadeParaAdicionar);
+//                 }
+//             }
+//         }
+//         var resultado = await CommitAsync();
+//         return resultado > 0;
+//     }
 
-    public async Task<Unidade> Atualizar(Unidade unidade)
-    {
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
+//     public async Task<Unidade> Atualizar(Unidade unidade)
+//     {
+//         if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return null;
 
-        if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Id != unidade.Id).Result.Any())
-        {
-            Notificar("Já existe uma unidade com este número.");
-            return null;
-        }
+//         if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Id != unidade.Id).Result.Any())
+//         {
+//             Notificar("Já existe uma unidade com este número.");
+//             return null;
+//         }
 
-        _unidadeRepository.Atualizar(unidade);
-        var result = await CommitAsync();
+//         _unidadeRepository.Atualizar(unidade);
+//         var result = await CommitAsync();
 
-        if (result == 0)
-        {
-            Notificar("Ocorreu um erro ao salvar a unidade.");
-            return null;
-        }
+//         if (result == 0)
+//         {
+//             Notificar("Ocorreu um erro ao salvar a unidade.");
+//             return null;
+//         }
 
-        return unidade;
-    }
+//         return unidade;
+//     }
 
-    public async Task<bool> Remover(int id)
-    {
-        var unidade = await _unidadeRepository.ObterPorIdAsync(id);
+//     public async Task<bool> Remover(int id)
+//     {
+//         var unidade = await _unidadeRepository.ObterPorIdAsync(id);
 
-        if (unidade == null)
-        {
-            Notificar("Unidade não encontrada.");
-            return false;
-        }
+//         if (unidade == null)
+//         {
+//             Notificar("Unidade não encontrada.");
+//             return false;
+//         }
 
-        _unidadeRepository.Remover(unidade);
-        var result = await CommitAsync();
+//         _unidadeRepository.Remover(unidade);
+//         var result = await CommitAsync();
 
-        if (result == 0)
-        {
-            Notificar("Ocorreu um erro ao remover a unidade.");
-            return false;
-        }
+//         if (result == 0)
+//         {
+//             Notificar("Ocorreu um erro ao remover a unidade.");
+//             return false;
+//         }
 
-        return true;
-    }
+//         return true;
+//     }
 
-    public async Task<IEnumerable<Unidade>> ObterTodosAsync()
-    {
-        return await _unidadeRepository.ObterTodosAsync();
-    }
+//     public async Task<IEnumerable<Unidade>> ObterTodosAsync()
+//     {
+//         return await _unidadeRepository.ObterTodosAsync();
+//     }
 
-    public async Task<Unidade> ObterPorIdAsync(int id)
-    {
-        return await _unidadeRepository.ObterPorIdAsync(id);
-    }
+//     public async Task<Unidade> ObterPorIdAsync(int id)
+//     {
+//         return await _unidadeRepository.ObterPorIdAsync(id);
+//     }
 
-    public async Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync()
-    {
-        return await _unidadeRepository.ObterUnidadesComCondominioAsync();
-    }
+//     public async Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync()
+//     {
+//         return await _unidadeRepository.ObterUnidadesComCondominioAsync();
+//     }
 
-    public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id)
-    {
-        return await _unidadeRepository.ObterUnidadePorIdComCondominioEMoradoresAsync(id);
-    }
+//     public async Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id)
+//     {
+//         return await _unidadeRepository.ObterUnidadePorIdComCondominioEMoradoresAsync(id);
+//     }
 
-    public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
-    {
-        return await _unidadeRepository.ObterPorUnidadePorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
-    }
+//     public async Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
+//     {
+//         return await _unidadeRepository.ObterPorUnidadePorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
+//     }
 
-    public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
-    {
-        return await _unidadeRepository.ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
-    }
+//     public async Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
+//     {
+//         return await _unidadeRepository.ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
+//     }
 
-    public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
-    {
-        return await _unidadeRepository.ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
-    }
+//     public async Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero)
+//     {
+//         return await _unidadeRepository.ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(condominioId, bloco, numero);
+//     }
 
-    public void Dispose()
-    {
-        _unitOfWork?.Dispose();
-    }
-}
+//     public void Dispose()
+//     {
+//         _unitOfWork?.Dispose();
+//     }
+// }

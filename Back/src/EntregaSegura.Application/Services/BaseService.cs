@@ -1,6 +1,6 @@
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Models;
-using EntregaSegura.Infrastructure.UnitOfWork;
+using EntregaSegura.Infra.Data.UnitOfWork;
 using FluentValidation;
 using FluentValidation.Results;
 

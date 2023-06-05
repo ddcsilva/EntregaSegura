@@ -1,13 +1,16 @@
+using System.Linq.Expressions;
 using EntregaSegura.Domain.Entities;
 
-namespace EntregaSegura.Domain.Interfaces.Repositories
+namespace EntregaSegura.Domain.Interfaces;
+
+public interface IUnidadeRepository
 {
-    public interface IUnidadeRepository : IRepository<Unidade>
-    {
-        Task<IEnumerable<Unidade>> ObterUnidadesComCondominioAsync();
-        Task<Unidade> ObterUnidadePorIdComCondominioEMoradoresAsync(int id);
-        Task<Unidade> ObterPorUnidadePorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
-        Task<Unidade> ObterUnidadeComMoradoresPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
-        Task<Unidade> ObterUnidadeComEntregasPorCondominioBlocoNumeroAsync(int condominioId, string bloco, int numero);
-    }
+    Task<IEnumerable<Unidade>> ObterTodasUnidadesAsync();
+    Task<Unidade> ObterUnidadePorIdAsync(int id);
+    Task<IEnumerable<Unidade>> BuscarAsync(Expression<Func<Unidade, bool>> predicate);
+
+    void Adicionar(Unidade unidade);
+    void Atualizar(Unidade unidade);
+    void Remover(Unidade unidade);
+    void RemoverSerie(IEnumerable<Unidade> unidade);
 }

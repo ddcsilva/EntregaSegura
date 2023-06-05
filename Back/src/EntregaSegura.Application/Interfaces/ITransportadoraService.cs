@@ -1,15 +1,13 @@
-using EntregaSegura.Domain.Entities;
+using EntregaSegura.Application.DTOs;
 
 namespace EntregaSegura.Application.Interfaces;
 
 public interface ITransportadoraService : IDisposable
 {
-    Task<Transportadora> Adicionar(Transportadora transportadora);
-    Task<Transportadora> Atualizar(Transportadora transportadora);
-    Task<bool> Remover(int id);
-    Task<IEnumerable<Transportadora>> ObterTodosAsync();
-    Task<Transportadora> ObterPorIdAsync(int id);
-    Task<Transportadora> ObterPorNomeAsync(string nome);
-    Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId);
-    Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome);
+    Task<IEnumerable<TransportadoraDTO>> ObterTodasTransportadorasAsync();
+    Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id);
+
+    Task AdicionarAsync(TransportadoraDTO transportadora);
+    Task AtualizarAsync(TransportadoraDTO transportadora);
+    Task RemoverAsync(int id);
 }

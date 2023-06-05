@@ -1,16 +1,13 @@
-using EntregaSegura.Domain.Entities;
+using EntregaSegura.Application.DTOs;
 
 namespace EntregaSegura.Application.Interfaces;
 
 public interface ICondominioService : IDisposable
 {
-    Task<Condominio> Adicionar(Condominio condominio);
-    Task<Condominio> Atualizar(Condominio condominio);
-    Task<bool> Remover(int id);
-    Task<IEnumerable<Condominio>> ObterTodosAsync();
-    Task<IEnumerable<Condominio>> ObterTodosCondominiosPeloNomeAsync(string nome);
-    Task<Condominio> ObterPorIdAsync(int id);
-    Task<Condominio> ObterCondominioComFuncionariosAsync(int condominioId);
-    Task<Condominio> ObterCondominioComUnidadesAsync(int condominioId);
-    Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(int condominioId);
+    Task<IEnumerable<CondominioDTO>> ObterTodosCondominiosAsync();
+    Task<CondominioDTO> ObterCondominioPorIdAsync(int id);
+
+    Task AdicionarAsync(CondominioDTO condominio);
+    Task AtualizarAsync(CondominioDTO condominio);
+    Task RemoverAsync(int id);
 }

@@ -1,11 +1,15 @@
+using System.Linq.Expressions;
 using EntregaSegura.Domain.Entities;
 
-namespace EntregaSegura.Domain.Interfaces.Repositories
+namespace EntregaSegura.Domain.Interfaces;
+
+public interface ITransportadoraRepository
 {
-    public interface ITransportadoraRepository : IRepository<Transportadora>
-    {
-        Task<Transportadora> ObterPorNomeAsync(string nome);
-        Task<Transportadora> ObterTransportadoraComEntregasAsync(int id);
-        Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome);
-    }
+    Task<IEnumerable<Transportadora>> ObterTodasTransportadorasAsync();
+    Task<Transportadora> ObterTransportadoraPorIdAsync(int id);
+    Task<IEnumerable<Transportadora>> BuscarAsync(Expression<Func<Transportadora, bool>> predicate);
+
+    void Adicionar(Transportadora transportadora);
+    void Atualizar(Transportadora transportadora);
+    void Remover(Transportadora transportadora);
 }

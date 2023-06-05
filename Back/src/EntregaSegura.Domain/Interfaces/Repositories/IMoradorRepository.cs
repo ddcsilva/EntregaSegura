@@ -1,11 +1,15 @@
+using System.Linq.Expressions;
 using EntregaSegura.Domain.Entities;
 
-namespace EntregaSegura.Domain.Interfaces.Repositories;
+namespace EntregaSegura.Domain.Interfaces;
 
-public interface IMoradorRepository : IRepository<Morador>
+public interface IMoradorRepository
 {
-    Task<Morador> ObterPorNomeAsync(string nome);
-    Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId);
-    Task<Morador> ObterMoradorComEntregasAsync(int id);
-    Task<Morador> ObterMoradorComUnidadeAsync(int id);
+    Task<IEnumerable<Morador>> ObterTodosMoradoresAsync();
+    Task<Morador> ObterMoradorPorIdAsync(int id);
+    Task<IEnumerable<Morador>> BuscarAsync(Expression<Func<Morador, bool>> predicate);
+
+    void Adicionar(Morador morador);
+    void Atualizar(Morador morador);
+    void Remover(Morador morador);
 }

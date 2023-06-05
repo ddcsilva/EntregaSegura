@@ -2,25 +2,48 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Condominio : Empresa
 {
-    public Condominio()
+    private readonly IList<Unidade> _unidades;
+    private readonly IList<Funcionario> _funcionarios;
+
+    public Condominio(
+        string nome, 
+        string cnpj, 
+        string telefone, 
+        string email,
+        int quantidadeBlocos,
+        int quantidadeUnidades,
+        int quantidadeAndares,
+        string logradouro,
+        int numero,
+        string cep,
+        string bairro,
+        string cidade,
+        string estado) : base(nome, cnpj, telefone, email)
     {
-        Unidades = new List<Unidade>();
-        Funcionarios = new List<Funcionario>();
+        QuantidadeBlocos = quantidadeBlocos;
+        QuantidadeUnidades = quantidadeUnidades;
+        QuantidadeAndares = quantidadeAndares;
+        Logradouro = logradouro;
+        Numero = numero;
+        Cep = cep;
+        Bairro = bairro;
+        Cidade = cidade;
+        Estado = estado;
+
+        _unidades = new List<Unidade>();
+        _funcionarios = new List<Funcionario>();
     }
 
     public int QuantidadeBlocos { get; set; }
     public int QuantidadeUnidades { get; set; }
     public int QuantidadeAndares { get; set; }
     public string Logradouro { get; set; }
-    public string Numero { get; set; }
-    public string CEP { get; set; }
+    public int Numero { get; set; }
+    public string Cep { get; set; }
     public string Bairro { get; set; }
     public string Cidade { get; set; }
     public string Estado { get; set; }
 
-    // Um condomínio possui várias unidades
     public ICollection<Unidade> Unidades { get; set; }
-
-    // Um condomínio possui vários funcionários
     public ICollection<Funcionario> Funcionarios { get; set; }
 }

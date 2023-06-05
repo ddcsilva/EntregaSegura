@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace EntregaSegura.Application.DTOs.Transportadoras;
+namespace EntregaSegura.Application.DTOs;
 
 public class TransportadoraDTO
 {

@@ -1,148 +1,141 @@
+using AutoMapper;
+using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
-using EntregaSegura.Domain.Interfaces.Repositories;
-using EntregaSegura.Domain.Validators;
-using EntregaSegura.Infrastructure.UnitOfWork;
+using EntregaSegura.Domain.Interfaces;
+using EntregaSegura.Domain.Validations;
+using EntregaSegura.Infra.Data.UnitOfWork;
 
 namespace EntregaSegura.Application.Services;
 
 public class CondominioService : BaseService, ICondominioService
 {
     private readonly ICondominioRepository _condominioRepository;
+    private readonly IMapper _mapper;
 
-    public CondominioService(ICondominioRepository condominioRepository,
-                             IUnitOfWork unitOfWork,
-                             INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+    public CondominioService(
+        ICondominioRepository condominioRepository,
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _condominioRepository = condominioRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Condominio> Adicionar(Condominio condominio)
+    public async Task<IEnumerable<CondominioDTO>> ObterTodosCondominiosAsync()
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return null;
+        var condominios = await _condominioRepository.ObterTodosCondominiosAsync();
+        return _mapper.Map<IEnumerable<CondominioDTO>>(condominios); 
+    }
 
-        if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ).Result.Any())
+    public async Task<CondominioDTO> ObterCondominioPorIdAsync(int id)
+    {
+        var condominio = await _condominioRepository.ObterCondominioPorIdAsync(id);
+        return _mapper.Map<CondominioDTO>(condominio);
+    }
+
+    public async Task AdicionarAsync(CondominioDTO condominioDTO)
+    {
+        var condominio = _mapper.Map<Condominio>(condominioDTO);
+
+        if (!ExecutarValidacao(new CondominioValidator(), condominio))
+        {
+            return;
+        }
+
+        if (_condominioRepository.BuscarAsync(c => c.Cnpj == condominio.Cnpj).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
         }
 
-        if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome).Result.Any())
+        if (_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome).Result.Any())
         {
             Notificar("Já existe um condomínio com este nome.");
         }
 
-        if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email).Result.Any())
+        if (_condominioRepository.BuscarAsync(c => c.Email == condominio.Email).Result.Any())
         {
             Notificar("Já existe um condomínio com este e-mail.");
         }
 
-        if (TemNotificacoes()) return null;
+        if (TemNotificacoes()) 
+        {
+            return;
+        }
 
         _condominioRepository.Adicionar(condominio);
-        var result = await CommitAsync();
+        var resultadoOperacao = await CommitAsync();
 
-        if (result == 0)
+        if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao salvar o condomínio.");
-            return null;
         }
-
-        return condominio;
     }
 
-    public async Task<Condominio> Atualizar(Condominio condominio)
+    public async Task AtualizarAsync(CondominioDTO condominioDTO)
     {
-        if(!ExecutarValidacao(new CondominioValidator(), condominio)) return null;
+        var condominio = _mapper.Map<Condominio>(condominioDTO);
 
-        if(_condominioRepository.BuscarAsync(c => c.CNPJ == condominio.CNPJ && c.Id != condominio.Id).Result.Any())
+        if (!ExecutarValidacao(new CondominioValidator(), condominio)) 
+        {
+            return;
+        }
+
+        if (_condominioRepository.BuscarAsync(c => c.Cnpj == condominio.Cnpj && c.Id != condominio.Id).Result.Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
-            return null;
         }
 
-        if(_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome && c.Id != condominio.Id).Result.Any())
+        if (_condominioRepository.BuscarAsync(c => c.Nome == condominio.Nome && c.Id != condominio.Id).Result.Any())
         {
             Notificar("Já existe um condomínio com este Nome.");
-            return null;
         }
 
-        if(_condominioRepository.BuscarAsync(c => c.Email == condominio.Email && c.Id != condominio.Id).Result.Any())
+        if (_condominioRepository.BuscarAsync(c => c.Email == condominio.Email && c.Id != condominio.Id).Result.Any())
         {
             Notificar("Já existe um condomínio com este E-mail.");
-            return null;
+        }
+
+        if (TemNotificacoes()) 
+        {
+            return;
         }
 
         _condominioRepository.Atualizar(condominio);
-        var result = await CommitAsync();
+        var resultadoOperacao = await CommitAsync();
 
-        if (result == 0)
+        if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao atualizar o condomínio.");
-            return null;
         }
-
-        return condominio;
     }
 
-    public async Task <bool> Remover(int id)
+    public async Task RemoverAsync(int id)
     {
-        var condominio = await _condominioRepository.ObterPorIdAsync(id);
+        var condominio = _condominioRepository.ObterCondominioPorIdAsync(id).Result;
 
         if (condominio == null)
         {
             Notificar("Condomínio não encontrado.");
-            return false;
+            return;
         }
 
         _condominioRepository.Remover(condominio);
 
         try
         {
-            var result = await CommitAsync();
+            var resultadoOperacao = await CommitAsync();
 
-            if (result == 0)
+            if (resultadoOperacao == 0)
             {
                 Notificar("Ocorreu um erro ao remover o condomínio.");
-                return false;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Notificar(ex.Message);
-            return false;
+            Notificar("Ocorreu um erro inesperado. Favor, contate o administrador.");
         }
-
-        return true;
-    }
-
-    public async Task<IEnumerable<Condominio>> ObterTodosAsync()
-    {
-        return await _condominioRepository.ObterTodosAsync();
-    }
-
-    public async Task<IEnumerable<Condominio>> ObterTodosCondominiosPeloNomeAsync(string nome)
-    {
-        return await _condominioRepository.ObterTodosCondominiosPeloNomeAsync(nome);
-    }
-
-    public async Task<Condominio> ObterPorIdAsync(int id)
-    {
-        return await _condominioRepository.ObterPorIdAsync(id);
-    }
-
-    public async Task<Condominio> ObterCondominioComFuncionariosAsync(int condominioId)
-    {
-        return await _condominioRepository.ObterCondominioComFuncionariosAsync(condominioId);
-    }
-
-    public async Task<Condominio> ObterCondominioComUnidadesAsync(int condominioId)
-    {
-        return await _condominioRepository.ObterCondominioComUnidadesAsync(condominioId);
-    }
-
-    public async Task<Condominio> ObterCondominioComUnidadesEFuncionariosAsync(int condominioId)
-    {
-        return await _condominioRepository.ObterCondominioComUnidadesEFuncionariosAsync(condominioId);
     }
 
     public void Dispose()

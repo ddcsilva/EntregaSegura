@@ -1,144 +1,141 @@
+using AutoMapper;
+using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
-using EntregaSegura.Domain.Interfaces.Repositories;
-using EntregaSegura.Domain.Validators;
-using EntregaSegura.Infrastructure.UnitOfWork;
+using EntregaSegura.Domain.Interfaces;
+using EntregaSegura.Domain.Validations;
+using EntregaSegura.Infra.Data.UnitOfWork;
 
 namespace EntregaSegura.Application.Services;
 
 public class TransportadoraService : BaseService, ITransportadoraService
 {
     private readonly ITransportadoraRepository _transportadoraRepository;
+    private readonly IMapper _mapper;
 
-    public TransportadoraService(ITransportadoraRepository transportadoraRepository,
-                                 IUnitOfWork unitOfWork,
-                                 INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+    public TransportadoraService(
+        ITransportadoraRepository transportadoraRepository,
+        IUnitOfWork unitOfWork,
+        IMapper mapper,
+        INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _transportadoraRepository = transportadoraRepository;
+        _mapper = mapper;
     }
 
-    public async Task<Transportadora> Adicionar(Transportadora transportadora)
+    public async Task<IEnumerable<TransportadoraDTO>> ObterTodasTransportadorasAsync()
     {
-        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
+        var transportadoras = await _transportadoraRepository.ObterTodasTransportadorasAsync();
+        return _mapper.Map<IEnumerable<TransportadoraDTO>>(transportadoras);
+    }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ).Result.Any())
+    public async Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id)
+    {
+        var transportadora = await _transportadoraRepository.ObterTransportadoraPorIdAsync(id);
+        return _mapper.Map<TransportadoraDTO>(transportadora);
+    }
+
+    public async Task AdicionarAsync(TransportadoraDTO transportadoraDTO)
+    {
+        var transportadora = _mapper.Map<Transportadora>(transportadoraDTO);
+
+        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora))
+        {
+            return;
+        }
+
+        if (_transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
-            return null;
         }
 
         if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
-            return null;
         }
 
         if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
-            return null;
+        }
+
+        if (TemNotificacoes())
+        {
+            return;
         }
 
         _transportadoraRepository.Adicionar(transportadora);
-        var result = await CommitAsync();
+        var resultadoOperacao = await _unitOfWork.CommitAsync();
 
-        if (result == 0)
+        if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao salvar a transportadora.");
-            return null;
         }
-
-        return transportadora;
     }
 
-    public async Task<Transportadora> Atualizar(Transportadora transportadora)
+    public async Task AtualizarAsync(TransportadoraDTO transportadoraDTO)
     {
-        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return null;
+        var transportadora = _mapper.Map<Transportadora>(transportadoraDTO);
 
-        if (_transportadoraRepository.BuscarAsync(c => c.CNPJ == transportadora.CNPJ && c.Id != transportadora.Id).Result.Any())
+        if (!ExecutarValidacao(new TransportadoraValidator(), transportadora))
+        {
+            return;
+        }
+
+        if (_transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
-            return null;
         }
 
         if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
-            return null;
         }
 
         if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
-            return null;
+        }
+
+        if (TemNotificacoes())
+        {
+            return;
         }
 
         _transportadoraRepository.Atualizar(transportadora);
-        var result = await CommitAsync();
+        var resultadoOperacao = await CommitAsync();
 
-        if (result == 0)
+        if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao atualizar a transportadora.");
-            return null;
         }
-
-        return transportadora;
     }
 
-    public async Task<bool> Remover(int id)
+    public async Task RemoverAsync(int id)
     {
-        var transportadora = await _transportadoraRepository.ObterPorIdAsync(id);
+        var transportadora = _transportadoraRepository.ObterTransportadoraPorIdAsync(id).Result;
 
         if (transportadora == null)
         {
             Notificar("Transportadora não encontrada.");
-            return false;
+            return;
         }
 
         _transportadoraRepository.Remover(transportadora);
 
         try
         {
-            var result = await CommitAsync();
+            var resultadoOperacao = await CommitAsync();
 
-            if (result == 0)
+            if (resultadoOperacao == 0)
             {
                 Notificar("Ocorreu um erro ao remover a transportadora.");
-                return false;
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Notificar(ex.Message);
-            return false;
+            Notificar("Ocorreu um erro inesperado. Favor, contate o administrador.");
         }
-
-        return true;
-    }
-
-    public async Task<IEnumerable<Transportadora>> ObterTodosAsync()
-    {
-        return await _transportadoraRepository.ObterTodosAsync();
-    }
-
-    public async Task<Transportadora> ObterPorIdAsync(int id)
-    {
-        return await _transportadoraRepository.ObterPorIdAsync(id);
-    }
-
-    public async Task<Transportadora> ObterPorNomeAsync(string nome)
-    {
-        return await _transportadoraRepository.ObterPorNomeAsync(nome);
-    }
-
-    public async Task<Transportadora> ObterTransportadoraComEntregasAsync(int transportadoraId)
-    {
-        return await _transportadoraRepository.ObterTransportadoraComEntregasAsync(transportadoraId);
-    }
-
-    public async Task<IEnumerable<Transportadora>> ObterTodasTransportadorasPeloNomeAsync(string nome)
-    {
-        return await _transportadoraRepository.ObterTodasTransportadorasPeloNomeAsync(nome);
     }
 
     public void Dispose()

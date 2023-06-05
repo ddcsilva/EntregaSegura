@@ -2,11 +2,16 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Transportadora : Empresa
 {
-    public Transportadora()
+    private readonly IList<Entrega> _entregas;
+
+    public Transportadora(
+        string nome, 
+        string cnpj, 
+        string telefone, 
+        string email) : base(nome, cnpj, telefone, email)
     {
-        Entregas = new List<Entrega>();
+        _entregas = new List<Entrega>();
     }
 
-    // Uma transportadora pode realizar várias entregas
-    public ICollection<Entrega> Entregas { get; set; }
+    public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
 }

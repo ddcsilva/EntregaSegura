@@ -17,8 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
-    <ProjectReference Include="..\EntregaSegura.Infrastructure\EntregaSegura.Infrastructure.csproj" />
+    <ProjectReference Include="..\EntregaSegura.Infra.Data\EntregaSegura.Infra.Data.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,14 +1,11 @@
 using EntregaSegura.API.Extensions;
-using EntregaSegura.Infrastructure.Contexts;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using EntregaSegura.Infra.IoC;
+using EntregaSegura.Application.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<EntregaSeguraContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-//builder.Services.AddIdentityConfiguration(builder.Configuration);
+builder.Services.AddContexts(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -38,9 +35,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.ResolveDependencies();
-
-builder.Services.AddAutoMapper(typeof(Program));
-
+builder.Services.AddAutoMapper(typeof(AutoMapperConfiguration));
 
 var app = builder.Build();
 
@@ -54,7 +49,6 @@ app.UseCors("Development");
 
 app.UseHttpsRedirection();
 
-//app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

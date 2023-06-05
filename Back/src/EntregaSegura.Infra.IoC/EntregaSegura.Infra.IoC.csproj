@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EntregaSegura.Application\EntregaSegura.Application.csproj" />
+    <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
+    <ProjectReference Include="..\EntregaSegura.Infra.Data\EntregaSegura.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

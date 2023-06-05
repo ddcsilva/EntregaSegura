@@ -1,4 +1,4 @@
-namespace EntregaSegura.Application.DTOs.Unidades;
+namespace EntregaSegura.Application.DTOs;
 
 public class UnidadesEmMassaDTO
 {
