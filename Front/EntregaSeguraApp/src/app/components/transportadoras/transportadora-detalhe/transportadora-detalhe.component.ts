@@ -39,8 +39,7 @@ export class TransportadoraDetalheComponent implements OnInit {
     private transportadoraService: TransportadoraService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private tratamentoErrosService: TratamentoErrosService,
-    private dialog: MatDialog) { }
+    private tratamentoErrosService: TratamentoErrosService) { }
 
   ngOnInit() {
     this.id = Number(this.route.snapshot.params['id']);
