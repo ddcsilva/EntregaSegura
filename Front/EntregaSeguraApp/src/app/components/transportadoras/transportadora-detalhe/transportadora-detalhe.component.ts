@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 
 // Model imports
 import { Transportadora } from 'src/app/models/transportadora';
-import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
 
 // Service imports
 import { TransportadoraService } from 'src/app/services/transportadora/transportadora.service';
@@ -19,9 +18,6 @@ import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros
 
 // Helper imports
 import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
-
-// Component imports
-import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 
 @Component({
   selector: 'app-transportadora-detalhe',
