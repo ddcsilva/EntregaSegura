@@ -29,13 +29,13 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
             .HasColumnName("UND_NUMERO")
             .HasColumnOrder(3)
             .IsRequired()
-            .HasColumnType("varchar(10)")
+            .HasColumnType("int")
             .HasComment("Número da unidade");
 
         builder.Property(u => u.Andar)
             .HasColumnName("UND_ANDAR")
             .HasColumnOrder(4)
-            .HasColumnType("varchar(10)")
+            .HasColumnType("int")
             .HasComment("Andar da unidade");
 
         builder.Property(u => u.Bloco)

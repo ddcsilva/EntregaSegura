@@ -9,10 +9,15 @@ public class UnidadeValidator : AbstractValidator<Unidade>
     {
         RuleFor(u => u.Bloco)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-            .Length(1, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+            .Length(1, 20).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 
         RuleFor(u => u.Numero)
-            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .LessThanOrEqualTo(10).WithMessage("O campo {PropertyName} não pode ser maior que 10");
+
+        RuleFor(u => u.Andar)
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .LessThanOrEqualTo(40).WithMessage("O campo {PropertyName} não pode ser maior que 40");
 
         RuleFor(u => u.CondominioId)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
