@@ -1,6 +1,6 @@
+using FluentValidation;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Validations.Helpers;
-using FluentValidation;
 
 namespace EntregaSegura.Domain.Validations;
 

@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using EntregaSegura.Domain.Entities;
 using Microsoft.Data.SqlClient;
 using EntregaSegura.Infra.Data.Contexts;
 

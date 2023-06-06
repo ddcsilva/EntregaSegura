@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Application.Notifications;
 using EntregaSegura.Application.Services;
@@ -5,7 +6,6 @@ using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Infra.Data.Repositories;
 using EntregaSegura.Infra.Data.UnitOfWork;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace EntregaSegura.Infra.IoC;
 

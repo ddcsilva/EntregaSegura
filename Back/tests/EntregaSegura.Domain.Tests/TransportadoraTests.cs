@@ -1,6 +1,6 @@
+using FluentAssertions;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Validations;
-using FluentAssertions;
 
 namespace EntregaSegura.Domain.Tests;
 

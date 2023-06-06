@@ -1,6 +1,6 @@
+using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Infra.Data.Extensions;
-using Microsoft.EntityFrameworkCore;
 
 namespace EntregaSegura.Infra.Data.Contexts;
 

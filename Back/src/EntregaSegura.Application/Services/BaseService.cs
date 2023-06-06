@@ -1,8 +1,8 @@
+using FluentValidation;
+using FluentValidation.Results;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Models;
 using EntregaSegura.Infra.Data.UnitOfWork;
-using FluentValidation;
-using FluentValidation.Results;
 
 namespace EntregaSegura.Application.Services;
 

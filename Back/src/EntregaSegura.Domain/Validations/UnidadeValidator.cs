@@ -1,5 +1,5 @@
-using EntregaSegura.Domain.Entities;
 using FluentValidation;
+using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Domain.Validations;
 

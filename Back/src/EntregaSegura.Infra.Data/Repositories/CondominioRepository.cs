@@ -1,8 +1,8 @@
 using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Infra.Data.Contexts;
-using Microsoft.EntityFrameworkCore;
 
 namespace EntregaSegura.Infra.Data.Repositories;
 

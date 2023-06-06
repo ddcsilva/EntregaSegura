@@ -1,6 +1,5 @@
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
-
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;

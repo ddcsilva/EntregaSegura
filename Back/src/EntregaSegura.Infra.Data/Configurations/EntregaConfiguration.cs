@@ -1,13 +1,10 @@
-using EntregaSegura.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Infra.Data.Configurations;
 
-/// <summary>
-/// Classe que representa a configuração da entidade Entrega
-/// </summary>
 public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
 {
     public void Configure(EntityTypeBuilder<Entrega> builder)

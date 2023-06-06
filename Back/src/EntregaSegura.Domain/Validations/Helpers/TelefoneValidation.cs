@@ -1,5 +1,6 @@
-namespace EntregaSegura.Domain.Validations.Helpers;
 using System.Text.RegularExpressions;
+
+namespace EntregaSegura.Domain.Validations.Helpers;
 
 public static class TelefoneValidation
 {

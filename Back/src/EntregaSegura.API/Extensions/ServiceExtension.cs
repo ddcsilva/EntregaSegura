@@ -1,5 +1,5 @@
-using EntregaSegura.Infra.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
+using EntregaSegura.Infra.Data.Contexts;
 
 namespace EntregaSegura.API.Extensions;
 
