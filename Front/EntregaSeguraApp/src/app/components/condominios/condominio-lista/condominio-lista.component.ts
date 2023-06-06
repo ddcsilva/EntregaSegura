@@ -91,18 +91,20 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
         this.table.renderRows();
         this.spinner.hide();
       },
-      error: (error: any) => {
-        this.exibirErros(error);
+      error: (erro: any) => {
+        this.exibirErros(erro);
         this.spinner.hide();
       }
     });
   }
 
   private exibirErros(erro: any) {
-    if (erro instanceof Array) {
+    if (typeof erro === 'string') {
+      this.toastr.error(erro, 'Erro!');
+    } else if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
-  }
+  }  
 }

@@ -8,24 +8,26 @@
                     <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()" class="form-content lg-form">
                         <div class="row">
                             <h2>Informações Gerais</h2>
+
                             <!-- Campo Nome -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Nome</mat-label>
                                     <input formControlName="nome" matInput placeholder="Nome" required>
-                                    <mat-icon matSuffix>person</mat-icon>
+                                    <mat-icon matSuffix>business</mat-icon>
                                     <mat-error *ngIf="formulario.get('nome')?.invalid">
                                         Por favor, insira o nome do condomínio.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
+
                             <!-- Campo CNPJ -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>CNPJ</mat-label>
                                     <input formControlName="cnpj" matInput placeholder="CNPJ" mask="00.000.000/0000-00"
                                         required>
-                                    <mat-icon matSuffix>business</mat-icon>
+                                    <mat-icon matSuffix>business_center</mat-icon>
                                     <mat-error *ngIf="formulario.get('cnpj')?.invalid">
                                         Por favor, insira um CNPJ válido.
                                     </mat-error>
@@ -101,8 +103,6 @@
                                     </mat-error>
                                 </mat-form-field>
                             </div>
-
-
 
                             <!-- Campo Bairro -->
                             <div class="col-md-6">

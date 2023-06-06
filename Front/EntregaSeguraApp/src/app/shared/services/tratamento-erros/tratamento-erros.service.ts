@@ -1,37 +1,38 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 
 @Injectable()
 export class TratamentoErrosService {
-  public tratarErro(erro: HttpErrorResponse) {
+  public tratarErro(errorResponse: HttpErrorResponse | Error): Observable<never> {
     let mensagemErro: string;
   
-    if (this.apiEstaForaDoAr(erro)) {
-      mensagemErro = 'Nosso serviço está temporariamente indisponível. Por favor, tente novamente mais tarde.';
-    } else if (this.erroDeClienteOuRede(erro)) {
-      mensagemErro = erro.error.message;
-    } else if (this.erroDoBackendComCorpoResposta(erro)) {
-      mensagemErro = erro.error.errors;
+    if (errorResponse instanceof HttpErrorResponse) {
+      if (this.apiEstaForaDoAr(errorResponse)) {
+        mensagemErro = 'Nosso serviço está temporariamente indisponível. Por favor, tente novamente mais tarde.';
+      } else if (this.erroDeClienteOuRede(errorResponse)) {
+        mensagemErro = errorResponse.error.message;
+      } else if (this.erroDoBackendComCorpoResposta(errorResponse)) {
+        mensagemErro = errorResponse.error.errors.join(', ');
+      } else {
+        mensagemErro = `${errorResponse.message}`;
+      }
     } else {
-      mensagemErro = `${erro.message}`;
+      mensagemErro = `${errorResponse.message}`;
     }
   
     return throwError(() => new Error(mensagemErro));
-  }
-  
+  }  
 
-  private apiEstaForaDoAr(erro: HttpErrorResponse): boolean {
-    return erro.status === 0;
-  }
-
-  private erroDeClienteOuRede(erro: HttpErrorResponse): boolean {
-    return erro.error instanceof ErrorEvent;
+  private apiEstaForaDoAr(errorResponse: HttpErrorResponse): boolean {
+    return errorResponse.status === 0;
   }
 
-  private erroDoBackendComCorpoResposta(erro: HttpErrorResponse): boolean {
-    return erro.error && erro.error.errors;
+  private erroDeClienteOuRede(errorResponse: HttpErrorResponse): boolean {
+    return errorResponse.error instanceof ErrorEvent;
+  }
+
+  private erroDoBackendComCorpoResposta(errorResponse: HttpErrorResponse): boolean {
+    return errorResponse.error && errorResponse.error.errors && Array.isArray(errorResponse.error.errors);
   }
 }
-
-

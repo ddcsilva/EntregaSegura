@@ -1,19 +1,30 @@
-import { UnidadeService } from './../../../services/unidade/unidade.service';
+// Angular imports
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+
+// Library imports
+import { Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
-import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
+
+// Model imports
 import { Condominio } from 'src/app/models/condominio';
 import { UnidadesEmMassa } from 'src/app/models/unidadesEmMassa';
-import { CondominioService } from 'src/app/services/condominio/condominio.service';
-import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
+
+// Service imports
+import { UnidadeService } from './../../../services/unidade/unidade.service';
+import { CondominioService } from 'src/app/services/condominio/condominio.service';
 import { CepService } from 'src/app/shared/services/cep/cep.service';
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
+
+// Helper imports
+import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
+
+// Component imports
+import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 
 @Component({
   selector: 'app-condominio-detalhe',
@@ -22,9 +33,10 @@ import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros
 })
 export class CondominioDetalheComponent implements OnInit {
   public titulo: string = 'Novo Condomínio';
-  public mascaraTelefone = '(00) 0000-00009';
+  public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
-  public id: number | null = null;
+
+  private id: number | null = null;
   private condominio: Condominio = {} as Condominio;
 
   constructor(
@@ -48,29 +60,6 @@ export class CondominioDetalheComponent implements OnInit {
     this.formControl.telefone.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);
     });
-  }
-
-  get formControl(): any {
-    return this.formulario.controls;
-  }
-
-  private carregarCondominio(): void {
-    if (this.id) {
-      this.spinner.show();
-
-      this.condominioService.obterPorId(String(this.id)).subscribe({
-        next: (condominio: Condominio) => {
-          this.condominio = { ...condominio };
-          this.formulario.patchValue(this.condominio);
-          this.titulo = 'Edição: ' + this.condominio.nome;
-        },
-        error: (error: any) => {
-          this.spinner.hide();
-          this.toastr.error('Erro ao carregar o condomínio', 'Erro!');
-        },
-        complete: () => this.spinner.hide()
-      });
-    }
   }
 
   public submeterFormulario(): void {
@@ -142,26 +131,6 @@ export class CondominioDetalheComponent implements OnInit {
     this.formulario.markAsUntouched();
   }
 
-  private atualizarMascaraTelefone(value: string): void {
-    const numbers = value.replace(/\D/g, '');
-    this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
-  }
-
-  private atualizarCondominio(condominio: Condominio): Observable<Condominio> {
-    return this.condominioService.atualizar(String(condominio.id), condominio);
-  }
-
-  private criarCondominio(condominio: Condominio): Observable<Condominio> {
-    return this.condominioService.criar(condominio);
-  }
-
-  private tratarErros(erro: any): void {
-    this.spinner.hide();
-    this.tratamentoErrosService.tratarErro(erro).subscribe({
-      error: (error: any) => this.toastr.error(error.message, 'Erro!')
-    });
-  }
-
   public buscarCep(event: Event) {
     event.preventDefault();
     const cep = this.formulario.get('cep')?.value;
@@ -194,6 +163,45 @@ export class CondominioDetalheComponent implements OnInit {
         }
       });
     }
+  }
+
+  private carregarCondominio(): void {
+    if (this.id) {
+      this.spinner.show();
+
+      this.condominioService.obterPorId(String(this.id)).subscribe({
+        next: (condominio: Condominio) => {
+          this.condominio = { ...condominio };
+          this.formulario.patchValue(this.condominio);
+          this.titulo = 'Edição: ' + this.condominio.nome;
+        },
+        error: (error: any) => {
+          this.spinner.hide();
+          this.toastr.error('Erro ao carregar o condomínio', 'Erro!');
+        },
+        complete: () => this.spinner.hide()
+      });
+    }
+  }
+
+  private atualizarMascaraTelefone(value: string): void {
+    const numbers = value.replace(/\D/g, '');
+    this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+  }
+
+  private atualizarCondominio(condominio: Condominio): Observable<Condominio> {
+    return this.condominioService.atualizar(String(condominio.id), condominio);
+  }
+
+  private criarCondominio(condominio: Condominio): Observable<Condominio> {
+    return this.condominioService.criar(condominio);
+  }
+
+  private tratarErros(erro: any): void {
+    this.spinner.hide();
+    this.tratamentoErrosService.tratarErro(erro).subscribe({
+      error: (error: any) => this.toastr.error(error.message, 'Erro!')
+    });
   }
 
   private validarformulario(): void {
@@ -233,5 +241,9 @@ export class CondominioDetalheComponent implements OnInit {
     this.formulario.get('bairro')?.disable();
     this.formulario.get('cidade')?.disable();
     this.formulario.get('estado')?.disable();
+  }
+
+  get formControl(): any {
+    return this.formulario.controls;
   }
 }

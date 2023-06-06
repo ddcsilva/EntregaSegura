@@ -60,6 +60,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { UnidadeService } from './services/unidade/unidade.service';
 import { FormatarTelefonePipe } from './shared/pipes/formatar-telefone.pipe';
+import { FormatarCnpjPipe } from './shared/pipes/formatar-cnpj.pipe';
 
 registerLocaleData(ptBr)
 
@@ -81,7 +82,8 @@ registerLocaleData(ptBr)
     UnidadesComponent,
     SuporteComponent,
     ConfirmacaoDialogComponent,
-    FormatarTelefonePipe
+    FormatarTelefonePipe,
+    FormatarCnpjPipe
   ],
   imports: [
     // Angular modules
