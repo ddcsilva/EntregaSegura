@@ -13,11 +13,10 @@ public class TransportadoraService : BaseService, ITransportadoraService
     private readonly ITransportadoraRepository _transportadoraRepository;
     private readonly IMapper _mapper;
 
-    public TransportadoraService(
-        ITransportadoraRepository transportadoraRepository,
-        IUnitOfWork unitOfWork,
-        IMapper mapper,
-        INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+    public TransportadoraService(ITransportadoraRepository transportadoraRepository,
+                                 IUnitOfWork unitOfWork,
+                                 IMapper mapper,
+                                 INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _transportadoraRepository = transportadoraRepository;
         _mapper = mapper;
