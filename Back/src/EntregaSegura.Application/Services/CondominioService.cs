@@ -70,7 +70,10 @@ public class CondominioService : BaseService, ICondominioService
         if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao salvar o condomínio.");
+            return;
         }
+
+        condominioDTO.Id = condominio.Id;
     }
 
     public async Task AtualizarAsync(CondominioDTO condominioDTO)

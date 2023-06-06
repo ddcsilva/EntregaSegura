@@ -13,13 +13,16 @@ public class TransportadoraValidator : AbstractValidator<Transportadora>
             .Length(2, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres");
 
         RuleFor(c => c.Cnpj)
-            .Must(CNPJValidation.ValidarCNPJ).WithMessage("O campo {PropertyName} fornecido é inválido");
+            .Must(CNPJValidation.ValidarCNPJ).WithMessage("O campo {PropertyName} fornecido é inválido")
+            .When(c => !string.IsNullOrWhiteSpace(c.Cnpj));
 
         RuleFor(c => c.Telefone)
-            .Must(TelefoneValidation.ValidarTelefone).WithMessage("O campo {PropertyName} fornecido é inválido");
+            .Must(TelefoneValidation.ValidarTelefone).WithMessage("O campo {PropertyName} fornecido é inválido")
+            .When(c => !string.IsNullOrWhiteSpace(c.Telefone));
 
         RuleFor(c => c.Email)
             .EmailAddress().WithMessage("O campo {PropertyName} fornecido é inválido")
-            .Length(5, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres");
+            .Length(5, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
+            .When(c => !string.IsNullOrWhiteSpace(c.Email));
     }
 }

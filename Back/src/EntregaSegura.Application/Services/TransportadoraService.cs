@@ -44,17 +44,17 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return;
         }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj).Result.Any())
+        if (!string.IsNullOrEmpty(transportadora.Cnpj) && _transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj).Result.Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
         }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
+        if (!string.IsNullOrEmpty(transportadora.Nome) && _transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
         }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
+        if (!string.IsNullOrEmpty(transportadora.Email) && _transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
         }
@@ -70,7 +70,10 @@ public class TransportadoraService : BaseService, ITransportadoraService
         if (resultadoOperacao == 0)
         {
             Notificar("Ocorreu um erro ao salvar a transportadora.");
+            return;
         }
+
+        transportadoraDTO.Id = transportadora.Id;
     }
 
     public async Task AtualizarAsync(TransportadoraDTO transportadoraDTO)

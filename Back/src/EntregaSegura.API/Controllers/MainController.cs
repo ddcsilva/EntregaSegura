@@ -2,60 +2,61 @@ using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.Net;
 
-namespace EntregaSegura.API.Controllers;
-
-[ApiController]
-public class MainController : ControllerBase
+namespace EntregaSegura.API.Controllers
 {
-    private readonly INotificadorErros _notificadorErros;
-
-    protected MainController(INotificadorErros notificadorErros)
+    [ApiController]
+    public class MainController : ControllerBase
     {
-        _notificadorErros = notificadorErros;
-    }
+        private readonly INotificadorErros _notificadorErros;
 
-    protected bool OperacaoValida()
-    {
-        return !_notificadorErros.TemNotificacoes();
-    }
-
-    protected ActionResult CustomResponse(object result = null)
-    {
-        if (OperacaoValida())
+        protected MainController(INotificadorErros notificadorErros)
         {
-            return Ok(new
+            _notificadorErros = notificadorErros;
+        }
+
+        protected bool OperacaoValida()
+        {
+            return !_notificadorErros.TemNotificacoes();
+        }
+
+        protected ActionResult CustomResponse(object result = null, HttpStatusCode statusCode = HttpStatusCode.OK)
+        {
+            var response = new
             {
-                success = true,
-                data = result
-            });
+                success = OperacaoValida(),
+                statusCode = (int)statusCode,
+                data = result,
+                errors = OperacaoValida() ? new string[] { } : _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
+            };
+
+            return StatusCode((int)statusCode, response);
         }
 
-        return BadRequest(new
+        protected ActionResult CustomResponse(ModelStateDictionary modelState)
         {
-            success = false,
-            errors = _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
-        });
-    }
+            if (!modelState.IsValid)
+            {
+                NotificarErroModelInvalida(modelState);
+            }
 
-    protected ActionResult CustomResponse(ModelStateDictionary modelState)
-    {
-        if (!modelState.IsValid) NotificarErroModelInvalida(modelState);
-        return CustomResponse();
-    }
-
-    protected void NotificarErroModelInvalida(ModelStateDictionary modelState)
-    {
-        var erros = modelState.Values.SelectMany(e => e.Errors);
-        foreach (var erro in erros)
-        {
-            var mensagemErro = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
-            NotificarErro(mensagemErro);
+            return CustomResponse();
         }
-    }
 
-    protected void NotificarErro(string mensagem)
-    {
-        _notificadorErros.Handle(new NotificacaoErros(mensagem));
+        protected void NotificarErroModelInvalida(ModelStateDictionary modelState)
+        {
+            var erros = modelState.Values.SelectMany(e => e.Errors);
+            foreach (var erro in erros)
+            {
+                var mensagemErro = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
+                NotificarErro(mensagemErro);
+            }
+        }
+
+        protected void NotificarErro(string mensagem)
+        {
+            _notificadorErros.Handle(new NotificacaoErros(mensagem));
+        }
     }
 }

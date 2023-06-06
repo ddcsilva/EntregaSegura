@@ -1,8 +1,9 @@
-using AutoMapper;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaSegura.API.Controllers;
 
@@ -22,35 +23,34 @@ public class CondominiosController : MainController
     {
         var condominios = await _condominioService.ObterTodosCondominiosAsync();
 
-        if (condominios == null)
-        {
-            return NotFound();
-        }
-
-        return Ok(condominios);
+        return CustomResponse(condominios, HttpStatusCode.OK);
     }
 
-    [HttpGet("{id:int}", Name = "ObterCondominio")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<CondominioDTO>> ObterCondominioPorId(int id)
     {
         var condominio = await _condominioService.ObterCondominioPorIdAsync(id);
 
         if (condominio == null)
         {
-            return NotFound();
+            NotificarErro("Condomínio não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
         }
 
-        return Ok(condominio);
+        return CustomResponse(condominio, HttpStatusCode.OK);
     }
 
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] CondominioDTO condominioDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState);
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
         await _condominioService.AdicionarAsync(condominioDTO);
 
-        return new CreatedAtRouteResult("ObterCondominio", new { id = condominioDTO.Id }, condominioDTO);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+
+        return CustomResponse(condominioDTO, HttpStatusCode.Created);
     }
 
     [HttpPut("{id:int}")]
@@ -59,14 +59,17 @@ public class CondominiosController : MainController
         if (id != condominioDTO.Id)
         {
             NotificarErro("Erro ao atualizar condomínio: Id da requisição difere do Id do objeto");
-            return CustomResponse(condominioDTO);
+            return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
-        if (!ModelState.IsValid) return CustomResponse(ModelState);
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
         await _condominioService.AtualizarAsync(condominioDTO);
 
-        return CustomResponse(condominioDTO);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+
+        return CustomResponse(condominioDTO, HttpStatusCode.OK);
     }
 
     [HttpDelete("{id:int}")]
@@ -74,10 +77,17 @@ public class CondominiosController : MainController
     {
         var condominioDTO = await _condominioService.ObterCondominioPorIdAsync(id);
 
-        if (condominioDTO == null) return NotFound("Condomínio não encontrado.");
+        if (condominioDTO == null)
+        {
+            NotificarErro("Condomínio não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
         await _condominioService.RemoverAsync(id);
 
-        return CustomResponse(condominioDTO);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+
+        return CustomResponse(null, HttpStatusCode.OK);
     }
 }

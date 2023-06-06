@@ -1,115 +1,93 @@
-// using AutoMapper;
-// using EntregaSegura.Application.DTOs.Transportadoras;
-// using EntregaSegura.Application.Interfaces;
-// using EntregaSegura.Domain.Entities;
-// using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
-// namespace EntregaSegura.API.Controllers;
+using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Domain.Entities;
 
-// [Route("api/transportadoras")]
-// public class TransportadorasController : MainController
-// {
-//     private readonly ITransportadoraService _transportadoraService;
-//     private readonly IMapper _mapper;
+namespace EntregaSegura.API.Controllers;
 
-//     public TransportadorasController(
-//         ITransportadoraService transportadoraService,
-//         IMapper mapper,
-//         INotificadorErros notificadorErros) : base(notificadorErros)
-//     {
-//         _transportadoraService = transportadoraService;
-//         _mapper = mapper;
-//     }
+[Route("api/transportadoras")]
+public class TransportadorasController : MainController
+{
+    private readonly ITransportadoraService _transportadoraService;
 
-//     [HttpPost]
-//     public async Task<ActionResult<TransportadoraDTO>> Adicionar(TransportadoraDTO transportadoraDTO)
-//     {
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+    public TransportadorasController(ITransportadoraService transportadoraService,
+                                     INotificadorErros notificadorErros) : base(notificadorErros)
+    {
+        _transportadoraService = transportadoraService;
+    }
 
-//         var transportadora = _mapper.Map<Transportadora>(transportadoraDTO);
-//         var novaTransportadora = await _transportadoraService.Adicionar(transportadora);
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TransportadoraDTO>>> ObterTodasTransportadoras()
+    {
+        var transportadoras = await _transportadoraService.ObterTodasTransportadorasAsync();
 
-//         if (novaTransportadora == null) return CustomResponse(ModelState);
+        return CustomResponse(transportadoras, HttpStatusCode.OK);
+    }
 
-//         transportadoraDTO = _mapper.Map<TransportadoraDTO>(novaTransportadora);
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<TransportadoraDTO>> ObterTransportadoraPorId(int id)
+    {
+        var transportadora = await _transportadoraService.ObterTransportadoraPorIdAsync(id);
 
-//         return CustomResponse(transportadoraDTO);
-//     }
+        if (transportadora == null)
+        {
+            NotificarErro("Transportadora não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
-//     [HttpGet]
-//     public async Task<ActionResult<IEnumerable<TransportadoraDTO>>> ObterTodos()
-//     {
-//         var transportadorasDTO = await ObterTransportadoras();
+        return CustomResponse(transportadora, HttpStatusCode.OK);
+    }
 
-//         return Ok(transportadorasDTO);
-//     }
+    [HttpPost]
+    public async Task<ActionResult> Adicionar([FromBody] TransportadoraDTO transportadoraDTO)
+    {
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-//     [HttpGet("{id:int}")]
-//     public async Task<ActionResult<TransportadoraDTO>> ObterPorId(int id)
-//     {
-//         var transportadoraDTO = await ObterTransportadora(id);
+        await _transportadoraService.AdicionarAsync(transportadoraDTO);
 
-//         return transportadoraDTO == null ? NotFound() : Ok(transportadoraDTO);
-//     }
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//     [HttpGet("por-nome/{nome}")]
-//     public async Task<ActionResult<IEnumerable<TransportadoraDTO>>> ObterPorNome(string nome)
-//     {
-//         var transportadorasDTO = await ObterTransportadorasPeloNome(nome);
+        return CustomResponse(transportadoraDTO, HttpStatusCode.Created);
+    }
 
-//         return Ok(transportadorasDTO);
-//     }
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<TransportadoraDTO>> Atualizar(int id, TransportadoraDTO transportadoraDTO)
+    {
+        if (id != transportadoraDTO.Id)
+        {
+            NotificarErro("Erro ao atualizar a transportadora: Id da requisição difere do Id do objeto");
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+        }
 
-//     [HttpPut("{id:int}")]
-//     public async Task<ActionResult<TransportadoraDTO>> Atualizar(int id, TransportadoraDTO transportadoraDTO)
-//     {
-//         if (id != transportadoraDTO.Id)
-//         {
-//             NotificarErro("Erro ao atualizar a transportadora: Id da requisição difere do Id do objeto");
-//             return CustomResponse(transportadoraDTO);
-//         }
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+        await _transportadoraService.AtualizarAsync(transportadoraDTO);
 
-//         var transportadora = _mapper.Map<Transportadora>(transportadoraDTO);
-//         var transportadoraAtualizada = await _transportadoraService.Atualizar(transportadora);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//         if (transportadoraAtualizada == null) return CustomResponse(ModelState);
+        return CustomResponse(transportadoraDTO, HttpStatusCode.OK);
+    }
 
-//         transportadoraDTO = _mapper.Map<TransportadoraDTO>(transportadoraAtualizada);
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Remover(int id)
+    {
+        var transportadoraDTO = await _transportadoraService.ObterTransportadoraPorIdAsync(id);
 
-//         return CustomResponse(transportadoraDTO);
-//     }
+        if (transportadoraDTO == null)
+        {
+            NotificarErro("Transportadora não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
-//     [HttpDelete("{id:int}")]
-//     public async Task<ActionResult> Remover(int id)
-//     {
-//         var transportadoraDTO = await ObterTransportadora(id);
+        await _transportadoraService.RemoverAsync(id);
 
-//         if (transportadoraDTO == null) return NotFound();
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//         var remocaoBemSucedida = await _transportadoraService.Remover(id);
-
-//         if (!remocaoBemSucedida)
-//         {
-//             return CustomResponse();
-//         }
-
-//         return CustomResponse(transportadoraDTO);
-//     }
-
-//     private async Task<IEnumerable<TransportadoraDTO>> ObterTransportadoras()
-//     {
-//         return _mapper.Map<IEnumerable<TransportadoraDTO>>(await _transportadoraService.ObterTodosAsync());
-//     }
-
-//     private async Task<TransportadoraDTO> ObterTransportadora(int transportadoraId)
-//     {
-//         return _mapper.Map<TransportadoraDTO>(await _transportadoraService.ObterPorIdAsync(transportadoraId));
-//     }
-
-//     private async Task<IEnumerable<TransportadoraDTO>> ObterTransportadorasPeloNome(string nome)
-//     {
-//         return _mapper.Map<IEnumerable<TransportadoraDTO>>(await _transportadoraService.ObterTodasTransportadorasPeloNomeAsync(nome));
-//     }
-// }
+        return CustomResponse(null, HttpStatusCode.OK);
+    }
+}

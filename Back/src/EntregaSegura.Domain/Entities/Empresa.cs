@@ -5,9 +5,9 @@ public abstract class Empresa : BaseEntity
     protected Empresa(string nome, string cnpj, string telefone, string email)
     {
         Nome = nome;
-        Cnpj = cnpj;
-        Telefone = telefone;
-        Email = email;
+        Cnpj = string.IsNullOrEmpty(cnpj) ? null : cnpj;
+        Telefone = string.IsNullOrEmpty(telefone) ? null : telefone;
+        Email = string.IsNullOrEmpty(email) ? null : email;
     }
 
     public string Nome { get; private set; }
