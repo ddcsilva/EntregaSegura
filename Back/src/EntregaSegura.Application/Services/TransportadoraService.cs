@@ -43,17 +43,20 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return;
         }
 
-        if (!string.IsNullOrEmpty(transportadora.Cnpj) && _transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj).Result.Any())
+        var transportadoraExistente = !string.IsNullOrEmpty(transportadora.Cnpj) && _transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj).Result.Any();
+        if (transportadoraExistente)
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
         }
 
-        if (!string.IsNullOrEmpty(transportadora.Nome) && _transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any())
+        var transportadoraMesmoNome = !string.IsNullOrEmpty(transportadora.Nome) && _transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome).Result.Any();
+        if (transportadoraMesmoNome)
         {
             Notificar("Já existe uma transportadora com este nome.");
         }
 
-        if (!string.IsNullOrEmpty(transportadora.Email) && _transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any())
+        var transportadoraMesmoEmail = !string.IsNullOrEmpty(transportadora.Email) && _transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email).Result.Any();
+        if (transportadoraMesmoEmail)
         {
             Notificar("Já existe uma transportadora com este e-mail.");
         }
@@ -83,18 +86,21 @@ public class TransportadoraService : BaseService, ITransportadoraService
         {
             return;
         }
-
-        if (_transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj && c.Id != transportadora.Id).Result.Any())
+            
+        var transportadoraExistente = _transportadoraRepository.BuscarAsync(c => c.Cnpj == transportadora.Cnpj && c.Id != transportadora.Id).Result.Any();
+        if (transportadoraExistente)
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
         }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any())
+        var transportadoraMesmoNome = _transportadoraRepository.BuscarAsync(c => c.Nome == transportadora.Nome && c.Id != transportadora.Id).Result.Any();
+        if (transportadoraMesmoNome)
         {
             Notificar("Já existe uma transportadora com este nome.");
         }
 
-        if (_transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any())
+        var transportadoraMesmoEmail = _transportadoraRepository.BuscarAsync(c => c.Email == transportadora.Email && c.Id != transportadora.Id).Result.Any();
+        if (transportadoraMesmoEmail)
         {
             Notificar("Já existe uma transportadora com este e-mail.");
         }
