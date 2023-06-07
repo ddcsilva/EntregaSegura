@@ -1,22 +1,40 @@
 <div class="dashboard">
-    <mat-card class="card">
-      <mat-card-title>Total de entregas no ano</mat-card-title>
-      <mat-card-content>
-        <h2>{{ totalEntregas }}</h2>
-      </mat-card-content>
-    </mat-card>
+  <mat-card class="card">
+    <mat-card-title>Total de entregas no ano</mat-card-title>
+    <mat-card-content>
+      <h2>{{ totalEntregas }}</h2>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-card class="card">
-      <mat-card-title>Entregas pendentes</mat-card-title>
-      <mat-card-content>
-        <h2>{{ entregasPendentes }}</h2>
-      </mat-card-content>
-    </mat-card>
+  <mat-card class="card">
+    <mat-card-title>Entregas pendentes</mat-card-title>
+    <mat-card-content>
+      <h2>{{ entregasPendentes }}</h2>
+    </mat-card-content>
+  </mat-card>
 
-    <mat-card class="card">
-      <mat-card-title>Unidades ocupadas</mat-card-title>
-      <mat-card-content>
-        <h2>{{ unidadesOcupadas }}</h2>
-      </mat-card-content>
-    </mat-card>
-  </div>
+  <mat-card class="card">
+    <mat-card-title>Unidades ocupadas</mat-card-title>
+    <mat-card-content>
+      <h2>{{ unidadesOcupadas }}</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card">
+    <mat-card-title>Entregas concluídas</mat-card-title>
+    <mat-card-content>
+      <h2>{{ entregasConcluidas }}</h2>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card class="card card-full-width">
+    <mat-card-title>Progresso das entregas</mat-card-title>
+    <mat-card-content>
+      <div class="chart-container">
+        <canvas baseChart class="chart" [data]="lineChartData" [options]="lineChartOptions" [type]="lineChartType">
+        </canvas>
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+</div>
