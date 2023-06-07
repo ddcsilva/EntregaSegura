@@ -44,12 +44,20 @@ import { UnidadesComponent } from './components/unidades/unidades.component';
 import { UnidadeListaComponent } from './components/unidades/unidade-lista/unidade-lista.component';
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
+import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
+
+// Custom pipe imports
+import { FormatarTelefonePipe } from './shared/pipes/formatar-telefone.pipe';
+import { FormatarCnpjPipe } from './shared/pipes/formatar-cnpj.pipe';
 
 // Custom services imports
 import { CepService } from './shared/services/cep/cep.service';
 import { CondominioService } from './services/condominio/condominio.service';
 import { TransportadoraService } from './services/transportadora/transportadora.service';
 import { TratamentoErrosService } from './shared/services/tratamento-erros/tratamento-erros.service';
+import { UnidadeService } from './services/unidade/unidade.service';
+
+// Custom config imports
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
 
 // Third-party library imports
@@ -57,10 +65,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
-import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
-import { UnidadeService } from './services/unidade/unidade.service';
-import { FormatarTelefonePipe } from './shared/pipes/formatar-telefone.pipe';
-import { FormatarCnpjPipe } from './shared/pipes/formatar-cnpj.pipe';
+import { NgChartsModule } from 'ng2-charts';
 
 registerLocaleData(ptBr)
 
@@ -98,6 +103,7 @@ registerLocaleData(ptBr)
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,
     ToastrModule.forRoot(),
+    NgChartsModule,
 
     // Angular Material modules
     CdkTableModule,
