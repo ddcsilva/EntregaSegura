@@ -7,28 +7,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./suporte.component.scss']
 })
 export class SuporteComponent implements OnInit {
-
-  suporteForm!: FormGroup;
-  
+  suporteForm: FormGroup;
+  isLoading: boolean = false;
   assuntos = [
-    {value: 'tecnico', viewValue: 'Problema Técnico'},
-    {value: 'financeiro', viewValue: 'Questão Financeira'},
-    {value: 'geral', viewValue: 'Questão Geral'}
+    {value: 'bug', viewValue: 'Reportar um bug'},
+    {value: 'questao', viewValue: 'Questão sobre uso'},
+    {value: 'pedido', viewValue: 'Pedido de nova funcionalidade'},
   ];
 
-  constructor(private formBuilder: FormBuilder) { }
-
-  ngOnInit() {
-    this.suporteForm = this.formBuilder.group({
+  constructor(private fb: FormBuilder) {
+    this.suporteForm = this.fb.group({
       assunto: ['', Validators.required],
-      mensagem: ['', Validators.required]
+      mensagem: ['', Validators.required],
+      arquivos: [''],
+      enviarCopia: ['']
     });
   }
 
+  ngOnInit() {}
+
   enviarMensagem() {
     if (this.suporteForm.valid) {
-      console.log(this.suporteForm.value);
-      // Aqui você pode enviar os dados para o backend.
+      this.isLoading = true;
+      // Enviar dados do formulário
     }
   }
 }

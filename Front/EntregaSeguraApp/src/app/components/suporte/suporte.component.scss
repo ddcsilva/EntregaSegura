@@ -1,8 +1,20 @@
-mat-form-field {
-    width: 100%;
+.container {
+  margin-top: 20px;
+
+  .row {
+    .mat-card {
+      margin-top: 20px;
+      padding: 20px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+
+      .mensagem-field {
+        textarea {
+          min-height: 100px;
+        }
+      }
+    }
   }
-  
-  .mensagem-field {
-    height: 150px;
-  }
-  
+}
