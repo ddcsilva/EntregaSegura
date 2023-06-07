@@ -101,7 +101,7 @@ export class UnidadeListaComponent implements OnInit, OnDestroy {
   }
 
   private obterLista() {
-    this.unidadeService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
+    this.unidadeService.obterTodasUnidadesComCondominio().pipe(takeUntil(this.destroy$)).subscribe({
       next: (unidades: Unidade[]) => {
         this.listaUnidades = unidades;
         this.dataSource = new MatTableDataSource<Unidade>(this.listaUnidades);

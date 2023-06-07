@@ -1,9 +1,17 @@
+// Angular imports
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
+// Library imports
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+
+// Models
 import { Unidade } from 'src/app/models/unidade';
-import { UnidadesEmMassa } from 'src/app/models/unidadesEmMassa';
+import { UnidadesEmMassa } from 'src/app/models/unidades-em-massa';
+import { ApiResponse } from 'src/app/shared/models/api-response';
+
+// Services
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
 
 @Injectable()
@@ -16,18 +24,35 @@ export class UnidadeService {
 
   constructor(private http: HttpClient, private tratamentoErrosService: TratamentoErrosService) { }
 
-  public adicionarEmMassa(unidades: UnidadesEmMassa): Observable<void> {
-    const url = `${this.urlBase}/em-massa`;
-    return this.fazerRequisicao(() => this.http.post<void>(url, unidades, this.httpOptions));
+  public obterTodos(): Observable<Unidade[]> {
+    return this.fazerRequisicao(() => this.http.get<ApiResponse<Unidade[]>>(this.urlBase))
+      .pipe(
+        map(response => response.data)
+      );
+  }
+
+  public obterTodasUnidadesComCondominio(): Observable<Unidade[]> {
+    const url = `${this.urlBase}/com-condominio`;
+    return this.fazerRequisicao(() => this.http.get<ApiResponse<Unidade[]>>(url))
+      .pipe(
+        map(response => response.data)
+      );
+  }
+
+  public obterPorId(id: number): Observable<Unidade> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.get<Unidade>(url));
   }
 
   public criar(unidade: Unidade): Observable<Unidade> {
-    return this.fazerRequisicao(() => this.http.post<Unidade>(this.urlBase, unidade, this.httpOptions));
+    return this.fazerRequisicao(() => this.http.post<ApiResponse<Unidade>>(this.urlBase, unidade, this.httpOptions))
+      .pipe(map(response => response.data));
   }
 
   public atualizar(id: number, unidade: Unidade): Observable<Unidade> {
     const url = `${this.urlBase}/${id}`;
-    return this.fazerRequisicao(() => this.http.put<Unidade>(url, unidade, this.httpOptions));
+    return this.fazerRequisicao(() => this.http.put<ApiResponse<Unidade>>(url, unidade, this.httpOptions))
+      .pipe(map(response => response.data));
   }
 
   public excluir(id: number): Observable<void> {
@@ -35,13 +60,9 @@ export class UnidadeService {
     return this.fazerRequisicao(() => this.http.delete<void>(url));
   }
 
-  public obterTodos(): Observable<Unidade[]> {
-    return this.fazerRequisicao(() => this.http.get<Unidade[]>(this.urlBase));
-  }
-
-  public obterPorId(id: number): Observable<Unidade> {
-    const url = `${this.urlBase}/${id}`;
-    return this.fazerRequisicao(() => this.http.get<Unidade>(url));
+  public adicionarEmMassa(unidades: UnidadesEmMassa): Observable<void> {
+    const url = `${this.urlBase}/em-massa`;
+    return this.fazerRequisicao(() => this.http.post<void>(url, unidades, this.httpOptions));
   }
 
   private fazerRequisicao(operacaoHttp: Function): Observable<any> {

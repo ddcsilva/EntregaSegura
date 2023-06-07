@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 
 // Model imports
 import { Condominio } from 'src/app/models/condominio';
-import { UnidadesEmMassa } from 'src/app/models/unidadesEmMassa';
+import { UnidadesEmMassa } from 'src/app/models/unidades-em-massa';
 import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
 
 // Service imports
