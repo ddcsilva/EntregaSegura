@@ -6,6 +6,7 @@ namespace EntregaSegura.Domain.Interfaces;
 public interface IUnidadeRepository
 {
     Task<IEnumerable<Unidade>> ObterTodasUnidadesAsync();
+    Task<IEnumerable<Unidade>> ObterTodasUnidadesComCondominioAsync();
     Task<Unidade> ObterUnidadePorIdAsync(int id);
     Task<IEnumerable<Unidade>> BuscarAsync(Expression<Func<Unidade, bool>> predicate);
 

@@ -25,7 +25,7 @@ public static class DependencyInjection
         // services.AddScoped<IFuncionarioService, FuncionarioService>();
         // services.AddScoped<IMoradorService, MoradorService>();
         services.AddScoped<ITransportadoraService, TransportadoraService>();
-        // services.AddScoped<IUnidadeService, UnidadeService>();
+        services.AddScoped<IUnidadeService, UnidadeService>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<INotificadorErros, NotificadorErros>();

@@ -23,6 +23,12 @@ public class UnidadeRepository : IUnidadeRepository
         return unidades;
     }
 
+    public async Task<IEnumerable<Unidade>> ObterTodasUnidadesComCondominioAsync()
+    {
+        var unidades = await _dbSet.AsNoTracking().Include(u => u.Condominio).ToListAsync();
+        return unidades;
+    }
+
     public async Task<Unidade> ObterUnidadePorIdAsync(int id)
     {
         var unidade = await _dbSet.FindAsync(id);

@@ -1,115 +1,113 @@
-// using AutoMapper;
-// using EntregaSegura.Application.DTOs.Unidades;
-// using EntregaSegura.Application.Interfaces;
-// using EntregaSegura.Domain.Entities;
-// using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Domain.Entities;
 
-// namespace EntregaSegura.API.Controllers;
+namespace EntregaSegura.API.Controllers;
 
-// [Route("api/unidades")]
-// public class UnidadesController : MainController
-// {
-//     private readonly IUnidadeService _unidadeService;
-//     private readonly IMapper _mapper;
+[Route("api/unidades")]
+public class UnidadesController : MainController
+{
+    private readonly IUnidadeService _unidadeService;
 
-//     public UnidadesController(IUnidadeService unidadeService,
-//                               IMapper mapper,
-//                               INotificadorErros notificadorErros) : base(notificadorErros)
-//     {
-//         _unidadeService = unidadeService;
-//         _mapper = mapper;
-//     }
+    public UnidadesController(IUnidadeService unidadeService,
+                              INotificadorErros notificadorErros) : base(notificadorErros)
+    {
+        _unidadeService = unidadeService;
+    }
 
-//     [HttpGet]
-//     public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodos()
-//     {
-//         var unidadesDTO = await ObterUnidadesComCondominio();
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidades()
+    {
+        var unidades = await _unidadeService.ObterTodasUnidadesAsync();
 
-//         return Ok(unidadesDTO);
-//     }
+        return CustomResponse(unidades, HttpStatusCode.OK);
+    }
 
-//     [HttpGet("{id:int}")]
-//     public async Task<ActionResult<UnidadeDTO>> ObterPorId(int id)
-//     {
-//         var unidadeDTO = await ObterUnidadePorIdComMoradores(id);
+    [HttpGet("com-condominio")]
+    public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidadesComCondominio()
+    {
+        var unidades = await _unidadeService.ObterTodasUnidadesComCondominioAsync();
 
-//         if (unidadeDTO == null) return NotFound();
+        return CustomResponse(unidades, HttpStatusCode.OK);
+    }
 
-//         return Ok(unidadeDTO);
-//     }
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<UnidadeDTO>> ObterUnidadePorId(int id)
+    {
+        var unidade = await _unidadeService.ObterUnidadePorIdAsync(id);
 
-//     [HttpPost]
-//     public async Task<ActionResult<UnidadeDTO>> Adicionar(UnidadeDTO unidadeDTO)
-//     {
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+        if (unidade == null)
+        {
+            NotificarErro("Unidade não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
-//         var unidade = _mapper.Map<Unidade>(unidadeDTO);
-//         var novaUnidade = await _unidadeService.Adicionar(unidade);
+        return CustomResponse(unidade, HttpStatusCode.OK);
+    }
 
-//         if (novaUnidade == null) return CustomResponse(ModelState);
+    [HttpPost]
+    public async Task<ActionResult> Adicionar([FromBody] UnidadeDTO unidadeDTO)
+    {
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-//         unidadeDTO = _mapper.Map<UnidadeDTO>(novaUnidade);
+        await _unidadeService.AdicionarAsync(unidadeDTO);
 
-//         return CustomResponse(unidadeDTO);
-//     }
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//     [HttpPost("em-massa")]
-//     public async Task<ActionResult> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesDTO)
-//     {
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+        return CustomResponse(unidadeDTO, HttpStatusCode.Created);
+    }
 
-//         var resultado = await _unidadeService.AdicionarUnidadesEmMassa(unidadesDTO);
+    [HttpPost("em-massa")]
+    public async Task<ActionResult> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesEmMassaDTO)
+    {
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-//         if (!resultado) return CustomResponse(ModelState);
+        await _unidadeService.AdicionarUnidadesEmMassaAsync(unidadesEmMassaDTO);
 
-//         return CustomResponse();
-//     }
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//     [HttpPut("{id:int}")]
-//     public async Task<ActionResult<UnidadeDTO>> Atualizar(int id, UnidadeDTO unidadeDTO)
-//     {
-//         if (id != unidadeDTO.Id)
-//         {
-//             NotificarErro("O id informado não é o mesmo que foi passado na query");
-//             return CustomResponse(unidadeDTO);
-//         }
+        return CustomResponse(unidadesEmMassaDTO, HttpStatusCode.Created);
+    }
 
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<UnidadeDTO>> Atualizar(int id, UnidadeDTO unidadeDTO)
+    {
+        if (id != unidadeDTO.Id)
+        {
+            NotificarErro("Erro ao atualizar a unidade, id informado não é o mesmo que foi passado na query");
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+        }
 
-//         var unidade = _mapper.Map<Unidade>(unidadeDTO);
-//         var unidadeAtualizada = await _unidadeService.Atualizar(unidade);
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-//         if (unidadeAtualizada == null) return CustomResponse(ModelState);
+        await _unidadeService.AtualizarAsync(unidadeDTO);
 
-//         unidadeDTO = _mapper.Map<UnidadeDTO>(unidadeAtualizada);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//         return CustomResponse(unidadeDTO);
-//     }
+        return CustomResponse(unidadeDTO, HttpStatusCode.OK);
+    }
+    
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult> Remover(int id)
+    {
+        var unidadeDTO = await _unidadeService.ObterUnidadePorIdAsync(id);
 
-//     [HttpDelete("{id:int}")]
-//     public async Task<ActionResult<UnidadeDTO>> Excluir(int id)
-//     {
-//         var unidadeDTO = await ObterUnidade(id);
+        if (unidadeDTO == null)
+        {
+            NotificarErro("Unidade não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
-//         if (unidadeDTO == null) return NotFound();
+        await _unidadeService.RemoverAsync(id);
 
-//         await _unidadeService.Remover(id);
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-//         return CustomResponse(unidadeDTO);
-//     }
-
-//     private async Task<IEnumerable<UnidadeDTO>> ObterUnidadesComCondominio()
-//     {
-//         return _mapper.Map<IEnumerable<UnidadeDTO>>(await _unidadeService.ObterUnidadesComCondominioAsync());
-//     }
-
-//     private async Task<UnidadeDTO> ObterUnidade(int id)
-//     {
-//         return _mapper.Map<UnidadeDTO>(await _unidadeService.ObterPorIdAsync(id));
-//     }
-
-//     private async Task<UnidadeDTO> ObterUnidadePorIdComMoradores(int id)
-//     {
-//         return _mapper.Map<UnidadeDTO>(await _unidadeService.ObterUnidadePorIdComCondominioEMoradoresAsync(id));
-//     }
-// }
+        return CustomResponse(null, HttpStatusCode.OK);
+    }
+}
