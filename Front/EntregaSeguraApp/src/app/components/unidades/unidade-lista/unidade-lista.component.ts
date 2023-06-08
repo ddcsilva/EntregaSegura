@@ -21,7 +21,7 @@ import { MatSelectChange } from '@angular/material/select';
 })
 export class UnidadeListaComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Unidades';
-  public colunasExibidas: string[] = ['id', 'bloco', 'andar', 'numero', 'condominioId', 'nomeCondominio', 'actions'];
+  public colunasExibidas: string[] = ['id', 'bloco', 'andar', 'numero', 'nomeCondominio', 'actions'];
   private listaUnidades: Unidade[] = [];
   public dataSource = new MatTableDataSource<Unidade>(this.listaUnidades);
   public condominios: Condominio[] = [];
