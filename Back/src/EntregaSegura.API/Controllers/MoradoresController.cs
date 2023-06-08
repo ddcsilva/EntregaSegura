@@ -1,72 +1,87 @@
-// using EntregaSegura.Application.DTOs;
-// using EntregaSegura.Application.Interfaces;
-// using EntregaSegura.Domain.Entities;
-// using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Domain.Entities;
+using Microsoft.AspNetCore.Mvc;
 
-// namespace EntregaSegura.API.Controllers;
+namespace EntregaSegura.API.Controllers;
 
-// [Route("api/moradores")]
-// public class MoradoresController : MainController
-// {
-//     private readonly IMoradorService _moradorService;
+[Route("api/moradores")]
+public class MoradoresController : MainController
+{
+    private readonly IMoradorService _moradorService;
 
-//     public MoradoresController(IMoradorService moradorService,
-//                                INotificadorErros notificadorErros) : base(notificadorErros)
-//     {
-//         _moradorService = moradorService;
-//     }
+    public MoradoresController(IMoradorService moradorService,
+                               INotificadorErros notificadorErros) : base(notificadorErros)
+    {
+        _moradorService = moradorService;
+    }
 
-//     [HttpGet]
-//     public async Task<ActionResult<IEnumerable<MoradorDTO>>> ObterTodosMoradores()
-//     {
-//         var moradores = await _moradorService.ObterTodosMoradoresAsync();
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<MoradorDTO>>> ObterTodosMoradores()
+    {
+        var moradores = await _moradorService.ObterTodosMoradoresAsync();
 
-//         return CustomResponse(moradores, HttpStatusCode.OK);
-//     }
+        return CustomResponse(moradores, HttpStatusCode.OK);
+    }
 
-//     [HttpPost]
-//     public async Task<ActionResult<MoradorDTO>> Adicionar(MoradorDTO moradorDTO)
-//     {
-//         if (!ModelState.IsValid) return CustomResponse(ModelState);
+    [HttpGet("{id:int}")]
+    public async Task<ActionResult<MoradorDTO>> ObterMoradorPorId(int id)
+    {
+        var morador = await _moradorService.ObterMoradorPorIdAsync(id);
 
-//         var nomeImagem = $"{Guid.NewGuid() + "_" + moradorDTO.Foto}";
-//         if(!UploadArquivo(moradorDTO.FotoBase64, nomeImagem))
-//         {
-//             return CustomResponse(moradorDTO);
-//         }
+        if (morador == null)
+        {
+            NotificarErro("Morador não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
 
-//         var morador = _mapper.Map<Morador>(moradorDTO);
-//         morador.Foto = nomeImagem;
+        return CustomResponse(morador, HttpStatusCode.OK);
+    }
 
-//         var novoMorador = await _moradorService.Adicionar(morador);
+    // [HttpPost]
+    // public async Task<ActionResult<MoradorDTO>> Adicionar(MoradorDTO moradorDTO)
+    // {
+    //     if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-//         if (novoMorador == null) return CustomResponse(ModelState);
+    //     var nomeImagem = $"{Guid.NewGuid() + "_" + moradorDTO.Foto}";
+    //     if(!UploadArquivo(moradorDTO.FotoBase64, nomeImagem))
+    //     {
+    //         return CustomResponse(moradorDTO);
+    //     }
 
-//         moradorDTO = _mapper.Map<MoradorDTO>(novoMorador);
+    //     var morador = _mapper.Map<Morador>(moradorDTO);
+    //     morador.Foto = nomeImagem;
 
-//         return CustomResponse(moradorDTO);
-//     }
+    //     var novoMorador = await _moradorService.Adicionar(morador);
 
-//     private bool UploadArquivo(string arquivo, string nomeImagem)
-//     {
-//         if (string.IsNullOrEmpty(arquivo))
-//         {
-//             NotificarErro("Forneça uma imagem para este morador!");
-//             return false;
-//         }
+    //     if (novoMorador == null) return CustomResponse(ModelState);
 
-//         var imageDataByteArray = Convert.FromBase64String(arquivo);
+    //     moradorDTO = _mapper.Map<MoradorDTO>(novoMorador);
 
-//         var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", nomeImagem);
+    //     return CustomResponse(moradorDTO);
+    // }
 
-//         if (System.IO.File.Exists(filePath))
-//         {
-//             NotificarErro("Já existe um arquivo com este nome!");
-//             return false;
-//         }
+    private bool UploadArquivo(string arquivo, string nomeImagem)
+    {
+        if (string.IsNullOrEmpty(arquivo))
+        {
+            NotificarErro("Forneça uma imagem para este morador!");
+            return false;
+        }
 
-//         System.IO.File.WriteAllBytes(filePath, imageDataByteArray);
+        var imageDataByteArray = Convert.FromBase64String(arquivo);
 
-//         return true;
-//     }
-// }
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", nomeImagem);
+
+        if (System.IO.File.Exists(filePath))
+        {
+            NotificarErro("Já existe um arquivo com este nome!");
+            return false;
+        }
+
+        System.IO.File.WriteAllBytes(filePath, imageDataByteArray);
+
+        return true;
+    }
+}
