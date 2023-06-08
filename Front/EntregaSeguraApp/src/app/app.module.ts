@@ -43,6 +43,8 @@ import { TransportadoraDetalheComponent } from './components/transportadoras/tra
 import { UnidadesComponent } from './components/unidades/unidades.component';
 import { UnidadeListaComponent } from './components/unidades/unidade-lista/unidade-lista.component';
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
+import { MoradoresComponent } from './components/moradores/moradores.component';
+import { MoradoresListaComponent } from './components/moradores/moradores-lista/moradores-lista.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 
@@ -66,6 +68,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
+import { MoradorService } from './services/morador/morador.service';
 
 registerLocaleData(ptBr)
 
@@ -88,7 +91,9 @@ registerLocaleData(ptBr)
     SuporteComponent,
     ConfirmacaoDialogComponent,
     FormatarTelefonePipe,
-    FormatarCnpjPipe
+    FormatarCnpjPipe,
+    MoradoresComponent,
+    MoradoresListaComponent
   ],
   imports: [
     // Angular modules
@@ -141,6 +146,7 @@ registerLocaleData(ptBr)
     CondominioService,
     UnidadeService,
     TransportadoraService,
+    MoradorService,
     TratamentoErrosService
   ],
   bootstrap: [AppComponent],

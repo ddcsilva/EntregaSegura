@@ -1,0 +1,84 @@
+<app-titulo [icone]="'people'" [titulo]="titulo"></app-titulo>
+
+<div class="row">
+    <div class="col-md-2">
+        <button mat-raised-button routerLink="detalhe">
+            <mat-icon>add</mat-icon>
+            Novo
+        </button>
+    </div>
+    <div class="col-md-4 offset-md-6">
+        <mat-form-field>
+            <mat-label>Buscar por...</mat-label>
+            <input matInput placeholder="Buscar..." #input>
+        </mat-form-field>
+    </div>
+</div>
+
+<br>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+
+        <!-- As colunas de tabela são semelhantes à Transportadora, mas com os campos Morador -->
+        
+        <!-- Index Column -->
+        <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.id}} </td>
+        </ng-container>
+
+        <!-- Nome Column -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef> Nome </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.nome}} </td>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.email}} </td>
+        </ng-container>
+
+        <!-- Telefone Column -->
+        <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef> Telefone </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.telefone}} </td>
+        </ng-container>
+
+        <!-- Ramal Column -->
+        <ng-container matColumnDef="ramal">
+            <th mat-header-cell *matHeaderCellDef> Ramal </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.ramal}} </td>
+        </ng-container>
+
+        <!-- Condomínio Column -->
+        <ng-container matColumnDef="nomeCondominio">
+            <th mat-header-cell *matHeaderCellDef> Condomínio </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.nomeCondominio}} </td>
+        </ng-container>
+
+        <!-- Unidade Column -->
+        <ng-container matColumnDef="blocoAndarUnidade">
+            <th mat-header-cell *matHeaderCellDef> Unidade </th>
+            <td mat-cell *matCellDef="let morador"> {{morador.blocoAndarUnidade}} </td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let morador">
+                <button mat-icon-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunasExibidas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunasExibidas;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

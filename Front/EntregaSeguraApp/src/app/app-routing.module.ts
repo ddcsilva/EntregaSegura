@@ -11,6 +11,8 @@ import { UnidadesComponent } from './components/unidades/unidades.component';
 import { UnidadeListaComponent } from './components/unidades/unidade-lista/unidade-lista.component';
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
+import { MoradoresComponent } from './components/moradores/moradores.component';
+import { MoradoresListaComponent } from './components/moradores/moradores-lista/moradores-lista.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,14 @@ const routes: Routes = [
     path: 'unidades', component: UnidadesComponent,
     children: [
       { path: '', component: UnidadeListaComponent },
+      { path: 'detalhe', component: UnidadeDetalheComponent },
+      { path: 'detalhe/:id', component: UnidadeDetalheComponent }
+    ],
+  },
+  {
+    path: 'moradores', component: MoradoresComponent,
+    children: [
+      { path: '', component: MoradoresListaComponent },
       { path: 'detalhe', component: UnidadeDetalheComponent },
       { path: 'detalhe/:id', component: UnidadeDetalheComponent }
     ],
