@@ -1,4 +1,3 @@
-// using AutoMapper;
 // using EntregaSegura.Application.DTOs;
 // using EntregaSegura.Application.Interfaces;
 // using EntregaSegura.Domain.Entities;
@@ -10,14 +9,19 @@
 // public class MoradoresController : MainController
 // {
 //     private readonly IMoradorService _moradorService;
-//     private readonly IMapper _mapper;
 
 //     public MoradoresController(IMoradorService moradorService,
-//                                IMapper mapper,
 //                                INotificadorErros notificadorErros) : base(notificadorErros)
 //     {
 //         _moradorService = moradorService;
-//         _mapper = mapper;
+//     }
+
+//     [HttpGet]
+//     public async Task<ActionResult<IEnumerable<MoradorDTO>>> ObterTodosMoradores()
+//     {
+//         var moradores = await _moradorService.ObterTodosMoradoresAsync();
+
+//         return CustomResponse(moradores, HttpStatusCode.OK);
 //     }
 
 //     [HttpPost]

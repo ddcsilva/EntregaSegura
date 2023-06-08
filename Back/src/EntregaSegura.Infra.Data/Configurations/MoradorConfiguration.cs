@@ -27,7 +27,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnType("varchar(100)")
             .HasComment("Nome do morador");
 
-        builder.Property(m => m.CPF)
+        builder.Property(m => m.Cpf)
             .HasColumnName("MOR_CPF")
             .HasColumnOrder(3)
             .IsRequired()
@@ -94,7 +94,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasConstraintName("FK_MORADORES_ENTREGAS")
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasIndex(m => m.CPF)
+        builder.HasIndex(m => m.Cpf)
             .HasDatabaseName("IX_MORADORES_CPF")
             .IsUnique();
 

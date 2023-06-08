@@ -95,7 +95,7 @@ public static class ModelBuilderExtensions
         {
             UnidadeId = 1,
             Nome = "Morador Teste 1",
-            CPF = "12345678901",
+            Cpf = "12345678901",
             Email = "morador1@teste.com",
             Telefone = "1234567890",
             Ramal = "123",
@@ -106,7 +106,7 @@ public static class ModelBuilderExtensions
         {
             UnidadeId = 2,
             Nome = "Morador Teste 2",
-            CPF = "12345678902",
+            Cpf = "12345678902",
             Email = "morador2@teste.com",
             Telefone = "1234567891",
             Ramal = "456",

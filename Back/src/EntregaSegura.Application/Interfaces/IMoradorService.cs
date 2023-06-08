@@ -1,16 +1,13 @@
-using EntregaSegura.Domain.Entities;
+using EntregaSegura.Application.DTOs;
 
 namespace EntregaSegura.Application.Interfaces;
 
 public interface IMoradorService
 {
-    Task<Morador> Adicionar(Morador morador);
-    Task<Morador> Atualizar(Morador morador);
-    Task<bool> Remover(int id);
-    Task<IEnumerable<Morador>> ObterTodosAsync();
-    Task<Morador> ObterPorIdAsync(int id);
-    Task<Morador> ObterPorNomeAsync(string nome);
-    Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId);
-    Task<Morador> ObterMoradorComEntregasAsync(int moradorId);
-    Task<Morador> ObterMoradorComUnidadeAsync(int moradorId);
+    Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresAsync();
+    Task<MoradorDTO> ObterMoradorPorIdAsync(int id);
+
+    Task AdicionarAsync(MoradorDTO morador);
+    Task AtualizarAsync(MoradorDTO morador);
+    Task RemoverAsync(int id);
 }

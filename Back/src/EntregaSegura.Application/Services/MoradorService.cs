@@ -1,102 +1,155 @@
-// using EntregaSegura.Application.Interfaces;
-// using EntregaSegura.Domain.Entities;
-// using EntregaSegura.Domain.Interfaces.Repositories;
-// using EntregaSegura.Domain.Validators;
-// using EntregaSegura.Infrastructure.UnitOfWork;
+using AutoMapper;
+using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Interfaces;
+using EntregaSegura.Domain.Validations;
+using EntregaSegura.Infra.Data.UnitOfWork;
 
-// namespace EntregaSegura.Application.Services;
+namespace EntregaSegura.Application.Services;
 
-// public class MoradorService : BaseService, IMoradorService
-// {
-//     private readonly IMoradorRepository _moradorRepository;
+public class MoradorService : BaseService, IMoradorService
+{
+    private readonly IMoradorRepository _moradorRepository;
+    private readonly IMapper _mapper;
 
-//     public MoradorService(IMoradorRepository moradorRepository,
-//                           IUnitOfWork unitOfWork,
-//                           INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
-//     {
-//         _moradorRepository = moradorRepository;
-//     }
+    public MoradorService(IMoradorRepository moradorRepository,
+                          IUnitOfWork unitOfWork,
+                          IMapper mapper,
+                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
 
-//     public async Task<Morador> Adicionar(Morador morador)
-//     {
-//         if (!ExecutarValidacao(new MoradorValidator(), morador)) return null;
+    {
+        _moradorRepository = moradorRepository;
+        _mapper = mapper;
+    }
 
-//         if (_moradorRepository.BuscarAsync(m => m.CPF == morador.CPF).Result.Any())
-//         {
-//             Notificar("Já existe um morador com este CPF.");
-//             return null;
-//         }
+    public async Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresAsync()
+    {
+        var moradores = await _moradorRepository.ObterTodosMoradoresAsync();
+        return _mapper.Map<IEnumerable<MoradorDTO>>(moradores);
+    }
 
-//         _moradorRepository.Adicionar(morador);
-//         await CommitAsync();
+    public async Task<MoradorDTO> ObterMoradorPorIdAsync(int id)
+    {
+        var morador = await _moradorRepository.ObterMoradorPorIdAsync(id);
+        return _mapper.Map<MoradorDTO>(morador);
+    }
 
-//         return morador;
-//     }
+    public async Task AdicionarAsync(MoradorDTO moradorDTO)
+    {
+        var morador = _mapper.Map<Morador>(moradorDTO);
 
-//     public async Task<Morador> Atualizar(Morador morador)
-//     {
-//         if (!ExecutarValidacao(new MoradorValidator(), morador)) return null;
+        if (!ExecutarValidacao(new MoradorValidator(), morador))
+        {
+            return;
+        }
 
-//         if (_moradorRepository.BuscarAsync(m => m.CPF == morador.CPF && m.Id != morador.Id).Result.Any())
-//         {
-//             Notificar("Já existe um morador com este CPF.");
-//             return null;
-//         }
+        var cpfExistente = _moradorRepository.BuscarAsync(m => m.Cpf == morador.Cpf).Result.Any();
+        if (cpfExistente)
+        {
+            Notificar("Já existe um morador com este CPF informado.");
+        }
 
-//         _moradorRepository.Atualizar(morador);
-//         await CommitAsync();
+        var nomeExistente = _moradorRepository.BuscarAsync(m => m.Nome == morador.Nome).Result.Any();
+        if (nomeExistente)
+        {
+            Notificar("Já existe um morador com este nome informado.");
+        }
 
-//         return morador;
-//     }
+        var emailExistente = _moradorRepository.BuscarAsync(m => m.Email == morador.Email).Result.Any();
+        if (emailExistente)
+        {
+            Notificar("Já existe um morador com este e-mail informado.");
+        }
 
-//     public async Task<bool> Remover(int id)
-//     {
-//         var morador = await _moradorRepository.ObterPorIdAsync(id);
+        if (TemNotificacoes())
+        {
+            return;
+        }
 
-//         if (morador == null)
-//         {
-//             Notificar("Morador não encontrado.");
-//             return false;
-//         }
+        _moradorRepository.Adicionar(morador);
+        var resultadoOperacao = await _unitOfWork.CommitAsync();
 
-//         _moradorRepository.Remover(morador);
-//         await CommitAsync();
+        if (resultadoOperacao <= 0)
+        {
+            Notificar("Erro ao tentar adicionar morador.");
+            return;
+        }
 
-//         return true;
-//     }
+        moradorDTO.Id = morador.Id;
+    }
 
-//     public async Task<IEnumerable<Morador>> ObterTodosAsync()
-//     {
-//         return await _moradorRepository.ObterTodosAsync();
-//     }
+    public async Task AtualizarAsync(MoradorDTO moradorDTO)
+    {
+        var morador = _mapper.Map<Morador>(moradorDTO);
 
-//     public async Task<Morador> ObterPorIdAsync(int id)
-//     {
-//         return await _moradorRepository.ObterPorIdAsync(id);
-//     }
+        if (!ExecutarValidacao(new MoradorValidator(), morador))
+        {
+            return;
+        }
 
-//     public async Task<Morador> ObterPorNomeAsync(string nome)
-//     {
-//         return await _moradorRepository.ObterPorNomeAsync(nome);
-//     }
+        var cpfExistente = _moradorRepository.BuscarAsync(m => m.Cpf == morador.Cpf && m.Id != morador.Id).Result.Any();
+        if (cpfExistente)
+        {
+            Notificar("Já existe um morador com este CPF informado.");
+        }
 
-//     public async Task<Morador> ObterMoradorComEntregasAsync(int moradorId)
-//     {
-//         return await _moradorRepository.ObterMoradorComEntregasAsync(moradorId);
-//     }
+        var nomeExistente = _moradorRepository.BuscarAsync(m => m.Nome == morador.Nome && m.Id != morador.Id).Result.Any();
+        if (nomeExistente)
+        {
+            Notificar("Já existe um morador com este nome informado.");
+        }
 
-//     public async Task<IEnumerable<Morador>> ObterMoradoresPorUnidadeAsync(int unidadeId)
-//     {
-//         return await _moradorRepository.ObterMoradoresPorUnidadeAsync(unidadeId);
-//     }
+        var emailExistente = _moradorRepository.BuscarAsync(m => m.Email == morador.Email && m.Id != morador.Id).Result.Any();
+        if (emailExistente)
+        {
+            Notificar("Já existe um morador com este e-mail informado.");
+        }
 
-//     public async Task<Morador> ObterMoradorComUnidadeAsync(int moradorId)
-//     {
-//         return await _moradorRepository.ObterMoradorComUnidadeAsync(moradorId);
-//     }
+        if (TemNotificacoes())
+        {
+            return;
+        }
 
-//     public void Dispose()
-//     {
-//         _unitOfWork?.Dispose();
-//     }
-// }
+        _moradorRepository.Atualizar(morador);
+        var resultadoOperacao = await _unitOfWork.CommitAsync();
+
+        if (resultadoOperacao <= 0)
+        {
+            Notificar("Erro ao tentar atualizar morador.");
+            return;
+        }
+    }
+
+    public async Task RemoverAsync(int id)
+    {
+        var morador = _moradorRepository.ObterMoradorPorIdAsync(id).Result;
+
+        if (morador == null)
+        {
+            Notificar("Morador não encontrado.");
+            return;
+        }
+
+        _moradorRepository.Remover(morador);
+
+        try
+        {
+            var resultadoOperacao = await _unitOfWork.CommitAsync();
+
+            if (resultadoOperacao <= 0)
+            {
+                Notificar("Erro ao tentar remover morador.");
+            }
+        }
+        catch (Exception)
+        {
+            Notificar("Ocorreu um erro inesperado. Favor, contate o administrador.");
+        }
+    }
+
+    public void Dispose()
+    {
+        _unitOfWork?.Dispose();
+    }
+}
