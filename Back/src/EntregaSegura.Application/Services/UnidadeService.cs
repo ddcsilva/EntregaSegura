@@ -25,9 +25,9 @@ public class UnidadeService : BaseService, IUnidadeService
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync()
+    public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync(bool incluirCondominio, bool rastrearAlteracoes)
     {
-        var unidades = await _unidadeRepository.ObterTodasUnidadesAsync();
+        var unidades = await _unidadeRepository.ObterTodasUnidadesAsync(incluirCondominio, rastrearAlteracoes);
         return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
     }
 

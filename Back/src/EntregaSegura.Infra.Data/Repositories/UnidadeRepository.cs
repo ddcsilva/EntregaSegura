@@ -17,10 +17,20 @@ public class UnidadeRepository : IUnidadeRepository
         _dbSet = _context.Set<Unidade>();
     }
 
-    public async Task<IEnumerable<Unidade>> ObterTodasUnidadesAsync()
+    public async Task<IEnumerable<Unidade>> ObterTodasUnidadesAsync(bool incluirCondominio, bool rastrearAlteracoes)
     {
-        var unidades = await _dbSet.AsNoTracking().ToListAsync();
-        return unidades;
+        if (incluirCondominio)
+        {
+            return !rastrearAlteracoes
+                ? await _dbSet.AsNoTracking().Include(u => u.Condominio).ToListAsync()
+                : await _dbSet.Include(u => u.Condominio).ToListAsync();
+        }
+        else
+        {
+            return !rastrearAlteracoes
+                ? await _dbSet.AsNoTracking().ToListAsync()
+                : await _dbSet.ToListAsync();
+        }
     }
 
     public async Task<IEnumerable<Unidade>> ObterTodasUnidadesComCondominioAsync()

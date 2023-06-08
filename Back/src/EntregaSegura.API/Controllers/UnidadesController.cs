@@ -20,15 +20,7 @@ public class UnidadesController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidades()
     {
-        var unidades = await _unidadeService.ObterTodasUnidadesAsync();
-
-        return CustomResponse(unidades, HttpStatusCode.OK);
-    }
-
-    [HttpGet("com-condominio")]
-    public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidadesComCondominio()
-    {
-        var unidades = await _unidadeService.ObterTodasUnidadesComCondominioAsync();
+        var unidades = await _unidadeService.ObterTodasUnidadesAsync(incluirCondominio: true, rastrearAlteracoes: false);
 
         return CustomResponse(unidades, HttpStatusCode.OK);
     }
@@ -91,7 +83,7 @@ public class UnidadesController : MainController
 
         return CustomResponse(unidadeDTO, HttpStatusCode.OK);
     }
-    
+
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Remover(int id)
     {
