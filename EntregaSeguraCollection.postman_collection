@@ -1,0 +1,525 @@
+{
+	"info": {
+		"_postman_id": "ad2a26cf-48d9-45e6-bc9e-81fdafbde6a0",
+		"name": "Sistema de Gerenciamento de Entregas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7845618"
+	},
+	"item": [
+		{
+			"name": "GET",
+			"item": [
+				{
+					"name": "Condomínios",
+					"item": [
+						{
+							"name": "Obter Todos os Condomínios",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/condominios",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"condominios"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Condomínio por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/condominios/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"condominios",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entregas",
+					"item": []
+				},
+				{
+					"name": "Funcionários",
+					"item": []
+				},
+				{
+					"name": "Moradores",
+					"item": [
+						{
+							"name": "Obter Todas os Moradores",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/moradores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"moradores"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Morador por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/moradores/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"moradores",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Transportadoras",
+					"item": [
+						{
+							"name": "Obter Todas as Transportadoras",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/transportadoras",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"transportadoras"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Transportadora por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/transportadoras/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"transportadoras",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Unidades",
+					"item": [
+						{
+							"name": "Obter Todas as Unidades",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/unidades",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obter Unidade por ID",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/unidades/1",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "POST",
+			"item": [
+				{
+					"name": "Condomínios",
+					"item": [
+						{
+							"name": "Incluir Condomínio",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nome\": \"Condomínio das Flores\",\r\n    \"CNPJ\": \"02664444000157\",\r\n    \"Telefone\": \"12996762807\",\r\n    \"Email\": \"condominio@teste.com.br\",\r\n    \"CEP\": \"12345678\",\r\n    \"Logradouro\": \"Rua das Palmeiras\",\r\n    \"Numero\": \"123\",\r\n    \"Complemento\": \"Apto 456\",\r\n    \"Bairro\": \"Jardim das Flores\",\r\n    \"Cidade\": \"Cidade das Flores\",\r\n    \"Estado\": \"SP\",\r\n    \"QuantidadeBlocos\": 1,\r\n    \"QuantidadeAndares\": 7,\r\n    \"QuantidadeUnidades\": 4,\r\n    \"Unidades\": [],\r\n    \"Funcionarios\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/condominios",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"condominios"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entregas",
+					"item": []
+				},
+				{
+					"name": "Funcionários",
+					"item": []
+				},
+				{
+					"name": "Login",
+					"item": []
+				},
+				{
+					"name": "Moradores",
+					"item": []
+				},
+				{
+					"name": "Transportadoras",
+					"item": [
+						{
+							"name": "Incluir Transportadora",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nome\": \"Transportadora Teste 2\",\r\n    \"CNPJ\": \"\",\r\n    \"Telefone\": \"\",\r\n    \"Email\": \"transportadora2@teste.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/transportadoras",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"transportadoras"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Unidades",
+					"item": [
+						{
+							"name": "Incluir Unidades em Massa",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CondominioId\": 2,\r\n    \"QuantidadeBlocos\": 5,\r\n    \"QuantidadeAndaresPorBloco\": 10,\r\n    \"QuantidadeUnidadesPorAndar\": 2\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/unidades/em-massa",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades",
+										"em-massa"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Incluir Unidades",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"bloco\": \"1\",\r\n  \"andar\": 1,\r\n  \"numero\": 10,\r\n  \"condominioId\": 1\r\n}\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/unidades/",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades",
+										""
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "PUT",
+			"item": [
+				{
+					"name": "Condomínios",
+					"item": [
+						{
+							"name": "Atualizar Condomínio",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id\": \"3\",\r\n    \"Nome\": \"Condomínio das Flores 2\",\r\n    \"CNPJ\": \"02664444000157\",\r\n    \"Telefone\": \"12996762807\",\r\n    \"Email\": \"condominio@teste.com.br\",\r\n    \"CEP\": \"12345678\",\r\n    \"Logradouro\": \"Rua das Palmeiras\",\r\n    \"Numero\": \"123\",\r\n    \"Complemento\": \"Apto 456\",\r\n    \"Bairro\": \"Jardim das Flores\",\r\n    \"Cidade\": \"Cidade das Flores\",\r\n    \"Estado\": \"SP\",\r\n    \"QuantidadeBlocos\": 1,\r\n    \"QuantidadeAndares\": 7,\r\n    \"QuantidadeUnidades\": 4,\r\n    \"Unidades\": [],\r\n    \"Funcionarios\": []\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/condominios/3",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"condominios",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entregas",
+					"item": []
+				},
+				{
+					"name": "Funcionários",
+					"item": []
+				},
+				{
+					"name": "Moradores",
+					"item": []
+				},
+				{
+					"name": "Transportadoras",
+					"item": []
+				},
+				{
+					"name": "Unidades",
+					"item": [
+						{
+							"name": "Atualizar Unidade",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"id\": 297,\r\n  \"bloco\": \"1\",\r\n  \"andar\": 1,\r\n  \"numero\": 9,\r\n  \"condominioId\": 1\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/unidades/297",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades",
+										"297"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "DELETE",
+			"item": [
+				{
+					"name": "Condomínios",
+					"item": [
+						{
+							"name": "Remover Condomínio",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/condominios/11",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"condominios",
+										"11"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Entregas",
+					"item": []
+				},
+				{
+					"name": "Funcionários",
+					"item": []
+				},
+				{
+					"name": "Moradores",
+					"item": []
+				},
+				{
+					"name": "Transportadoras",
+					"item": []
+				},
+				{
+					"name": "Unidades",
+					"item": [
+						{
+							"name": "Remover Unidade",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/unidades/297",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"unidades",
+										"297"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
