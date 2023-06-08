@@ -21,6 +21,7 @@ public class UnidadeService : BaseService, IUnidadeService
                           INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
     {
         _unidadeRepository = unidadeRepository;
+        _condominioRepository = condominioRepository;
         _mapper = mapper;
     }
 
@@ -127,19 +128,19 @@ public class UnidadeService : BaseService, IUnidadeService
 
     public async Task AtualizarAsync(UnidadeDTO unidadeDTO)
     {
-        var unidadeExistente = await _unidadeRepository.ObterUnidadePorIdAsync(unidadeDTO.Id);
-        if (unidadeExistente == null)
-        {
-            Notificar("A unidade especificada não existe.");
-            return;
-        }
-
         var unidade = _mapper.Map<Unidade>(unidadeDTO);
 
         if (!ExecutarValidacao(new UnidadeValidator(), unidade))
         {
             return;
         }
+
+        // var unidadeExistente = await _unidadeRepository.ObterUnidadePorIdAsync(unidadeDTO.Id);
+        // if (unidadeExistente == null)
+        // {
+        //     Notificar("A unidade especificada não existe.");
+        //     return;
+        // }
 
         if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && u.Id != unidade.Id).Result.Any())
         {
@@ -164,7 +165,12 @@ public class UnidadeService : BaseService, IUnidadeService
         }
 
         _unidadeRepository.Atualizar(unidade);
-        await _unitOfWork.CommitAsync();
+        var resultadoOperacao = await CommitAsync();
+
+        if (resultadoOperacao == 0)
+        {
+            Notificar("Ocorreu um erro ao atualizar a unidade.");
+        }
     }
 
 

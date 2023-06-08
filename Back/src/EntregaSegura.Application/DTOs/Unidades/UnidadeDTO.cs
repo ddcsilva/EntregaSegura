@@ -15,8 +15,7 @@ public class UnidadeDTO
     public int Andar { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(5, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 1)]
-    public string Numero { get; set; }
+    public int Numero { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public int CondominioId { get; set; }
