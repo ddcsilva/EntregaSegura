@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntregaSegura.Infra.Data.Migrations
 {
     [DbContext(typeof(EntregaSeguraContext))]
-    [Migration("20230607011647_Initial")]
-    partial class Initial
+    [Migration("20230608040558_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,8 +163,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cep = "04567010",
                             Cidade = "São Paulo",
                             Cnpj = "17540623000150",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1467),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1458),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(4879),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(4870),
                             Email = "contato@boavista.com.br",
                             Estado = "SP",
                             Logradouro = "Rua das Acácias",
@@ -182,8 +182,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cep = "22021001",
                             Cidade = "Rio de Janeiro",
                             Cnpj = "27004428000169",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1474),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1474),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(4886),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(4885),
                             Email = "contato@raiodesol.com.br",
                             Estado = "RJ",
                             Logradouro = "Avenida Atlântica",
@@ -286,9 +286,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2342),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2342),
-                            DataRecebimento = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2342),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5794),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5794),
+                            DataRecebimento = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5795),
                             Descricao = "Entrega Teste 1",
                             FuncionarioId = 1,
                             MoradorId = 1,
@@ -299,9 +299,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2346),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2345),
-                            DataRecebimento = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2346),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5797),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5797),
+                            DataRecebimento = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5797),
                             Descricao = "Entrega Teste 2",
                             FuncionarioId = 2,
                             MoradorId = 2,
@@ -412,9 +412,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                             CPF = "12345678903",
                             Cargo = 3,
                             CondominioId = 1,
-                            DataAdmissao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2312),
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2312),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2311),
+                            DataAdmissao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5765),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5764),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5764),
                             Email = "funcionario1@teste.com",
                             Nome = "Funcionario Teste 1",
                             Telefone = "1234567892"
@@ -425,9 +425,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                             CPF = "12345678904",
                             Cargo = 2,
                             CondominioId = 2,
-                            DataAdmissao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2315),
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2314),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2314),
+                            DataAdmissao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5768),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5767),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5767),
                             Email = "funcionario2@teste.com",
                             Nome = "Funcionario Teste 2",
                             Telefone = "1234567893"
@@ -524,8 +524,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 1,
                             CPF = "12345678901",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2294),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2294),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5745),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5744),
                             Email = "morador1@teste.com",
                             Foto = "foto1.jpg",
                             Nome = "Morador Teste 1",
@@ -537,8 +537,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 2,
                             CPF = "12345678902",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2298),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2297),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5748),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5748),
                             Email = "morador2@teste.com",
                             Foto = "foto2.jpg",
                             Nome = "Morador Teste 2",
@@ -629,8 +629,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 1,
                             Cnpj = "12345678912347",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2328),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2328),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5780),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5780),
                             Email = "transportadora1@teste.com",
                             Nome = "Transportadora Teste 1",
                             Telefone = "1234567894"
@@ -639,8 +639,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 2,
                             Cnpj = "12345678912348",
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2330),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2330),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5782),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5782),
                             Email = "transportadora2@teste.com",
                             Nome = "Transportadora Teste 2",
                             Telefone = "1234567895"
@@ -713,8 +713,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1576),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1575),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5018),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5017),
                             Numero = 1
                         },
                         new
@@ -723,8 +723,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1588),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1587),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5029),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5028),
                             Numero = 2
                         },
                         new
@@ -733,8 +733,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1590),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1589),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5030),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5030),
                             Numero = 3
                         },
                         new
@@ -743,8 +743,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1591),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1591),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5032),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5031),
                             Numero = 4
                         },
                         new
@@ -753,8 +753,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1593),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1592),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5033),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5033),
                             Numero = 1
                         },
                         new
@@ -763,8 +763,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1596),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1595),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5037),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5036),
                             Numero = 2
                         },
                         new
@@ -773,8 +773,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1597),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1597),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5038),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5038),
                             Numero = 3
                         },
                         new
@@ -783,8 +783,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1599),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1598),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5040),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5039),
                             Numero = 4
                         },
                         new
@@ -793,8 +793,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1600),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1600),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5041),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5041),
                             Numero = 1
                         },
                         new
@@ -803,8 +803,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1602),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1602),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5043),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5043),
                             Numero = 2
                         },
                         new
@@ -813,8 +813,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1604),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1603),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5045),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5044),
                             Numero = 3
                         },
                         new
@@ -823,8 +823,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1605),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1605),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5046),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5046),
                             Numero = 4
                         },
                         new
@@ -833,8 +833,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1607),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1606),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5047),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5047),
                             Numero = 1
                         },
                         new
@@ -843,8 +843,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1608),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1608),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5049),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5048),
                             Numero = 2
                         },
                         new
@@ -853,8 +853,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1609),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1609),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5050),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5050),
                             Numero = 3
                         },
                         new
@@ -863,8 +863,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1611),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1610),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5051),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5051),
                             Numero = 4
                         },
                         new
@@ -873,8 +873,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1612),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1612),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5053),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5052),
                             Numero = 1
                         },
                         new
@@ -883,8 +883,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1614),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1614),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5055),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5054),
                             Numero = 2
                         },
                         new
@@ -893,8 +893,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1616),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1615),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5056),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5056),
                             Numero = 3
                         },
                         new
@@ -903,8 +903,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1617),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1617),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5057),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5057),
                             Numero = 4
                         },
                         new
@@ -913,8 +913,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1619),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1618),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5059),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5059),
                             Numero = 1
                         },
                         new
@@ -923,8 +923,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1620),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1619),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5060),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5060),
                             Numero = 2
                         },
                         new
@@ -933,8 +933,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1621),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1621),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5094),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5093),
                             Numero = 3
                         },
                         new
@@ -943,8 +943,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1623),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1622),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5096),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5096),
                             Numero = 4
                         },
                         new
@@ -953,8 +953,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1624),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1624),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5097),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5097),
                             Numero = 1
                         },
                         new
@@ -963,8 +963,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1625),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1625),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5099),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5098),
                             Numero = 2
                         },
                         new
@@ -973,8 +973,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1667),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1667),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5100),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5100),
                             Numero = 3
                         },
                         new
@@ -983,8 +983,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1669),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1668),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5101),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5101),
                             Numero = 4
                         },
                         new
@@ -993,8 +993,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1671),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1670),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5103),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5102),
                             Numero = 1
                         },
                         new
@@ -1003,8 +1003,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1672),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1671),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5104),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5104),
                             Numero = 2
                         },
                         new
@@ -1013,8 +1013,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1673),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1673),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5105),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5105),
                             Numero = 3
                         },
                         new
@@ -1023,8 +1023,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1674),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1674),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5107),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5106),
                             Numero = 4
                         },
                         new
@@ -1033,8 +1033,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1676),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1676),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5108),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5108),
                             Numero = 1
                         },
                         new
@@ -1043,8 +1043,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1678),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1678),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5110),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5110),
                             Numero = 2
                         },
                         new
@@ -1053,8 +1053,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1680),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1679),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5112),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5111),
                             Numero = 3
                         },
                         new
@@ -1063,8 +1063,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1681),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1680),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5113),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5113),
                             Numero = 4
                         },
                         new
@@ -1073,8 +1073,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1682),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1682),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5114),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5114),
                             Numero = 1
                         },
                         new
@@ -1083,8 +1083,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1684),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1683),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5116),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5115),
                             Numero = 2
                         },
                         new
@@ -1093,8 +1093,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1685),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1685),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5117),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5116),
                             Numero = 3
                         },
                         new
@@ -1103,8 +1103,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1686),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1686),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5118),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5118),
                             Numero = 4
                         },
                         new
@@ -1113,8 +1113,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1688),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1688),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5120),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5119),
                             Numero = 1
                         },
                         new
@@ -1123,8 +1123,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1689),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1689),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5121),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5120),
                             Numero = 2
                         },
                         new
@@ -1133,8 +1133,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1691),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1690),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5122),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5122),
                             Numero = 3
                         },
                         new
@@ -1143,8 +1143,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1692),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1691),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5123),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5123),
                             Numero = 4
                         },
                         new
@@ -1153,8 +1153,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1693),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1693),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5125),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5124),
                             Numero = 1
                         },
                         new
@@ -1163,8 +1163,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1695),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1694),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5126),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5126),
                             Numero = 2
                         },
                         new
@@ -1173,8 +1173,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1696),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1695),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5127),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5127),
                             Numero = 3
                         },
                         new
@@ -1183,8 +1183,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1697),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1697),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5128),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5128),
                             Numero = 4
                         },
                         new
@@ -1193,8 +1193,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1698),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1698),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5130),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5130),
                             Numero = 1
                         },
                         new
@@ -1203,8 +1203,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1700),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1699),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5131),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5131),
                             Numero = 2
                         },
                         new
@@ -1213,8 +1213,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1701),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1701),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5133),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5132),
                             Numero = 3
                         },
                         new
@@ -1223,8 +1223,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1702),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1702),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5134),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5133),
                             Numero = 4
                         },
                         new
@@ -1233,8 +1233,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1704),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1703),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5135),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5135),
                             Numero = 1
                         },
                         new
@@ -1243,8 +1243,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1705),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1705),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5136),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5136),
                             Numero = 2
                         },
                         new
@@ -1253,8 +1253,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1706),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1706),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5138),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5137),
                             Numero = 3
                         },
                         new
@@ -1263,8 +1263,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 1,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1707),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1707),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5139),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5139),
                             Numero = 4
                         },
                         new
@@ -1273,8 +1273,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1710),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1709),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5141),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5141),
                             Numero = 1
                         },
                         new
@@ -1283,8 +1283,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1711),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1711),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5143),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5142),
                             Numero = 2
                         },
                         new
@@ -1293,8 +1293,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1713),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1712),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5144),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5144),
                             Numero = 3
                         },
                         new
@@ -1303,8 +1303,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1714),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1714),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5145),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5145),
                             Numero = 4
                         },
                         new
@@ -1313,8 +1313,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1715),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1715),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5147),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5146),
                             Numero = 5
                         },
                         new
@@ -1323,8 +1323,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1717),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1716),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5148),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5148),
                             Numero = 6
                         },
                         new
@@ -1333,8 +1333,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1718),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1717),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5149),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5149),
                             Numero = 7
                         },
                         new
@@ -1343,8 +1343,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1719),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1719),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5150),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5150),
                             Numero = 8
                         },
                         new
@@ -1353,8 +1353,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1721),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1720),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5152),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5152),
                             Numero = 1
                         },
                         new
@@ -1363,8 +1363,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1723),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1723),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5154),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5154),
                             Numero = 2
                         },
                         new
@@ -1373,8 +1373,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1725),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1724),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5156),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5155),
                             Numero = 3
                         },
                         new
@@ -1383,8 +1383,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1726),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1726),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5157),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5157),
                             Numero = 4
                         },
                         new
@@ -1393,8 +1393,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1727),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1727),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5158),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5158),
                             Numero = 5
                         },
                         new
@@ -1403,8 +1403,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1729),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1728),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5159),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5159),
                             Numero = 6
                         },
                         new
@@ -1413,8 +1413,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1730),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1729),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5161),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5160),
                             Numero = 7
                         },
                         new
@@ -1423,8 +1423,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1731),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1731),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5162),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5162),
                             Numero = 8
                         },
                         new
@@ -1433,8 +1433,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1733),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1732),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5163),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5163),
                             Numero = 1
                         },
                         new
@@ -1443,8 +1443,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1734),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1733),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5165),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5164),
                             Numero = 2
                         },
                         new
@@ -1453,8 +1453,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1735),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1735),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5166),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5166),
                             Numero = 3
                         },
                         new
@@ -1463,8 +1463,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1736),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1736),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5167),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5167),
                             Numero = 4
                         },
                         new
@@ -1473,8 +1473,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1738),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1737),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5168),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5168),
                             Numero = 5
                         },
                         new
@@ -1483,8 +1483,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1739),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1738),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5170),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5169),
                             Numero = 6
                         },
                         new
@@ -1493,8 +1493,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1740),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1740),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5171),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5170),
                             Numero = 7
                         },
                         new
@@ -1503,8 +1503,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1741),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1741),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5172),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5172),
                             Numero = 8
                         },
                         new
@@ -1513,8 +1513,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1743),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1742),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5173),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5173),
                             Numero = 1
                         },
                         new
@@ -1523,8 +1523,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1744),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1744),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5205),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5204),
                             Numero = 2
                         },
                         new
@@ -1533,8 +1533,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1745),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1745),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5206),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5206),
                             Numero = 3
                         },
                         new
@@ -1543,8 +1543,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1746),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1746),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5208),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5207),
                             Numero = 4
                         },
                         new
@@ -1553,8 +1553,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1748),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1747),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5209),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5208),
                             Numero = 5
                         },
                         new
@@ -1563,8 +1563,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1780),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1780),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5210),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5210),
                             Numero = 6
                         },
                         new
@@ -1573,8 +1573,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1782),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1781),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5211),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5211),
                             Numero = 7
                         },
                         new
@@ -1583,8 +1583,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1783),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1783),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5212),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5212),
                             Numero = 8
                         },
                         new
@@ -1593,8 +1593,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1784),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1784),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5214),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5214),
                             Numero = 1
                         },
                         new
@@ -1603,8 +1603,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1786),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1785),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5215),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5215),
                             Numero = 2
                         },
                         new
@@ -1613,8 +1613,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1787),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1787),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5216),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5216),
                             Numero = 3
                         },
                         new
@@ -1623,8 +1623,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1788),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1788),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5218),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5217),
                             Numero = 4
                         },
                         new
@@ -1633,8 +1633,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1789),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1789),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5219),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5219),
                             Numero = 5
                         },
                         new
@@ -1643,8 +1643,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1791),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1790),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5220),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5220),
                             Numero = 6
                         },
                         new
@@ -1653,8 +1653,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1792),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1792),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5221),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5221),
                             Numero = 7
                         },
                         new
@@ -1663,8 +1663,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1794),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1793),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5223),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5222),
                             Numero = 8
                         },
                         new
@@ -1673,8 +1673,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1795),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1795),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5224),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5224),
                             Numero = 1
                         },
                         new
@@ -1683,8 +1683,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1796),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1796),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5225),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5225),
                             Numero = 2
                         },
                         new
@@ -1693,8 +1693,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1798),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1797),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5226),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5226),
                             Numero = 3
                         },
                         new
@@ -1703,8 +1703,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1799),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1798),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5228),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5227),
                             Numero = 4
                         },
                         new
@@ -1713,8 +1713,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1800),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1800),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5229),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5229),
                             Numero = 5
                         },
                         new
@@ -1723,8 +1723,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1801),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1801),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5230),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5230),
                             Numero = 6
                         },
                         new
@@ -1733,8 +1733,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1803),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1802),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5231),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5231),
                             Numero = 7
                         },
                         new
@@ -1743,8 +1743,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1804),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1803),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5233),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5232),
                             Numero = 8
                         },
                         new
@@ -1753,8 +1753,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1805),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1805),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5234),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5234),
                             Numero = 1
                         },
                         new
@@ -1763,8 +1763,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1807),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1806),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5235),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5235),
                             Numero = 2
                         },
                         new
@@ -1773,8 +1773,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1808),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1807),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5237),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5236),
                             Numero = 3
                         },
                         new
@@ -1783,8 +1783,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1809),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1809),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5238),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5237),
                             Numero = 4
                         },
                         new
@@ -1793,8 +1793,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1810),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1810),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5239),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5239),
                             Numero = 5
                         },
                         new
@@ -1803,8 +1803,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1811),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1811),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5240),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5240),
                             Numero = 6
                         },
                         new
@@ -1813,8 +1813,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1813),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1812),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5241),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5241),
                             Numero = 7
                         },
                         new
@@ -1823,8 +1823,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1814),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1814),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5243),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5242),
                             Numero = 8
                         },
                         new
@@ -1833,8 +1833,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1816),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1815),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5244),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5244),
                             Numero = 1
                         },
                         new
@@ -1843,8 +1843,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1817),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1816),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5245),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5245),
                             Numero = 2
                         },
                         new
@@ -1853,8 +1853,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1818),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1818),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5247),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5246),
                             Numero = 3
                         },
                         new
@@ -1863,8 +1863,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1819),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1819),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5248),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5247),
                             Numero = 4
                         },
                         new
@@ -1873,8 +1873,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1821),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1820),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5249),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5249),
                             Numero = 5
                         },
                         new
@@ -1883,8 +1883,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1822),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1821),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5250),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5250),
                             Numero = 6
                         },
                         new
@@ -1893,8 +1893,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1823),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1823),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5251),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5251),
                             Numero = 7
                         },
                         new
@@ -1903,8 +1903,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1824),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1824),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5253),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5252),
                             Numero = 8
                         },
                         new
@@ -1913,8 +1913,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1826),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1825),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5254),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5254),
                             Numero = 1
                         },
                         new
@@ -1923,8 +1923,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1827),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1826),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5255),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5255),
                             Numero = 2
                         },
                         new
@@ -1933,8 +1933,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1828),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1828),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5257),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5256),
                             Numero = 3
                         },
                         new
@@ -1943,8 +1943,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1829),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1829),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5258),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5257),
                             Numero = 4
                         },
                         new
@@ -1953,8 +1953,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1831),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1830),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5259),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5259),
                             Numero = 5
                         },
                         new
@@ -1963,8 +1963,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1832),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1832),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5260),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5260),
                             Numero = 6
                         },
                         new
@@ -1973,8 +1973,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1833),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1833),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5261),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5261),
                             Numero = 7
                         },
                         new
@@ -1983,8 +1983,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1834),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1834),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5263),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5262),
                             Numero = 8
                         },
                         new
@@ -1993,8 +1993,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1836),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1835),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5264),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5264),
                             Numero = 1
                         },
                         new
@@ -2003,8 +2003,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1838),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1838),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5266),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5266),
                             Numero = 2
                         },
                         new
@@ -2013,8 +2013,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1839),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1839),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5268),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5267),
                             Numero = 3
                         },
                         new
@@ -2023,8 +2023,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1841),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1840),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5269),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5268),
                             Numero = 4
                         },
                         new
@@ -2033,8 +2033,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1842),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1841),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5270),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5270),
                             Numero = 5
                         },
                         new
@@ -2043,8 +2043,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1843),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1843),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5271),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5271),
                             Numero = 6
                         },
                         new
@@ -2053,8 +2053,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1844),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1844),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5272),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5272),
                             Numero = 7
                         },
                         new
@@ -2063,8 +2063,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "1",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1845),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1845),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5305),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5304),
                             Numero = 8
                         },
                         new
@@ -2073,8 +2073,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1847),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1847),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5307),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5307),
                             Numero = 1
                         },
                         new
@@ -2083,8 +2083,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1848),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1848),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5309),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5308),
                             Numero = 2
                         },
                         new
@@ -2093,8 +2093,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1850),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1849),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5310),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5310),
                             Numero = 3
                         },
                         new
@@ -2103,8 +2103,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1882),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1882),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5311),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5311),
                             Numero = 4
                         },
                         new
@@ -2113,8 +2113,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1884),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1884),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5312),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5312),
                             Numero = 5
                         },
                         new
@@ -2123,8 +2123,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1885),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1885),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5314),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5313),
                             Numero = 6
                         },
                         new
@@ -2133,8 +2133,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1887),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1886),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5315),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5315),
                             Numero = 7
                         },
                         new
@@ -2143,8 +2143,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1888),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1887),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5316),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5316),
                             Numero = 8
                         },
                         new
@@ -2153,8 +2153,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1889),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1889),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5318),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5317),
                             Numero = 1
                         },
                         new
@@ -2163,8 +2163,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1891),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1890),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5319),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5318),
                             Numero = 2
                         },
                         new
@@ -2173,8 +2173,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1892),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1892),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5320),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5320),
                             Numero = 3
                         },
                         new
@@ -2183,8 +2183,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1893),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1893),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5321),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5321),
                             Numero = 4
                         },
                         new
@@ -2193,8 +2193,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1895),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1894),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5322),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5322),
                             Numero = 5
                         },
                         new
@@ -2203,8 +2203,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1896),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1895),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5324),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5323),
                             Numero = 6
                         },
                         new
@@ -2213,8 +2213,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1897),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1897),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5325),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5325),
                             Numero = 7
                         },
                         new
@@ -2223,8 +2223,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1898),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1898),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5326),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5326),
                             Numero = 8
                         },
                         new
@@ -2233,8 +2233,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1900),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1899),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5328),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5327),
                             Numero = 1
                         },
                         new
@@ -2243,8 +2243,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1901),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1901),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5329),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5328),
                             Numero = 2
                         },
                         new
@@ -2253,8 +2253,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1902),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1902),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5330),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5330),
                             Numero = 3
                         },
                         new
@@ -2263,8 +2263,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1904),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1903),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5331),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5331),
                             Numero = 4
                         },
                         new
@@ -2273,8 +2273,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1905),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1905),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5333),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5332),
                             Numero = 5
                         },
                         new
@@ -2283,8 +2283,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1906),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1906),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5334),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5333),
                             Numero = 6
                         },
                         new
@@ -2293,8 +2293,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1907),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1907),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5335),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5335),
                             Numero = 7
                         },
                         new
@@ -2303,8 +2303,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1909),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1908),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5336),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5336),
                             Numero = 8
                         },
                         new
@@ -2313,8 +2313,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1910),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1910),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5338),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5337),
                             Numero = 1
                         },
                         new
@@ -2323,8 +2323,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1912),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1911),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5339),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5339),
                             Numero = 2
                         },
                         new
@@ -2333,8 +2333,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1913),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1912),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5340),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5340),
                             Numero = 3
                         },
                         new
@@ -2343,8 +2343,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1914),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1914),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5342),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5341),
                             Numero = 4
                         },
                         new
@@ -2353,8 +2353,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1916),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1915),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5343),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5343),
                             Numero = 5
                         },
                         new
@@ -2363,8 +2363,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1917),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1916),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5344),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5344),
                             Numero = 6
                         },
                         new
@@ -2373,8 +2373,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1918),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1918),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5345),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5345),
                             Numero = 7
                         },
                         new
@@ -2383,8 +2383,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1919),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1919),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5347),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5346),
                             Numero = 8
                         },
                         new
@@ -2393,8 +2393,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1921),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1920),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5348),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5348),
                             Numero = 1
                         },
                         new
@@ -2403,8 +2403,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1922),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1922),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5349),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5349),
                             Numero = 2
                         },
                         new
@@ -2413,8 +2413,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1923),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1923),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5350),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5350),
                             Numero = 3
                         },
                         new
@@ -2423,8 +2423,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1924),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1924),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5352),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5351),
                             Numero = 4
                         },
                         new
@@ -2433,8 +2433,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1926),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1925),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5353),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5353),
                             Numero = 5
                         },
                         new
@@ -2443,8 +2443,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1927),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1927),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5354),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5354),
                             Numero = 6
                         },
                         new
@@ -2453,8 +2453,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1928),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1928),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5355),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5355),
                             Numero = 7
                         },
                         new
@@ -2463,8 +2463,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1929),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1929),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5357),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5356),
                             Numero = 8
                         },
                         new
@@ -2473,8 +2473,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1931),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1930),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5358),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5358),
                             Numero = 1
                         },
                         new
@@ -2483,8 +2483,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1932),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1932),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5359),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5359),
                             Numero = 2
                         },
                         new
@@ -2493,8 +2493,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1933),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1933),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5360),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5360),
                             Numero = 3
                         },
                         new
@@ -2503,8 +2503,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1935),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1934),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5362),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5361),
                             Numero = 4
                         },
                         new
@@ -2513,8 +2513,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1936),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1935),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5363),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5362),
                             Numero = 5
                         },
                         new
@@ -2523,8 +2523,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1937),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1937),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5364),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5364),
                             Numero = 6
                         },
                         new
@@ -2533,8 +2533,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1938),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1938),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5365),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5365),
                             Numero = 7
                         },
                         new
@@ -2543,8 +2543,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1940),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1939),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5366),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5366),
                             Numero = 8
                         },
                         new
@@ -2553,8 +2553,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1941),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1941),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5368),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5367),
                             Numero = 1
                         },
                         new
@@ -2563,8 +2563,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1942),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1942),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5369),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5369),
                             Numero = 2
                         },
                         new
@@ -2573,8 +2573,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1944),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1943),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5370),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5370),
                             Numero = 3
                         },
                         new
@@ -2583,8 +2583,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1945),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1945),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5372),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5371),
                             Numero = 4
                         },
                         new
@@ -2593,8 +2593,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1946),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1946),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5373),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5372),
                             Numero = 5
                         },
                         new
@@ -2603,8 +2603,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1947),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1947),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5374),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5374),
                             Numero = 6
                         },
                         new
@@ -2613,8 +2613,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1949),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1948),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5375),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5375),
                             Numero = 7
                         },
                         new
@@ -2623,8 +2623,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1950),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1950),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5377),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5376),
                             Numero = 8
                         },
                         new
@@ -2633,8 +2633,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1951),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1951),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5378),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5378),
                             Numero = 1
                         },
                         new
@@ -2643,8 +2643,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1953),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1952),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5379),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5379),
                             Numero = 2
                         },
                         new
@@ -2653,8 +2653,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1954),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1954),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5380),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5380),
                             Numero = 3
                         },
                         new
@@ -2663,8 +2663,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1955),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1955),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5382),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5381),
                             Numero = 4
                         },
                         new
@@ -2673,8 +2673,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1956),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1956),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5383),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5382),
                             Numero = 5
                         },
                         new
@@ -2683,8 +2683,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1958),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1957),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5384),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5384),
                             Numero = 6
                         },
                         new
@@ -2693,8 +2693,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1959),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1959),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5385),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5385),
                             Numero = 7
                         },
                         new
@@ -2703,8 +2703,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1960),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1960),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5386),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5386),
                             Numero = 8
                         },
                         new
@@ -2713,8 +2713,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1962),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1961),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5388),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5387),
                             Numero = 1
                         },
                         new
@@ -2723,8 +2723,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1963),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1962),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5389),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5389),
                             Numero = 2
                         },
                         new
@@ -2733,8 +2733,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1964),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1964),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5390),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5390),
                             Numero = 3
                         },
                         new
@@ -2743,8 +2743,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1965),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1965),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5392),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5391),
                             Numero = 4
                         },
                         new
@@ -2753,8 +2753,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1967),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1966),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5393),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5392),
                             Numero = 5
                         },
                         new
@@ -2763,8 +2763,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1968),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1968),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5394),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5394),
                             Numero = 6
                         },
                         new
@@ -2773,8 +2773,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1969),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1969),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5395),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5395),
                             Numero = 7
                         },
                         new
@@ -2783,8 +2783,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1970),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1970),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5396),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5396),
                             Numero = 8
                         },
                         new
@@ -2793,8 +2793,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1972),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1971),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5429),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5428),
                             Numero = 1
                         },
                         new
@@ -2803,8 +2803,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1973),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1973),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5430),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5430),
                             Numero = 2
                         },
                         new
@@ -2813,8 +2813,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1974),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1974),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5432),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5431),
                             Numero = 3
                         },
                         new
@@ -2823,8 +2823,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1976),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(1975),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5433),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5432),
                             Numero = 4
                         },
                         new
@@ -2833,8 +2833,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2009),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2007),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5434),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5434),
                             Numero = 5
                         },
                         new
@@ -2843,8 +2843,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2010),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2010),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5435),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5435),
                             Numero = 6
                         },
                         new
@@ -2853,8 +2853,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2012),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2011),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5437),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5436),
                             Numero = 7
                         },
                         new
@@ -2863,8 +2863,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "2",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2013),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2013),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5438),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5437),
                             Numero = 8
                         },
                         new
@@ -2873,8 +2873,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2015),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2014),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5439),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5439),
                             Numero = 1
                         },
                         new
@@ -2883,8 +2883,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2016),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2016),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5441),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5440),
                             Numero = 2
                         },
                         new
@@ -2893,8 +2893,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2017),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2017),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5442),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5441),
                             Numero = 3
                         },
                         new
@@ -2903,8 +2903,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2018),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2018),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5443),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5443),
                             Numero = 4
                         },
                         new
@@ -2913,8 +2913,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2020),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2019),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5444),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5444),
                             Numero = 5
                         },
                         new
@@ -2923,8 +2923,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2021),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2020),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5445),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5445),
                             Numero = 6
                         },
                         new
@@ -2933,8 +2933,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2022),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2022),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5447),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5446),
                             Numero = 7
                         },
                         new
@@ -2943,8 +2943,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 1,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2023),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2023),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5448),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5448),
                             Numero = 8
                         },
                         new
@@ -2953,8 +2953,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2025),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2024),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5449),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5449),
                             Numero = 1
                         },
                         new
@@ -2963,8 +2963,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2026),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2026),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5450),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5450),
                             Numero = 2
                         },
                         new
@@ -2973,8 +2973,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2027),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2027),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5452),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5451),
                             Numero = 3
                         },
                         new
@@ -2983,8 +2983,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2029),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2028),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5453),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5453),
                             Numero = 4
                         },
                         new
@@ -2993,8 +2993,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2030),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2029),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5454),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5454),
                             Numero = 5
                         },
                         new
@@ -3003,8 +3003,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2031),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2031),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5456),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5455),
                             Numero = 6
                         },
                         new
@@ -3013,8 +3013,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2032),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2032),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5457),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5456),
                             Numero = 7
                         },
                         new
@@ -3023,8 +3023,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 2,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2034),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2033),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5458),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5458),
                             Numero = 8
                         },
                         new
@@ -3033,8 +3033,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2035),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2035),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5459),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5459),
                             Numero = 1
                         },
                         new
@@ -3043,8 +3043,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2036),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2036),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5461),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5460),
                             Numero = 2
                         },
                         new
@@ -3053,8 +3053,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2037),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2037),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5462),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5461),
                             Numero = 3
                         },
                         new
@@ -3063,8 +3063,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2039),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2038),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5463),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5463),
                             Numero = 4
                         },
                         new
@@ -3073,8 +3073,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2040),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2039),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5464),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5464),
                             Numero = 5
                         },
                         new
@@ -3083,8 +3083,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2041),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2041),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5465),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5465),
                             Numero = 6
                         },
                         new
@@ -3093,8 +3093,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2042),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2042),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5467),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5466),
                             Numero = 7
                         },
                         new
@@ -3103,8 +3103,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 3,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2044),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2043),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5468),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5467),
                             Numero = 8
                         },
                         new
@@ -3113,8 +3113,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2045),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2045),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5469),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5469),
                             Numero = 1
                         },
                         new
@@ -3123,8 +3123,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2046),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2046),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5470),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5470),
                             Numero = 2
                         },
                         new
@@ -3133,8 +3133,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2048),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2047),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5472),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5471),
                             Numero = 3
                         },
                         new
@@ -3143,8 +3143,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2049),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2049),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5473),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5472),
                             Numero = 4
                         },
                         new
@@ -3153,8 +3153,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2050),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2050),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5474),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5474),
                             Numero = 5
                         },
                         new
@@ -3163,8 +3163,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2051),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2051),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5475),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5475),
                             Numero = 6
                         },
                         new
@@ -3173,8 +3173,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2053),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2052),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5476),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5476),
                             Numero = 7
                         },
                         new
@@ -3183,8 +3183,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 4,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2054),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2054),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5478),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5477),
                             Numero = 8
                         },
                         new
@@ -3193,8 +3193,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2055),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2055),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5479),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5479),
                             Numero = 1
                         },
                         new
@@ -3203,8 +3203,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2057),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2056),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5480),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5480),
                             Numero = 2
                         },
                         new
@@ -3213,8 +3213,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2058),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2058),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5481),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5481),
                             Numero = 3
                         },
                         new
@@ -3223,8 +3223,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2059),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2059),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5483),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5482),
                             Numero = 4
                         },
                         new
@@ -3233,8 +3233,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2061),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2060),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5484),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5484),
                             Numero = 5
                         },
                         new
@@ -3243,8 +3243,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2062),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2062),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5485),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5485),
                             Numero = 6
                         },
                         new
@@ -3253,8 +3253,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2063),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2063),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5486),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5486),
                             Numero = 7
                         },
                         new
@@ -3263,8 +3263,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 5,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2065),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2064),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5488),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5487),
                             Numero = 8
                         },
                         new
@@ -3273,8 +3273,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2066),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2066),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5489),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5489),
                             Numero = 1
                         },
                         new
@@ -3283,8 +3283,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2100),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2100),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5526),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5526),
                             Numero = 2
                         },
                         new
@@ -3293,8 +3293,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2102),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2101),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5528),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5528),
                             Numero = 3
                         },
                         new
@@ -3303,8 +3303,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2103),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2103),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5529),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5529),
                             Numero = 4
                         },
                         new
@@ -3313,8 +3313,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2104),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2104),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5530),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5530),
                             Numero = 5
                         },
                         new
@@ -3323,8 +3323,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2106),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2105),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5532),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5531),
                             Numero = 6
                         },
                         new
@@ -3333,8 +3333,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2107),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2106),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5533),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5533),
                             Numero = 7
                         },
                         new
@@ -3343,8 +3343,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 6,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2108),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2108),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5534),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5534),
                             Numero = 8
                         },
                         new
@@ -3353,8 +3353,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2110),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2109),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5536),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5535),
                             Numero = 1
                         },
                         new
@@ -3363,8 +3363,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2111),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2110),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5537),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5537),
                             Numero = 2
                         },
                         new
@@ -3373,8 +3373,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2112),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2112),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5538),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5538),
                             Numero = 3
                         },
                         new
@@ -3383,8 +3383,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2114),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2113),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5539),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5539),
                             Numero = 4
                         },
                         new
@@ -3393,8 +3393,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2115),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2114),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5541),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5540),
                             Numero = 5
                         },
                         new
@@ -3403,8 +3403,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2116),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2116),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5542),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5541),
                             Numero = 6
                         },
                         new
@@ -3413,8 +3413,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2117),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2117),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5543),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5543),
                             Numero = 7
                         },
                         new
@@ -3423,8 +3423,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 7,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2119),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2118),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5544),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5544),
                             Numero = 8
                         },
                         new
@@ -3433,8 +3433,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2120),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2120),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5546),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5545),
                             Numero = 1
                         },
                         new
@@ -3443,8 +3443,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2121),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2121),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5547),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5546),
                             Numero = 2
                         },
                         new
@@ -3453,8 +3453,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2122),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2122),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5548),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5548),
                             Numero = 3
                         },
                         new
@@ -3463,8 +3463,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2124),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2123),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5549),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5549),
                             Numero = 4
                         },
                         new
@@ -3473,8 +3473,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2125),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2125),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5551),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5550),
                             Numero = 5
                         },
                         new
@@ -3483,8 +3483,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2126),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2126),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5552),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5551),
                             Numero = 6
                         },
                         new
@@ -3493,8 +3493,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2128),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2127),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5553),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5553),
                             Numero = 7
                         },
                         new
@@ -3503,8 +3503,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 8,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2129),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2128),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5554),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5554),
                             Numero = 8
                         },
                         new
@@ -3513,8 +3513,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2130),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2130),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5556),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5555),
                             Numero = 1
                         },
                         new
@@ -3523,8 +3523,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2131),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2131),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5557),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5556),
                             Numero = 2
                         },
                         new
@@ -3533,8 +3533,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2133),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2132),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5558),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5558),
                             Numero = 3
                         },
                         new
@@ -3543,8 +3543,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2134),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2134),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5559),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5559),
                             Numero = 4
                         },
                         new
@@ -3553,8 +3553,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2135),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2135),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5561),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5560),
                             Numero = 5
                         },
                         new
@@ -3563,8 +3563,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2136),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2136),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5562),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5561),
                             Numero = 6
                         },
                         new
@@ -3573,8 +3573,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2138),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2137),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5563),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5563),
                             Numero = 7
                         },
                         new
@@ -3583,8 +3583,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 9,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2139),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2139),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5564),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5564),
                             Numero = 8
                         },
                         new
@@ -3593,8 +3593,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2140),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2140),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5566),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5565),
                             Numero = 1
                         },
                         new
@@ -3603,8 +3603,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2142),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2141),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5567),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5567),
                             Numero = 2
                         },
                         new
@@ -3613,8 +3613,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2143),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2142),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5568),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5568),
                             Numero = 3
                         },
                         new
@@ -3623,8 +3623,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2144),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2144),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5570),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5569),
                             Numero = 4
                         },
                         new
@@ -3633,8 +3633,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2145),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2145),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5571),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5570),
                             Numero = 5
                         },
                         new
@@ -3643,8 +3643,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2147),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2146),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5572),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5572),
                             Numero = 6
                         },
                         new
@@ -3653,8 +3653,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2148),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2147),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5573),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5573),
                             Numero = 7
                         },
                         new
@@ -3663,10 +3663,208 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Andar = 10,
                             Bloco = "3",
                             CondominioId = 2,
-                            DataAtualizacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2149),
-                            DataCriacao = new DateTime(2023, 6, 6, 22, 16, 46, 775, DateTimeKind.Local).AddTicks(2149),
+                            DataAtualizacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5574),
+                            DataCriacao = new DateTime(2023, 6, 8, 1, 5, 58, 191, DateTimeKind.Local).AddTicks(5574),
                             Numero = 8
                         });
+                });
+
+            modelBuilder.Entity("EntregaSegura.Infra.Data.Identity.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Entrega", b =>
@@ -3733,6 +3931,57 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .HasConstraintName("FK_UNIDADES_CONDOMINIOS");
 
                     b.Navigation("Condominio");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Condominio", b =>

@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Infra.Data.Extensions;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using EntregaSegura.Infra.Data.Identity;
 
 namespace EntregaSegura.Infra.Data.Contexts;
 
-public class EntregaSeguraContext : DbContext
+public class EntregaSeguraContext : IdentityDbContext<ApplicationUser>
 {
     public EntregaSeguraContext(DbContextOptions options) : base(options) { }
 

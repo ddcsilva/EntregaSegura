@@ -6,6 +6,8 @@ using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Infra.Data.Repositories;
 using EntregaSegura.Infra.Data.UnitOfWork;
+using EntregaSegura.Domain.Interfaces.Account;
+using EntregaSegura.Infra.Data.Identity;
 
 namespace EntregaSegura.Infra.IoC;
 
@@ -26,6 +28,9 @@ public static class DependencyInjection
         // services.AddScoped<IMoradorService, MoradorService>();
         services.AddScoped<ITransportadoraService, TransportadoraService>();
         services.AddScoped<IUnidadeService, UnidadeService>();
+
+        services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+        services.AddScoped<ISeedUsersRoles, SeedUsersRoles>();
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<INotificadorErros, NotificadorErros>();

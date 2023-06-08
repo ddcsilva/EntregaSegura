@@ -2,6 +2,7 @@ using EntregaSegura.API.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using EntregaSegura.Infra.IoC;
 using EntregaSegura.Application.Mappings;
+using EntregaSegura.Domain.Interfaces.Account;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,8 @@ builder.Services.AddContexts(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddIdentityConfiguration(builder.Configuration);
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {
@@ -49,8 +52,22 @@ app.UseCors("Development");
 
 app.UseHttpsRedirection();
 
+SeedUsersRoles(app);
+
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
 app.Run();
+
+void SeedUsersRoles(IApplicationBuilder app)
+{
+    using (var serviceScope = app.ApplicationServices.CreateScope())
+    {
+        var seed = serviceScope.ServiceProvider.GetService<ISeedUsersRoles>();
+
+        seed.SeedRoles();
+        seed.SeedUsers();
+    }
+}
