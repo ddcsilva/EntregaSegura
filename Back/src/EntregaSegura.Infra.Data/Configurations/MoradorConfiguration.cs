@@ -71,6 +71,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
+            .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de criação do morador")
             .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Throw);
 
@@ -79,6 +80,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
+            .HasDefaultValueSql("GETDATE()")
             .HasComment("Data da última atualização do morador")
             .Metadata.SetBeforeSaveBehavior(PropertySaveBehavior.Save);
 

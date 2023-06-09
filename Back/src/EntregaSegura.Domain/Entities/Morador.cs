@@ -15,9 +15,6 @@ public sealed class Morador : BaseEntity
     public string Ramal { get; set; }
     public string Foto { get; set; }
 
-    // Um morador pertence a apenas uma unidade
     public Unidade Unidade { get; set; }
-
-    // Um morador pode receber várias entregas
     public ICollection<Entrega> Entregas { get; set; }
 }

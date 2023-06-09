@@ -8,55 +8,52 @@ public static class ModelBuilderExtensions
 {
     public static void SeedData(this ModelBuilder modelBuilder)
     {
-        var condominio1 = new Condominio
-        (
-            "Condomínio Boa Vista",
-            "17540623000150",
-            "1140028922",
-            "contato@boavista.com.br",
-            2,
-            4,
-            7,
-            "Rua das Acácias",
-            55,
-            "04567010",
-            "Jardim Paulistano",
-            "São Paulo",
-            "SP"
-        );
+        PopularCondominios(modelBuilder);
+        PopularUnidades(modelBuilder);
+        PopularMoradores(modelBuilder);
+        PopularFuncionarios(modelBuilder);
+        PopularTransportadoras(modelBuilder);
+        PopularEntregas(modelBuilder);
+    }
 
-        var condominio2 = new Condominio
-        (
-            "Condomínio Raio de Sol",
-            "27004428000169",
-            "2130033211",
-            "contato@raiodesol.com.br",
-            3,
-            8,
-            10,
-            "Avenida Atlântica",
-            700,
-            "22021001",
-            "Copacabana",
-            "Rio de Janeiro",
-            "RJ"
-        );
-
-        condominio1.DefinirId(1);
-        condominio2.DefinirId(2);
-
-        modelBuilder.Entity<Condominio>().HasData(condominio1, condominio2);
-
-        var unidades = new List<Unidade>();
-
-        for (int bloco = 1; bloco <= condominio1.QuantidadeBlocos; bloco++)
+    private static void PopularCondominios(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Condominio>().HasData(new
         {
-            for (int andar = 1; andar <= condominio1.QuantidadeAndares; andar++)
+            Id = 1,
+            Nome = "Condomínio Boa Vista",
+            Cnpj = "17540623000150",
+            Telefone = "1140028922",
+            Email = "contato@boavista.com.br",
+            QuantidadeBlocos = 2,
+            QuantidadeAndares = 4,
+            QuantidadeUnidades = 7,
+            Logradouro = "Rua das Acácias",
+            Numero = 55,
+            Cep = "04567010",
+            Bairro = "Jardim Paulistano",
+            Cidade = "São Paulo",
+            Estado = "SP"
+        });
+    }
+
+    private static void PopularUnidades(ModelBuilder modelBuilder)
+    {
+        var quantidadeBlocos = 2;
+        var quantidadeAndares = 4;
+        var quantidadeUnidades = 7;
+
+        var unidadeId = 1;
+
+        for (int bloco = 1; bloco <= quantidadeBlocos; bloco++)
+        {
+            for (int andar = 1; andar <= quantidadeAndares; andar++)
             {
-                for (int unidade = 1; unidade <= condominio1.QuantidadeUnidades; unidade++)
+                for (int unidade = 1; unidade <= quantidadeUnidades; unidade++)
                 {
-                    unidades.Add(new Unidade
+                    modelBuilder.Entity<Unidade>().HasData(new
                     {
+                        Id = unidadeId++,
                         CondominioId = 1,
                         Numero = unidade,
                         Andar = andar,
@@ -65,34 +62,13 @@ public static class ModelBuilderExtensions
                 }
             }
         }
+    }
 
-        for (int bloco = 1; bloco <= condominio2.QuantidadeBlocos; bloco++)
+    private static void PopularMoradores(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Morador>().HasData(new
         {
-            for (int andar = 1; andar <= condominio2.QuantidadeAndares; andar++)
-            {
-                for (int unidade = 1; unidade <= condominio2.QuantidadeUnidades; unidade++)
-                {
-                    unidades.Add(new Unidade
-                    {
-                        CondominioId = 2,
-                        Numero = unidade,
-                        Andar = andar,
-                        Bloco = bloco.ToString()
-                    });
-                }
-            }
-        }
-
-        // Define os IDs para as Unidades criadas
-        for (int i = 0; i < unidades.Count; i++)
-        {
-            unidades[i].DefinirId(i + 1);
-        }
-
-        modelBuilder.Entity<Unidade>().HasData(unidades.ToArray());
-
-        var morador1 = new Morador
-        {
+            Id = 1,
             UnidadeId = 1,
             Nome = "Morador Teste 1",
             Cpf = "12345678901",
@@ -100,93 +76,48 @@ public static class ModelBuilderExtensions
             Telefone = "1234567890",
             Ramal = "123",
             Foto = "foto1.jpg"
-        };
+        });
+    }
 
-        var morador2 = new Morador
+    private static void PopularFuncionarios(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Funcionario>().HasData(new
         {
-            UnidadeId = 2,
-            Nome = "Morador Teste 2",
-            Cpf = "12345678902",
-            Email = "morador2@teste.com",
-            Telefone = "1234567891",
-            Ramal = "456",
-            Foto = "foto2.jpg"
-        };
-
-        morador1.DefinirId(1);
-        morador2.DefinirId(2);
-
-        modelBuilder.Entity<Morador>().HasData(morador1, morador2);
-
-        var funcionario1 = new Funcionario
-        {
+            Id = 1,
             CondominioId = 1,
-            Nome = "Funcionario Teste 1",
-            CPF = "12345678903",
+            Nome = "Funcionário Teste 1",
+            Cpf = "12345678903",
             Email = "funcionario1@teste.com",
             Telefone = "1234567892",
-            Cargo = CargoFuncionario.Zelador
-        };
+            Cargo = CargoFuncionario.Porteiro,
+            DataAdmissao = DateTime.Now
+        });
+    }
 
-        var funcionario2 = new Funcionario
+    private static void PopularTransportadoras(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Transportadora>().HasData(new
         {
-            CondominioId = 2,
-            Nome = "Funcionario Teste 2",
-            CPF = "12345678904",
-            Email = "funcionario2@teste.com",
-            Telefone = "1234567893",
-            Cargo = CargoFuncionario.Porteiro
-        };
+            Id = 1,
+            Nome = "Transportadora Teste 1",
+            Cnpj = "12345678912347",
+            Telefone = "1234567894",
+            Email = "transportadora1@teste.com"
+        });
+    }
 
-        funcionario1.DefinirId(1);
-        funcionario2.DefinirId(2);
-
-        modelBuilder.Entity<Funcionario>().HasData(funcionario1, funcionario2);
-
-        var transportadora1 = new Transportadora
-        (
-            "Transportadora Teste 1",
-            "12345678912347",
-            "1234567894",
-            "transportadora1@teste.com"
-        );
-
-        var transportadora2 = new Transportadora
-        (
-            "Transportadora Teste 2",
-            "12345678912348",
-            "1234567895",
-            "transportadora2@teste.com"
-        );
-
-        transportadora1.DefinirId(1);
-        transportadora2.DefinirId(2);
-
-        modelBuilder.Entity<Transportadora>().HasData(transportadora1, transportadora2);
-
-        var entrega1 = new Entrega
+    private static void PopularEntregas(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Entrega>().HasData(new
         {
+            Id = 1,
             TransportadoraId = 1,
             MoradorId = 1,
             FuncionarioId = 1,
+            DataRecebimento = DateTime.Now,
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
-            Status = StatusEntrega.Recebida,
-        };
-
-        var entrega2 = new Entrega
-        {
-            TransportadoraId = 2,
-            MoradorId = 2,
-            FuncionarioId = 2,
-            Descricao = "Entrega Teste 2",
-            Observacao = "Observação Teste 2",
-            Status = StatusEntrega.Recebida,
-        };
-
-        entrega1.DefinirId(1);
-        entrega2.DefinirId(2);
-
-        modelBuilder.Entity<Entrega>().HasData(entrega1, entrega2);
+            Status = StatusEntrega.AguardandoRetirada
+        });
     }
 }

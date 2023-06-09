@@ -27,7 +27,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .HasColumnType("varchar(100)")
             .HasComment("Nome do funcionário");
 
-        builder.Property(f => f.CPF)
+        builder.Property(f => f.Cpf)
             .HasColumnName("FUN_CPF")
             .HasColumnOrder(3)
             .IsRequired()
@@ -103,7 +103,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .HasConstraintName("FK_FUNCIONARIO_ENTREGA")
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasIndex(f => f.CPF)
+        builder.HasIndex(f => f.Cpf)
             .HasDatabaseName("IX_FUNCIONARIO_CPF")
             .IsUnique();
 

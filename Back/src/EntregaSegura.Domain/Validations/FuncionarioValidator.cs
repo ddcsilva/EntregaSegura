@@ -12,10 +12,10 @@ public class FuncionarioValidator : AbstractValidator<Funcionario>
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
             .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 
-        RuleFor(c => c.CPF)
+        RuleFor(c => c.Cpf)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
             .Must(CPFValidation.ValidarCPF).WithMessage("O campo {PropertyName} fornecido é inválido")
-            .When(c => c.CPF != null);
+            .When(c => c.Cpf != null);
 
         RuleFor(c => c.Email)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")

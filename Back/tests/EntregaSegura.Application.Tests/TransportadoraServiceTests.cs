@@ -61,7 +61,7 @@ public class TransportadoraServiceTests
         _transportadoraRepositoryMock.Setup(r => r.ObterTransportadoraPorIdAsync(transportadoraDTO.Id)).ReturnsAsync(transportadora);
         _unitOfWorkMock.Setup(u => u.CommitAsync()).ReturnsAsync(1);
 
-        // Act
+        // Actx
         await _service.AtualizarAsync(transportadoraDTO);
 
         // Assert
@@ -118,7 +118,6 @@ public class TransportadoraServiceTests
         // Arrange
         var id = 1;
         var transportadora = new Transportadora("Transportadora", "22.264.404/0001-25", "(11) 2345-6789", "empresa@empresa.com.br");
-        transportadora.DefinirId(id);
         var transportadoraDTO = new TransportadoraDTO { Id = id, Nome = "Transportadora", Cnpj = "22.264.404/0001-25", Telefone = "(11) 2345-6789", Email = "empresa@empresa.com.br" };
 
         _transportadoraRepositoryMock.Setup(r => r.ObterTransportadoraPorIdAsync(id)).ReturnsAsync(transportadora);
