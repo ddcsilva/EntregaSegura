@@ -39,28 +39,56 @@ public class MoradoresController : MainController
         return CustomResponse(morador, HttpStatusCode.OK);
     }
 
-    // [HttpPost]
-    // public async Task<ActionResult<MoradorDTO>> Adicionar(MoradorDTO moradorDTO)
-    // {
-    //     if (!ModelState.IsValid) return CustomResponse(ModelState);
+    [HttpPost]
+    public async Task<ActionResult> Adicionar([FromBody] MoradorDTO moradorDTO)
+    {
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-    //     var nomeImagem = $"{Guid.NewGuid() + "_" + moradorDTO.Foto}";
-    //     if(!UploadArquivo(moradorDTO.FotoBase64, nomeImagem))
-    //     {
-    //         return CustomResponse(moradorDTO);
-    //     }
+        await _moradorService.AdicionarAsync(moradorDTO);
 
-    //     var morador = _mapper.Map<Morador>(moradorDTO);
-    //     morador.Foto = nomeImagem;
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
 
-    //     var novoMorador = await _moradorService.Adicionar(morador);
+        return CustomResponse(moradorDTO, HttpStatusCode.Created);
+    }
 
-    //     if (novoMorador == null) return CustomResponse(ModelState);
+    [HttpPut("{id:int}")]
+    public async Task<ActionResult<MoradorDTO>> Atualizar(int id, MoradorDTO moradorDTO)
+    {
+        if (id != moradorDTO.Id)
+        {
+            NotificarErro("Erro ao atualizar morador: Id da requisição difere do Id do objeto");
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+        }
 
-    //     moradorDTO = _mapper.Map<MoradorDTO>(novoMorador);
+        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
 
-    //     return CustomResponse(moradorDTO);
-    // }
+        await _moradorService.AtualizarAsync(moradorDTO);
+
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+
+        return CustomResponse(moradorDTO, HttpStatusCode.OK);
+    }
+
+    [HttpDelete("{id:int}")]
+    public async Task<ActionResult<MoradorDTO>> Excluir(int id)
+    {
+        var moradorDTO = await _moradorService.ObterMoradorPorIdAsync(id);
+
+        if (moradorDTO == null)
+        {
+            NotificarErro("Morador não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
+
+        await _moradorService.RemoverAsync(id);
+
+        if (!OperacaoValida())
+            return CustomResponse(null, HttpStatusCode.BadRequest);
+
+        return CustomResponse(moradorDTO, HttpStatusCode.OK);
+    }
 
     private bool UploadArquivo(string arquivo, string nomeImagem)
     {
