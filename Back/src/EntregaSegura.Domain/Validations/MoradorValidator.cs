@@ -23,16 +23,16 @@ public class MoradorValidator : AbstractValidator<Morador>
         RuleFor(c => c.Ramal)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
             .Length(1, 5).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
-            .When(c => c.Ramal != null);
+            .When(c => !string.IsNullOrWhiteSpace(c.Ramal));
 
         RuleFor(c => c.Foto)
             .Length(1, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
-            .When(c => c.Foto != null);
+            .When(c => !string.IsNullOrWhiteSpace(c.Foto));
 
         RuleFor(m => m.Email)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
             .EmailAddress().WithMessage("O campo {PropertyName} fornecido é inválido")
-            .When(c => c.Email != null);
+            .When(c => !string.IsNullOrWhiteSpace(c.Email));
 
         RuleFor(m => m.UnidadeId)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
