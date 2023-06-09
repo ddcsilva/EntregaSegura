@@ -2,19 +2,30 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Morador : BaseEntity
 {
-    public Morador()
+    private readonly IList<Entrega> _entregas;
+
+    public Morador(string nome, string cpf, string email, string telefone, string ramal, string foto, int unidadeId)
     {
-        Entregas = new List<Entrega>();
+        Nome = nome;
+        Cpf = cpf;
+        Email = email;
+        Telefone = telefone;
+        Ramal = ramal;
+        Foto = foto;
+        UnidadeId = unidadeId;
+
+        _entregas = new List<Entrega>();
     }
 
-    public int UnidadeId { get; set; }
-    public string Nome { get; set; }
-    public string Cpf { get; set; }
-    public string Email { get; set; }
-    public string Telefone { get; set; }
-    public string Ramal { get; set; }
-    public string Foto { get; set; }
+    public string Nome { get; private set; }
+    public string Cpf { get; private set; }
+    public string Email { get; private set; }
+    public string Telefone { get; private set; }
+    public string Ramal { get; private set; }
+    public string Foto { get; private set; }
 
-    public Unidade Unidade { get; set; }
-    public ICollection<Entrega> Entregas { get; set; }
+    public int UnidadeId { get; private set; }
+    public Unidade Unidade { get; private set; }
+
+    public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
 }

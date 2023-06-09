@@ -4,24 +4,31 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Funcionario : BaseEntity
 {
-    public Funcionario()
+    private readonly IList<Entrega> _entregas;
+
+    public Funcionario(string nome, string cpf, string email, string telefone, CargoFuncionario cargo, Condominio condominio)
     {
-        Entregas = new List<Entrega>();
+        Nome = nome;
+        Cpf = cpf;
+        Email = email;
+        Telefone = telefone;
+        Cargo = cargo;
+        Condominio = condominio;
         DataAdmissao = DateTime.Now;
+
+        _entregas = new List<Entrega>();
     }
 
-    public int CondominioId { get; set; }
-    public string Nome { get; set; }
-    public string Cpf { get; set; }
-    public string Email { get; set; }
-    public string Telefone { get; set; }
-    public CargoFuncionario Cargo { get; set; }
-    public DateTime DataAdmissao { get; set; }
-    public DateTime? DataDemissao { get; set; }
+    public string Nome { get; private set; }
+    public string Cpf { get; private set; }
+    public string Email { get; private set; }
+    public string Telefone { get; private set; }
+    public CargoFuncionario Cargo { get; private set; }
+    public DateTime DataAdmissao { get; private set; }
+    public DateTime? DataDemissao { get; private set; }
 
-    // Um funcionário pertence a apenas um condomínio
-    public Condominio Condominio { get; set; }
+    public int CondominioId { get; private set; }
+    public Condominio Condominio { get; private set; }
 
-    // Um funcionário pode manipular várias entregas
-    public ICollection<Entrega> Entregas { get; set; }
+    public IReadOnlyCollection<Entrega> Entregas => _entregas.ToList();
 }

@@ -4,27 +4,26 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Entrega : BaseEntity
 {
-    public Entrega()
+    public Entrega(string descricao, string observacao, int transportadoraId, int moradorId, int funcionarioId)
     {
-        DataRecebimento = DateTime.Now;
-        Status = StatusEntrega.Recebida;        
+        Descricao = descricao;
+        Observacao = observacao;
+        TransportadoraId = transportadoraId;
+        MoradorId = moradorId;
+        FuncionarioId = funcionarioId;
+        Status = StatusEntrega.Recebida;
     }
 
-    public int TransportadoraId { get; set; }
-    public int MoradorId { get; set; }
-    public int FuncionarioId { get; set; }
-    public DateTime DataRecebimento { get; set; }
-    public DateTime? DataRetirada { get; set; }
-    public string Descricao { get; set; }
-    public string Observacao { get; set; }
-    public StatusEntrega Status { get; set; }
+    public DateTime DataRecebimento { get; private set; }
+    public DateTime? DataRetirada { get; private set; }
+    public string Descricao { get; private set; }
+    public string Observacao { get; private set; }
+    public StatusEntrega Status { get; private set; }
 
-    // Uma entrega pertence a apenas uma transportadora
-    public Transportadora Transportadora { get; set; }
-
-    // Uma entrega pertence a apenas um morador
-    public Morador Morador { get; set; }
-
-    // Uma entrega só pode ser manipulada por um funcionário
-    public Funcionario Funcionario { get; set; }
+    public int TransportadoraId { get; private set; }
+    public Transportadora Transportadora { get; private set; }
+    public int MoradorId { get; private set; }
+    public Morador Morador { get; private set; }
+    public int FuncionarioId { get; private set; }
+    public Funcionario Funcionario { get; private set; }
 }

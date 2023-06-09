@@ -34,16 +34,16 @@ public sealed class Condominio : Empresa
         _funcionarios = new List<Funcionario>();
     }
 
-    public int QuantidadeBlocos { get; set; }
-    public int QuantidadeUnidades { get; set; }
-    public int QuantidadeAndares { get; set; }
-    public string Logradouro { get; set; }
-    public int Numero { get; set; }
-    public string Cep { get; set; }
-    public string Bairro { get; set; }
-    public string Cidade { get; set; }
-    public string Estado { get; set; }
+    public int QuantidadeBlocos { get; private set; }
+    public int QuantidadeUnidades { get; private set; }
+    public int QuantidadeAndares { get; private set; }
+    public string Logradouro { get; private set; }
+    public int Numero { get; private set; }
+    public string Cep { get; private set; }
+    public string Bairro { get; private set; }
+    public string Cidade { get; private set; }
+    public string Estado { get; private set; }
 
-    public ICollection<Unidade> Unidades { get; set; }
-    public ICollection<Funcionario> Funcionarios { get; set; }
+    public IReadOnlyCollection<Unidade> Unidades => _unidades.ToArray();
+    public IReadOnlyCollection<Funcionario> Funcionarios => _funcionarios.ToArray();
 }
