@@ -263,7 +263,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataRecebimento = new DateTime(2023, 6, 9, 18, 28, 1, 786, DateTimeKind.Local).AddTicks(3583),
+                            DataRecebimento = new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1201),
                             Descricao = "Entrega Teste 1",
                             FuncionarioId = 1,
                             MoradorId = 1,
@@ -374,7 +374,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cargo = 2,
                             CondominioId = 1,
                             Cpf = "12345678903",
-                            DataAdmissao = new DateTime(2023, 6, 9, 18, 28, 1, 786, DateTimeKind.Local).AddTicks(3536),
+                            DataAdmissao = new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1140),
                             Email = "funcionario1@teste.com",
                             Nome = "Funcionário Teste 1",
                             Telefone = "1234567892"

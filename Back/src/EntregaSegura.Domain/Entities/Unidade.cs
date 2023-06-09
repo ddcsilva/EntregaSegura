@@ -2,16 +2,24 @@ namespace EntregaSegura.Domain.Entities;
 
 public class Unidade : BaseEntity
 {
-    public Unidade()
+    private readonly IList<Morador> _moradores;
+
+    public Unidade(int numero, int andar, string bloco, int condominioId)
     {
-        Moradores = new List<Morador>();
+        Numero = numero;
+        Andar = andar;
+        Bloco = bloco;
+        CondominioId = condominioId;
+        
+        _moradores = new List<Morador>();
     }
 
-    public int CondominioId { get; set; }
-    public int Numero { get; set; }
-    public int Andar { get; set; }
-    public string Bloco { get; set; }
+    public int Numero { get; private set; }
+    public int Andar { get; private set; }
+    public string Bloco { get; private set; }
     
-    public Condominio Condominio { get; set; }
-    public ICollection<Morador> Moradores { get; set; } 
+    public int CondominioId { get; private set; }
+    public Condominio Condominio { get; private set; }
+
+    public IReadOnlyCollection<Morador> Moradores => _moradores.ToArray();
 }

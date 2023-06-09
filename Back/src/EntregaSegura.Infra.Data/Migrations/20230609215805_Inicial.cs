@@ -332,7 +332,7 @@ namespace EntregaSegura.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
                 columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE" },
-                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 9, 18, 28, 1, 786, DateTimeKind.Local).AddTicks(3536), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892" });
+                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1140), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892" });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
@@ -412,7 +412,7 @@ namespace EntregaSegura.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { 1, new DateTime(2023, 6, 9, 18, 28, 1, 786, DateTimeKind.Local).AddTicks(3583), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
+                values: new object[] { 1, new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1201), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

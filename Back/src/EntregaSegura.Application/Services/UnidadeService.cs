@@ -103,13 +103,7 @@ public class UnidadeService : BaseService, IUnidadeService
             {
                 for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
                 {
-                    var unidadeParaAdicionar = new Unidade
-                    {
-                        CondominioId = unidadesDTO.CondominioId,
-                        Bloco = bloco.ToString(),
-                        Andar = andar,
-                        Numero = unidade
-                    };
+                    var unidadeParaAdicionar = new Unidade(unidade, andar, bloco.ToString(), unidadesDTO.CondominioId);
 
                     _unidadeRepository.Adicionar(unidadeParaAdicionar);
                 }
