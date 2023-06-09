@@ -3,23 +3,28 @@ using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
+using EntregaSegura.Domain.Interfaces.Account;
 using EntregaSegura.Domain.Validations;
 using EntregaSegura.Infra.Data.UnitOfWork;
+using Microsoft.AspNetCore.Identity;
 
 namespace EntregaSegura.Application.Services;
 
 public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
+    private readonly IAutenticacaoService _autenticacaoService;
     private readonly IMapper _mapper;
 
     public MoradorService(IMoradorRepository moradorRepository,
+                          IAutenticacaoService autenticacaoService,
                           IUnitOfWork unitOfWork,
                           IMapper mapper,
                           INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
 
     {
         _moradorRepository = moradorRepository;
+        _autenticacaoService = autenticacaoService;
         _mapper = mapper;
     }
 
@@ -77,6 +82,14 @@ public class MoradorService : BaseService, IMoradorService
         }
 
         moradorDTO.Id = morador.Id;
+
+        var senhaAleatoria = _autenticacaoService.GerarSenhaAleatoria();
+        var resultadoRegistro = await _autenticacaoService.RegistrarAsync(morador.Email, senhaAleatoria, morador.Id);
+
+        if (!resultadoRegistro)
+        {
+            Notificar("Erro ao tentar adicionar usuário para o morador.");
+        }
     }
 
     public async Task AtualizarAsync(MoradorDTO moradorDTO)
