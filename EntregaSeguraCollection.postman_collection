@@ -254,7 +254,37 @@
 				},
 				{
 					"name": "Moradores",
-					"item": []
+					"item": [
+						{
+							"name": "Incluir Morador",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nome\": \"João da Silva\",\r\n    \"CPF\": \"71328947068\",\r\n    \"Email\": \"joaodasilva@gmail.com\",\r\n    \"Telefone\": \"11987654321\",\r\n    \"Ramal\": \"1024\",\r\n    \"UnidadeId\": 1\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/moradores",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"moradores"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Transportadoras",
@@ -487,7 +517,29 @@
 				},
 				{
 					"name": "Moradores",
-					"item": []
+					"item": [
+						{
+							"name": "Remover Morador",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:5001/api/moradores/8",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"moradores",
+										"8"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Transportadoras",
