@@ -6,14 +6,13 @@ public sealed class Funcionario : BaseEntity
 {
     private readonly IList<Entrega> _entregas;
 
-    public Funcionario(string nome, string cpf, string email, string telefone, CargoFuncionario cargo, Condominio condominio)
+    public Funcionario(string nome, string cpf, string email, string telefone, CargoFuncionario cargo)
     {
         Nome = nome;
         Cpf = cpf;
         Email = email;
         Telefone = telefone;
         Cargo = cargo;
-        Condominio = condominio;
         DataAdmissao = DateTime.Now;
 
         _entregas = new List<Entrega>();

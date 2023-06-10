@@ -4,13 +4,13 @@ namespace EntregaSegura.Application.Interfaces;
 
 public interface IUnidadeService : IDisposable
 {
-    Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync(bool incluirCondominio, bool rastrearAlteracoes);
-    Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesComCondominioAsync();
+    Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync();
     Task<UnidadeDTO> ObterUnidadePorIdAsync(int id);
 
-    Task AdicionarAsync(UnidadeDTO unidade);
-    Task<bool> AdicionarUnidadesEmMassaAsync(UnidadesEmMassaDTO unidadesDTO);
-    Task AtualizarAsync(UnidadeDTO unidade);
-    Task RemoverAsync(int id);
+    Task<bool> AdicionarAsync(UnidadeDTO unidadeDTO);
+    Task<bool> AtualizarAsync(UnidadeDTO unidadeDTO);
+    Task<bool> RemoverAsync(int id);
 
+    Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesComCondominioAsync();
+    Task<bool> AdicionarUnidadesEmMassaAsync(UnidadesEmMassaDTO unidadesDTO);
 }

@@ -21,7 +21,6 @@ public class TransportadorasController : MainController
     public async Task<ActionResult<IEnumerable<TransportadoraDTO>>> ObterTodasTransportadoras()
     {
         var transportadoras = await _transportadoraService.ObterTodasTransportadorasAsync();
-
         return CustomResponse(transportadoras, HttpStatusCode.OK);
     }
 

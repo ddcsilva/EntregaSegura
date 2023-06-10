@@ -4,7 +4,6 @@ using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Domain.Validations;
-using EntregaSegura.Infra.Data.UnitOfWork;
 
 namespace EntregaSegura.Application.Services;
 
@@ -14,20 +13,20 @@ public class UnidadeService : BaseService, IUnidadeService
     private readonly ICondominioRepository _condominioRepository;
     private readonly IMapper _mapper;
 
-    public UnidadeService(IUnidadeRepository unidadeRepository,
-                          ICondominioRepository condominioRepository,
-                          IMapper mapper,
-                          IUnitOfWork unitOfWork,
-                          INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
+    public UnidadeService(
+        IUnidadeRepository unidadeRepository,
+        ICondominioRepository condominioRepository,
+        IMapper mapper,
+        INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _unidadeRepository = unidadeRepository;
         _condominioRepository = condominioRepository;
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync(bool incluirCondominio, bool rastrearAlteracoes)
+    public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync()
     {
-        var unidades = await _unidadeRepository.ObterTodasUnidadesAsync(incluirCondominio, rastrearAlteracoes);
+        var unidades = await _unidadeRepository.BuscarTodos();
         return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
     }
 
@@ -39,57 +38,34 @@ public class UnidadeService : BaseService, IUnidadeService
 
     public async Task<UnidadeDTO> ObterUnidadePorIdAsync(int id)
     {
-        var unidade = await _unidadeRepository.ObterUnidadePorIdAsync(id);
+        var unidade = await _unidadeRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
         return _mapper.Map<UnidadeDTO>(unidade);
     }
 
-    public async Task AdicionarAsync(UnidadeDTO unidadeDTO)
+    public async Task<bool> AdicionarAsync(UnidadeDTO unidadeDTO)
     {
         var unidade = _mapper.Map<Unidade>(unidadeDTO);
 
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade))
-        {
-            return;
-        }
-
-        var condominio = await _condominioRepository.ObterCondominioPorIdAsync(unidade.CondominioId);
-        if (condominio == null)
-        {
-            Notificar("O condomínio especificado não existe.");
-        }
-        
-        var unidadeExistente = _unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId).Result.Any();
-        if (unidadeExistente)
-        {
-            Notificar("Já existe uma unidade com este número no mesmo andar, bloco e condomínio.");
-        }
-
-        var blocoExistente = _unidadeRepository.BuscarAsync(u => u.CondominioId == unidade.CondominioId && u.Bloco == unidade.Bloco).Result.Any();
-        if (!blocoExistente)
-        {
-            Notificar("O bloco especificado não existe neste condomínio.");
-        }
-
-        if (TemNotificacoes())
-        {
-            return;
-        }
+        if (!await ValidarUnidade(unidade)) return false;
 
         _unidadeRepository.Adicionar(unidade);
-        var resultadoOperacao = await _unitOfWork.CommitAsync();
 
-        if (resultadoOperacao == 0)
+        var adicionadoComSucesso = await _unidadeRepository.SalvarAlteracoesAsync();
+
+        if (!adicionadoComSucesso)
         {
             Notificar("Ocorreu um erro ao salvar a unidade.");
-            return;
+            return false;
         }
 
         unidadeDTO.Id = unidade.Id;
+
+        return true;
     }
 
     public async Task<bool> AdicionarUnidadesEmMassaAsync(UnidadesEmMassaDTO unidadesDTO)
     {
-        var unidadesExistentes = await _unidadeRepository.BuscarAsync(u => u.CondominioId == unidadesDTO.CondominioId);
+        var unidadesExistentes = await _unidadeRepository.BuscarPorCondicao(u => u.CondominioId == unidadesDTO.CondominioId);
 
         if (unidadesExistentes.Any())
         {
@@ -104,99 +80,93 @@ public class UnidadeService : BaseService, IUnidadeService
                 for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
                 {
                     var unidadeParaAdicionar = new Unidade(unidade, andar, bloco.ToString(), unidadesDTO.CondominioId);
-
                     _unidadeRepository.Adicionar(unidadeParaAdicionar);
                 }
             }
         }
 
-        var resultadoOperacao = await _unitOfWork.CommitAsync();
+        var adicionadoComSucesso = await _unidadeRepository.SalvarAlteracoesAsync();
 
-        if (resultadoOperacao == 0)
+        if (!adicionadoComSucesso)
         {
             Notificar("Ocorreu um erro ao salvar as unidades.");
+            return false;
         }
 
-        return resultadoOperacao > 0;
+        return true;
     }
 
-    public async Task AtualizarAsync(UnidadeDTO unidadeDTO)
+    public async Task<bool> AtualizarAsync(UnidadeDTO unidadeDTO)
     {
         var unidade = _mapper.Map<Unidade>(unidadeDTO);
 
-        if (!ExecutarValidacao(new UnidadeValidator(), unidade))
-        {
-            return;
-        }
-
-        // var unidadeExistente = await _unidadeRepository.ObterUnidadePorIdAsync(unidadeDTO.Id);
-        // if (unidadeExistente == null)
-        // {
-        //     Notificar("A unidade especificada não existe.");
-        //     return;
-        // }
-
-        if (_unidadeRepository.BuscarAsync(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && u.Id != unidade.Id).Result.Any())
-        {
-            Notificar("Já existe uma unidade com este número no mesmo andar, bloco e condomínio.");
-        }
-
-        var condominio = await _condominioRepository.ObterCondominioPorIdAsync(unidade.CondominioId);
-        if (condominio == null)
-        {
-            Notificar("O condomínio especificado não existe.");
-        }
-
-        var blocoExiste = _unidadeRepository.BuscarAsync(u => u.CondominioId == unidade.CondominioId && u.Bloco == unidade.Bloco).Result.Any();
-        if (!blocoExiste)
-        {
-            Notificar("O bloco especificado não existe neste condomínio.");
-        }
-
-        if (TemNotificacoes())
-        {
-            return;
-        }
+        if (!await ValidarUnidade(unidade, ehAtualizacao: true)) return false;
 
         _unidadeRepository.Atualizar(unidade);
-        var resultadoOperacao = await CommitAsync();
 
-        if (resultadoOperacao == 0)
+        var atualizadoComSucesso = await _unidadeRepository.SalvarAlteracoesAsync();
+
+        if (!atualizadoComSucesso)
         {
             Notificar("Ocorreu um erro ao atualizar a unidade.");
+            return false;
         }
+
+        return true;
     }
 
-
-    public async Task RemoverAsync(int id)
+    public async Task<bool> RemoverAsync(int id)
     {
-        var unidadeExistente = await _unidadeRepository.ObterUnidadePorIdAsync(id);
+        var unidade = await _unidadeRepository.BuscarPorIdAsync(id);
 
-        if (unidadeExistente == null)
+        if (unidade == null)
         {
             Notificar("A unidade especificada não existe.");
-            return;
+            return false;
         }
 
-        _unidadeRepository.Remover(unidadeExistente);
+        _unidadeRepository.Remover(unidade);
 
-        try
+        var removidoComSucesso = await _unidadeRepository.SalvarAlteracoesAsync();
+
+        if (!removidoComSucesso)
         {
-            var resultadoOperacao = await _unitOfWork.CommitAsync();
+            Notificar("Ocorreu um erro ao remover a unidade.");
+            return false;
+        }
 
-            if (resultadoOperacao == 0)
-            {
-                Notificar("Ocorreu um erro ao remover a unidade.");
-            }
-        }
-        catch (Exception)
-        {
-            Notificar("Ocorreu um erro inesperado. Favor, contate o administrador.");
-        }
+        return true;
     }
 
     public void Dispose()
     {
-        _unitOfWork?.Dispose();
+        _unidadeRepository?.Dispose();
+        _condominioRepository?.Dispose();
+    }
+
+    private async Task<bool> ValidarUnidade(Unidade unidade, bool ehAtualizacao = false)
+    {
+        if (!ExecutarValidacao(new UnidadeValidator(), unidade)) return false;
+
+        var condominio = await _condominioRepository.BuscarPorIdAsync(unidade.CondominioId);
+        if (condominio == null)
+        {
+            Notificar("O condomínio especificado não existe.");
+            return false;
+        }
+
+        if (_unidadeRepository.BuscarPorCondicao(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && (!ehAtualizacao || u.Id != unidade.Id)).Result.Any())
+        {
+            Notificar("Já existe uma unidade com este número no mesmo andar, bloco e condomínio.");
+            return false;
+        }
+
+        if (!_unidadeRepository.BuscarPorCondicao(u => u.CondominioId == unidade.CondominioId && u.Bloco == unidade.Bloco).Result.Any())
+        {
+            Notificar("O bloco especificado não existe neste condomínio.");
+            return false;
+        }
+
+        return true;
     }
 }

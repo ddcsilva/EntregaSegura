@@ -2,18 +2,15 @@ using FluentValidation;
 using FluentValidation.Results;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Models;
-using EntregaSegura.Infra.Data.UnitOfWork;
 
 namespace EntregaSegura.Application.Services;
 
 public abstract class BaseService
 {
-    protected readonly IUnitOfWork _unitOfWork;
     private readonly INotificadorErros _notificadorErros;
 
-    protected BaseService(IUnitOfWork unitOfWork, INotificadorErros notificadorErros)
+    protected BaseService(INotificadorErros notificadorErros)
     {
-        _unitOfWork = unitOfWork;
         _notificadorErros = notificadorErros;
     }
 
@@ -39,15 +36,5 @@ public abstract class BaseService
         Notificar(validator);
 
         return false;
-    }
-
-    public bool TemNotificacoes()
-    {
-        return _notificadorErros.TemNotificacoes();
-    }
-
-    public async Task<int> CommitAsync()
-    {
-        return await _unitOfWork.CommitAsync();
     }
 }

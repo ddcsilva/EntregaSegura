@@ -7,7 +7,7 @@ public interface ITransportadoraService : IDisposable
     Task<IEnumerable<TransportadoraDTO>> ObterTodasTransportadorasAsync();
     Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id);
 
-    Task AdicionarAsync(TransportadoraDTO transportadora);
-    Task AtualizarAsync(TransportadoraDTO transportadora);
-    Task RemoverAsync(int id);
+    Task<bool> AdicionarAsync(TransportadoraDTO transportadoraDTO);
+    Task<bool> AtualizarAsync(TransportadoraDTO transportadoraDTO);
+    Task<bool> RemoverAsync(int id);
 }

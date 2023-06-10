@@ -20,7 +20,7 @@ public class UnidadesController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidades()
     {
-        var unidades = await _unidadeService.ObterTodasUnidadesAsync(incluirCondominio: true, rastrearAlteracoes: false);
+        var unidades = await _unidadeService.ObterTodasUnidadesComCondominioAsync();
 
         return CustomResponse(unidades, HttpStatusCode.OK);
     }
