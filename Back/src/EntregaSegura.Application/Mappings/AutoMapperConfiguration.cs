@@ -18,7 +18,9 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Funcionario, FuncionarioDTO>();
 
         CreateMap<MoradorDTO, Morador>();
-        CreateMap<Morador, MoradorDTO>();
+        CreateMap<Morador, MoradorDTO>()
+            .ForMember(dest => dest.NomeUnidade, opt => opt.MapFrom(src => $"{src.Unidade.Bloco} - {src.Unidade.Andar} - {src.Unidade.Numero}"))
+            .ForMember(dest => dest.NomeCondominio, opt => opt.MapFrom(src => src.Unidade.Condominio.Nome));
         
         CreateMap<UnidadeDTO, Unidade>();
         CreateMap<Unidade, UnidadeDTO>()

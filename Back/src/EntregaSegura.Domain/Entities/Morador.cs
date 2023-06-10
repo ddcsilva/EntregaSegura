@@ -19,8 +19,8 @@ public sealed class Morador : EntityBase
 
     public string Nome { get; private set; }
     public string Cpf { get; private set; }
-    public string Email { get; private set; }
     public string Telefone { get; private set; }
+    public string Email { get; private set; }
     public string Ramal { get; private set; }
     public string Foto { get; private set; }
 
