@@ -87,6 +87,23 @@ public class TransportadoraTests
     }
 
     [Fact]
+    public void Deve_Gerar_Erro_Quando_Email_For_Muito_Longo()
+    {
+        var emailMuitoLongo = new string('a', 101);
+        var transportadora = new Transportadora("Transportadora", "04.238.377/0001-80", "(11) 2345-6789", emailMuitoLongo);
+        var resultadoValidacao = _validator.Validate(transportadora);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(transportadora.Email));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Email_For_Curto()
+    {
+        var transportadora = new Transportadora("Transportadora", "04.238.377/0001-80", "(11) 2345-6789", "a");
+        var resultadoValidacao = _validator.Validate(transportadora);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(transportadora.Email));
+    }
+
+    [Fact]
     public void Nao_Deve_Gerar_Erros_Quando_Dominio_For_Valido()
     {
         var transportadora = new Transportadora("Transportadora", "22.264.404/0001-25", "(11) 2345-6789", "empresa@empresa.com.br");

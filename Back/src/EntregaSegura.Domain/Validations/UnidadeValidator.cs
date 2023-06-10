@@ -13,10 +13,12 @@ public class UnidadeValidator : AbstractValidator<Unidade>
 
         RuleFor(u => u.Numero)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .GreaterThanOrEqualTo(1).WithMessage("O campo {PropertyName} não pode ser menor que 1")
             .LessThanOrEqualTo(10).WithMessage("O campo {PropertyName} não pode ser maior que 10");
 
         RuleFor(u => u.Andar)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .GreaterThanOrEqualTo(1).WithMessage("O campo {PropertyName} não pode ser menor que 1")
             .LessThanOrEqualTo(40).WithMessage("O campo {PropertyName} não pode ser maior que 40");
 
         RuleFor(u => u.CondominioId)

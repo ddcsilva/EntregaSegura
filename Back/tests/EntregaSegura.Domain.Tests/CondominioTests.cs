@@ -23,6 +23,25 @@ public class CondominioTests
     }
 
     [Fact]
+    public void Deve_Gerar_Erro_Quando_Nome_For_Curto_Demais()
+    {
+        var condominio = new Condominio("A", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Nome));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Nome_For_Longo_Demais()
+    {
+        var nomeMuitoLongo = new string('a', 101);
+        var condominio = new Condominio(nomeMuitoLongo, "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Nome));
+    }
+
+    [Fact]
     public void Deve_Gerar_Erro_Quando_CNPJ_For_Nulo()
     {
         var condominio = new Condominio("Condominio Paulista", null, "(11) 2345-6789", "condominio@condominio.com.br",
@@ -68,12 +87,31 @@ public class CondominioTests
     }
 
     [Fact]
+    public void Deve_Gerar_Erro_Quando_Email_For_Longo_Demais()
+    {
+        var emailMuitoLongo = new string('a', 101);
+        var condominio = new Condominio("Condominio Paulista", "22.264.404/0001-25", "(11) 2345-6789", emailMuitoLongo,
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Email));
+    }
+
+    [Fact]
     public void Deve_Gerar_Erro_Quando_Email_For_Invalido()
     {
         var condominio = new Condominio("Condominio Paulista", "22.264.404/0001-25", "(11) 2345-6789", "condominio@",
             5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
         var resultadoValidacao = _validator.Validate(condominio);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Email));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_CEP_For_Nulo()
+    {
+        var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, "Avenida Paulista", 1500, null, "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Cep));
     }
 
     [Fact]
@@ -95,7 +133,7 @@ public class CondominioTests
     }
 
     [Fact]
-    public void Deve_Gerar_Erro_Quando_Logradouro_For_Curto_Longo_Demais()
+    public void Deve_Gerar_Erro_Quando_Logradouro_For_Curto_Demais()
     {
         var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
             5, 5, 5, "A", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
@@ -104,7 +142,17 @@ public class CondominioTests
     }
 
     [Fact]
-    public void Deve_Gerar_Erro_Quando_Numero_For_Zero_Ou_Negativo()
+    public void Deve_Gerar_Erro_Quando_Logradouro_For_Longo_Demais()
+    {
+        var logradouroMuitoLongo = new string('a', 101);
+        var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, logradouroMuitoLongo, 1500, "01311000", "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Logradouro));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Numero_For_Menor_Que_1()
     {
         var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
             5, 5, 5, "Avenida Paulista", 0, "01311000", "Bela Vista", "São Paulo", "SP");
@@ -131,10 +179,20 @@ public class CondominioTests
     }
 
     [Fact]
-    public void Deve_Gerar_Erro_Quando_Bairro_For_Curto_Ou_Longo_Demais()
+    public void Deve_Gerar_Erro_Quando_Bairro_For_Curto_Demais()
     {
         var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
-            5, 5, 5, "Avenida Paulista", 1500, "01311000", "A", "São Paulo", "SP");
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "B", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Bairro));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Bairro_For_Longo_Demais()
+    {
+        var bairroMuitoLongo = new string('a', 101);
+        var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", bairroMuitoLongo, "São Paulo", "SP");
         var resultadoValidacao = _validator.Validate(condominio);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Bairro));
     }
@@ -149,10 +207,20 @@ public class CondominioTests
     }
 
     [Fact]
-    public void Deve_Gerar_Erro_Quando_Cidade_For_Curta_Ou_Longa_Demais()
+    public void Deve_Gerar_Erro_Quando_Cidade_For_Curta_Demais()
     {
         var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
-            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "A", "SP");
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "S", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Cidade));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Cidade_For_Longa_Demais()
+    {
+        var cidadeMuitoLonga = new string('a', 101);
+        var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            5, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", cidadeMuitoLonga, "SP");
         var resultadoValidacao = _validator.Validate(condominio);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.Cidade));
     }
@@ -176,10 +244,19 @@ public class CondominioTests
     }
 
     [Fact]
-    public void Deve_Gerar_Erro_Quando_QuantidadeBlocos_For_Menor_Que_1_Ou_Maior_Que_20()
+    public void Deve_Gerar_Erro_Quando_QuantidadeBlocos_For_Menor_Que_1()
     {
         var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
             0, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
+        var resultadoValidacao = _validator.Validate(condominio);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.QuantidadeBlocos));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_QuantidadeBlocos_For_Maior_Que_20()
+    {
+        var condominio = new Condominio("Condominio Paulista", "04.238.377/0001-80", "(11) 2345-6789", "condominio@condominio.com.br",
+            21, 5, 5, "Avenida Paulista", 1500, "01311000", "Bela Vista", "São Paulo", "SP");
         var resultadoValidacao = _validator.Validate(condominio);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.QuantidadeBlocos));
     }
@@ -210,7 +287,7 @@ public class CondominioTests
         var resultadoValidacao = _validator.Validate(condominio);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(condominio.QuantidadeAndares));
     }
-    
+
     [Fact]
     public void Deve_Gerar_Erro_Quando_QuantidadeAndares_For_Maior_Que_40()
     {

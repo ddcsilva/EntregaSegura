@@ -31,11 +31,27 @@ public class UnidadeTests
     }
 
     [Fact]
+    public void Deve_Gerar_Erro_Quando_Numero_For_Menor_Que_1()
+    {
+        var unidade = new Unidade(0, 1, "A", 1);
+        var resultadoValidacao = _validator.Validate(unidade);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(unidade.Numero));
+    }
+
+    [Fact]
     public void Deve_Gerar_Erro_Quando_Numero_For_Maior_Que_10()
     {
         var unidade = new Unidade(11, 1, "A", 1);
         var resultadoValidacao = _validator.Validate(unidade);
         resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(unidade.Numero));
+    }
+
+    [Fact]
+    public void Deve_Gerar_Erro_Quando_Andar_For_Menor_Que_1()
+    {
+        var unidade = new Unidade(1, 0, "A", 1);
+        var resultadoValidacao = _validator.Validate(unidade);
+        resultadoValidacao.Errors.Should().Contain(failure => failure.PropertyName == nameof(unidade.Andar));
     }
 
     [Fact]
