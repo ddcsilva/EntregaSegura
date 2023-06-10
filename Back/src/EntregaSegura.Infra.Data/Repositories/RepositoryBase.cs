@@ -17,14 +17,14 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where T
         _dbSet = _context.Set<TEntity>();
     }
 
-    public async Task<IEnumerable<TEntity>> BuscarTodos(bool rastrearAlteracoes = false)
+    public async Task<IEnumerable<TEntity>> BuscarTodosAsync(bool rastrearAlteracoes = false)
     {
         return !rastrearAlteracoes
             ? await _dbSet.AsNoTracking().ToListAsync()
             : await _dbSet.ToListAsync();
     }
 
-    public async Task<IEnumerable<TEntity>> BuscarPorCondicao(Expression<Func<TEntity, bool>> expression, bool rastrearAlteracoes = false)
+    public async Task<IEnumerable<TEntity>> BuscarPorCondicaoAsync(Expression<Func<TEntity, bool>> expression, bool rastrearAlteracoes = false)
     {
         return !rastrearAlteracoes
             ? await _dbSet.AsNoTracking().Where(expression).ToListAsync()

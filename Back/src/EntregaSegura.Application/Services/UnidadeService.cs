@@ -26,7 +26,7 @@ public class UnidadeService : BaseService, IUnidadeService
 
     public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync()
     {
-        var unidades = await _unidadeRepository.BuscarTodos();
+        var unidades = await _unidadeRepository.BuscarTodosAsync();
         return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
     }
 
@@ -65,7 +65,7 @@ public class UnidadeService : BaseService, IUnidadeService
 
     public async Task<bool> AdicionarUnidadesEmMassaAsync(UnidadesEmMassaDTO unidadesDTO)
     {
-        var unidadesExistentes = await _unidadeRepository.BuscarPorCondicao(u => u.CondominioId == unidadesDTO.CondominioId);
+        var unidadesExistentes = await _unidadeRepository.BuscarPorCondicaoAsync(u => u.CondominioId == unidadesDTO.CondominioId);
 
         if (unidadesExistentes.Any())
         {
@@ -155,13 +155,13 @@ public class UnidadeService : BaseService, IUnidadeService
             return false;
         }
 
-        if (_unidadeRepository.BuscarPorCondicao(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && (!ehAtualizacao || u.Id != unidade.Id)).Result.Any())
+        if (_unidadeRepository.BuscarPorCondicaoAsync(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && (!ehAtualizacao || u.Id != unidade.Id)).Result.Any())
         {
             Notificar("Já existe uma unidade com este número no mesmo andar, bloco e condomínio.");
             return false;
         }
 
-        if (!_unidadeRepository.BuscarPorCondicao(u => u.CondominioId == unidade.CondominioId && u.Bloco == unidade.Bloco).Result.Any())
+        if (!_unidadeRepository.BuscarPorCondicaoAsync(u => u.CondominioId == unidade.CondominioId && u.Bloco == unidade.Bloco).Result.Any())
         {
             Notificar("O bloco especificado não existe neste condomínio.");
             return false;

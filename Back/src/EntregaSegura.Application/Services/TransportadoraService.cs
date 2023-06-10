@@ -23,7 +23,7 @@ public class TransportadoraService : BaseService, ITransportadoraService
 
     public async Task<IEnumerable<TransportadoraDTO>> ObterTodasTransportadorasAsync()
     {
-        var transportadoras = await _transportadoraRepository.BuscarTodos();
+        var transportadoras = await _transportadoraRepository.BuscarTodosAsync();
         return _mapper.Map<IEnumerable<TransportadoraDTO>>(transportadoras);
     }
 
@@ -106,21 +106,21 @@ public class TransportadoraService : BaseService, ITransportadoraService
         if (!ExecutarValidacao(new TransportadoraValidator(), transportadora)) return false;
 
         if (!string.IsNullOrWhiteSpace(transportadora.Cnpj)
-            && (await _transportadoraRepository.BuscarPorCondicao(c => c.Cnpj == transportadora.Cnpj && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
+            && (await _transportadoraRepository.BuscarPorCondicaoAsync(c => c.Cnpj == transportadora.Cnpj && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
         {
             Notificar("Já existe uma transportadora com este CNPJ.");
             return false;
         }
 
         if (!string.IsNullOrWhiteSpace(transportadora.Nome)
-            && (await _transportadoraRepository.BuscarPorCondicao(c => c.Nome == transportadora.Nome && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
+            && (await _transportadoraRepository.BuscarPorCondicaoAsync(c => c.Nome == transportadora.Nome && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
         {
             Notificar("Já existe uma transportadora com este nome.");
             return false;
         }
 
         if (!string.IsNullOrWhiteSpace(transportadora.Email)
-            && (await _transportadoraRepository.BuscarPorCondicao(c => c.Email == transportadora.Email && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
+            && (await _transportadoraRepository.BuscarPorCondicaoAsync(c => c.Email == transportadora.Email && (ehAtualizacao ? c.Id != transportadora.Id : true))).Any())
         {
             Notificar("Já existe uma transportadora com este e-mail.");
             return false;

@@ -5,8 +5,8 @@ namespace EntregaSegura.Domain.Interfaces;
 
 public interface IRepositoryBase<TEntity> : IDisposable where TEntity : EntityBase
 {
-    Task<IEnumerable<TEntity>> BuscarTodos(bool rastrearAlteracoe = false);
-    Task<IEnumerable<TEntity>> BuscarPorCondicao(Expression<Func<TEntity, bool>> expression, bool rastrearAlteracoes = false);
+    Task<IEnumerable<TEntity>> BuscarTodosAsync(bool rastrearAlteracoe = false);
+    Task<IEnumerable<TEntity>> BuscarPorCondicaoAsync(Expression<Func<TEntity, bool>> expression, bool rastrearAlteracoes = false);
     Task<TEntity> BuscarPorIdAsync(int id, bool rastrearAlteracoes = false);
 
     void Adicionar(TEntity entity);

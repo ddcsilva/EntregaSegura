@@ -23,7 +23,7 @@ public class CondominioService : BaseService, ICondominioService
 
     public async Task<IEnumerable<CondominioDTO>> ObterTodosCondominiosAsync()
     {
-        var condominios = await _condominioRepository.BuscarTodos();
+        var condominios = await _condominioRepository.BuscarTodosAsync();
         return _mapper.Map<IEnumerable<CondominioDTO>>(condominios);
     }
 
@@ -106,21 +106,21 @@ public class CondominioService : BaseService, ICondominioService
         if (!ExecutarValidacao(new CondominioValidator(), condominio)) return false;
 
         if (!string.IsNullOrWhiteSpace(condominio.Cnpj)
-            && (await _condominioRepository.BuscarPorCondicao(c => c.Cnpj == condominio.Cnpj && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
+            && (await _condominioRepository.BuscarPorCondicaoAsync(c => c.Cnpj == condominio.Cnpj && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
         {
             Notificar("Já existe um condomínio com este CNPJ.");
             return false;
         }
 
         if (!string.IsNullOrWhiteSpace(condominio.Nome)
-            && (await _condominioRepository.BuscarPorCondicao(c => c.Nome == condominio.Nome && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
+            && (await _condominioRepository.BuscarPorCondicaoAsync(c => c.Nome == condominio.Nome && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
         {
             Notificar("Já existe um condomínio com este Nome.");
             return false;
         }
 
         if (!string.IsNullOrWhiteSpace(condominio.Email)
-            && (await _condominioRepository.BuscarPorCondicao(c => c.Email == condominio.Email && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
+            && (await _condominioRepository.BuscarPorCondicaoAsync(c => c.Email == condominio.Email && (ehAtualizacao ? c.Id != condominio.Id : true))).Any())
         {
             Notificar("Já existe um condomínio com este E-mail.");
             return false;

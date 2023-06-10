@@ -1,8 +1,8 @@
 namespace EntregaSegura.Domain.Entities;
 
-public abstract class BaseEntity
+public abstract class EntityBase
 {
-    protected BaseEntity()
+    protected EntityBase()
     {
         DataCriacao = DateTime.Now;
         DataAtualizacao = DateTime.Now;

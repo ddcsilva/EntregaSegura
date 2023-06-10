@@ -37,7 +37,7 @@ public class TransportadoraServiceTests
 
         _mapperMock.Setup(m => m.Map<Transportadora>(transportadoraDTO)).Returns(transportadora);
         _transportadoraRepositoryMock
-            .Setup(r => r.BuscarPorCondicao(It.IsAny<Expression<Func<Transportadora, bool>>>(), false))
+            .Setup(r => r.BuscarPorCondicaoAsync(It.IsAny<Expression<Func<Transportadora, bool>>>(), false))
             .ReturnsAsync(new List<Transportadora>());
         _transportadoraRepositoryMock.Setup(r => r.SalvarAlteracoesAsync()).ReturnsAsync(true);
 
@@ -106,7 +106,7 @@ public class TransportadoraServiceTests
         };
 
         _transportadoraRepositoryMock
-            .Setup(r => r.BuscarTodos(false))
+            .Setup(r => r.BuscarTodosAsync(false))
             .ReturnsAsync(transportadoras);
         _mapperMock.Setup(m => m.Map<IEnumerable<TransportadoraDTO>>(transportadoras)).Returns(transportadorasDTO);
 
