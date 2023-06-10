@@ -54,22 +54,28 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .IsRequired()
             .HasComment("Cargo do funcionário");
 
+        builder.Property(f => f.UserId)
+            .HasColumnName("FUN_USER_ID")
+            .HasColumnOrder(7)
+            .IsRequired()
+            .HasComment("Chave estrangeira do usuário");
+
         builder.Property(f => f.DataAdmissao)
             .HasColumnName("FUN_DATA_ADMISSAO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data de admissão do funcionário");
 
         builder.Property(f => f.DataDemissao)
             .HasColumnName("FUN_DATA_DEMISSAO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(9)
             .HasColumnType("datetime")
             .HasComment("Data de demissão do funcionário");
 
         builder.Property(f => f.DataCriacao)
             .HasColumnName("FUN_DATA_CRIACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -78,7 +84,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataAtualizacao)
             .HasColumnName("FUN_DATA_ATUALIZACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -87,7 +93,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.CondominioId)
             .HasColumnName("FUN_CONDOMINIO_ID")
-            .HasColumnOrder(11)
+            .HasColumnOrder(12)
             .IsRequired()
             .HasComment("Chave estrangeira do condomínio");
 
@@ -95,6 +101,12 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .WithMany(c => c.Funcionarios)
             .HasForeignKey(f => f.CondominioId)
             .HasConstraintName("FK_FUNCIONARIO_CONDOMINIO")
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(f => f.User)
+            .WithOne()
+            .HasForeignKey<Funcionario>(f => f.UserId)
+            .HasConstraintName("FK_FUNCIONARIOS_USERS")
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(f => f.Entregas)

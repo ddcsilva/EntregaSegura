@@ -263,7 +263,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataRecebimento = new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1201),
+                            DataRecebimento = new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2471),
                             Descricao = "Entrega Teste 1",
                             FuncionarioId = 1,
                             MoradorId = 1,
@@ -293,7 +293,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<int>("CondominioId")
                         .HasColumnType("int")
                         .HasColumnName("FUN_CONDOMINIO_ID")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(12)
                         .HasComment("Chave estrangeira do condomínio");
 
                     b.Property<string>("Cpf")
@@ -306,14 +306,14 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<DateTime>("DataAdmissao")
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_ADMISSAO")
-                        .HasColumnOrder(7)
+                        .HasColumnOrder(8)
                         .HasComment("Data de admissão do funcionário");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_ATUALIZACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(11)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do funcionário");
 
@@ -321,14 +321,14 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_CRIACAO")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(10)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do funcionário");
 
                     b.Property<DateTime?>("DataDemissao")
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_DEMISSAO")
-                        .HasColumnOrder(8)
+                        .HasColumnOrder(9)
                         .HasComment("Data de demissão do funcionário");
 
                     b.Property<string>("Email")
@@ -352,6 +352,12 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .HasColumnOrder(5)
                         .HasComment("Telefone do funcionário");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("FUN_USER_ID")
+                        .HasColumnOrder(7)
+                        .HasComment("Chave estrangeira do usuário");
+
                     b.HasKey("Id")
                         .HasName("PK_FUNCIONARIOS");
 
@@ -365,6 +371,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("IX_FUNCIONARIO_EMAIL");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("TB_FUNCIONARIOS", (string)null);
 
                     b.HasData(
@@ -374,10 +383,11 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cargo = 2,
                             CondominioId = 1,
                             Cpf = "12345678903",
-                            DataAdmissao = new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1140),
+                            DataAdmissao = new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2434),
                             Email = "funcionario1@teste.com",
                             Nome = "Funcionário Teste 1",
-                            Telefone = "1234567892"
+                            Telefone = "1234567892",
+                            UserId = 2
                         });
                 });
 
@@ -403,7 +413,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_ATUALIZACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(11)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do morador");
 
@@ -411,7 +421,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("MOR_DATA_CRIACAO")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(10)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do morador");
 
@@ -454,6 +464,12 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .HasColumnOrder(8)
                         .HasComment("Chave estrangeira da unidade do morador");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("MOR_USER_ID")
+                        .HasColumnOrder(9)
+                        .HasComment("Chave estrangeira do usuário do morador");
+
                     b.HasKey("Id")
                         .HasName("PK_MORADORES");
 
@@ -468,6 +484,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.HasIndex("UnidadeId")
                         .HasDatabaseName("IX_MORADORES_UNIDADE_ID");
 
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
                     b.ToTable("TB_MORADORES", (string)null);
 
                     b.HasData(
@@ -480,7 +499,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Nome = "Morador Teste 1",
                             Ramal = "123",
                             Telefone = "1234567890",
-                            UnidadeId = 1
+                            UnidadeId = 1,
+                            UserId = 2
                         });
                 });
 
@@ -1081,10 +1101,73 @@ namespace EntregaSegura.Infra.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EntregaSegura.Infra.Data.Identity.ApplicationUser", b =>
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.Role", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("TB_ROLES", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "8aeaad2a-094d-4375-b976-32daf0e21e1e",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "3f87eabb-d6b7-431c-bf97-2bca8d2f1135",
+                            Name = "Sindico",
+                            NormalizedName = "SINDICO"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "f2ef15b2-a4f5-4fdf-bbb9-cbd0a627a14d",
+                            Name = "Funcionario",
+                            NormalizedName = "FUNCIONARIO"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ConcurrencyStamp = "c726939a-28d0-4e8f-bda2-0696af21a6db",
+                            Name = "Morador",
+                            NormalizedName = "MORADOR"
+                        });
+                });
+
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -1105,9 +1188,6 @@ namespace EntregaSegura.Infra.Data.Migrations
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<int>("MoradorId")
-                        .HasColumnType("int");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -1146,37 +1226,113 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.ToTable("AspNetUsers", (string)null);
+                    b.ToTable("TB_USERS", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "cd9603d6-56db-4a74-8808-1312a6f8bfdd",
+                            Email = "admin@localhost",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@LOCALHOST",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJIidA8hwxymht43+0TW0WR9kG24PXvqB0yA2UME+NnOTer+XH1qahSzyVBnZi3GwQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "e1333414-c0dd-4ab1-bb24-8de6ef5fd256",
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0425dca8-8ac5-4bff-beb1-015542a6328e",
+                            Email = "sindico@localhost",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SINDICO@LOCALHOST",
+                            NormalizedUserName = "SINDICO",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDwxMwDQnrBIbchiNHG/jO3ygmbbK1ZpaLhtOtRJlnID/jVY/BJaE6yqFqoG42Ffug==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4895feea-86af-4765-9035-6870f32fa040",
+                            TwoFactorEnabled = false,
+                            UserName = "sindico"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "dfb4b4f4-e9f4-4b03-884d-1d324567d308",
+                            Email = "funcionario@localhost",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "FUNCIONARIO@LOCALHOST",
+                            NormalizedUserName = "FUNCIONARIO",
+                            PasswordHash = "AQAAAAEAACcQAAAAEA60brBbmqg8Iexh7zK5Xm/b7a7j3wx6UKRYsGMcF2wVR274ZMTrPQubfbUQEJY02w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "fe3f40c5-aaed-4f46-90ec-7ac6fffb42bb",
+                            TwoFactorEnabled = false,
+                            UserName = "funcionario"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "3411bdda-b16d-48c7-bd17-1f3b04079ce6",
+                            Email = "morador@localhost",
+                            EmailConfirmed = true,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "MORADOR@LOCALHOST",
+                            NormalizedUserName = "MORADOR",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOenIi3eEc+tYnjN9ErlTVq72qehEePxA1p8rZfxU4eCFwbuBYbRmFDoryeP6d7KxA==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0fe9a5b9-5543-46ff-a88d-c2979596d77b",
+                            TwoFactorEnabled = false,
+                            UserName = "morador"
+                        });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.UserRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.HasKey("UserId", "RoleId");
 
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.HasIndex("RoleId");
 
-                    b.HasKey("Id");
+                    b.ToTable("TB_USERROLES", (string)null);
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
+                    b.HasData(
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 4
+                        });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1190,18 +1346,17 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims", (string)null);
+                    b.ToTable("TB_ROLECLAIMS", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1215,18 +1370,17 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims", (string)null);
+                    b.ToTable("TB_USERCLAIMS", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -1237,36 +1391,20 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins", (string)null);
+                    b.ToTable("TB_USERLOGINS", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -1279,7 +1417,7 @@ namespace EntregaSegura.Infra.Data.Migrations
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens", (string)null);
+                    b.ToTable("TB_USERTOKENS", (string)null);
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Entrega", b =>
@@ -1321,7 +1459,16 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_FUNCIONARIO_CONDOMINIO");
 
+                    b.HasOne("EntregaSegura.Domain.Identity.User", "User")
+                        .WithOne()
+                        .HasForeignKey("EntregaSegura.Domain.Entities.Funcionario", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_FUNCIONARIOS_USERS");
+
                     b.Navigation("Condominio");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Morador", b =>
@@ -1333,7 +1480,16 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_MORADORES_UNIDADES");
 
+                    b.HasOne("EntregaSegura.Domain.Identity.User", "User")
+                        .WithOne()
+                        .HasForeignKey("EntregaSegura.Domain.Entities.Morador", "UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("FK_MORADORES_USERS");
+
                     b.Navigation("Unidade");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Unidade", b =>
@@ -1348,51 +1504,55 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Navigation("Condominio");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.UserRole", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("EntregaSegura.Domain.Identity.Role", "Role")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntregaSegura.Domain.Identity.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("EntregaSegura.Domain.Identity.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                    b.HasOne("EntregaSegura.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                    b.HasOne("EntregaSegura.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("EntregaSegura.Infra.Data.Identity.ApplicationUser", null)
+                    b.HasOne("EntregaSegura.Domain.Identity.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1424,6 +1584,16 @@ namespace EntregaSegura.Infra.Data.Migrations
             modelBuilder.Entity("EntregaSegura.Domain.Entities.Unidade", b =>
                 {
                     b.Navigation("Moradores");
+                });
+
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.Role", b =>
+                {
+                    b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("EntregaSegura.Domain.Identity.User", b =>
+                {
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }

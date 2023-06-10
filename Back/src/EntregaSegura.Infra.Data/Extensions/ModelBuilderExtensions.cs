@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Entities.Enums;
+using EntregaSegura.Domain.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace EntregaSegura.Infra.Data.Extensions;
 
@@ -14,6 +16,9 @@ public static class ModelBuilderExtensions
         PopularFuncionarios(modelBuilder);
         PopularTransportadoras(modelBuilder);
         PopularEntregas(modelBuilder);
+        PopularPapeis(modelBuilder);
+        PopularUsuarios(modelBuilder);
+        PopularUsuariosPapeis(modelBuilder);
     }
 
     private static void PopularCondominios(ModelBuilder modelBuilder)
@@ -70,6 +75,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             UnidadeId = 1,
+            UserId = 2,
             Nome = "Morador Teste 1",
             Cpf = "12345678901",
             Email = "morador1@teste.com",
@@ -85,6 +91,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             CondominioId = 1,
+            UserId = 2,
             Nome = "Funcionário Teste 1",
             Cpf = "12345678903",
             Email = "funcionario1@teste.com",
@@ -118,6 +125,121 @@ public static class ModelBuilderExtensions
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
             Status = StatusEntrega.AguardandoRetirada
+        });
+    }
+
+    private static void PopularPapeis(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Role>().HasData(new Role
+        {
+            Id = 1,
+            Name = "Admin",
+            NormalizedName = "ADMIN"
+        });
+
+        modelBuilder.Entity<Role>().HasData(new Role
+        {
+            Id = 2,
+            Name = "Sindico",
+            NormalizedName = "SINDICO"
+        });
+
+        modelBuilder.Entity<Role>().HasData(new Role
+        {
+            Id = 3,
+            Name = "Funcionario",
+            NormalizedName = "FUNCIONARIO"
+        });
+
+        modelBuilder.Entity<Role>().HasData(new Role
+        {
+            Id = 4,
+            Name = "Morador",
+            NormalizedName = "MORADOR"
+        });
+    }
+
+    private static void PopularUsuarios(ModelBuilder modelBuilder)
+    {
+        var senha = new PasswordHasher<User>();
+
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = 1,
+            UserName = "admin",
+            NormalizedUserName = "ADMIN",
+            Email = "admin@localhost",
+            NormalizedEmail = "ADMIN@LOCALHOST",
+            EmailConfirmed = true,
+            LockoutEnabled = false,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            PasswordHash = senha.HashPassword(null, "Admin@123")
+        });
+
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = 2,
+            UserName = "sindico",
+            NormalizedUserName = "SINDICO",
+            Email = "sindico@localhost",
+            NormalizedEmail = "SINDICO@LOCALHOST",
+            EmailConfirmed = true,
+            LockoutEnabled = false,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            PasswordHash = senha.HashPassword(null, "Sindico@123")
+        });
+
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = 3,
+            UserName = "funcionario",
+            NormalizedUserName = "FUNCIONARIO",
+            Email = "funcionario@localhost",
+            NormalizedEmail = "FUNCIONARIO@LOCALHOST",
+            EmailConfirmed = true,
+            LockoutEnabled = false,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            PasswordHash = senha.HashPassword(null, "Funcionario@123")
+        });
+
+        modelBuilder.Entity<User>().HasData(new User
+        {
+            Id = 4,
+            UserName = "morador",
+            NormalizedUserName = "MORADOR",
+            Email = "morador@localhost",
+            NormalizedEmail = "MORADOR@LOCALHOST",
+            EmailConfirmed = true,
+            LockoutEnabled = false,
+            SecurityStamp = Guid.NewGuid().ToString(),
+            PasswordHash = senha.HashPassword(null, "Morador@123")
+        });
+    }
+
+    private static void PopularUsuariosPapeis(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<UserRole>().HasData(new UserRole
+        {
+            RoleId = 1,
+            UserId = 1
+        });
+
+        modelBuilder.Entity<UserRole>().HasData(new UserRole
+        {
+            RoleId = 2,
+            UserId = 2
+        });
+
+        modelBuilder.Entity<UserRole>().HasData(new UserRole
+        {
+            RoleId = 3,
+            UserId = 3
+        });
+
+        modelBuilder.Entity<UserRole>().HasData(new UserRole
+        {
+            RoleId = 4,
+            UserId = 4
         });
     }
 }

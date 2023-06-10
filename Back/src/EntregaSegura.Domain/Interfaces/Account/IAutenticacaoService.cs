@@ -1,12 +1,12 @@
-namespace EntregaSegura.Domain.Interfaces.Account;
+// namespace EntregaSegura.Domain.Interfaces.Account;
 
-public interface IAutenticacaoService
-{
-    Task<bool> AutenticarAsync(string email, string senha);
+// public interface IAutenticacaoService
+// {
+//     Task<bool> AutenticarAsync(string email, string senha);
 
-    Task<bool> RegistrarAsync(string email, string senha, int moradorId);
+//     Task<bool> RegistrarAsync(string email, string senha, int moradorId);
 
-    public string GerarSenhaAleatoria();
+//     public string GerarSenhaAleatoria();
 
-    Task LogoutAsync();
-}
+//     Task LogoutAsync();
+// }

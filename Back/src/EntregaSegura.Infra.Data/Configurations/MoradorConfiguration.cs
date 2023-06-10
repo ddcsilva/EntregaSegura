@@ -66,9 +66,15 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .IsRequired()
             .HasComment("Chave estrangeira da unidade do morador");
 
+        builder.Property(m => m.UserId)
+            .HasColumnName("MOR_USER_ID")
+            .HasColumnOrder(9)
+            .IsRequired()
+            .HasComment("Chave estrangeira do usuário do morador");
+
         builder.Property(m => m.DataCriacao)
             .HasColumnName("MOR_DATA_CRIACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -77,7 +83,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
 
         builder.Property(m => m.DataAtualizacao)
             .HasColumnName("MOR_DATA_ATUALIZACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -94,6 +100,12 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .WithOne(e => e.Morador)
             .HasForeignKey(e => e.MoradorId)
             .HasConstraintName("FK_MORADORES_ENTREGAS")
+            .OnDelete(DeleteBehavior.Restrict);
+
+        builder.HasOne(m => m.User)
+            .WithOne()
+            .HasForeignKey<Morador>(m => m.UserId)
+            .HasConstraintName("FK_MORADORES_USERS")
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasIndex(m => m.Cpf)

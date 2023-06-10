@@ -1,14 +1,15 @@
 using EntregaSegura.Domain.Interfaces.Account;
+using EntregaSegura.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace EntregaSegura.Infra.Data.Identity;
 
 public class SeedUsersRoles : ISeedUsersRoles
 {
-    private readonly UserManager<ApplicationUser> _userManager;
-    private readonly RoleManager<IdentityRole> _roleManager;
+    private readonly UserManager<User> _userManager;
+    private readonly RoleManager<Role> _roleManager;
 
-    public SeedUsersRoles(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
+    public SeedUsersRoles(UserManager<User> userManager, RoleManager<Role> roleManager)
     {
         _userManager = userManager;
         _roleManager = roleManager;
@@ -18,7 +19,7 @@ public class SeedUsersRoles : ISeedUsersRoles
     {
         if (_userManager.FindByEmailAsync("admin@localhost").Result == null)
         {
-            ApplicationUser usuario = new ApplicationUser();
+            User usuario = new User();
             usuario.UserName = "admin@localhost";
             usuario.Email = "admin@localhost";
             usuario.NormalizedUserName = "ADMIN@LOCALHOST";
@@ -40,7 +41,7 @@ public class SeedUsersRoles : ISeedUsersRoles
     {
         if (!_roleManager.RoleExistsAsync("Morador").Result)
         {
-            IdentityRole role = new IdentityRole();
+            Role role = new Role();
             role.Name = "Morador";
             role.NormalizedName = "MORADOR";
             IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
@@ -48,7 +49,7 @@ public class SeedUsersRoles : ISeedUsersRoles
 
         if (!_roleManager.RoleExistsAsync("Funcionario").Result)
         {
-            IdentityRole role = new IdentityRole();
+            Role role = new Role();
             role.Name = "Funcionario";
             role.NormalizedName = "FUNCIONARIO";
             IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
@@ -56,7 +57,7 @@ public class SeedUsersRoles : ISeedUsersRoles
 
         if (!_roleManager.RoleExistsAsync("Sindico").Result)
         {
-            IdentityRole role = new IdentityRole();
+            Role role = new Role();
             role.Name = "Sindico";
             role.NormalizedName = "SINDICO";
             IdentityResult roleResult = _roleManager.CreateAsync(role).Result;
@@ -64,7 +65,7 @@ public class SeedUsersRoles : ISeedUsersRoles
 
         if (!_roleManager.RoleExistsAsync("Admin").Result)
         {
-            IdentityRole role = new IdentityRole();
+            Role role = new Role();
             role.Name = "Admin";
             role.NormalizedName = "ADMIN";
             IdentityResult roleResult = _roleManager.CreateAsync(role).Result;

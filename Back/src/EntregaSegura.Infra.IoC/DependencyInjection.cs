@@ -44,7 +44,7 @@ public static class DependencyInjection
 
     private static void ResolverDependenciasIdentity(this IServiceCollection services)
     {
-        services.AddScoped<IAutenticacaoService, AutenticacaoService>();
+        // services.AddScoped<IAutenticacaoService, AutenticacaoService>();
         services.AddScoped<ISeedUsersRoles, SeedUsersRoles>();
     }
 

@@ -11,17 +11,17 @@ namespace EntregaSegura.Application.Services;
 public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
-    private readonly IAutenticacaoService _autenticacaoService;
+    // private readonly IAutenticacaoService _autenticacaoService;
     private readonly IMapper _mapper;
 
     public MoradorService(
         IMoradorRepository moradorRepository,
-        IAutenticacaoService autenticacaoService,
+        // IAutenticacaoService autenticacaoService,
         IMapper mapper,
         INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
-        _autenticacaoService = autenticacaoService;
+        // _autenticacaoService = autenticacaoService;
         _mapper = mapper;
     }
 
@@ -55,13 +55,13 @@ public class MoradorService : BaseService, IMoradorService
 
         moradorDTO.Id = morador.Id;
 
-        var senhaAleatoria = _autenticacaoService.GerarSenhaAleatoria();
-        var usuarioRegistradoComSucesso = await _autenticacaoService.RegistrarAsync(moradorDTO.Email, senhaAleatoria, morador.Id);
+        // var senhaAleatoria = _autenticacaoService.GerarSenhaAleatoria();
+        // var usuarioRegistradoComSucesso = await _autenticacaoService.RegistrarAsync(moradorDTO.Email, senhaAleatoria, morador.Id);
 
-        if (!usuarioRegistradoComSucesso)
-        {
-            Notificar("Erro ao tentar adicionar usuário para o morador.");
-        }
+        // if (!usuarioRegistradoComSucesso)
+        // {
+        //     Notificar("Erro ao tentar adicionar usuário para o morador.");
+        // }
 
         return true;
     }

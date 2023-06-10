@@ -10,46 +10,6 @@ namespace EntregaSegura.Infra.Data.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "AspNetRoles",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUsers",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MoradorId = table.Column<int>(type: "int", nullable: false),
-                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
-                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
-                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TB_CONDOMINIOS",
                 columns: table => new
                 {
@@ -77,6 +37,21 @@ namespace EntregaSegura.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TB_ROLES",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_ROLES", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TB_TRANSPORTADORAS",
                 columns: table => new
                 {
@@ -95,137 +70,29 @@ namespace EntregaSegura.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AspNetRoleClaims",
+                name: "TB_USERS",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserClaims",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserLogins",
-                columns: table => new
-                {
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserRoles",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    RoleId = table.Column<string>(type: "nvarchar(450)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
-                        column: x => x.RoleId,
-                        principalTable: "AspNetRoles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "AspNetUserTokens",
-                columns: table => new
-                {
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    table.ForeignKey(
-                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TB_FUNCIONARIOS",
-                columns: table => new
-                {
-                    FUN_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave primária do funcionário")
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    FUN_NOME = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Nome do funcionário"),
-                    FUN_CPF = table.Column<string>(type: "varchar(11)", nullable: false, comment: "CPF do funcionário"),
-                    FUN_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do funcionário"),
-                    FUN_TELEFONE = table.Column<string>(type: "varchar(11)", nullable: false, comment: "Telefone do funcionário"),
-                    FUN_CARGO = table.Column<int>(type: "int", nullable: false, comment: "Cargo do funcionário"),
-                    FUN_DATA_ADMISSAO = table.Column<DateTime>(type: "datetime", nullable: false, comment: "Data de admissão do funcionário"),
-                    FUN_DATA_DEMISSAO = table.Column<DateTime>(type: "datetime", nullable: true, comment: "Data de demissão do funcionário"),
-                    FUN_DATA_CRIACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data de criação do funcionário"),
-                    FUN_DATA_ATUALIZACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data da última atualização do funcionário"),
-                    FUN_CONDOMINIO_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do condomínio")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_FUNCIONARIOS", x => x.FUN_ID);
-                    table.ForeignKey(
-                        name: "FK_FUNCIONARIO_CONDOMINIO",
-                        column: x => x.FUN_CONDOMINIO_ID,
-                        principalTable: "TB_CONDOMINIOS",
-                        principalColumn: "CND_ID",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_TB_USERS", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -253,6 +120,147 @@ namespace EntregaSegura.Infra.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "TB_ROLECLAIMS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_ROLECLAIMS", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TB_ROLECLAIMS_TB_ROLES_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "TB_ROLES",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_FUNCIONARIOS",
+                columns: table => new
+                {
+                    FUN_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave primária do funcionário")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FUN_NOME = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Nome do funcionário"),
+                    FUN_CPF = table.Column<string>(type: "varchar(11)", nullable: false, comment: "CPF do funcionário"),
+                    FUN_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do funcionário"),
+                    FUN_TELEFONE = table.Column<string>(type: "varchar(11)", nullable: false, comment: "Telefone do funcionário"),
+                    FUN_CARGO = table.Column<int>(type: "int", nullable: false, comment: "Cargo do funcionário"),
+                    FUN_USER_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do usuário"),
+                    FUN_DATA_ADMISSAO = table.Column<DateTime>(type: "datetime", nullable: false, comment: "Data de admissão do funcionário"),
+                    FUN_DATA_DEMISSAO = table.Column<DateTime>(type: "datetime", nullable: true, comment: "Data de demissão do funcionário"),
+                    FUN_DATA_CRIACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data de criação do funcionário"),
+                    FUN_DATA_ATUALIZACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data da última atualização do funcionário"),
+                    FUN_CONDOMINIO_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do condomínio")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_FUNCIONARIOS", x => x.FUN_ID);
+                    table.ForeignKey(
+                        name: "FK_FUNCIONARIO_CONDOMINIO",
+                        column: x => x.FUN_CONDOMINIO_ID,
+                        principalTable: "TB_CONDOMINIOS",
+                        principalColumn: "CND_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_FUNCIONARIOS_USERS",
+                        column: x => x.FUN_USER_ID,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_USERCLAIMS",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_USERCLAIMS", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TB_USERCLAIMS_TB_USERS_UserId",
+                        column: x => x.UserId,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_USERLOGINS",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_USERLOGINS", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_TB_USERLOGINS_TB_USERS_UserId",
+                        column: x => x.UserId,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_USERROLES",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_USERROLES", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_TB_USERROLES_TB_ROLES_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "TB_ROLES",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TB_USERROLES_TB_USERS_UserId",
+                        column: x => x.UserId,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TB_USERTOKENS",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TB_USERTOKENS", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_TB_USERTOKENS_TB_USERS_UserId",
+                        column: x => x.UserId,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TB_MORADORES",
                 columns: table => new
                 {
@@ -265,6 +273,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                     MOR_RAMAL = table.Column<string>(type: "varchar(5)", nullable: true, comment: "Ramal do morador"),
                     MOR_FOTO = table.Column<string>(type: "varchar(100)", nullable: true, comment: "Foto do morador"),
                     MOR_UNIDADE_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira da unidade do morador"),
+                    MOR_USER_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do usuário do morador"),
                     MOR_DATA_CRIACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data de criação do morador"),
                     MOR_DATA_ATUALIZACAO = table.Column<DateTime>(type: "datetime", nullable: false, defaultValueSql: "GETDATE()", comment: "Data da última atualização do morador")
                 },
@@ -276,6 +285,12 @@ namespace EntregaSegura.Infra.Data.Migrations
                         column: x => x.MOR_UNIDADE_ID,
                         principalTable: "TB_UNIDADES",
                         principalColumn: "UND_ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_MORADORES_USERS",
+                        column: x => x.MOR_USER_ID,
+                        principalTable: "TB_USERS",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -325,14 +340,36 @@ namespace EntregaSegura.Infra.Data.Migrations
                 values: new object[] { 1, "Jardim Paulistano", "04567010", "São Paulo", "17540623000150", "contato@boavista.com.br", "SP", "Rua das Acácias", "Condomínio Boa Vista", 55, 4, 2, 7, "1140028922" });
 
             migrationBuilder.InsertData(
+                table: "TB_ROLES",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, "8aeaad2a-094d-4375-b976-32daf0e21e1e", "Admin", "ADMIN" },
+                    { 2, "3f87eabb-d6b7-431c-bf97-2bca8d2f1135", "Sindico", "SINDICO" },
+                    { 3, "f2ef15b2-a4f5-4fdf-bbb9-cbd0a627a14d", "Funcionario", "FUNCIONARIO" },
+                    { 4, "c726939a-28d0-4e8f-bda2-0696af21a6db", "Morador", "MORADOR" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TB_TRANSPORTADORAS",
                 columns: new[] { "TRA_ID", "TRA_CNPJ", "TRA_EMAIL", "TRA_NOME", "TRA_TELEFONE" },
                 values: new object[] { 1, "12345678912347", "transportadora1@teste.com", "Transportadora Teste 1", "1234567894" });
 
             migrationBuilder.InsertData(
+                table: "TB_USERS",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 0, "cd9603d6-56db-4a74-8808-1312a6f8bfdd", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEJIidA8hwxymht43+0TW0WR9kG24PXvqB0yA2UME+NnOTer+XH1qahSzyVBnZi3GwQ==", null, false, "e1333414-c0dd-4ab1-bb24-8de6ef5fd256", false, "admin" },
+                    { 2, 0, "0425dca8-8ac5-4bff-beb1-015542a6328e", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEDwxMwDQnrBIbchiNHG/jO3ygmbbK1ZpaLhtOtRJlnID/jVY/BJaE6yqFqoG42Ffug==", null, false, "4895feea-86af-4765-9035-6870f32fa040", false, "sindico" },
+                    { 3, 0, "dfb4b4f4-e9f4-4b03-884d-1d324567d308", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEA60brBbmqg8Iexh7zK5Xm/b7a7j3wx6UKRYsGMcF2wVR274ZMTrPQubfbUQEJY02w==", null, false, "fe3f40c5-aaed-4f46-90ec-7ac6fffb42bb", false, "funcionario" },
+                    { 4, 0, "3411bdda-b16d-48c7-bd17-1f3b04079ce6", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEOenIi3eEc+tYnjN9ErlTVq72qehEePxA1p8rZfxU4eCFwbuBYbRmFDoryeP6d7KxA==", null, false, "0fe9a5b9-5543-46ff-a88d-c2979596d77b", false, "morador" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
-                columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE" },
-                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1140), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892" });
+                columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE", "FUN_USER_ID" },
+                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2434), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
@@ -405,53 +442,25 @@ namespace EntregaSegura.Infra.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "TB_USERROLES",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 1, 1 },
+                    { 2, 2 },
+                    { 3, 3 },
+                    { 4, 4 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "TB_MORADORES",
-                columns: new[] { "MOR_ID", "MOR_CPF", "MOR_EMAIL", "MOR_FOTO", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID" },
-                values: new object[] { 1, "12345678901", "morador1@teste.com", "foto1.jpg", "Morador Teste 1", "123", "1234567890", 1 });
+                columns: new[] { "MOR_ID", "MOR_CPF", "MOR_EMAIL", "MOR_FOTO", "MOR_NOME", "MOR_RAMAL", "MOR_TELEFONE", "MOR_UNIDADE_ID", "MOR_USER_ID" },
+                values: new object[] { 1, "12345678901", "morador1@teste.com", "foto1.jpg", "Morador Teste 1", "123", "1234567890", 1, 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { 1, new DateTime(2023, 6, 9, 18, 58, 4, 683, DateTimeKind.Local).AddTicks(1201), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetRoleClaims_RoleId",
-                table: "AspNetRoleClaims",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "RoleNameIndex",
-                table: "AspNetRoles",
-                column: "NormalizedName",
-                unique: true,
-                filter: "[NormalizedName] IS NOT NULL");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserClaims_UserId",
-                table: "AspNetUserClaims",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserLogins_UserId",
-                table: "AspNetUserLogins",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AspNetUserRoles_RoleId",
-                table: "AspNetUserRoles",
-                column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "EmailIndex",
-                table: "AspNetUsers",
-                column: "NormalizedEmail");
-
-            migrationBuilder.CreateIndex(
-                name: "UserNameIndex",
-                table: "AspNetUsers",
-                column: "NormalizedUserName",
-                unique: true,
-                filter: "[NormalizedUserName] IS NOT NULL");
+                values: new object[] { 1, new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2471), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",
@@ -504,6 +513,12 @@ namespace EntregaSegura.Infra.Data.Migrations
                 column: "FUN_CONDOMINIO_ID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TB_FUNCIONARIOS_FUN_USER_ID",
+                table: "TB_FUNCIONARIOS",
+                column: "FUN_USER_ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_MORADORES_CPF",
                 table: "TB_MORADORES",
                 column: "MOR_CPF",
@@ -519,6 +534,24 @@ namespace EntregaSegura.Infra.Data.Migrations
                 name: "IX_MORADORES_UNIDADE_ID",
                 table: "TB_MORADORES",
                 column: "MOR_UNIDADE_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_MORADORES_MOR_USER_ID",
+                table: "TB_MORADORES",
+                column: "MOR_USER_ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_ROLECLAIMS_RoleId",
+                table: "TB_ROLECLAIMS",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "TB_ROLES",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TRANSPORTADORAS_CNPJ",
@@ -551,33 +584,54 @@ namespace EntregaSegura.Infra.Data.Migrations
                 name: "IX_UNIDADES_CONDOMINIO_NUMERO_BLOCO",
                 table: "TB_UNIDADES",
                 columns: new[] { "CON_ID", "UND_NUMERO", "UND_BLOCO" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_USERCLAIMS_UserId",
+                table: "TB_USERCLAIMS",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_USERLOGINS_UserId",
+                table: "TB_USERLOGINS",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TB_USERROLES_RoleId",
+                table: "TB_USERROLES",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "TB_USERS",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "TB_USERS",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AspNetRoleClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserClaims");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserLogins");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserRoles");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUserTokens");
-
-            migrationBuilder.DropTable(
                 name: "TB_ENTREGAS");
 
             migrationBuilder.DropTable(
-                name: "AspNetRoles");
+                name: "TB_ROLECLAIMS");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
+                name: "TB_USERCLAIMS");
+
+            migrationBuilder.DropTable(
+                name: "TB_USERLOGINS");
+
+            migrationBuilder.DropTable(
+                name: "TB_USERROLES");
+
+            migrationBuilder.DropTable(
+                name: "TB_USERTOKENS");
 
             migrationBuilder.DropTable(
                 name: "TB_TRANSPORTADORAS");
@@ -589,7 +643,13 @@ namespace EntregaSegura.Infra.Data.Migrations
                 name: "TB_MORADORES");
 
             migrationBuilder.DropTable(
+                name: "TB_ROLES");
+
+            migrationBuilder.DropTable(
                 name: "TB_UNIDADES");
+
+            migrationBuilder.DropTable(
+                name: "TB_USERS");
 
             migrationBuilder.DropTable(
                 name: "TB_CONDOMINIOS");

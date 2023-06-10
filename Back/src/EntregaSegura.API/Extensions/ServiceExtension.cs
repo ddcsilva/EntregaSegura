@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Infra.Data.Contexts;
-using EntregaSegura.Infra.Data.Identity;
 using Microsoft.AspNetCore.Identity;
+using EntregaSegura.Domain.Identity;
 
 namespace EntregaSegura.API.Extensions;
 
@@ -18,7 +18,7 @@ public static class ServiceExtension
 
     public static IServiceCollection AddIdentityConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<User, Role>()
             .AddEntityFrameworkStores<EntregaSeguraContext>()
             .AddDefaultTokenProviders();
 
