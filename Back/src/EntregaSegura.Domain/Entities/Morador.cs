@@ -1,6 +1,6 @@
 namespace EntregaSegura.Domain.Entities;
 
-public sealed class Morador : BaseEntity
+public sealed class Morador : EntityBase
 {
     private readonly IList<Entrega> _entregas;
 

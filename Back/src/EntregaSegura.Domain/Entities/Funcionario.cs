@@ -2,7 +2,7 @@ using EntregaSegura.Domain.Entities.Enums;
 
 namespace EntregaSegura.Domain.Entities;
 
-public sealed class Funcionario : BaseEntity
+public sealed class Funcionario : EntityBase
 {
     private readonly IList<Entrega> _entregas;
 

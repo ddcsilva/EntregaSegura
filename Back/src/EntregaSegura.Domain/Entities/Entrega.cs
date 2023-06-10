@@ -2,7 +2,7 @@ using EntregaSegura.Domain.Entities.Enums;
 
 namespace EntregaSegura.Domain.Entities;
 
-public sealed class Entrega : BaseEntity
+public sealed class Entrega : EntityBase
 {
     public Entrega(string descricao, string observacao, int transportadoraId, int moradorId, int funcionarioId)
     {

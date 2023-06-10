@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntregaSegura.Infra.Data.Repositories;
 
-public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : BaseEntity
+public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase
 {
     protected EntregaSeguraContext _context;
     protected DbSet<TEntity> _dbSet;

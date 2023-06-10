@@ -3,7 +3,7 @@ using EntregaSegura.Domain.Entities;
 
 namespace EntregaSegura.Domain.Interfaces;
 
-public interface IRepositoryBase<TEntity> : IDisposable where TEntity : BaseEntity
+public interface IRepositoryBase<TEntity> : IDisposable where TEntity : EntityBase
 {
     Task<IEnumerable<TEntity>> BuscarTodos(bool rastrearAlteracoe = false);
     Task<IEnumerable<TEntity>> BuscarPorCondicao(Expression<Func<TEntity, bool>> expression, bool rastrearAlteracoes = false);

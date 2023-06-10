@@ -1,6 +1,6 @@
 namespace EntregaSegura.Domain.Entities;
 
-public abstract class Empresa : BaseEntity
+public abstract class Empresa : EntityBase
 {
     protected Empresa(string nome, string cnpj, string telefone, string email)
     {

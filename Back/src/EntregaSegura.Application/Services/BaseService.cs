@@ -27,7 +27,7 @@ public abstract class BaseService
         _notificadorErros.Handle(new NotificacaoErros(mensagem));
     }
 
-    protected bool ExecutarValidacao<TV, TE>(TV validacao, TE entidade) where TV : AbstractValidator<TE> where TE : BaseEntity
+    protected bool ExecutarValidacao<TV, TE>(TV validacao, TE entidade) where TV : AbstractValidator<TE> where TE : EntityBase
     {
         var validator = validacao.Validate(entidade);
 
