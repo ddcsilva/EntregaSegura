@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <ProjectReference Include="..\EntregaSegura.Application\EntregaSegura.Application.csproj" />
     <ProjectReference Include="..\EntregaSegura.Domain\EntregaSegura.Domain.csproj" />
     <ProjectReference Include="..\EntregaSegura.Infra.Data\EntregaSegura.Infra.Data.csproj" />

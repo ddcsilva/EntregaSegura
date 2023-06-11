@@ -3,7 +3,6 @@ using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
-using EntregaSegura.Domain.Interfaces.Account;
 using EntregaSegura.Domain.Validations;
 
 namespace EntregaSegura.Application.Services;
