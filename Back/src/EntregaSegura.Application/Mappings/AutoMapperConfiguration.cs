@@ -1,6 +1,7 @@
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Identity;
 
 namespace EntregaSegura.Application.Mappings;
 
@@ -25,5 +26,11 @@ public class AutoMapperConfiguration : Profile
         CreateMap<UnidadeDTO, Unidade>();
         CreateMap<Unidade, UnidadeDTO>()
             .ForMember(dest => dest.NomeCondominio, opt => opt.MapFrom(src => src.Condominio.Nome));
+
+        CreateMap<UsuarioDTO, User>();
+        CreateMap<User, UsuarioDTO>();
+
+        CreateMap<LoginUsuarioDTO, User>();
+        CreateMap<User, LoginUsuarioDTO>();
     }
 }

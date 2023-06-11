@@ -5,8 +5,6 @@ using EntregaSegura.Application.Services;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Infra.Data.Repositories;
-using EntregaSegura.Domain.Interfaces.Account;
-using EntregaSegura.Infra.Data.Identity;
 
 namespace EntregaSegura.Infra.IoC;
 
@@ -16,7 +14,6 @@ public static class DependencyInjection
     {
         ResolverDependenciasRepository(services);
         ResolverDependenciasServices(services);
-        ResolverDependenciasIdentity(services);
         ResolverOutrasDependencias(services);
 
         return services;
@@ -30,6 +27,7 @@ public static class DependencyInjection
         services.AddScoped<IMoradorRepository, MoradorRepository>();
         services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();
         services.AddScoped<IUnidadeRepository, UnidadeRepository>();
+        services.AddScoped<IUsuarioRepository, UsuarioRepository>();
     }
 
     private static void ResolverDependenciasServices(this IServiceCollection services)
@@ -40,12 +38,8 @@ public static class DependencyInjection
         services.AddScoped<IMoradorService, MoradorService>();
         services.AddScoped<ITransportadoraService, TransportadoraService>();
         services.AddScoped<IUnidadeService, UnidadeService>();
-    }
-
-    private static void ResolverDependenciasIdentity(this IServiceCollection services)
-    {
-        // services.AddScoped<IAutenticacaoService, AutenticacaoService>();
-        services.AddScoped<ISeedUsersRoles, SeedUsersRoles>();
+        services.AddScoped<IUsuarioService, UsuarioService>();
+        services.AddScoped<ITokenService, TokenService>();
     }
 
     private static void ResolverOutrasDependencias(this IServiceCollection services)

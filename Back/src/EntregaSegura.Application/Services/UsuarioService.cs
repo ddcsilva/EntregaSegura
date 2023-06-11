@@ -29,9 +29,9 @@ public class UsuarioService : BaseService, IUsuarioService
         _usuarioRepository = usuarioRepository;
     }
 
-    public async Task<SignInResult> VerificarCredenciaisAsync(LoginUsuarioDTO loginUsuarioDTO, string senha)
+    public async Task<SignInResult> VerificarCredenciaisAsync(UsuarioDTO usuarioDTO, string senha)
     {
-        var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == loginUsuarioDTO.Login);
+        var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == usuarioDTO.UserName);
 
         if (usuario == null)
         {
@@ -67,7 +67,7 @@ public class UsuarioService : BaseService, IUsuarioService
 
     public async Task<UsuarioDTO> AtualizarContaUsuarioAsync(UsuarioDTO usuarioDTO)
     {
-        var usuario = await _usuarioRepository.BuscarPorLoginAsync(usuarioDTO.Login);
+        var usuario = await _usuarioRepository.BuscarPorLoginAsync(usuarioDTO.UserName);
 
         if (usuario == null)
         {

@@ -33,7 +33,7 @@ public class TokenService : ITokenService
         var claims = new List<Claim>
         {
             new Claim(ClaimTypes.NameIdentifier, usuarioDTO.Id.ToString()),
-            new Claim(ClaimTypes.Name, usuarioDTO.Login),
+            new Claim(ClaimTypes.Name, usuarioDTO.UserName),
             new Claim(ClaimTypes.Email, usuarioDTO.Email)
         };
 

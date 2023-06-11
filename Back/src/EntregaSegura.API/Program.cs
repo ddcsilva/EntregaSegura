@@ -2,11 +2,17 @@ using EntregaSegura.API.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using EntregaSegura.Infra.IoC;
 using EntregaSegura.Application.Mappings;
+using System.Text.Json.Serialization;
+using EntregaSegura.Domain.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddContexts(builder.Configuration);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
