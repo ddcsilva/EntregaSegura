@@ -14,4 +14,8 @@ public interface IRepositoryBase<TEntity> : IDisposable where TEntity : EntityBa
     void Remover(TEntity entity);
     
     Task<bool> SalvarAlteracoesAsync();
+
+    Task IniciarTrasacaoAsync();
+    Task SalvarTransacaoAsync();
+    Task DescartarTransacaoAsync();
 }

@@ -103,7 +103,15 @@ public class UsuarioService : BaseService, IUsuarioService
 
     public async Task<bool> VerificarSeUsuarioExisteAsync(string login)
     {
-        return await _userManager.Users.AnyAsync(u => u.UserName == login);
+        var usuarioExistente = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == login);
+
+        if (usuarioExistente != null)
+        {
+            Notificar("Já existe um usuário com este login.");
+            return true;
+        }
+
+        return false;
     }
 
     public void Dispose()

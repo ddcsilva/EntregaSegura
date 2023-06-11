@@ -31,6 +31,9 @@ public class MoradorDTO
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public int UnidadeId { get; set; }
 
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    public int UserId { get; set; }
+
     public string NomeCondominio { get; set; }
 
     public string NomeUnidade { get; set; }

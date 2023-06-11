@@ -1,4 +1,6 @@
 using System.Net;
+using System.Security.Claims;
+using EntregaSegura.API.Extensions;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
@@ -22,14 +24,15 @@ public class UsuarioController : MainController
         _tokenService = tokenService;
     }
 
-    [AllowAnonymous]
-    [HttpGet("ObterUsuario/{login}")]
-    public async Task<ActionResult> ObterUsuario(string login)
+    [HttpGet("obter-usuario")]
+    public async Task<ActionResult> ObterUsuario()
     {
-        var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(login);
+        var userName = User.ObterUserName();
+
+        var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(userName);
 
         if (usuario == null)
-            return NotFound();
+            return CustomResponse(null, HttpStatusCode.NotFound);
 
         return CustomResponse(usuario);
     }
@@ -42,16 +45,14 @@ public class UsuarioController : MainController
 
         if (await _usuarioService.VerificarSeUsuarioExisteAsync(usuarioDTO.UserName))
         {
-            NotificarErro("Já existe um usuário com este login.");
-            return CustomResponse();
+            return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
         var usuarioRegistrado = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
 
         if (usuarioRegistrado == null)
         {
-            NotificarErro("Não foi possível registrar o usuário.");
-            return CustomResponse();
+            return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
         return CustomResponse(usuarioRegistrado);
@@ -63,7 +64,7 @@ public class UsuarioController : MainController
     {
         if (!ModelState.IsValid)
         {
-            return CustomResponse(ModelState);
+            return CustomResponse(ModelState, HttpStatusCode.BadRequest);
         }
 
         var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(loginDTO.UserName);

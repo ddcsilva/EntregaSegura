@@ -33,4 +33,9 @@ public sealed class Morador : EntityBase
     public User User { get; private set; }
 
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
+
+    public void DefinirUsuario(int userId)
+    {
+        UserId = userId;
+    }
 }

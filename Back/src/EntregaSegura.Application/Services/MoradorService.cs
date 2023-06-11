@@ -10,17 +10,17 @@ namespace EntregaSegura.Application.Services;
 public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
-    // private readonly IAutenticacaoService _autenticacaoService;
+    private readonly IUsuarioService _usuarioService;
     private readonly IMapper _mapper;
 
     public MoradorService(
         IMoradorRepository moradorRepository,
-        // IAutenticacaoService autenticacaoService,
+        IUsuarioService usuarioService,
         IMapper mapper,
         INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
-        // _autenticacaoService = autenticacaoService;
+        _usuarioService = usuarioService;
         _mapper = mapper;
     }
 
@@ -42,25 +42,41 @@ public class MoradorService : BaseService, IMoradorService
 
         if (!await ValidarMorador(morador)) return false;
 
-        _moradorRepository.Adicionar(morador);
-        
-        var adicionadoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
-
-        if (!adicionadoComSucesso)
+        var usuarioDTO = new UsuarioDTO
         {
-            Notificar("Ocorreu um erro ao adicionar o morador.");
-            return false;
+            UserName = morador.Email,
+            Email = morador.Email,
+            Senha = "123456"
+        };
+
+        using (_moradorRepository.IniciarTrasacaoAsync())
+        {
+            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
+
+            if (usuarioRegistradoComSucesso == null)
+            {
+                Notificar("Ocorreu um erro ao adicionar o morador.");
+                return false;
+            }
+
+            morador.DefinirUsuario(usuarioRegistradoComSucesso.Id);
+
+            _moradorRepository.Adicionar(morador);
+
+            var adicionadoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
+
+            if (!adicionadoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao adicionar o morador.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            await _moradorRepository.SalvarTransacaoAsync();
         }
 
         moradorDTO.Id = morador.Id;
-
-        // var senhaAleatoria = _autenticacaoService.GerarSenhaAleatoria();
-        // var usuarioRegistradoComSucesso = await _autenticacaoService.RegistrarAsync(moradorDTO.Email, senhaAleatoria, morador.Id);
-
-        // if (!usuarioRegistradoComSucesso)
-        // {
-        //     Notificar("Erro ao tentar adicionar usuário para o morador.");
-        // }
+        moradorDTO.UserId = morador.UserId;
 
         return true;
     }

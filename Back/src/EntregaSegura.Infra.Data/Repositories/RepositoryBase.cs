@@ -58,6 +58,21 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where T
         return await _context.SaveChangesAsync() > 0;
     }
 
+    public async Task IniciarTrasacaoAsync()
+    {
+        await _context.Database.BeginTransactionAsync();
+    }
+    
+    public async Task SalvarTransacaoAsync()
+    {
+        await _context.Database.CommitTransactionAsync();
+    }
+
+    public async Task DescartarTransacaoAsync()
+    {
+        await _context.Database.RollbackTransactionAsync();
+    }
+
     public void Dispose()
     {
         _context?.Dispose();
