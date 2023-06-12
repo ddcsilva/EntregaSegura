@@ -77,14 +77,7 @@ public class MoradorService : BaseService, IMoradorService
 
             await _moradorRepository.SalvarTransacaoAsync();
 
-            string assuntoEmail = "Bem-vindo ao EntregaSegura!";
-            string mensagemEmail = $"Olá {morador.Nome},\n\n" +
-                                   $"Sua conta no EntregaSegura foi criada com sucesso! " +
-                                   $"Suas credenciais são:\n\n" +
-                                   $"Usuário: {usuarioDTO.UserName}\n" +
-                                   $"Senha: {usuarioDTO.Senha}\n\n" +
-                                   $"Atenciosamente,\n" +
-                                   $"Equipe EntregaSegura";
+            (string assuntoEmail, string mensagemEmail) = ConstruirEmail(morador, usuarioDTO);
 
             await _emailService.EnviarEmailAsync(usuarioDTO.Email, assuntoEmail, mensagemEmail);
         }
@@ -140,6 +133,19 @@ public class MoradorService : BaseService, IMoradorService
     public void Dispose()
     {
         _moradorRepository?.Dispose();
+    }
+
+    private (string, string) ConstruirEmail(Morador morador, UsuarioDTO usuarioDTO)
+    {
+        string assuntoEmail = "Bem-vindo ao EntregaSegura!";
+        string mensagemEmail = $"Olá {morador.Nome},\n\n" +
+                               $"Sua conta no EntregaSegura foi criada com sucesso! " +
+                               $"Suas credenciais são:\n\n" +
+                               $"Usuário: {usuarioDTO.UserName}\n" +
+                               $"Senha: {usuarioDTO.Senha}\n\n" +
+                               $"Atenciosamente,\n" +
+                               $"Equipe EntregaSegura";
+        return (assuntoEmail, mensagemEmail);
     }
 
     private async Task<bool> ValidarMorador(Morador morador, bool ehAtualizacao = false)
