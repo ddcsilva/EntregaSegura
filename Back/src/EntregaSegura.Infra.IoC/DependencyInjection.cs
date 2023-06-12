@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<IUnidadeService, UnidadeService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IEmailService, EmailService>();
     }
 
     private static void ResolverOutrasDependencias(this IServiceCollection services)

@@ -11,16 +11,19 @@ public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
     private readonly IUsuarioService _usuarioService;
+    private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public MoradorService(
         IMoradorRepository moradorRepository,
         IUsuarioService usuarioService,
+        IEmailService emailService,
         IMapper mapper,
         INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
         _usuarioService = usuarioService;
+        _emailService = emailService;
         _mapper = mapper;
     }
 
@@ -73,6 +76,17 @@ public class MoradorService : BaseService, IMoradorService
             }
 
             await _moradorRepository.SalvarTransacaoAsync();
+
+            string assuntoEmail = "Bem-vindo ao EntregaSegura!";
+            string mensagemEmail = $"Olá {morador.Nome},\n\n" +
+                                   $"Sua conta no EntregaSegura foi criada com sucesso! " +
+                                   $"Suas credenciais são:\n\n" +
+                                   $"Usuário: {usuarioDTO.UserName}\n" +
+                                   $"Senha: {usuarioDTO.Senha}\n\n" +
+                                   $"Atenciosamente,\n" +
+                                   $"Equipe EntregaSegura";
+
+            await _emailService.EnviarEmailAsync(usuarioDTO.Email, assuntoEmail, mensagemEmail);
         }
 
         moradorDTO.Id = morador.Id;
