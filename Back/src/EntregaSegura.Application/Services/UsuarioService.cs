@@ -50,7 +50,7 @@ public class UsuarioService : BaseService, IUsuarioService
         return resultado;
     }
 
-    public async Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO)
+    public async Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO, string role)
     {
         var usuario = _mapper.Map<User>(usuarioDTO);
 
@@ -59,6 +59,14 @@ public class UsuarioService : BaseService, IUsuarioService
         if (!resultado.Succeeded)
         {
             Notificar("Ocorreu um erro ao criar a conta do usuário.");
+            return null;
+        }
+
+        var roleUsuario = await _userManager.AddToRoleAsync(usuario, role);
+
+        if (!roleUsuario.Succeeded)
+        {
+            Notificar($"Ocorreu um erro ao adicionar a role '{role}' ao usuário.");
             return null;
         }
 

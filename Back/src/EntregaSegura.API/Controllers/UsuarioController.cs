@@ -38,27 +38,6 @@ public class UsuarioController : MainController
     }
 
     [AllowAnonymous]
-    [HttpPost("Registrar")]
-    public async Task<ActionResult> Registrar(UsuarioDTO usuarioDTO)
-    {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
-
-        if (await _usuarioService.VerificarSeUsuarioExisteAsync(usuarioDTO.UserName))
-        {
-            return CustomResponse(null, HttpStatusCode.BadRequest);
-        }
-
-        var usuarioRegistrado = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
-
-        if (usuarioRegistrado == null)
-        {
-            return CustomResponse(null, HttpStatusCode.BadRequest);
-        }
-
-        return CustomResponse(usuarioRegistrado);
-    }
-
-    [AllowAnonymous]
     [HttpPost("Login")]
     public async Task<ActionResult> Login(LoginUsuarioDTO loginDTO)
     {

@@ -21,7 +21,7 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
             .HasComment("Chave primária da entrega");
 
         builder.Property(e => e.TransportadoraId)
-            .HasColumnName("TRP_ID")
+            .HasColumnName("TRA_ID")
             .HasColumnOrder(2)
             .IsRequired()
             .HasComment("Chave estrangeira da transportadora");

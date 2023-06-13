@@ -9,6 +9,6 @@ public interface IUsuarioService : IDisposable
     Task<UsuarioDTO> ObterUsuarioPeloLoginAsync(string login);
     
     Task<SignInResult> VerificarCredenciaisAsync(UsuarioDTO usuarioDTO, string senha);
-    Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO);
+    Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO, string role);
     Task<UsuarioDTO> AtualizarContaUsuarioAsync(UsuarioDTO usuarioDTO);
 }

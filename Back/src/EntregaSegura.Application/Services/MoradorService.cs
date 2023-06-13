@@ -54,7 +54,7 @@ public class MoradorService : BaseService, IMoradorService
 
         using (_moradorRepository.IniciarTrasacaoAsync())
         {
-            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
+            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO, "MORADOR");
 
             if (usuarioRegistradoComSucesso == null)
             {
