@@ -27,9 +27,9 @@ public class CondominioService : BaseService, ICondominioService
         return _mapper.Map<IEnumerable<CondominioDTO>>(condominios);
     }
 
-    public async Task<CondominioDTO> ObterCondominioPorIdAsync(int id)
+    public async Task<CondominioDTO> ObterCondominioPorIdAsync(int id, bool rastrearAlteracoes = false)
     {
-        var condominio = await _condominioRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
+        var condominio = await _condominioRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
         return _mapper.Map<CondominioDTO>(condominio);
     }
 
@@ -60,7 +60,7 @@ public class CondominioService : BaseService, ICondominioService
 
         if (!await ValidarCondominio(condominio, ehAtualizacao: true)) return false;
 
-        _condominioRepository.Adicionar(condominio);
+        _condominioRepository.Atualizar(condominio);
 
         var atualizadoComSucesso = await _condominioRepository.SalvarAlteracoesAsync();
 

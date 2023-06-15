@@ -23,12 +23,14 @@ public class MainController : ControllerBase
 
     protected ActionResult CustomResponse(object result = null, HttpStatusCode statusCode = HttpStatusCode.OK)
     {
+        var operacaoValida = OperacaoValida();
+
         var response = new
         {
-            success = OperacaoValida(),
+            success = operacaoValida,
             statusCode = (int)statusCode,
             data = result,
-            errors = OperacaoValida() ? new string[] { } : _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
+            errors = operacaoValida ? new string[] { } : _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
         };
 
         return StatusCode((int)statusCode, response);
@@ -41,7 +43,7 @@ public class MainController : ControllerBase
             NotificarErroModelInvalida(modelState);
         }
 
-        return CustomResponse();
+        return CustomResponse(null, HttpStatusCode.BadRequest);
     }
 
     protected void NotificarErroModelInvalida(ModelStateDictionary modelState)

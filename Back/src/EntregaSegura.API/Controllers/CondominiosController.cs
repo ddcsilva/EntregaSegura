@@ -21,7 +21,6 @@ public class CondominiosController : MainController
     public async Task<ActionResult<IEnumerable<CondominioDTO>>> ObterTodosCondominios()
     {
         var condominios = await _condominioService.ObterTodosCondominiosAsync();
-
         return CustomResponse(condominios, HttpStatusCode.OK);
     }
 
@@ -42,12 +41,11 @@ public class CondominiosController : MainController
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] CondominioDTO condominioDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _condominioService.AdicionarAsync(condominioDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(condominioDTO, HttpStatusCode.Created);
     }
@@ -55,18 +53,25 @@ public class CondominiosController : MainController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<CondominioDTO>> Atualizar(int id, CondominioDTO condominioDTO)
     {
+        var condominio = await _condominioService.ObterCondominioPorIdAsync(id);
+
+        if (condominio == null)
+        {
+            NotificarErro("Condomínio não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
+
         if (id != condominioDTO.Id)
         {
             NotificarErro("Erro ao atualizar condomínio: Id da requisição difere do Id do objeto");
             return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _condominioService.AtualizarAsync(condominioDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(condominioDTO, HttpStatusCode.OK);
     }
@@ -84,8 +89,7 @@ public class CondominiosController : MainController
 
         await _condominioService.RemoverAsync(id);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(null, HttpStatusCode.OK);
     }
