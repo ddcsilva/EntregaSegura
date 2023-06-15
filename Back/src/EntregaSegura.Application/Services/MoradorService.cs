@@ -14,12 +14,11 @@ public class MoradorService : BaseService, IMoradorService
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
-    public MoradorService(
-        IMoradorRepository moradorRepository,
-        IUsuarioService usuarioService,
-        IEmailService emailService,
-        IMapper mapper,
-        INotificadorErros notificadorErros) : base(notificadorErros)
+    public MoradorService(IMoradorRepository moradorRepository,
+                          IUsuarioService usuarioService,
+                          IEmailService emailService,
+                          IMapper mapper,
+                          INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
         _usuarioService = usuarioService;
@@ -33,9 +32,9 @@ public class MoradorService : BaseService, IMoradorService
         return _mapper.Map<IEnumerable<MoradorDTO>>(moradores);
     }
 
-    public async Task<MoradorDTO> ObterMoradorPorIdAsync(int id)
+    public async Task<MoradorDTO> ObterMoradorPorIdAsync(int id, bool rastrearAlteracoes = false)
     {
-        var morador = await _moradorRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
+        var morador = await _moradorRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
         return _mapper.Map<MoradorDTO>(morador);
     }
 

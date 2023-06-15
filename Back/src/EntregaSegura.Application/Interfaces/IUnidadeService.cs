@@ -5,7 +5,7 @@ namespace EntregaSegura.Application.Interfaces;
 public interface IUnidadeService : IDisposable
 {
     Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesAsync();
-    Task<UnidadeDTO> ObterUnidadePorIdAsync(int id);
+    Task<UnidadeDTO> ObterUnidadePorIdAsync(int id, bool rastrearAlteracoes = false);
 
     Task<bool> AdicionarAsync(UnidadeDTO unidadeDTO);
     Task<bool> AtualizarAsync(UnidadeDTO unidadeDTO);

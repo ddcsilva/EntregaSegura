@@ -33,4 +33,9 @@ public sealed class Funcionario : EntityBase
     public User User { get; private set; }
 
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToList();
+
+    public void DefinirUsuario(int userId)
+    {
+        UserId = userId;
+    }
 }

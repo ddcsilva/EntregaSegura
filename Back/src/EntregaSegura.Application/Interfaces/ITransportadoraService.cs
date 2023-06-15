@@ -5,7 +5,7 @@ namespace EntregaSegura.Application.Interfaces;
 public interface ITransportadoraService : IDisposable
 {
     Task<IEnumerable<TransportadoraDTO>> ObterTodasTransportadorasAsync();
-    Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id);
+    Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false);
 
     Task<bool> AdicionarAsync(TransportadoraDTO transportadoraDTO);
     Task<bool> AtualizarAsync(TransportadoraDTO transportadoraDTO);

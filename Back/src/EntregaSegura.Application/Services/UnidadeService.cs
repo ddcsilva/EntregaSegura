@@ -36,9 +36,9 @@ public class UnidadeService : BaseService, IUnidadeService
         return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
     }
 
-    public async Task<UnidadeDTO> ObterUnidadePorIdAsync(int id)
+    public async Task<UnidadeDTO> ObterUnidadePorIdAsync(int id, bool rastrearAlteracoes = false)
     {
-        var unidade = await _unidadeRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
+        var unidade = await _unidadeRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
         return _mapper.Map<UnidadeDTO>(unidade);
     }
 

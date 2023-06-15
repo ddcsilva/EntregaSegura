@@ -33,5 +33,8 @@ public class FuncionarioDTO
 
     public string NomeCondominio { get; set; }
 
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
+    public int UserId { get; set; }
+
     public IEnumerable<EntregaDTO> Entregas { get; set; }
 }

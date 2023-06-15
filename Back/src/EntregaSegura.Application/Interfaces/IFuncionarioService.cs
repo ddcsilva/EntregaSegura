@@ -1,14 +1,13 @@
-using EntregaSegura.Domain.Entities;
+using EntregaSegura.Application.DTOs;
 
 namespace EntregaSegura.Application.Interfaces;
 
 public interface IFuncionarioService : IDisposable
 {
-    Task<Funcionario> Adicionar(Funcionario funcionario);
-    Task<Funcionario> Atualizar(Funcionario funcionario);
-    Task<bool> Remover(int id);
-    Task<IEnumerable<Funcionario>> ObterTodosAsync();
-    Task<Funcionario> ObterPorIdAsync(int id);
-    Task<Funcionario> ObterPorNomeAsync(string nome);
-    Task<Funcionario> ObterFuncionarioComEntregasAsync(int funcionarioId);
+    Task<IEnumerable<FuncionarioDTO>> ObterTodosFuncionariosAsync();
+    Task<FuncionarioDTO> ObterFuncionarioPorIdAsync(int id, bool rastrearAlteracoes = false);
+
+    Task<bool> AdicionarAsync(FuncionarioDTO funcionario);
+    Task<bool> AtualizarAsync(FuncionarioDTO funcionario);
+    Task<bool> RemoverAsync(int id);
 }

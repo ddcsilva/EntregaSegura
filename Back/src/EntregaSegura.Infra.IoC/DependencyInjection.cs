@@ -33,8 +33,8 @@ public static class DependencyInjection
     private static void ResolverDependenciasServices(this IServiceCollection services)
     {
         services.AddScoped<ICondominioService, CondominioService>();
-        // services.AddScoped<IEntregaService, EntregaService>();
-        // services.AddScoped<IFuncionarioService, FuncionarioService>();
+        services.AddScoped<IEntregaService, EntregaService>();
+        services.AddScoped<IFuncionarioService, FuncionarioService>();
         services.AddScoped<IMoradorService, MoradorService>();
         services.AddScoped<ITransportadoraService, TransportadoraService>();
         services.AddScoped<IUnidadeService, UnidadeService>();

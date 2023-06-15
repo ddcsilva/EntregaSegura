@@ -1,119 +1,85 @@
-// using EntregaSegura.Application.Interfaces;
-// using EntregaSegura.Domain.Entities;
-// using EntregaSegura.Domain.Interfaces.Repositories;
-// using EntregaSegura.Domain.Validators;
-// using EntregaSegura.Infrastructure.UnitOfWork;
+using AutoMapper;
+using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Interfaces;
+using EntregaSegura.Domain.Validations;
 
-// namespace EntregaSegura.Application.Services;
+namespace EntregaSegura.Application.Services;
 
-// public class EntregaService : BaseService, IEntregaService
-// {
-//     private readonly IEntregaRepository _entregaRepository;
+public class EntregaService : BaseService, IEntregaService
+{
+    private readonly IEntregaRepository _entregaRepository;
+    private readonly IEmailService _emailService;
+    private readonly IMapper _mapper;
 
-//     public EntregaService(IEntregaRepository entregaRepository,
-//                           IUnitOfWork unitOfWork,
-//                           INotificadorErros notificadorErros) : base(unitOfWork, notificadorErros)
-//     {
-//         _entregaRepository = entregaRepository;
-//     }
+    public EntregaService(IEntregaRepository entregaRepository,
+                          IEmailService emailService,
+                          IMapper mapper,
+                          INotificadorErros notificadorErros) : base(notificadorErros)
+    {
+        _entregaRepository = entregaRepository;
+        _emailService = emailService;
+        _mapper = mapper;
+    }
 
-//     public async Task<Entrega> Adicionar(Entrega entrega)
-//     {
-//         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return null;
+    public Task<Entrega> Adicionar(Entrega entrega)
+    {
+        throw new NotImplementedException();
+    }
 
-//         _entregaRepository.Adicionar(entrega);
-//         var result = await CommitAsync();
+    public Task<Entrega> Atualizar(Entrega entrega)
+    {
+        throw new NotImplementedException();
+    }
 
-//         if (result == 0)
-//         {
-//             Notificar("Ocorreu um erro ao salvar a entrega.");
-//             return null;
-//         }
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
 
-//         return entrega;
-//     }
+    public Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId)
+    {
+        throw new NotImplementedException();
+    }
 
-//     public async Task<Entrega> Atualizar(Entrega entrega)
-//     {
-//         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return null;
+    public Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId)
+    {
+        throw new NotImplementedException();
+    }
 
-//         _entregaRepository.Atualizar(entrega);
-//         var result = await CommitAsync();
+    public Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId)
+    {
+        throw new NotImplementedException();
+    }
 
-//         if (result == 0)
-//         {
-//             Notificar("Ocorreu um erro ao atualizar a entrega.");
-//             return null;
-//         }
+    public Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId)
+    {
+        throw new NotImplementedException();
+    }
 
-//         return entrega;
-//     }
+    public Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId)
+    {
+        throw new NotImplementedException();
+    }
 
-//     public async Task<bool> Remover(int id)
-//     {
-//         var entrega = await _entregaRepository.ObterPorIdAsync(id);
+    public Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId)
+    {
+        throw new NotImplementedException();
+    }
 
-//         if (entrega == null)
-//         {
-//             Notificar("Entrega não encontrada.");
-//             return false;
-//         }
+    public Task<Entrega> ObterPorIdAsync(int id)
+    {
+        throw new NotImplementedException();
+    }
 
-//         _entregaRepository.Remover(entrega);
+    public Task<IEnumerable<Entrega>> ObterTodosAsync()
+    {
+        throw new NotImplementedException();
+    }
 
-//         var result = await CommitAsync();
-
-//         if (result == 0)
-//         {
-//             Notificar("Ocorreu um erro ao remover a entrega.");
-//             return false;
-//         }
-
-//         return true;
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterTodosAsync()
-//     {
-//         return await _entregaRepository.ObterTodosAsync();
-//     }
-
-//     public async Task<Entrega> ObterPorIdAsync(int id)
-//     {
-//         return await _entregaRepository.ObterPorIdAsync(id);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId)
-//     {
-//         return await _entregaRepository.ObterEntregasPorMoradorAsync(moradorId);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId)
-//     {
-//         return await _entregaRepository.ObterEntregasPorFuncionarioAsync(funcionarioId);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId)
-//     {
-//         return await _entregaRepository.ObterEntregasPorTransportadoraAsync(transportadoraId);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId)
-//     {
-//         return await _entregaRepository.ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(moradorId);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId)
-//     {
-//         return await _entregaRepository.ObterEntregasComStatusRetiradaPorMoradorAsync(moradorId);
-//     }
-
-//     public async Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId)
-//     {
-//         return await _entregaRepository.ObterEntregasRecebidasPorFuncionarioAsync(funcionarioId);
-//     }
-
-//     public void Dispose()
-//     {
-//         _unitOfWork?.Dispose();
-//     }
-// }
+    public Task<bool> Remover(int id)
+    {
+        throw new NotImplementedException();
+    }
+}

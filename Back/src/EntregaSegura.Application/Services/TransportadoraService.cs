@@ -27,9 +27,9 @@ public class TransportadoraService : BaseService, ITransportadoraService
         return _mapper.Map<IEnumerable<TransportadoraDTO>>(transportadoras);
     }
 
-    public async Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id)
+    public async Task<TransportadoraDTO> ObterTransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false)
     {
-        var transportadora = await _transportadoraRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
+        var transportadora = await _transportadoraRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
         return _mapper.Map<TransportadoraDTO>(transportadora);
     }
 
