@@ -1,8 +1,8 @@
 using System.Net;
+using Microsoft.AspNetCore.Mvc;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace EntregaSegura.API.Controllers;
 
@@ -21,7 +21,6 @@ public class MoradoresController : MainController
     public async Task<ActionResult<IEnumerable<MoradorDTO>>> ObterTodosMoradores()
     {
         var moradores = await _moradorService.ObterTodosMoradoresAsync();
-
         return CustomResponse(moradores, HttpStatusCode.OK);
     }
 
@@ -42,12 +41,11 @@ public class MoradoresController : MainController
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] MoradorDTO moradorDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _moradorService.AdicionarAsync(moradorDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(moradorDTO, HttpStatusCode.Created);
     }
@@ -55,24 +53,31 @@ public class MoradoresController : MainController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<MoradorDTO>> Atualizar(int id, MoradorDTO moradorDTO)
     {
+        var morador = await _moradorService.ObterMoradorPorIdAsync(id);
+
+        if (morador == null)
+        {
+            NotificarErro("Morador não encontrado");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
+
         if (id != moradorDTO.Id)
         {
             NotificarErro("Erro ao atualizar morador: Id da requisição difere do Id do objeto");
             return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _moradorService.AtualizarAsync(moradorDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(moradorDTO, HttpStatusCode.OK);
     }
 
     [HttpDelete("{id:int}")]
-    public async Task<ActionResult<MoradorDTO>> Excluir(int id)
+    public async Task<ActionResult> Remover(int id)
     {
         var moradorDTO = await _moradorService.ObterMoradorPorIdAsync(id);
 
@@ -84,8 +89,7 @@ public class MoradoresController : MainController
 
         await _moradorService.RemoverAsync(id);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(moradorDTO, HttpStatusCode.OK);
     }
