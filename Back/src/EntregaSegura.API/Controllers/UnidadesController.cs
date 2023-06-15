@@ -21,7 +21,6 @@ public class UnidadesController : MainController
     public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidades()
     {
         var unidades = await _unidadeService.ObterTodasUnidadesComCondominioAsync();
-
         return CustomResponse(unidades, HttpStatusCode.OK);
     }
 
@@ -42,12 +41,11 @@ public class UnidadesController : MainController
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] UnidadeDTO unidadeDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _unidadeService.AdicionarAsync(unidadeDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(unidadeDTO, HttpStatusCode.Created);
     }
@@ -55,12 +53,11 @@ public class UnidadesController : MainController
     [HttpPost("em-massa")]
     public async Task<ActionResult> AdicionarUnidadesEmMassa(UnidadesEmMassaDTO unidadesEmMassaDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _unidadeService.AdicionarUnidadesEmMassaAsync(unidadesEmMassaDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(unidadesEmMassaDTO, HttpStatusCode.Created);
     }
@@ -68,18 +65,25 @@ public class UnidadesController : MainController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<UnidadeDTO>> Atualizar(int id, UnidadeDTO unidadeDTO)
     {
+        var unidade = await _unidadeService.ObterUnidadePorIdAsync(id);
+
+        if (unidade == null)
+        {
+            NotificarErro("Unidade não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
+
         if (id != unidadeDTO.Id)
         {
             NotificarErro("Erro ao atualizar a unidade, id informado não é o mesmo que foi passado na query");
             return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _unidadeService.AtualizarAsync(unidadeDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(unidadeDTO, HttpStatusCode.OK);
     }
@@ -97,8 +101,7 @@ public class UnidadesController : MainController
 
         await _unidadeService.RemoverAsync(id);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(null, HttpStatusCode.OK);
     }
