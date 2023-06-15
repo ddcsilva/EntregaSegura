@@ -41,12 +41,11 @@ public class TransportadorasController : MainController
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] TransportadoraDTO transportadoraDTO)
     {
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _transportadoraService.AdicionarAsync(transportadoraDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(transportadoraDTO, HttpStatusCode.Created);
     }
@@ -54,18 +53,25 @@ public class TransportadorasController : MainController
     [HttpPut("{id:int}")]
     public async Task<ActionResult<TransportadoraDTO>> Atualizar(int id, TransportadoraDTO transportadoraDTO)
     {
+        var transportadora = await _transportadoraService.ObterTransportadoraPorIdAsync(id);
+
+        if (transportadora == null)
+        {
+            NotificarErro("Transportadora não encontrada");
+            return CustomResponse(null, HttpStatusCode.NotFound);
+        }
+
         if (id != transportadoraDTO.Id)
         {
             NotificarErro("Erro ao atualizar a transportadora: Id da requisição difere do Id do objeto");
             return CustomResponse(null, HttpStatusCode.BadRequest);
         }
 
-        if (!ModelState.IsValid) return CustomResponse(ModelState, HttpStatusCode.BadRequest);
+        if (!ModelState.IsValid) return CustomResponse(ModelState);
 
         await _transportadoraService.AtualizarAsync(transportadoraDTO);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(transportadoraDTO, HttpStatusCode.OK);
     }
@@ -83,8 +89,7 @@ public class TransportadorasController : MainController
 
         await _transportadoraService.RemoverAsync(id);
 
-        if (!OperacaoValida())
-            return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!OperacaoValida()) return CustomResponse(null, HttpStatusCode.BadRequest);
 
         return CustomResponse(null, HttpStatusCode.OK);
     }
