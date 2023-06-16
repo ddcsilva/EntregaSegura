@@ -300,7 +300,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                 {
                     ETG_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave primária da entrega")
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TRP_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira da transportadora"),
+                    TRA_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira da transportadora"),
                     FUN_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do funcionário"),
                     MOR_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do morador"),
                     ETG_DATA_RECEBIMENTO = table.Column<DateTime>(type: "datetime", nullable: false, comment: "Data de recebimento da entrega"),
@@ -316,7 +316,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                     table.PrimaryKey("PK_ENTREGAS", x => x.ETG_ID);
                     table.ForeignKey(
                         name: "FK_ENTREGA_TRANSPORTADORA",
-                        column: x => x.TRP_ID,
+                        column: x => x.TRA_ID,
                         principalTable: "TB_TRANSPORTADORAS",
                         principalColumn: "TRA_ID",
                         onDelete: ReferentialAction.Restrict);
@@ -344,10 +344,10 @@ namespace EntregaSegura.Infra.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "8aeaad2a-094d-4375-b976-32daf0e21e1e", "Admin", "ADMIN" },
-                    { 2, "3f87eabb-d6b7-431c-bf97-2bca8d2f1135", "Sindico", "SINDICO" },
-                    { 3, "f2ef15b2-a4f5-4fdf-bbb9-cbd0a627a14d", "Funcionario", "FUNCIONARIO" },
-                    { 4, "c726939a-28d0-4e8f-bda2-0696af21a6db", "Morador", "MORADOR" }
+                    { 1, "1ec5bd79-f06d-496b-8692-5fab2b5b0ac4", "Admin", "ADMIN" },
+                    { 2, "74cb8045-95f9-4683-ab59-51de28eceeda", "Sindico", "SINDICO" },
+                    { 3, "30ecfea0-9c6a-4437-bd23-ee386177d0c5", "Funcionario", "FUNCIONARIO" },
+                    { 4, "574ee489-8249-40e2-a4aa-ea4edf735fd6", "Morador", "MORADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -360,16 +360,16 @@ namespace EntregaSegura.Infra.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "cd9603d6-56db-4a74-8808-1312a6f8bfdd", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEJIidA8hwxymht43+0TW0WR9kG24PXvqB0yA2UME+NnOTer+XH1qahSzyVBnZi3GwQ==", null, false, "e1333414-c0dd-4ab1-bb24-8de6ef5fd256", false, "admin" },
-                    { 2, 0, "0425dca8-8ac5-4bff-beb1-015542a6328e", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEDwxMwDQnrBIbchiNHG/jO3ygmbbK1ZpaLhtOtRJlnID/jVY/BJaE6yqFqoG42Ffug==", null, false, "4895feea-86af-4765-9035-6870f32fa040", false, "sindico" },
-                    { 3, 0, "dfb4b4f4-e9f4-4b03-884d-1d324567d308", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEA60brBbmqg8Iexh7zK5Xm/b7a7j3wx6UKRYsGMcF2wVR274ZMTrPQubfbUQEJY02w==", null, false, "fe3f40c5-aaed-4f46-90ec-7ac6fffb42bb", false, "funcionario" },
-                    { 4, 0, "3411bdda-b16d-48c7-bd17-1f3b04079ce6", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEOenIi3eEc+tYnjN9ErlTVq72qehEePxA1p8rZfxU4eCFwbuBYbRmFDoryeP6d7KxA==", null, false, "0fe9a5b9-5543-46ff-a88d-c2979596d77b", false, "morador" }
+                    { 1, 0, "c7d02d32-8b74-4862-ac28-6d1af82a0578", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEAbuA5DLsgFEzYOvDLAOtxTjbKgEYA6nX3v61HZ1wtaApkWEcL+tQK6Nhy8kWjq8Ug==", null, false, "bf8ff509-8331-42f4-a5d5-e2e9a2228146", false, "admin" },
+                    { 2, 0, "5f737e7b-9048-46b7-958d-0036a2926901", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEDXCuuxUelMQ07gTQjvv8TC0LtDETWDynmXCdSqoYi16BzKj0vBNYrR971hwoXAmEA==", null, false, "f654a5ed-c23b-4688-9936-40e211c403a3", false, "sindico" },
+                    { 3, 0, "e0b4a955-609d-452c-a64a-21740941f516", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEKj23SLanJkUnvvuKnxxVmLTjwi58kVqNCLlI9cLgVcIGhdP6QPPJyjhSGBlXdhoiA==", null, false, "e90757f2-25ac-4340-b2fb-925b194f4735", false, "funcionario" },
+                    { 4, 0, "2e75a399-042f-42cb-8f7e-60761f9bb29f", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEK8cIg5kHELCNsgWx1aOMEHtdwEjaVT04XkqiEGZopNwi0IYC/whEh8nfJZkC9WSKw==", null, false, "23aabd2b-3f89-48d2-a606-e030263fb733", false, "morador" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
                 columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE", "FUN_USER_ID" },
-                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2434), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
+                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6277), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
@@ -459,8 +459,8 @@ namespace EntregaSegura.Infra.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
-                columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRP_ID" },
-                values: new object[] { 1, new DateTime(2023, 6, 10, 20, 51, 42, 989, DateTimeKind.Local).AddTicks(2471), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
+                columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRA_ID" },
+                values: new object[] { 1, new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6308), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",
@@ -491,9 +491,9 @@ namespace EntregaSegura.Infra.Data.Migrations
                 column: "MOR_ID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TB_ENTREGAS_TRP_ID",
+                name: "IX_TB_ENTREGAS_TRA_ID",
                 table: "TB_ENTREGAS",
-                column: "TRP_ID");
+                column: "TRA_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_FUNCIONARIO_CPF",

@@ -27,7 +27,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             Nome = "Condomínio Boa Vista",
-            Cnpj = "17540623000150",
+            Cnpj = "55787865000131",
             Telefone = "1140028922",
             Email = "contato@boavista.com.br",
             QuantidadeBlocos = 2,
