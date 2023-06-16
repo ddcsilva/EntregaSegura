@@ -38,7 +38,7 @@ export class CondominioService {
 
   public criar(condominio: Condominio): Observable<Condominio> {
     return this.fazerRequisicao(() => this.http.post<ApiResponse<Condominio>>(this.urlBase, condominio, this.httpOptions))
-      .pipe(map(response => response.data));
+      .pipe(map((response: ApiResponse<Condominio>) => response.data));
   }
 
   public atualizar(id: string, condominio: Condominio): Observable<Condominio> {

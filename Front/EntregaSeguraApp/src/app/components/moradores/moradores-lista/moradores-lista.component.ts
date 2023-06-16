@@ -1,21 +1,31 @@
+// Angular imports
+import { Router } from "@angular/router";
 import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatSort } from "@angular/material/sort";
 import { MatTable, MatTableDataSource } from "@angular/material/table";
-import { Router } from "@angular/router";
-import { NgxSpinnerService } from "ngx-spinner";
+
+// Model imports
+import { Morador } from "src/app/models/morador";
+
+// Service imports
+import { MoradorService } from "src/app/services/morador/morador.service";
+
+// Component imports
+import { ExclusaoDialogComponent } from "src/app/shared/components/exclusao-dialog/exclusao-dialog.component";
+
+// Library imports
 import { ToastrService } from "ngx-toastr";
 import { Subject, takeUntil } from "rxjs";
-import { Morador } from "src/app/models/morador";
-import { MoradorService } from "src/app/services/morador/morador.service";
+import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: 'app-moradores-lista',
   templateUrl: './moradores-lista.component.html',
   styleUrls: ['./moradores-lista.component.scss']
 })
-export class MoradoresListaComponent implements OnInit, OnDestroy, AfterViewInit {
+export class MoradoresListaComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Moradores';
   public colunasExibidas: string[] = ['id', 'nome', 'email', 'telefone', 'ramal', 'nomeCondominio', 'blocoAndarUnidade', 'actions'];
   private listaMoradores: Morador[] = [];
@@ -45,10 +55,25 @@ export class MoradoresListaComponent implements OnInit, OnDestroy, AfterViewInit
     this.destroy$.complete();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.renderRows();
+  public excluirMorador(id: number) {
+    const dialogRef = this.dialog.open(ExclusaoDialogComponent);
+    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+      if (confirmacaoExclusao) {
+        this.moradorService.excluir(id.toString()).subscribe({
+          next: () => {
+            this.toastr.success('Morador excluído com sucesso', 'Sucesso!');
+            this.obterLista();
+          },
+          error: (error: any) => {
+            this.exibirErros(error);
+          }
+        });
+      }
+    });
+  }
+
+  public editarMorador(id: number): void {
+    this.router.navigate(['moradores/detalhe', id]);
   }
 
   public aplicarFiltro(evento: Event) {
@@ -61,20 +86,25 @@ export class MoradoresListaComponent implements OnInit, OnDestroy, AfterViewInit
       next: (moradores: Morador[]) => {
         this.listaMoradores = moradores;
         this.dataSource = new MatTableDataSource<Morador>(this.listaMoradores);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.table.renderRows();
         this.spinner.hide();
       },
-      error: (error: any) => {
-        this.exibirErros(error);
+      error: (erro: any) => {
+        this.exibirErros(erro);
         this.spinner.hide();
       }
     });
   }
 
   private exibirErros(erro: any) {
-    if (erro instanceof Array) {
+    if (typeof erro === 'string') {
+      this.toastr.error(erro, 'Erro!');
+    } else if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir item', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
   }
 }

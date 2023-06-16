@@ -31,14 +31,6 @@ export class UnidadeService {
       );
   }
 
-  public obterTodasUnidadesComCondominio(): Observable<Unidade[]> {
-    const url = `${this.urlBase}/com-condominio`;
-    return this.fazerRequisicao(() => this.http.get<ApiResponse<Unidade[]>>(url))
-      .pipe(
-        map(response => response.data)
-      );
-  }
-
   public obterPorId(id: number): Observable<Unidade> {
     const url = `${this.urlBase}/${id}`;
     return this.fazerRequisicao(() => this.http.get<Unidade>(url));

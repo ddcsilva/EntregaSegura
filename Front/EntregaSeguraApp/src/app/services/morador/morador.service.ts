@@ -1,10 +1,17 @@
+// Angular imports
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+
+// Library imports
+import { Observable, catchError, map } from 'rxjs';
+
+// Models
 import { Morador } from 'src/app/models/morador';
+import { ApiResponse } from 'src/app/shared/models/api-response';
+
+// Services
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
 
-@Injectable()
 @Injectable()
 export class MoradorService {
   private urlBase: string = 'https://localhost:5001/api/moradores';
@@ -16,26 +23,38 @@ export class MoradorService {
   constructor(private http: HttpClient, private tratamentoErrosService: TratamentoErrosService) { }
 
   public obterTodos(): Observable<Morador[]> {
-    return of([
-      {
-        id: 1,
-        nome: "João Silva",
-        email: "joao.silva@example.com",
-        telefone: "(11) 98765-4321",
-        ramal: "1234",
-        nomeCondominio: "Condomínio Bela Vista",
-        blocoAndarUnidade: "Bloco A, 10º andar, Unidade 2"
-      },
-      {
-        id: 2,
-        nome: "Maria Santos",
-        email: "maria.santos@example.com",
-        telefone: "(11) 98765-4322",
-        ramal: "1235",
-        nomeCondominio: "Condomínio Bela Vista",
-        blocoAndarUnidade: "Bloco A, 10º andar, Unidade 3"
-      }
-    ]);
+    return this.fazerRequisicao(() => this.http.get<ApiResponse<Morador[]>>(this.urlBase))
+      .pipe(
+        map(response => response.data)
+      );
+  }
+
+  public obterPorId(id: string): Observable<Morador> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.get<ApiResponse<Morador>>(url))
+      .pipe(map(response => response.data));
+  }
+
+  public criar(morador: Morador): Observable<Morador> {
+    return this.fazerRequisicao(() => this.http.post<ApiResponse<Morador>>(this.urlBase, morador, this.httpOptions))
+      .pipe(map((response: ApiResponse<Morador>) => response.data));
+  }
+
+  public atualizar(id: string, morador: Morador): Observable<Morador> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.put<ApiResponse<Morador>>(url, morador, this.httpOptions))
+      .pipe(map(response => response.data));
+  }
+
+  public excluir(id: string): Observable<void> {
+    const url = `${this.urlBase}/${id}`;
+    return this.fazerRequisicao(() => this.http.delete<void>(url));
+  }
+
+  private fazerRequisicao(operacaoHttp: Function): Observable<any> {
+    return operacaoHttp().pipe(
+      catchError(this.tratamentoErrosService.tratarErro.bind(this.tratamentoErrosService))
+    );
   }
 }
 

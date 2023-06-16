@@ -1,18 +1,27 @@
+// Angular imports
+import { Router } from '@angular/router';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
-import { Subject, takeUntil } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { MatSelectChange } from '@angular/material/select';
+
+// Model imports
 import { Unidade } from 'src/app/models/unidade';
-import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { Condominio } from 'src/app/models/condominio';
+
+// Service imports
 import { UnidadeService } from 'src/app/services/unidade/unidade.service';
 import { CondominioService } from 'src/app/services/condominio/condominio.service';
-import { Condominio } from 'src/app/models/condominio';
-import { MatSelectChange } from '@angular/material/select';
+
+// Component imports
+import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+
+// Library imports
+import { ToastrService } from 'ngx-toastr';
+import { Subject, takeUntil } from 'rxjs';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-unidade-lista',
@@ -101,7 +110,7 @@ export class UnidadeListaComponent implements OnInit, OnDestroy {
   }
 
   private obterLista() {
-    this.unidadeService.obterTodasUnidadesComCondominio().pipe(takeUntil(this.destroy$)).subscribe({
+    this.unidadeService.obterTodos().pipe(takeUntil(this.destroy$)).subscribe({
       next: (unidades: Unidade[]) => {
         this.listaUnidades = unidades;
         this.dataSource = new MatTableDataSource<Unidade>(this.listaUnidades);
@@ -118,10 +127,12 @@ export class UnidadeListaComponent implements OnInit, OnDestroy {
   }
 
   private exibirErros(erro: any) {
-    if (erro instanceof Array) {
+    if (typeof erro === 'string') {
+      this.toastr.error(erro, 'Erro!');
+    } else if (erro instanceof Array) {
       erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir item', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
   }
 }

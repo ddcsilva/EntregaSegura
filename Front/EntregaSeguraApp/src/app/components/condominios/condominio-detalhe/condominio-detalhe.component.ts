@@ -82,7 +82,7 @@ export class CondominioDetalheComponent implements OnInit {
 
     operacao.subscribe({
       next: (response: any) => {
-        this.condominio = response.data;
+        this.condominio = response;
     
         if (!this.id) {
           const dialogConfig = {

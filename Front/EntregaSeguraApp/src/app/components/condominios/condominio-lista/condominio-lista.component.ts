@@ -106,5 +106,5 @@ export class CondominioListaComponent implements OnInit, OnDestroy {
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
     }
-  }  
+  }
 }

@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 export class TratamentoErrosService {
   public tratarErro(errorResponse: HttpErrorResponse | Error): Observable<never> {
     let mensagemErro: string;
-  
+
     if (errorResponse instanceof HttpErrorResponse) {
       if (this.apiEstaForaDoAr(errorResponse)) {
         mensagemErro = 'Nosso serviço está temporariamente indisponível. Por favor, tente novamente mais tarde.';
@@ -20,9 +20,9 @@ export class TratamentoErrosService {
     } else {
       mensagemErro = `${errorResponse.message}`;
     }
-  
+
     return throwError(() => new Error(mensagemErro));
-  }  
+  }
 
   private apiEstaForaDoAr(errorResponse: HttpErrorResponse): boolean {
     return errorResponse.status === 0;
@@ -33,6 +33,7 @@ export class TratamentoErrosService {
   }
 
   private erroDoBackendComCorpoResposta(errorResponse: HttpErrorResponse): boolean {
-    return errorResponse.error && errorResponse.error.errors && Array.isArray(errorResponse.error.errors);
+    return errorResponse.error && Array.isArray(errorResponse.error.errors);
   }
+
 }
