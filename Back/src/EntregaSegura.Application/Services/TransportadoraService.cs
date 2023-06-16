@@ -10,14 +10,16 @@ namespace EntregaSegura.Application.Services;
 public class TransportadoraService : BaseService, ITransportadoraService
 {
     private readonly ITransportadoraRepository _transportadoraRepository;
+    private readonly IEntregaRepository _entregaRepository;
     private readonly IMapper _mapper;
 
-    public TransportadoraService(
-        ITransportadoraRepository transportadoraRepository,
-        IMapper mapper,
-        INotificadorErros notificadorErros) : base(notificadorErros)
+    public TransportadoraService(ITransportadoraRepository transportadoraRepository,
+                                 IEntregaRepository entregaRepository,
+                                 IMapper mapper,
+                                 INotificadorErros notificador) : base(notificador)
     {
         _transportadoraRepository = transportadoraRepository;
+        _entregaRepository = entregaRepository;
         _mapper = mapper;
     }
 
@@ -83,6 +85,12 @@ public class TransportadoraService : BaseService, ITransportadoraService
             return false;
         }
 
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Esta transportadora não pode ser removida pois existem registros associados a ela.");
+            return false;
+        }
+
         _transportadoraRepository.Remover(transportadora);
 
         var removidoComSucesso = await _transportadoraRepository.SalvarAlteracoesAsync();
@@ -127,5 +135,12 @@ public class TransportadoraService : BaseService, ITransportadoraService
         }
 
         return true;
+    }
+
+    private async Task<bool> TemAssociacoes(int entregaId)
+    {
+        var temEntregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.Id == entregaId);
+
+        return temEntregas.Any();
     }
 }

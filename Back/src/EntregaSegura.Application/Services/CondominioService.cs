@@ -10,14 +10,20 @@ namespace EntregaSegura.Application.Services;
 public class CondominioService : BaseService, ICondominioService
 {
     private readonly ICondominioRepository _condominioRepository;
+    private readonly IUnidadeRepository _unidadeRepository;
+    private readonly IFuncionarioRepository _funcionarioRepository;
+
     private readonly IMapper _mapper;
 
-    public CondominioService(
-        ICondominioRepository condominioRepository,
-        IMapper mapper,
-        INotificadorErros notificadorErros) : base(notificadorErros)
+    public CondominioService(ICondominioRepository condominioRepository,
+                             IUnidadeRepository unidadeRepository,
+                             IFuncionarioRepository funcionarioRepository,
+                             IMapper mapper,
+                             INotificadorErros notificador) : base(notificador)
     {
         _condominioRepository = condominioRepository;
+        _unidadeRepository = unidadeRepository;
+        _funcionarioRepository = funcionarioRepository;
         _mapper = mapper;
     }
 
@@ -83,6 +89,12 @@ public class CondominioService : BaseService, ICondominioService
             return false;
         }
 
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Este condomínio não pode ser removido pois existem registros associados a ele.");
+            return false;
+        }
+
         _condominioRepository.Remover(condominio);
 
         var removidoComSucesso = await _condominioRepository.SalvarAlteracoesAsync();
@@ -127,5 +139,13 @@ public class CondominioService : BaseService, ICondominioService
         }
 
         return true;
+    }
+
+    private async Task<bool> TemAssociacoes(int condominioId)
+    {
+        var temUnidades = await _unidadeRepository.BuscarPorCondicaoAsync(u => u.Id == condominioId);
+        var temFuncionarios = await _funcionarioRepository.BuscarPorCondicaoAsync(f => f.Id == condominioId);
+
+        return temUnidades.Any() || temFuncionarios.Any();
     }
 }

@@ -11,16 +11,18 @@ public class UnidadeService : BaseService, IUnidadeService
 {
     private readonly IUnidadeRepository _unidadeRepository;
     private readonly ICondominioRepository _condominioRepository;
+    private readonly IMoradorRepository _moradorRepository;
     private readonly IMapper _mapper;
 
-    public UnidadeService(
-        IUnidadeRepository unidadeRepository,
-        ICondominioRepository condominioRepository,
-        IMapper mapper,
-        INotificadorErros notificadorErros) : base(notificadorErros)
+    public UnidadeService(IUnidadeRepository unidadeRepository,
+                          ICondominioRepository condominioRepository,
+                          IMoradorRepository moradorRepository,
+                          IMapper mapper,
+                          INotificadorErros notificador) : base(notificador)
     {
         _unidadeRepository = unidadeRepository;
         _condominioRepository = condominioRepository;
+        _moradorRepository = moradorRepository;
         _mapper = mapper;
     }
 
@@ -125,6 +127,12 @@ public class UnidadeService : BaseService, IUnidadeService
             return false;
         }
 
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Esta unidade não pode ser removida pois existem registros associados a ela.");
+            return false;
+        }
+
         _unidadeRepository.Remover(unidade);
 
         var removidoComSucesso = await _unidadeRepository.SalvarAlteracoesAsync();
@@ -168,5 +176,11 @@ public class UnidadeService : BaseService, IUnidadeService
         }
 
         return true;
+    }
+
+    private async Task<bool> TemAssociacoes(int unidadeId)
+    {
+        var moradores = await _moradorRepository.BuscarPorCondicaoAsync(m => m.UnidadeId == unidadeId);
+        return moradores.Any();
     }
 }

@@ -10,17 +10,20 @@ namespace EntregaSegura.Application.Services;
 public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
+    private readonly IEntregaRepository _entregaRepository;
     private readonly IUsuarioService _usuarioService;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public MoradorService(IMoradorRepository moradorRepository,
+                          IEntregaRepository entregaRepository,
                           IUsuarioService usuarioService,
                           IEmailService emailService,
                           IMapper mapper,
                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
+        _entregaRepository = entregaRepository;
         _usuarioService = usuarioService;
         _emailService = emailService;
         _mapper = mapper;
@@ -116,6 +119,12 @@ public class MoradorService : BaseService, IMoradorService
             return false;
         }
 
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Este morador não pode ser removido pois existem registros associados a ele.");
+            return false;
+        }
+
         _moradorRepository.Remover(morador);
 
         var removidoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
@@ -173,5 +182,12 @@ public class MoradorService : BaseService, IMoradorService
         }
 
         return true;
+    }
+
+    private async Task<bool> TemAssociacoes(int moradorId)
+    {
+        var entregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.MoradorId == moradorId);
+
+        return entregas.Any();
     }
 }
