@@ -13,8 +13,17 @@ import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/u
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { MoradoresComponent } from './components/moradores/moradores.component';
 import { MoradoresListaComponent } from './components/moradores/moradores-lista/moradores-lista.component';
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { LoginComponent } from './components/usuario/login/login.component';
 
 const routes: Routes = [
+  {
+    path: 'usuario',
+    component: UsuarioComponent,
+    children: [
+      { path: 'login', component: LoginComponent }
+    ],
+  },
   {
     path: 'dashboard', component: DashboardComponent
   },

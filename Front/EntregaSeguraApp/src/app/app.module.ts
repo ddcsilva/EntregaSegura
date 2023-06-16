@@ -31,6 +31,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 // Custom component imports
+import { UsuarioComponent } from './components/usuario/usuario.component';
+import { LoginComponent } from './components/usuario/login/login.component';
 import { CondominiosComponent } from './components/condominios/condominios.component';
 import { CondominioListaComponent } from './components/condominios/condominio-lista/condominio-lista.component';
 import { CondominioDetalheComponent } from './components/condominios/condominio-detalhe/condominio-detalhe.component';
@@ -58,6 +60,7 @@ import { CondominioService } from './services/condominio/condominio.service';
 import { TransportadoraService } from './services/transportadora/transportadora.service';
 import { TratamentoErrosService } from './shared/services/tratamento-erros/tratamento-erros.service';
 import { UnidadeService } from './services/unidade/unidade.service';
+import { MoradorService } from './services/morador/morador.service';
 
 // Custom config imports
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
@@ -68,7 +71,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
-import { MoradorService } from './services/morador/morador.service';
+import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
 
 registerLocaleData(ptBr)
 
@@ -76,6 +79,8 @@ registerLocaleData(ptBr)
   declarations: [
     // Components
     AppComponent,
+    UsuarioComponent,
+    LoginComponent,
     CondominioDetalheComponent,
     CondominioListaComponent,
     CondominiosComponent,
@@ -93,7 +98,8 @@ registerLocaleData(ptBr)
     FormatarTelefonePipe,
     FormatarCnpjPipe,
     MoradoresComponent,
-    MoradoresListaComponent
+    MoradoresListaComponent,
+    NotificacoesComponent
   ],
   imports: [
     // Angular modules
