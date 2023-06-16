@@ -12,6 +12,7 @@ namespace EntregaSegura.Application.Tests;
 public class TransportadoraServiceTests
 {
     private readonly Mock<ITransportadoraRepository> _transportadoraRepositoryMock;
+    private readonly Mock<IEntregaRepository> _entregaRepositoryMock;
     private readonly Mock<IMapper> _mapperMock;
     private readonly Mock<INotificadorErros> _notificadorErrosMock;
     private readonly TransportadoraService _service;
@@ -19,11 +20,13 @@ public class TransportadoraServiceTests
     public TransportadoraServiceTests()
     {
         _transportadoraRepositoryMock = new Mock<ITransportadoraRepository>();
+        _entregaRepositoryMock = new Mock<IEntregaRepository>();
         _mapperMock = new Mock<IMapper>();
         _notificadorErrosMock = new Mock<INotificadorErros>();
 
         _service = new TransportadoraService(
             _transportadoraRepositoryMock.Object,
+            _entregaRepositoryMock.Object,
             _mapperMock.Object,
             _notificadorErrosMock.Object);
     }
