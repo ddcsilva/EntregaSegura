@@ -31,9 +31,10 @@ export class UnidadeService {
       );
   }
 
-  public obterPorId(id: number): Observable<Unidade> {
+  public obterPorId(id: string): Observable<Unidade> {
     const url = `${this.urlBase}/${id}`;
-    return this.fazerRequisicao(() => this.http.get<Unidade>(url));
+    return this.fazerRequisicao(() => this.http.get<ApiResponse<Unidade>>(url))
+      .pipe(map(response => response.data));
   }
 
   public criar(unidade: Unidade): Observable<Unidade> {
@@ -41,7 +42,7 @@ export class UnidadeService {
       .pipe(map(response => response.data));
   }
 
-  public atualizar(id: number, unidade: Unidade): Observable<Unidade> {
+  public atualizar(id: string, unidade: Unidade): Observable<Unidade> {
     const url = `${this.urlBase}/${id}`;
     return this.fazerRequisicao(() => this.http.put<ApiResponse<Unidade>>(url, unidade, this.httpOptions))
       .pipe(map(response => response.data));

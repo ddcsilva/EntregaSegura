@@ -3,6 +3,7 @@ export interface Unidade {
     bloco: string;
     andar: number;
     numero: string;
+    descricaoUnidade: string;
     condominioId: number;
     nomeCondominio: string;
 }

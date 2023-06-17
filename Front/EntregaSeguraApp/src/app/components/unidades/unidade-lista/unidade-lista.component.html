@@ -31,9 +31,9 @@
 <div class="mat-elevation-z8">
     <mat-table [dataSource]="dataSource" matSort>
 
-        <!-- ID Column -->
+        <!-- Index Column -->
         <ng-container matColumnDef="id">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+            <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
             <mat-cell *matCellDef="let unidade"> {{unidade.id}} </mat-cell>
         </ng-container>
 
