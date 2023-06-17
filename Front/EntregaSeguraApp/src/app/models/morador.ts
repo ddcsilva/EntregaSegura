@@ -4,6 +4,7 @@ export interface Morador {
     email: string;
     telefone: string;
     ramal: string;
+    unidadeId: number;
     nomeCondominio: string;
-    blocoAndarUnidade: string;
+    descricaoUnidade: string;
 }

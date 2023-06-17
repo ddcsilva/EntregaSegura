@@ -21,13 +21,13 @@ import { Subject, takeUntil } from "rxjs";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
-  selector: 'app-moradores-lista',
-  templateUrl: './moradores-lista.component.html',
-  styleUrls: ['./moradores-lista.component.scss']
+  selector: 'app-morador-lista',
+  templateUrl: './morador-lista.component.html',
+  styleUrls: ['./morador-lista.component.scss']
 })
-export class MoradoresListaComponent implements OnInit, OnDestroy {
+export class MoradorListaComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Moradores';
-  public colunasExibidas: string[] = ['id', 'nome', 'email', 'telefone', 'ramal', 'nomeCondominio', 'blocoAndarUnidade', 'actions'];
+  public colunasExibidas: string[] = ['id', 'nome', 'ramal', 'nomeCondominio', 'descricaoUnidade', 'actions'];
   private listaMoradores: Morador[] = [];
   public dataSource = new MatTableDataSource<Morador>(this.listaMoradores);
   private destroy$ = new Subject<void>();
