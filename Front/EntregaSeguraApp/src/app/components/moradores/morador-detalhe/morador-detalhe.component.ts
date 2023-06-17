@@ -10,9 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 
 // Model imports
 import { Morador } from 'src/app/models/morador';
+import { Condominio } from './../../../models/condominio';
+import { Unidade } from './../../../models/unidade';
 
 // Service imports
 import { MoradorService } from 'src/app/services/morador/morador.service';
+import { UnidadeService } from 'src/app/services/unidade/unidade.service';
+import { CondominioService } from 'src/app/services/condominio/condominio.service';
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
 
 // Helper imports
@@ -29,6 +33,8 @@ export class MoradorDetalheComponent implements OnInit {
   public nomeArquivo: string = '';
   public previewURL: any = null;
   public formulario: FormGroup = new FormGroup({});
+  public condominios: Condominio[] = [];
+  public unidades: Unidade[] = [];
 
   private id: number | null = null;
   private morador: Morador = {} as Morador;
@@ -38,6 +44,8 @@ export class MoradorDetalheComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private moradorService: MoradorService,
+    private condominioService: CondominioService,
+    private unidadeService: UnidadeService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private tratamentoErrosService: TratamentoErrosService) { }
@@ -47,9 +55,39 @@ export class MoradorDetalheComponent implements OnInit {
 
     this.validarformulario();
     this.carregarMorador();
+    this.carregarCondominios();
 
     this.formControl.telefone.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);
+    });
+
+    this.formControl.condominioId.valueChanges.subscribe((condominioId: any) => {
+      if (condominioId) {
+        this.carregarUnidades(condominioId);
+      }
+    });
+  }
+
+  private carregarCondominios() {
+    this.condominioService.obterTodos().subscribe({
+      next: (condominios: Condominio[]) => {
+        this.condominios = condominios;
+      },
+      error: (error: any) => {
+        this.exibirErros(error);
+      }
+    });
+  }
+
+  public carregarUnidades(condominioId: number) {
+    this.unidadeService.obterTodosPorCondominioId(condominioId).subscribe({
+      next: (unidades: Unidade[]) => {
+        this.unidades = unidades;
+        this.formControl.unidadeId.enable();
+      },
+      error: (error: any) => {
+        this.exibirErros(error);
+      }
     });
   }
 
@@ -155,6 +193,8 @@ export class MoradorDetalheComponent implements OnInit {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
+      condominioId: ['', Validators.required],
+      unidadeId: [{ value: '', disabled: true }, Validators.required],
       nome: ['', Validators.required],
       cpf: ['', Validators.required],
       telefone: ['', Validators.required],
@@ -162,6 +202,16 @@ export class MoradorDetalheComponent implements OnInit {
       ramal: [''],
       foto: ['']
     });
+  }
+
+  private exibirErros(erro: any) {
+    if (typeof erro === 'string') {
+      this.toastr.error(erro, 'Erro!');
+    } else if (erro instanceof Array) {
+      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
+    } else {
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
+    }
   }
 
   get formControl(): any {

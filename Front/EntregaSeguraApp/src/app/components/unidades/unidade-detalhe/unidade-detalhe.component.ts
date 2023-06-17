@@ -46,7 +46,7 @@ export class UnidadeDetalheComponent implements OnInit {
 
     this.validarformulario();
     this.carregarUnidade();
-    this.obterCondominios();
+    this.carregarCondominios();
   }
 
   public submeterFormulario(): void {
@@ -127,7 +127,7 @@ export class UnidadeDetalheComponent implements OnInit {
     });
   }
 
-  private obterCondominios() {
+  private carregarCondominios() {
     this.condominioService.obterTodos().subscribe({
       next: (condominios: Condominio[]) => {
         this.condominios = condominios;

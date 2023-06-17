@@ -9,6 +9,39 @@
                         <div class="row">
                             <h2>Informações do Morador</h2>
 
+                            <!-- Campo Condomínio -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Condomínio</mat-label>
+                                    <mat-select formControlName="condominioId" required>
+                                        <mat-option *ngFor="let condominio of condominios" [value]="condominio.id">
+                                            {{condominio.nome}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix>business</mat-icon>
+                                    <mat-error *ngIf="formulario.get('condominioId')?.invalid">
+                                        Por favor, selecione um condomínio.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Unidade -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Unidade</mat-label>
+                                    <mat-select formControlName="unidadeId" required [disabled]="!unidades">
+                                        <mat-option *ngFor="let unidade of unidades" [value]="unidade.id">
+                                            {{unidade.descricaoUnidade}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix>home</mat-icon>
+                                    <mat-error *ngIf="formulario.get('unidadeId')?.invalid">
+                                        Por favor, selecione uma unidade.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+
                             <!-- Campo Nome -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
