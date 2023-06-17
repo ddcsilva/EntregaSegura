@@ -12,5 +12,6 @@ public interface IUnidadeService : IDisposable
     Task<bool> RemoverAsync(int id);
 
     Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesComCondominioAsync();
+    Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesPorCondominioAsync(int condominioId);
     Task<bool> AdicionarUnidadesEmMassaAsync(UnidadesEmMassaDTO unidadesDTO);
 }

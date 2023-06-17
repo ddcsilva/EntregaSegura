@@ -24,6 +24,13 @@ public class UnidadesController : MainController
         return CustomResponse(unidades, HttpStatusCode.OK);
     }
 
+    [HttpGet("por-condominio/{condominioId:int}")]
+    public async Task<ActionResult<IEnumerable<UnidadeDTO>>> ObterTodasUnidadesPorCondominio(int condominioId)
+    {
+        var unidades = await _unidadeService.ObterTodasUnidadesPorCondominioAsync(condominioId);
+        return CustomResponse(unidades, HttpStatusCode.OK);
+    }
+
     [HttpGet("{id:int}")]
     public async Task<ActionResult<UnidadeDTO>> ObterUnidadePorId(int id)
     {

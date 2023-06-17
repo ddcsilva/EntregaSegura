@@ -38,6 +38,12 @@ public class UnidadeService : BaseService, IUnidadeService
         return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
     }
 
+    public async Task<IEnumerable<UnidadeDTO>> ObterTodasUnidadesPorCondominioAsync(int condominioId)
+    {
+        var unidades = await _unidadeRepository.BuscarPorCondicaoAsync(u => u.CondominioId == condominioId);
+        return _mapper.Map<IEnumerable<UnidadeDTO>>(unidades);
+    }
+
     public async Task<UnidadeDTO> ObterUnidadePorIdAsync(int id, bool rastrearAlteracoes = false)
     {
         var unidade = await _unidadeRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
