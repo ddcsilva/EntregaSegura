@@ -10,4 +10,6 @@ public interface IMoradorService
     Task<bool> AdicionarAsync(MoradorDTO morador);
     Task<bool> AtualizarAsync(MoradorDTO morador);
     Task<bool> RemoverAsync(int id);
+
+    Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresComUnidadeECondominioAsync();
 }

@@ -36,5 +36,5 @@ public class MoradorDTO
 
     public string NomeCondominio { get; set; }
 
-    public string NomeUnidade { get; set; }
+    public string DescricaoUnidade { get; set; }
 }

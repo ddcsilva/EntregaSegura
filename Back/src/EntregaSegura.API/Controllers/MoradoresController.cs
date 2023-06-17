@@ -20,7 +20,7 @@ public class MoradoresController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MoradorDTO>>> ObterTodosMoradores()
     {
-        var moradores = await _moradorService.ObterTodosMoradoresAsync();
+        var moradores = await _moradorService.ObterTodosMoradoresComUnidadeECondominioAsync();
         return CustomResponse(moradores, HttpStatusCode.OK);
     }
 

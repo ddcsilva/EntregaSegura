@@ -35,6 +35,12 @@ public class MoradorService : BaseService, IMoradorService
         return _mapper.Map<IEnumerable<MoradorDTO>>(moradores);
     }
 
+    public async Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresComUnidadeECondominioAsync()
+    {
+        var moradores = await _moradorRepository.ObterTodosMoradoresComUnidadeECondominioAsync();
+        return _mapper.Map<IEnumerable<MoradorDTO>>(moradores);
+    }
+
     public async Task<MoradorDTO> ObterMoradorPorIdAsync(int id, bool rastrearAlteracoes = false)
     {
         var morador = await _moradorRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
