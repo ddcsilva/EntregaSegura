@@ -83,7 +83,7 @@ export class CondominioDetalheComponent implements OnInit {
     operacao.subscribe({
       next: (response: any) => {
         this.condominio = response;
-    
+
         if (!this.id) {
           const dialogConfig = {
             data: {
@@ -94,9 +94,9 @@ export class CondominioDetalheComponent implements OnInit {
               textoBotaoConfirmar: 'Confirmar',
             } as InformacoesConfirmacaoDialog
           };
-    
+
           const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
-    
+
           dialogRef.afterClosed().subscribe(result => {
             if (result) {
               const unidadesEmMassaDTO: UnidadesEmMassa = {
@@ -105,7 +105,7 @@ export class CondominioDetalheComponent implements OnInit {
                 quantidadeAndaresPorBloco: this.condominio.quantidadeAndares ? this.condominio.quantidadeAndares : 0,
                 quantidadeUnidadesPorAndar: this.condominio.quantidadeUnidades ? this.condominio.quantidadeUnidades : 0
               };
-    
+
               this.unidadeService.adicionarEmMassa(unidadesEmMassaDTO).subscribe({
                 next: () => {
                   this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
@@ -115,13 +115,13 @@ export class CondominioDetalheComponent implements OnInit {
             }
           });
         }
-    
+
         this.toastr.success(`Condomínio ${this.id ? 'atualizado' : 'criado'} com sucesso!`, 'Sucesso');
         this.router.navigate(['/condominios']);
       },
       error: (error: any) => this.tratarErros(error),
       complete: () => this.spinner.hide()
-    });    
+    });
   }
 
   public reiniciarFormulario(event: any): void {
@@ -185,8 +185,12 @@ export class CondominioDetalheComponent implements OnInit {
   }
 
   private atualizarMascaraTelefone(value: string): void {
-    const numbers = value.replace(/\D/g, '');
-    this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+    if (value) {
+      const numbers = value.replace(/\D/g, '');
+      this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+    } else {
+      this.mascaraTelefone = '(00) 0000-00009';
+    }
   }
 
   private atualizarCondominio(condominio: Condominio): Observable<Condominio> {
