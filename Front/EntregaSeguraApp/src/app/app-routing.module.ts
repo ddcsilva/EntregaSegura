@@ -12,7 +12,8 @@ import { UnidadeListaComponent } from './components/unidades/unidade-lista/unida
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { MoradoresComponent } from './components/moradores/moradores.component';
-import { MoradoresListaComponent } from './components/moradores/moradores-lista/moradores-lista.component';
+import { MoradorListaComponent } from './components/moradores/morador-lista/morador-lista.component';
+import { MoradorDetalheComponent } from './components/moradores/morador-detalhe/morador-detalhe.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { LoginComponent } from './components/usuario/login/login.component';
 
@@ -54,9 +55,9 @@ const routes: Routes = [
   {
     path: 'moradores', component: MoradoresComponent,
     children: [
-      { path: '', component: MoradoresListaComponent },
-      { path: 'detalhe', component: UnidadeDetalheComponent },
-      { path: 'detalhe/:id', component: UnidadeDetalheComponent }
+      { path: '', component: MoradorListaComponent },
+      { path: 'detalhe', component: MoradorDetalheComponent },
+      { path: 'detalhe/:id', component: MoradorDetalheComponent }
     ],
   },
   {
