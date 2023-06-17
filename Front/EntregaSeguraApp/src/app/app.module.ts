@@ -46,8 +46,10 @@ import { UnidadesComponent } from './components/unidades/unidades.component';
 import { UnidadeListaComponent } from './components/unidades/unidade-lista/unidade-lista.component';
 import { UnidadeDetalheComponent } from './components/unidades/unidade-detalhe/unidade-detalhe.component';
 import { MoradoresComponent } from './components/moradores/moradores.component';
-import { MoradoresListaComponent } from './components/moradores/moradores-lista/moradores-lista.component';
+import { MoradorListaComponent } from './components/moradores/morador-lista/morador-lista.component';
+import { MoradorDetalheComponent } from './components/moradores/morador-detalhe/morador-detalhe.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
+import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 
 // Custom pipe imports
@@ -71,7 +73,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
-import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
 
 registerLocaleData(ptBr)
 
@@ -98,7 +99,8 @@ registerLocaleData(ptBr)
     FormatarTelefonePipe,
     FormatarCnpjPipe,
     MoradoresComponent,
-    MoradoresListaComponent,
+    MoradorListaComponent,
+    MoradorDetalheComponent,
     NotificacoesComponent
   ],
   imports: [
