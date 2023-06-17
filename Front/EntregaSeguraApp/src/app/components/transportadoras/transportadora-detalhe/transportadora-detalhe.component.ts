@@ -107,8 +107,12 @@ export class TransportadoraDetalheComponent implements OnInit {
   }
 
   private atualizarMascaraTelefone(value: string): void {
-    const numbers = value.replace(/\D/g, '');
-    this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+    if (value) {
+      const numbers = value.replace(/\D/g, '');
+      this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+    } else {
+      this.mascaraTelefone = '(00) 0000-00009';
+    }
   }
 
   private atualizarTransportadora(transportadora: Transportadora): Observable<Transportadora> {
