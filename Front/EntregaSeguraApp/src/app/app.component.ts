@@ -12,7 +12,7 @@ import { NotificacaoService } from './services/notificacao/notificacao.service';
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   public mensagemDeCarregamentoSelecionada: string = '';
   public mediaQueryDispositivoMovel: MediaQueryList;
-  public fotoPerfilUsuario: string = '';
+  public fotoPerfilUsuario: string = '/assets/images/silvio-santos.jpg';
   public iniciaisUsuario: string = '';
 
   notificacoes: Notificacao[] = [];

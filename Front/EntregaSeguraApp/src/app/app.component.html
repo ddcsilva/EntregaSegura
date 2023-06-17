@@ -47,9 +47,11 @@
   <mat-sidenav #sidenav [opened]="true" [mode]="!mediaQueryDispositivoMovel.matches ? 'side' : 'over'"
     [fixedInViewport]="mediaQueryDispositivoMovel.matches" fixedTopGap="112" style="width: 240px;">
     <div class="secao-perfil">
-      <div class="avatar">
+      <div class="avatar" [style.backgroundImage]="'url(' + fotoPerfilUsuario + ')'"
+        [ngStyle]="{'background-color': !fotoPerfilUsuario ? '#757575' : 'transparent'}">
         <span *ngIf="!fotoPerfilUsuario">{{ iniciaisUsuario }}</span>
       </div>
+
       <h4 matLine>Danilo</h4>
       <p matLine class="email">danilo@email.com</p>
       <div class="icones-perfil">

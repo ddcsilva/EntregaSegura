@@ -71,7 +71,7 @@ export class TransportadoraDetalheComponent implements OnInit {
 
     operacao.subscribe({
       next: () => {
-        this.toastr.success(`Transportadora ${this.id ? 'atualizado' : 'criado'} com sucesso!`, 'Sucesso');
+        this.toastr.success(`Transportadora ${this.id ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso');
         this.router.navigate(['/transportadoras']);
       },
       error: (error: any) => this.tratarErros(error),
