@@ -17,6 +17,8 @@ public class UnidadeDTO
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public int Numero { get; set; }
 
+    public string DescricaoUnidade { get; set; }
+
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public int CondominioId { get; set; }
 
