@@ -26,6 +26,8 @@ public class MoradorDTO
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public string Ramal { get; set; }
 
+    public string FotoUpload { get; set; }
+
     public string Foto { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]

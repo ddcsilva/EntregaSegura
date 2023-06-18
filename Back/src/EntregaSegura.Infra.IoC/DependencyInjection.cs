@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<IUnidadeService, UnidadeService>();
         services.AddScoped<IUsuarioService, UsuarioService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IImagemService, ImagemService>();
         services.AddScoped<IEmailService, EmailService>();
     }
 

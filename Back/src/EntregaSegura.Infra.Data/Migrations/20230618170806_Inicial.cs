@@ -337,17 +337,17 @@ namespace EntregaSegura.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "TB_CONDOMINIOS",
                 columns: new[] { "CND_ID", "CND_BAIRRO", "CND_CEP", "CND_CIDADE", "CND_CNPJ", "CND_EMAIL", "CND_ESTADO", "CND_LOGRADOURO", "CND_NOME", "CND_NUMERO", "CND_QTD_ANDARES", "CND_QTD_BLOCOS", "CND_QTD_UNIDADES", "CND_TELEFONE" },
-                values: new object[] { 1, "Jardim Paulistano", "04567010", "São Paulo", "17540623000150", "contato@boavista.com.br", "SP", "Rua das Acácias", "Condomínio Boa Vista", 55, 4, 2, 7, "1140028922" });
+                values: new object[] { 1, "Jardim Paulistano", "04567010", "São Paulo", "55787865000131", "contato@boavista.com.br", "SP", "Rua das Acácias", "Condomínio Boa Vista", 55, 4, 2, 7, "1140028922" });
 
             migrationBuilder.InsertData(
                 table: "TB_ROLES",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "1ec5bd79-f06d-496b-8692-5fab2b5b0ac4", "Admin", "ADMIN" },
-                    { 2, "74cb8045-95f9-4683-ab59-51de28eceeda", "Sindico", "SINDICO" },
-                    { 3, "30ecfea0-9c6a-4437-bd23-ee386177d0c5", "Funcionario", "FUNCIONARIO" },
-                    { 4, "574ee489-8249-40e2-a4aa-ea4edf735fd6", "Morador", "MORADOR" }
+                    { 1, "f948cfb4-7909-406e-80a9-7061f7785364", "Admin", "ADMIN" },
+                    { 2, "01081235-0104-4ddb-9400-4a06b62fcd65", "Sindico", "SINDICO" },
+                    { 3, "3daf821f-bc33-4884-b59d-75970a023b45", "Funcionario", "FUNCIONARIO" },
+                    { 4, "20b9f651-28fa-487e-844b-f0d737123eb2", "Morador", "MORADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -360,16 +360,16 @@ namespace EntregaSegura.Infra.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "c7d02d32-8b74-4862-ac28-6d1af82a0578", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEAbuA5DLsgFEzYOvDLAOtxTjbKgEYA6nX3v61HZ1wtaApkWEcL+tQK6Nhy8kWjq8Ug==", null, false, "bf8ff509-8331-42f4-a5d5-e2e9a2228146", false, "admin" },
-                    { 2, 0, "5f737e7b-9048-46b7-958d-0036a2926901", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEDXCuuxUelMQ07gTQjvv8TC0LtDETWDynmXCdSqoYi16BzKj0vBNYrR971hwoXAmEA==", null, false, "f654a5ed-c23b-4688-9936-40e211c403a3", false, "sindico" },
-                    { 3, 0, "e0b4a955-609d-452c-a64a-21740941f516", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEKj23SLanJkUnvvuKnxxVmLTjwi58kVqNCLlI9cLgVcIGhdP6QPPJyjhSGBlXdhoiA==", null, false, "e90757f2-25ac-4340-b2fb-925b194f4735", false, "funcionario" },
-                    { 4, 0, "2e75a399-042f-42cb-8f7e-60761f9bb29f", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEK8cIg5kHELCNsgWx1aOMEHtdwEjaVT04XkqiEGZopNwi0IYC/whEh8nfJZkC9WSKw==", null, false, "23aabd2b-3f89-48d2-a606-e030263fb733", false, "morador" }
+                    { 1, 0, "541965d4-ddb7-4987-8c2c-ecea386ce77b", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEINYgqmb/X/qV2+cF8AhBX8vs2p4c0vjWn3hqDsbFj2K52vzAZ9tTCcXreJB9aLgpg==", null, false, "1c13f6e9-6672-4ca8-bec6-c9236119116f", false, "admin" },
+                    { 2, 0, "bc5af6f1-8245-4f76-9674-c322d12c3ac7", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEGM/zcuZxsV+/l3GrXPn0KMeVDKGOSeMBojEaIQlNo86dVqCd9rb568xXQIOicPsng==", null, false, "3f79126d-4605-49d1-ba14-1814d5be8c5e", false, "sindico" },
+                    { 3, 0, "44be714d-58a2-4b72-8d88-416793af519a", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEPAnyweMFvY1qDwgB1Z0BKYHhcjTheJ1xWG+sYMEgBvFoTfMR0tGNTId23uHaOnd/A==", null, false, "59fb0837-513c-48c0-b954-88af205704d3", false, "funcionario" },
+                    { 4, 0, "85b75cb4-d0e3-4599-bdb7-553ff45940ca", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEOGrQIaob1dIU46lqh/nydkPqkamg2Yv5OXhIkfzaeCcyopih5H9doxW2+1d+ilKXw==", null, false, "22093e51-5029-47b5-9f48-e9a65b2af913", false, "morador" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
                 columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE", "FUN_USER_ID" },
-                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6277), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
+                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7503), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
@@ -460,7 +460,7 @@ namespace EntregaSegura.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRA_ID" },
-                values: new object[] { 1, new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6308), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
+                values: new object[] { 1, new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7533), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",

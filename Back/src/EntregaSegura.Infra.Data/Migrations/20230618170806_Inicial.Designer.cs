@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EntregaSegura.Infra.Data.Migrations
 {
     [DbContext(typeof(EntregaSeguraContext))]
-    [Migration("20230616001910_Inicial")]
+    [Migration("20230618170806_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -162,7 +162,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Bairro = "Jardim Paulistano",
                             Cep = "04567010",
                             Cidade = "São Paulo",
-                            Cnpj = "17540623000150",
+                            Cnpj = "55787865000131",
                             Email = "contato@boavista.com.br",
                             Estado = "SP",
                             Logradouro = "Rua das Acácias",
@@ -265,7 +265,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataRecebimento = new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6308),
+                            DataRecebimento = new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7533),
                             Descricao = "Entrega Teste 1",
                             FuncionarioId = 1,
                             MoradorId = 1,
@@ -385,7 +385,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cargo = 2,
                             CondominioId = 1,
                             Cpf = "12345678903",
-                            DataAdmissao = new DateTime(2023, 6, 15, 21, 19, 9, 655, DateTimeKind.Local).AddTicks(6277),
+                            DataAdmissao = new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7503),
                             Email = "funcionario1@teste.com",
                             Nome = "Funcionário Teste 1",
                             Telefone = "1234567892",
@@ -1136,28 +1136,28 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "1ec5bd79-f06d-496b-8692-5fab2b5b0ac4",
+                            ConcurrencyStamp = "f948cfb4-7909-406e-80a9-7061f7785364",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "74cb8045-95f9-4683-ab59-51de28eceeda",
+                            ConcurrencyStamp = "01081235-0104-4ddb-9400-4a06b62fcd65",
                             Name = "Sindico",
                             NormalizedName = "SINDICO"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "30ecfea0-9c6a-4437-bd23-ee386177d0c5",
+                            ConcurrencyStamp = "3daf821f-bc33-4884-b59d-75970a023b45",
                             Name = "Funcionario",
                             NormalizedName = "FUNCIONARIO"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "574ee489-8249-40e2-a4aa-ea4edf735fd6",
+                            ConcurrencyStamp = "20b9f651-28fa-487e-844b-f0d737123eb2",
                             Name = "Morador",
                             NormalizedName = "MORADOR"
                         });
@@ -1235,15 +1235,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "c7d02d32-8b74-4862-ac28-6d1af82a0578",
+                            ConcurrencyStamp = "541965d4-ddb7-4987-8c2c-ecea386ce77b",
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAbuA5DLsgFEzYOvDLAOtxTjbKgEYA6nX3v61HZ1wtaApkWEcL+tQK6Nhy8kWjq8Ug==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEINYgqmb/X/qV2+cF8AhBX8vs2p4c0vjWn3hqDsbFj2K52vzAZ9tTCcXreJB9aLgpg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "bf8ff509-8331-42f4-a5d5-e2e9a2228146",
+                            SecurityStamp = "1c13f6e9-6672-4ca8-bec6-c9236119116f",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -1251,15 +1251,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "5f737e7b-9048-46b7-958d-0036a2926901",
+                            ConcurrencyStamp = "bc5af6f1-8245-4f76-9674-c322d12c3ac7",
                             Email = "sindico@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SINDICO@LOCALHOST",
                             NormalizedUserName = "SINDICO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEDXCuuxUelMQ07gTQjvv8TC0LtDETWDynmXCdSqoYi16BzKj0vBNYrR971hwoXAmEA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGM/zcuZxsV+/l3GrXPn0KMeVDKGOSeMBojEaIQlNo86dVqCd9rb568xXQIOicPsng==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f654a5ed-c23b-4688-9936-40e211c403a3",
+                            SecurityStamp = "3f79126d-4605-49d1-ba14-1814d5be8c5e",
                             TwoFactorEnabled = false,
                             UserName = "sindico"
                         },
@@ -1267,15 +1267,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e0b4a955-609d-452c-a64a-21740941f516",
+                            ConcurrencyStamp = "44be714d-58a2-4b72-8d88-416793af519a",
                             Email = "funcionario@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "FUNCIONARIO@LOCALHOST",
                             NormalizedUserName = "FUNCIONARIO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKj23SLanJkUnvvuKnxxVmLTjwi58kVqNCLlI9cLgVcIGhdP6QPPJyjhSGBlXdhoiA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPAnyweMFvY1qDwgB1Z0BKYHhcjTheJ1xWG+sYMEgBvFoTfMR0tGNTId23uHaOnd/A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "e90757f2-25ac-4340-b2fb-925b194f4735",
+                            SecurityStamp = "59fb0837-513c-48c0-b954-88af205704d3",
                             TwoFactorEnabled = false,
                             UserName = "funcionario"
                         },
@@ -1283,15 +1283,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "2e75a399-042f-42cb-8f7e-60761f9bb29f",
+                            ConcurrencyStamp = "85b75cb4-d0e3-4599-bdb7-553ff45940ca",
                             Email = "morador@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MORADOR@LOCALHOST",
                             NormalizedUserName = "MORADOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEK8cIg5kHELCNsgWx1aOMEHtdwEjaVT04XkqiEGZopNwi0IYC/whEh8nfJZkC9WSKw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOGrQIaob1dIU46lqh/nydkPqkamg2Yv5OXhIkfzaeCcyopih5H9doxW2+1d+ilKXw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "23aabd2b-3f89-48d2-a606-e030263fb733",
+                            SecurityStamp = "22093e51-5029-47b5-9f48-e9a65b2af913",
                             TwoFactorEnabled = false,
                             UserName = "morador"
                         });

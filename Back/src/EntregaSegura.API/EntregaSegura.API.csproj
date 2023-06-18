@@ -10,4 +10,7 @@
   <ItemGroup>
     <ProjectReference Include="..\EntregaSegura.Infra.IoC\EntregaSegura.Infra.IoC.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
 </Project>

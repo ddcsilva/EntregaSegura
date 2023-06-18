@@ -109,11 +109,11 @@
                                         type="button">
                                         <mat-icon>attach_file</mat-icon>
                                     </button>
-                                    <span *ngIf="nomeArquivo == ''" class="placeholder-text">Selecione uma foto</span>
-                                    <span *ngIf="nomeArquivo != ''" class="file-selected">{{nomeArquivo}}</span>
+                                    <span *ngIf="imagemNome == ''" class="placeholder-text">Selecione uma foto</span>
+                                    <span *ngIf="imagemNome != ''" class="file-selected">{{imagemNome}}</span>
                                 </div>
-                                <input hidden type="file" class="input-foto" formControlName="foto" accept="image/*"
-                                    (change)="onFileSelect($event)" #uploadFoto>
+                                <input type="file" accept="image/*" formControlName="imagemUpload" class="input-foto"
+                                    (change)="aoSelecionarArquivo($event)" #uploadFoto hidden>
                             </div>
                         </div>
 

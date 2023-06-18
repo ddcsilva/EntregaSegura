@@ -10,11 +10,14 @@ namespace EntregaSegura.API.Controllers;
 public class MoradoresController : MainController
 {
     private readonly IMoradorService _moradorService;
+    private readonly IImagemService _imagemService;
 
     public MoradoresController(IMoradorService moradorService,
+                               IImagemService imagemService,
                                INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorService = moradorService;
+        _imagemService = imagemService;
     }
 
     [HttpGet]
@@ -42,6 +45,15 @@ public class MoradoresController : MainController
     public async Task<ActionResult> Adicionar([FromBody] MoradorDTO moradorDTO)
     {
         if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+        string extensao = Path.GetExtension(moradorDTO.Foto);
+        var rand = new Random();
+        var nomeFoto = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() + "_" + rand.Next(1000, 9999).ToString() + extensao;
+
+        if (await _imagemService.SalvarImagemAsync(moradorDTO.FotoUpload, nomeFoto))
+        {
+            moradorDTO.Foto = nomeFoto;
+        }
 
         await _moradorService.AdicionarAsync(moradorDTO);
 
@@ -96,21 +108,11 @@ public class MoradoresController : MainController
 
     private bool UploadArquivo(string arquivo, string nomeImagem)
     {
-        if (string.IsNullOrEmpty(arquivo))
-        {
-            NotificarErro("Forneça uma imagem para este morador!");
-            return false;
-        }
+        if (string.IsNullOrEmpty(arquivo)) return false;
 
         var imageDataByteArray = Convert.FromBase64String(arquivo);
 
-        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/imagens", nomeImagem);
-
-        if (System.IO.File.Exists(filePath))
-        {
-            NotificarErro("Já existe um arquivo com este nome!");
-            return false;
-        }
+        var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", nomeImagem);
 
         System.IO.File.WriteAllBytes(filePath, imageDataByteArray);
 

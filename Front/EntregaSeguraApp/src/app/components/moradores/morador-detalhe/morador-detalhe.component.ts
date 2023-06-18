@@ -30,11 +30,13 @@ import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
 export class MoradorDetalheComponent implements OnInit {
   public titulo: string = 'Novo Morador';
   public mascaraTelefone: string = '(00) 0000-00009';
-  public nomeArquivo: string = '';
-  public previewURL: any = null;
   public formulario: FormGroup = new FormGroup({});
   public condominios: Condominio[] = [];
   public unidades: Unidade[] = [];
+
+  public imagemNome: string = '';
+  public imagemForm: any;
+  public imagemBase64: any;
 
   private id: number | null = null;
   private morador: Morador = {} as Morador;
@@ -48,7 +50,9 @@ export class MoradorDetalheComponent implements OnInit {
     private unidadeService: UnidadeService,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    private tratamentoErrosService: TratamentoErrosService) { }
+    private tratamentoErrosService: TratamentoErrosService) {
+    this.imagemForm = new FormData();
+  }
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.params['id']);
@@ -102,6 +106,9 @@ export class MoradorDetalheComponent implements OnInit {
 
     let operacao: Observable<Morador>;
 
+    morador.fotoUpload = this.imagemBase64;
+    morador.foto = this.imagemNome;
+
     if (this.id) {
       morador.id = this.id;
       operacao = this.atualizarMorador(morador as Morador);
@@ -119,24 +126,40 @@ export class MoradorDetalheComponent implements OnInit {
     });
   }
 
-  onFileSelect(event: Event) {
+  aoSelecionarArquivo(event: Event) {
     const target = event.target as HTMLInputElement;
     const files = target.files as FileList;
 
     if (files && files[0]) {
-      if (!files[0].type.startsWith('image/')) {
-        this.toastr.error('Por favor, selecione um arquivo de imagem.', 'Erro!');
+      if (!this.validarArquivo(files[0])) {
         return;
       }
 
-      const reader = new FileReader();
-
-      reader.onload = (e: any) => this.previewURL = e.target.result;
-
-      reader.readAsDataURL(files[0]);
-
-      this.nomeArquivo = files[0].name;
+      this.lerArquivo(files[0]);
+      this.definirNomeDoArquivo(files[0]);
     }
+  }
+
+  private validarArquivo(file: File): boolean {
+    if (!file.type.startsWith('image/')) {
+      this.toastr.error('Por favor, selecione um arquivo de imagem.', 'Erro!');
+      return false;
+    }
+    return true;
+  }
+
+  private lerArquivo(arquivo: File) {
+    const leitor = new FileReader();
+    leitor.onload = () => {
+      if (typeof leitor.result === "string") {
+        this.imagemBase64 = btoa(leitor.result);
+      }
+    };
+    leitor.readAsBinaryString(arquivo);
+  }
+
+  definirNomeDoArquivo(file: File) {
+    this.imagemNome = file.name;
   }
 
   public reiniciarFormulario(event: any): void {
@@ -144,8 +167,7 @@ export class MoradorDetalheComponent implements OnInit {
     this.formulario.reset();
     this.formulario.markAsPristine();
     this.formulario.markAsUntouched();
-    this.nomeArquivo = '';
-    this.previewURL = null;
+    this.imagemNome = '';
   }
 
   private atualizarMascaraTelefone(value: string): void {
@@ -200,6 +222,7 @@ export class MoradorDetalheComponent implements OnInit {
       telefone: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       ramal: [''],
+      fotoUpload: [''],
       foto: ['']
     });
   }
