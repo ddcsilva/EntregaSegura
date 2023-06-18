@@ -3,9 +3,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EntregaSegura.API.Controllers;
 
+[Authorize]
 [ApiController]
 public class MainController : ControllerBase
 {
