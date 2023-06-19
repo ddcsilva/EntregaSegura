@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { Login } from 'src/app/models/login';
+import { ContaService } from 'src/app/services/usuario/conta.service';
 
 @Component({
   selector: 'app-login',
@@ -7,18 +11,31 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  public model = {} as Login;
+
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    senha: new FormControl('', [Validators.required])
   });
 
-  constructor() { }
+  constructor(private router: Router, private toastr: ToastrService, private contaService: ContaService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
-    // Aqui você pode fazer a lógica de autenticação.
-    console.log(this.loginForm.value);
+  public login(): void {
+    this.contaService.login(this.model).subscribe({
+      next: (usuario: any) => {
+        this.router.navigate(['/']);
+        this.toastr.success('Login realizado com sucesso!', 'Sucesso!');
+      },
+      error: (error: any) => {
+        if (error.status === 401)
+          this.toastr.error('Usuário e/ou senha incorretos', 'Erro!');
+        else
+          this.toastr.error('Erro ao tentar realizar o login', 'Erro!');
+      }
+    })
   }
 }

@@ -9,15 +9,15 @@ using Microsoft.AspNetCore.Mvc;
 namespace EntregaSegura.API.Controllers;
 
 [Authorize]
-[Route("api/usuarios")]
-public class UsuarioController : MainController
+[Route("api/conta")]
+public class ContaController : MainController
 {
     private readonly IUsuarioService _usuarioService;
     private readonly ITokenService _tokenService;
     
-    public UsuarioController(IUsuarioService usuarioService,
-                             ITokenService tokenService,
-                             INotificadorErros notificadorErros) : base(notificadorErros)
+    public ContaController(IUsuarioService usuarioService,
+                           ITokenService tokenService,
+                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _usuarioService = usuarioService;
         _tokenService = tokenService;
@@ -45,7 +45,7 @@ public class UsuarioController : MainController
             return CustomResponse(ModelState, HttpStatusCode.BadRequest);
         }
 
-        var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(loginDTO.UserName);
+        var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(loginDTO.Email);
 
         if (usuario == null)
             return CustomResponse(null, HttpStatusCode.NotFound);
@@ -56,7 +56,7 @@ public class UsuarioController : MainController
             return CustomResponse(null, HttpStatusCode.Unauthorized);
 
         var retorno = new {
-            usuario = usuario.UserName,
+            email = usuario.Email,
             token = _tokenService.GerarToken(usuario).Result
         };
 

@@ -96,9 +96,9 @@ public class UsuarioService : BaseService, IUsuarioService
         return _mapper.Map<UsuarioDTO>(usuario);
     }
 
-    public async Task<UsuarioDTO> ObterUsuarioPeloLoginAsync(string login)
+    public async Task<UsuarioDTO> ObterUsuarioPeloLoginAsync(string email)
     {
-        var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.UserName == login);
+        var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
 
         if (usuario == null)
         {

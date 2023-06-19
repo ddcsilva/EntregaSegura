@@ -10,12 +10,12 @@
       Bem-vindo ao EntregaSegura
     </mat-card-title>
 
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form-content lg-form">
+    <form #formLogin="ngForm" [formGroup]="loginForm" (ngSubmit)="login()" class="form-content lg-form">
 
       <!-- Campo E-mail -->
       <mat-form-field appearance="standard">
         <mat-label>E-mail</mat-label>
-        <input formControlName="email" matInput placeholder="E-mail" required>
+        <input [(ngModel)]="model.email" formControlName="email" matInput type="email" placeholder="E-mail" required>
         <mat-icon matSuffix>mail</mat-icon>
         <mat-error *ngIf="loginForm.get('email')?.invalid">
           Por favor, insira um e-mail válido.
@@ -25,9 +25,9 @@
       <!-- Campo Senha -->
       <mat-form-field appearance="standard">
         <mat-label>Senha</mat-label>
-        <input formControlName="password" matInput type="password" placeholder="Senha" required>
+        <input [(ngModel)]="model.senha" formControlName="senha" matInput type="password" placeholder="Senha" required>
         <mat-icon matSuffix>lock</mat-icon>
-        <mat-error *ngIf="loginForm.get('password')?.invalid">
+        <mat-error *ngIf="loginForm.get('senha')?.invalid">
           Por favor, insira uma senha.
         </mat-error>
       </mat-form-field>
@@ -36,7 +36,7 @@
       <div class="button-reset-container">
 
         <!-- Botão de submissão -->
-        <button mat-raised-button color="primary" type="submit">Entrar</button>
+        <button [disabled]="loginForm.invalid" mat-raised-button color="primary" type="submit">Entrar</button>
 
         <!-- Link para recuperação de senha -->
         <div class="password-reset">

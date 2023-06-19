@@ -74,6 +74,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
+import { ContaService } from './services/usuario/conta.service';
 
 registerLocaleData(ptBr)
 
@@ -152,6 +153,7 @@ registerLocaleData(ptBr)
     },
 
     // Custom providers
+    ContaService,
     CepService,
     CondominioService,
     UnidadeService,
