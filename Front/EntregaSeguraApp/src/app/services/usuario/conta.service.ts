@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, ReplaySubject, map, take } from 'rxjs';
 import { User } from 'src/app/models/user';
 
@@ -10,7 +11,7 @@ export class ContaService {
 
   public currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   public login(model: any): Observable<void> {
     return this.http.post(this.urlBase + '/login', model).pipe(
@@ -36,5 +37,6 @@ export class ContaService {
   public logout(): void {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-  }
+    this.router.navigateByUrl('/usuario/login');
+  }  
 }

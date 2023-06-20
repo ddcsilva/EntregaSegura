@@ -1,8 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatSidenav } from '@angular/material/sidenav';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Notificacao } from './models/notificacao';
-import { NotificacaoService } from './services/notificacao/notificacao.service';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ContaService } from './services/usuario/conta.service';
 
 @Component({
@@ -10,56 +7,21 @@ import { ContaService } from './services/usuario/conta.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
+export class AppComponent implements OnInit {
   public mensagemDeCarregamentoSelecionada: string = '';
-  public mediaQueryDispositivoMovel: MediaQueryList;
-  public fotoPerfilUsuario: string = '/assets/images/silvio-santos.jpg';
-  public iniciaisUsuario: string = '';
+  public isUserAuthenticated: boolean = false;
 
-  notificacoes: Notificacao[] = [];
-  quantidadeNotificacoes: number = 0;
-
-  @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
-
-  constructor(public router: Router, public route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, private notificacaoService: NotificacaoService, public contaService: ContaService) {
-    this.mediaQueryDispositivoMovel = window.matchMedia('(max-width: 600px)');
-  }
-
-  get dispositivoMovel(): boolean {
-    return this.mediaQueryDispositivoMovel.matches;
-  }
-
-  set dispositivoMovel(value: boolean) {
-    this.sidenav.opened = !value;
-    this.changeDetectorRef.detectChanges();
-  }
-
-  private definirIniciaisUsuario(): void {
-    let nomes = 'Danilo Silva'.split(' ');
-    this.iniciaisUsuario = nomes[0].charAt(0) + nomes[nomes.length - 1].charAt(0);
-  }
+  constructor(public router: Router, public contaService: ContaService, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
-    this.definirIniciaisUsuario();
     this.selecionarMensagemDeCarregamento();
-
-    this.notificacaoService.getNotifications().subscribe(data => {
-      this.notificacoes = data;
-      this.quantidadeNotificacoes = data.length;
+  
+    this.contaService.currentUser$.subscribe(user => {
+      this.isUserAuthenticated = !!user;
+      this.ref.detectChanges();
     });
   }
-
-  ngAfterViewInit(): void {
-    this.mediaQueryDispositivoMovel.addEventListener('change', () => {
-      this.dispositivoMovel = this.mediaQueryDispositivoMovel.matches;
-    });
-
-    this.dispositivoMovel = this.mediaQueryDispositivoMovel.matches;
-  }
-
-  ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
-  }
+  
 
   selecionarMensagemDeCarregamento(): void {
     const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
@@ -81,6 +43,6 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public logout(): void {
     this.contaService.logout();
-    this.router.navigateByUrl('/usuario/login');
-  }
+    this.isUserAuthenticated = false;
+  }  
 }

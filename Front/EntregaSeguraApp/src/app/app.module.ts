@@ -76,6 +76,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
 import { ContaService } from './services/usuario/conta.service';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { NavbarComponent } from './shared/layout/navbar/navbar.component';
+import { SidenavComponent } from './shared/layout/sidenav/sidenav.component';
+import { SidenavService } from './shared/services/sidenav-service.service';
 
 registerLocaleData(ptBr)
 
@@ -104,7 +107,9 @@ registerLocaleData(ptBr)
     MoradoresComponent,
     MoradorListaComponent,
     MoradorDetalheComponent,
-    NotificacoesComponent
+    NotificacoesComponent,
+    NavbarComponent,
+    SidenavComponent
   ],
   imports: [
     // Angular modules
@@ -161,6 +166,7 @@ registerLocaleData(ptBr)
     TransportadoraService,
     MoradorService,
     TratamentoErrosService,
+    SidenavService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
