@@ -57,7 +57,9 @@
       <div class="icones-perfil">
         <mat-icon class="icone-pequeno">person</mat-icon>
         <mat-icon class="icone-pequeno">edit</mat-icon>
-        <mat-icon class="icone-pequeno">logout</mat-icon>
+        <a (click)="logout()">
+          <mat-icon class="icone-pequeno">logout</mat-icon>
+        </a>
       </div>
     </div>
     <mat-divider></mat-divider>

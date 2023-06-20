@@ -3,6 +3,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Notificacao } from './models/notificacao';
 import { NotificacaoService } from './services/notificacao/notificacao.service';
+import { ContaService } from './services/usuario/conta.service';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
 
-  constructor(private router: Router, public route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, private notificacaoService: NotificacaoService) {
+  constructor(public router: Router, public route: ActivatedRoute, private changeDetectorRef: ChangeDetectorRef, private notificacaoService: NotificacaoService, public contaService: ContaService) {
     this.mediaQueryDispositivoMovel = window.matchMedia('(max-width: 600px)');
   }
 
@@ -78,4 +79,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.mensagemDeCarregamentoSelecionada;
   }
 
+  public logout(): void {
+    this.contaService.logout();
+    this.router.navigateByUrl('/usuario/login');
+  }
 }

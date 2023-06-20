@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, ReplaySubject, map, take } from 'rxjs';
 import { User } from 'src/app/models/user';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class ContaService {
   private urlBase: string = 'https://localhost:5001/api/conta';
   private currentUserSource = new ReplaySubject<User | null>(1);
@@ -38,6 +36,5 @@ export class ContaService {
   public logout(): void {
     localStorage.removeItem('user');
     this.currentUserSource.next(null);
-    this.currentUserSource.complete();
   }
 }

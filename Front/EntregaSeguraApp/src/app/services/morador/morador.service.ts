@@ -15,6 +15,7 @@ import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros
 @Injectable()
 export class MoradorService {
   private urlBase: string = 'https://localhost:5001/api/moradores';
+  
 
   private httpOptions: { headers: HttpHeaders } = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

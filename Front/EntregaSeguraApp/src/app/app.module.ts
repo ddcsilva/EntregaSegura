@@ -69,12 +69,13 @@ import { MoradorService } from './services/morador/morador.service';
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
 
 // Third-party library imports
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
 import { ContaService } from './services/usuario/conta.service';
+import { JwtInterceptor } from './interceptors/jwt.interceptor';
 
 registerLocaleData(ptBr)
 
@@ -159,7 +160,8 @@ registerLocaleData(ptBr)
     UnidadeService,
     TransportadoraService,
     MoradorService,
-    TratamentoErrosService
+    TratamentoErrosService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent],
   exports: [
