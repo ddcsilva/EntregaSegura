@@ -16,20 +16,16 @@ import { MoradorListaComponent } from './components/moradores/morador-lista/mora
 import { MoradorDetalheComponent } from './components/moradores/morador-detalhe/morador-detalhe.component';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { LoginComponent } from './components/usuario/login/login.component';
+import { AuthGuard } from './helpers/auth.guard';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+
   {
-    path: 'usuario',
-    component: UsuarioComponent,
-    children: [
-      { path: 'login', component: LoginComponent }
-    ],
+    path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
   },
   {
-    path: 'dashboard', component: DashboardComponent
-  },
-  {
-    path: 'condominios', component: CondominiosComponent,
+    path: 'condominios', component: CondominiosComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: CondominioListaComponent },
       { path: 'detalhe', component: CondominioDetalheComponent },
@@ -37,7 +33,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'transportadoras', component: TransportadorasComponent,
+    path: 'transportadoras', component: TransportadorasComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: TransportadoraListaComponent },
       { path: 'detalhe', component: TransportadoraDetalheComponent },
@@ -45,7 +41,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'unidades', component: UnidadesComponent,
+    path: 'unidades', component: UnidadesComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: UnidadeListaComponent },
       { path: 'detalhe', component: UnidadeDetalheComponent },
@@ -53,7 +49,7 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'moradores', component: MoradoresComponent,
+    path: 'moradores', component: MoradoresComponent, canActivate: [AuthGuard],
     children: [
       { path: '', component: MoradorListaComponent },
       { path: 'detalhe', component: MoradorDetalheComponent },
@@ -61,10 +57,9 @@ const routes: Routes = [
     ],
   },
   {
-    path: 'suporte', component: SuporteComponent
+    path: 'suporte', component: SuporteComponent , canActivate: [AuthGuard]
   },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: '**', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '**', redirectTo: '/dashboard' },
 ];
 
 @NgModule({

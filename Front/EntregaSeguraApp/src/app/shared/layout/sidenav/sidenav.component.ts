@@ -1,8 +1,10 @@
+import { Usuario } from '@app/models/usuario';
 import { AfterViewInit, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContaService } from 'src/app/services/usuario/conta.service';
-import { SidenavService } from '../../services/sidenav-service.service';
 import { MatSidenav } from '@angular/material/sidenav';
+
+import { AutenticacaoService } from '@app/services';
+import { SidenavService } from '@app/shared/services';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,15 +15,19 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   @ViewChild('sidenav', { static: false }) sidenav!: MatSidenav;
   public mediaQueryDispositivoMovel: MediaQueryList;
   public sidenavAberto: boolean;
-  fotoPerfilUsuario: string = '/assets/images/silvio-santos.jpg';
-  iniciaisUsuario: string = '';
+  public fotoPerfilUsuario: string = '';
+  public iniciaisUsuario: string = '';
 
-  constructor(private sidenavService: SidenavService, public contaService: ContaService, public router: Router, private changeDetectorRef: ChangeDetectorRef) {
+  public usuario: Usuario;
+
+  constructor(private sidenavService: SidenavService, public autenticacaoService: AutenticacaoService, public router: Router, private changeDetectorRef: ChangeDetectorRef) {
     this.mediaQueryDispositivoMovel = window.matchMedia('(max-width: 600px)');
     this.sidenavAberto = !this.mediaQueryDispositivoMovel.matches;
+    this.usuario = <Usuario>this.autenticacaoService.usuarioAutenticado;
   }
 
   ngOnInit(): void {
+    console.log(this.usuario.nome);
     this.definirIniciaisUsuario();
     this.sidenavService.sidenavOpen$.subscribe(open => {
       if (this.sidenav) {
@@ -42,12 +48,18 @@ export class SidenavComponent implements OnInit, AfterViewInit {
   }
 
   private definirIniciaisUsuario(): void {
-    let nomes = 'Danilo Silva'.split(' ');
-    this.iniciaisUsuario = nomes[0].charAt(0) + nomes[nomes.length - 1].charAt(0);
+    let nomes = this.usuario.nome.split(' ');
+
+    if (nomes.length > 1) {
+      this.iniciaisUsuario = nomes[0].charAt(0) + nomes[nomes.length - 1].charAt(0);
+    } else {
+      this.iniciaisUsuario = nomes[0].charAt(0);
+    }
   }
+  
 
   public logout(): void {
-    this.contaService.logout();
-    this.router.navigateByUrl('/usuario/login');
+    this.autenticacaoService.logout();
+    this.router.navigateByUrl('/login');
   }
 }

@@ -10,12 +10,12 @@
       Bem-vindo ao EntregaSegura
     </mat-card-title>
 
-    <form #formLogin="ngForm" [formGroup]="loginForm" (ngSubmit)="login()" class="form-content lg-form">
+    <form [formGroup]="loginForm" (ngSubmit)="efetuarLogin()" class="form-content lg-form">
 
       <!-- Campo E-mail -->
       <mat-form-field appearance="standard">
         <mat-label>E-mail</mat-label>
-        <input [(ngModel)]="model.email" formControlName="email" matInput type="email" placeholder="E-mail" required>
+        <input matInput type="email" formControlName="email" placeholder="E-mail" required>
         <mat-icon matSuffix>mail</mat-icon>
         <mat-error *ngIf="loginForm.get('email')?.invalid">
           Por favor, insira um e-mail válido.
@@ -25,7 +25,7 @@
       <!-- Campo Senha -->
       <mat-form-field appearance="standard">
         <mat-label>Senha</mat-label>
-        <input [(ngModel)]="model.senha" formControlName="senha" matInput type="password" placeholder="Senha" required>
+        <input matInput type="password" formControlName="senha"  placeholder="Senha" required>
         <mat-icon matSuffix>lock</mat-icon>
         <mat-error *ngIf="loginForm.get('senha')?.invalid">
           Por favor, insira uma senha.

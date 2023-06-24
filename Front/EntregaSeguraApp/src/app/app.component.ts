@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ContaService } from './services/usuario/conta.service';
+import { AutenticacaoService } from '@app/services';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +11,11 @@ export class AppComponent implements OnInit {
   public mensagemDeCarregamentoSelecionada: string = '';
   public isUserAuthenticated: boolean = false;
 
-  constructor(public router: Router, public contaService: ContaService, private ref: ChangeDetectorRef) {}
+  constructor(public router: Router, public autenticacaoService: AutenticacaoService, private ref: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.selecionarMensagemDeCarregamento();
-  
-    this.contaService.currentUser$.subscribe(user => {
-      this.isUserAuthenticated = !!user;
-      this.ref.detectChanges();
-    });
-  }
-  
+  }  
 
   selecionarMensagemDeCarregamento(): void {
     const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
@@ -41,8 +35,8 @@ export class AppComponent implements OnInit {
     return this.mensagemDeCarregamentoSelecionada;
   }
 
-  public logout(): void {
-    this.contaService.logout();
-    this.isUserAuthenticated = false;
+  logout() {
+    this.autenticacaoService.logout();
+    this.router.navigate(['/login']);
   }  
 }

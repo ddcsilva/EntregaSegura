@@ -52,6 +52,8 @@ import { MoradorDetalheComponent } from './components/moradores/morador-detalhe/
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { NotificacoesComponent } from './components/notificacoes/notificacoes.component';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
+import { NavbarComponent } from './shared/layout/navbar/navbar.component';  
+import { SidenavComponent } from './shared/layout/sidenav/sidenav.component';
 
 // Custom pipe imports
 import { FormatarTelefonePipe } from './shared/pipes/formatar-telefone.pipe';
@@ -74,11 +76,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { NgxMaskModule } from 'ngx-mask';
 import { ToastrModule } from 'ngx-toastr';
 import { NgChartsModule } from 'ng2-charts';
-import { ContaService } from './services/usuario/conta.service';
-import { JwtInterceptor } from './interceptors/jwt.interceptor';
-import { NavbarComponent } from './shared/layout/navbar/navbar.component';
-import { SidenavComponent } from './shared/layout/sidenav/sidenav.component';
-import { SidenavService } from './shared/services/sidenav-service.service';
+import { AutenticacaoService } from './services/usuario/autenticacao.service';
+import { JwtInterceptor } from './helpers/jwt.interceptor';
+import { SidenavService } from './shared/services/sidebar/sidenav-service.service';
 
 registerLocaleData(ptBr)
 
@@ -159,7 +159,7 @@ registerLocaleData(ptBr)
     },
 
     // Custom providers
-    ContaService,
+    AutenticacaoService,
     CepService,
     CondominioService,
     UnidadeService,

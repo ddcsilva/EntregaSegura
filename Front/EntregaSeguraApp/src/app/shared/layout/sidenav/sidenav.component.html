@@ -1,17 +1,16 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav [opened]="sidenavAberto" [mode]="sidenavAberto ? 'side' : 'over'"
-        [fixedInViewport]="!sidenavAberto" fixedTopGap="112" style="width: 240px;">
+    [fixedInViewport]="!sidenavAberto" fixedTopGap="112" style="width: 240px;" *ngIf="autenticacaoService.usuarioAutenticado">
         <div class="secao-perfil">
             <div class="avatar" [style.backgroundImage]="'url(' + fotoPerfilUsuario + ')'"
                 [ngStyle]="{'background-color': !fotoPerfilUsuario ? '#757575' : 'transparent'}">
                 <span *ngIf="!fotoPerfilUsuario">{{ iniciaisUsuario }}</span>
             </div>
 
-            <h4 matLine>Danilo</h4>
-            <p matLine class="email">danilo@email.com</p>
+            <h4 matLine>{{usuario.nome}}</h4>
+            <p matLine class="email">{{usuario.email}}</p>
             <div class="icones-perfil">
                 <mat-icon class="icone-pequeno">person</mat-icon>
-                <mat-icon class="icone-pequeno">edit</mat-icon>
                 <a (click)="logout()">
                     <mat-icon class="icone-pequeno">logout</mat-icon>
                 </a>

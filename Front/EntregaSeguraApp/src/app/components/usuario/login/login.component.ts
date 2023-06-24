@@ -1,41 +1,75 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AutenticacaoService } from "@app/services";
 import { ToastrService } from 'ngx-toastr';
-import { Login } from 'src/app/models/login';
-import { ContaService } from 'src/app/services/usuario/conta.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
+import { first } from "rxjs";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  public model = {} as Login;
+    loginForm!: FormGroup;
+    carregando = false;
+    formularioEnviado = false;
+    erro = '';
 
+    constructor(
+        private formBuilder: FormBuilder,
+        private route: ActivatedRoute,
+        private router: Router,
+        private autenticacaoService: AutenticacaoService,
+        private toastr: ToastrService,
+        private spinner: NgxSpinnerService,
+        private tratamentoErrosService: TratamentoErrosService
+    ) {
+        // Redireciona para a página inicial se já estiver conectado
+        if (this.autenticacaoService.usuarioAutenticado) {
+            this.router.navigate(['/']);
+        }
+    }
 
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    senha: new FormControl('', [Validators.required])
-  });
+    ngOnInit() {
+        this.loginForm = this.formBuilder.group({
+            email: ['', [Validators.required, Validators.email]],
+            senha: ['', [Validators.required]]
+        });
+    }
 
-  constructor(private router: Router, private toastr: ToastrService, private contaService: ContaService) { }
+    get f() { return this.loginForm.controls; }
 
-  ngOnInit(): void {
-  }
+    efetuarLogin() {
+        this.spinner.show();
 
-  public login(): void {
-    this.contaService.login(this.model).subscribe({
-      next: (usuario: any) => {
-        this.router.navigate(['/']);
-        this.toastr.success('Login realizado com sucesso!', 'Sucesso!');
-      },
-      error: (error: any) => {
-        if (error.status === 401)
-          this.toastr.error('Usuário e/ou senha incorretos', 'Erro!');
-        else
-          this.toastr.error('Erro ao tentar realizar o login', 'Erro!');
-      }
-    })
-  }
+        if (this.loginForm.invalid) {
+            this.spinner.hide();
+            return;
+        }
+
+        this.autenticacaoService.login(this.f['email'].value, this.f['senha'].value)
+            .pipe(first())
+            .subscribe({
+                next: () => {
+                    // Obtenha o URL de retorno dos parâmetros de consulta ou padrão para a página inicial
+                    const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+                    this.router.navigateByUrl(returnUrl);
+                    this.toastr.success('Login efetuado com sucesso!', 'Sucesso');
+                    this.spinner.hide();
+                },
+                error: error => {
+                    this.tratarErros(error);
+                }
+            });
+    }
+
+    private tratarErros(erro: any): void {
+        this.spinner.hide();
+        this.tratamentoErrosService.tratarErro(erro).subscribe({
+            error: (error: any) => this.toastr.error(error.message, 'Erro!')
+        });
+    }
 }

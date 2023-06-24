@@ -1,7 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { Notificacao } from 'src/app/models/notificacao';
-import { NotificacaoService } from 'src/app/services/notificacao/notificacao.service';
-import { SidenavService } from '../../services/sidenav-service.service';
+import { Component, OnInit } from '@angular/core';
+
+import { Notificacao } from '@app/models';
+import { NotificacaoService } from '@app/services';
+import { AutenticacaoService } from '@app/services';
+import { SidenavService } from '@app/shared/services/';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +15,7 @@ export class NavbarComponent implements OnInit {
   notificacoes: Notificacao[] = [];
   quantidadeNotificacoes: number = 0;
 
-  constructor(private notificacaoService: NotificacaoService, private sidenavService: SidenavService) { }
+  constructor(private notificacaoService: NotificacaoService, private sidenavService: SidenavService, public autenticacaoService : AutenticacaoService) { }
 
   ngOnInit(): void {
     this.notificacaoService.getNotifications().subscribe(data => {
