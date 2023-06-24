@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
@@ -120,6 +121,12 @@ public class UsuarioService : BaseService, IUsuarioService
         }
 
         return false;
+    }
+
+    public async Task<IList<string>> ObterRolesUsuarioAsync(UsuarioDTO usuarioDTO)
+    {
+        var usuario = _mapper.Map<User>(usuarioDTO);
+        return await _userManager.GetRolesAsync(usuario);
     }
 
     public void Dispose()

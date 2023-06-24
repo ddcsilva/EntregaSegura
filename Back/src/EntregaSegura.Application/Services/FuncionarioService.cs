@@ -129,6 +129,13 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return true;
     }
 
+    public async Task<FuncionarioDTO> ObterFuncionarioPeloUsuarioAsync(int usuarioId)
+    {
+        var funcionario = await _funcionarioRepository.BuscarPorCondicaoAsync(m => m.UserId == usuarioId);
+
+        return _mapper.Map<FuncionarioDTO>(funcionario.FirstOrDefault());
+    }
+
     public void Dispose()
     {
         _funcionarioRepository?.Dispose();

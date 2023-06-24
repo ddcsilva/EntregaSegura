@@ -10,4 +10,6 @@ public interface IFuncionarioService : IDisposable
     Task<bool> AdicionarAsync(FuncionarioDTO funcionario);
     Task<bool> AtualizarAsync(FuncionarioDTO funcionario);
     Task<bool> RemoverAsync(int id);
+
+    Task<FuncionarioDTO> ObterFuncionarioPeloUsuarioAsync(int usuarioId);
 }

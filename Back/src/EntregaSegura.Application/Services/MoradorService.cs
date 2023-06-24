@@ -144,6 +144,13 @@ public class MoradorService : BaseService, IMoradorService
         return true;
     }
 
+    public async Task<MoradorDTO> ObterMoradorPeloUsuarioAsync(int usuarioId)
+    {
+        var morador = await _moradorRepository.BuscarPorCondicaoAsync(m => m.UserId == usuarioId);
+
+        return _mapper.Map<MoradorDTO>(morador.FirstOrDefault());
+    }
+
     public void Dispose()
     {
         _moradorRepository?.Dispose();

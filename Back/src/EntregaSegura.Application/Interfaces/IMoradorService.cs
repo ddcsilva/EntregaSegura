@@ -12,4 +12,5 @@ public interface IMoradorService
     Task<bool> RemoverAsync(int id);
 
     Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresComUnidadeECondominioAsync();
+    Task<MoradorDTO> ObterMoradorPeloUsuarioAsync(int usuarioId);
 }

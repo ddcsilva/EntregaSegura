@@ -13,13 +13,19 @@ namespace EntregaSegura.API.Controllers;
 public class ContaController : MainController
 {
     private readonly IUsuarioService _usuarioService;
+    private readonly IMoradorService _moradorService;
+    private readonly IFuncionarioService _funcionarioService;
     private readonly ITokenService _tokenService;
-    
+
     public ContaController(IUsuarioService usuarioService,
+                           IMoradorService moradorService,
+                           IFuncionarioService funcionarioService,
                            ITokenService tokenService,
                            INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _usuarioService = usuarioService;
+        _moradorService = moradorService;
+        _funcionarioService = funcionarioService;
         _tokenService = tokenService;
     }
 
@@ -50,13 +56,23 @@ public class ContaController : MainController
         if (usuario == null)
             return CustomResponse(null, HttpStatusCode.NotFound);
 
-        var resultadoAutenticacao =  await _usuarioService.VerificarCredenciaisAsync(usuario, loginDTO.Senha);
+        var resultadoAutenticacao = await _usuarioService.VerificarCredenciaisAsync(usuario, loginDTO.Senha);
 
         if (!resultadoAutenticacao.Succeeded)
             return CustomResponse(null, HttpStatusCode.Unauthorized);
 
-        var retorno = new {
+        var roles = await _usuarioService.ObterRolesUsuarioAsync(usuario);
+        var morador = await _moradorService.ObterMoradorPeloUsuarioAsync(usuario.Id);
+        var funcionario = await _funcionarioService.ObterFuncionarioPeloUsuarioAsync(usuario.Id);
+
+        var nome = morador != null ? morador.Nome : (funcionario != null ? funcionario.Nome : "Admin");
+
+        var retorno = new
+        {
+            id = usuario.Id,
+            nome,
             email = usuario.Email,
+            roles,
             token = _tokenService.GerarToken(usuario).Result
         };
 
