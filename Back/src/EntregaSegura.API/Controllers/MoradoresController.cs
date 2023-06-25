@@ -66,6 +66,9 @@ public class MoradoresController : MainController
     public async Task<ActionResult<MoradorDTO>> Atualizar(int id, MoradorDTO moradorDTO)
     {
         var morador = await _moradorService.ObterMoradorPorIdAsync(id);
+        string extensao = Path.GetExtension(moradorDTO.Foto);
+        var rand = new Random();
+        var nomeFoto = DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString() + "_" + rand.Next(1000, 9999).ToString() + extensao;
 
         if (morador == null)
         {
@@ -80,6 +83,11 @@ public class MoradoresController : MainController
         }
 
         if (!ModelState.IsValid) return CustomResponse(ModelState);
+
+        if (await _imagemService.SalvarImagemAsync(moradorDTO.FotoUpload, nomeFoto))
+        {
+            moradorDTO.Foto = nomeFoto;
+        }
 
         await _moradorService.AtualizarAsync(moradorDTO);
 

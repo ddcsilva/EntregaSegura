@@ -66,6 +66,7 @@ public class ContaController : MainController
         var funcionario = await _funcionarioService.ObterFuncionarioPeloUsuarioAsync(usuario.Id);
 
         var nome = morador != null ? morador.Nome : (funcionario != null ? funcionario.Nome : "Admin");
+        var foto = morador != null ? morador.Foto : "";
 
         var retorno = new
         {
@@ -73,6 +74,7 @@ public class ContaController : MainController
             nome,
             email = usuario.Email,
             roles,
+            foto,
             token = _tokenService.GerarToken(usuario).Result
         };
 

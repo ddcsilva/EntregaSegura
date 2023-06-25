@@ -10,15 +10,15 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 
 // Model imports
-import { Condominio } from 'src/app/models/condominio';
-import { UnidadesEmMassa } from 'src/app/models/unidades-em-massa';
-import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/informacoes-confirmacao-dialog';
+import { Condominio } from '@app/models';
+import { UnidadesEmMassa } from '@app/models';
+import { InformacoesConfirmacaoDialog } from '@app/shared/models';
 
 // Service imports
-import { UnidadeService } from './../../../services/unidade/unidade.service';
-import { CondominioService } from 'src/app/services/condominio/condominio.service';
-import { CepService } from 'src/app/shared/services/cep/cep.service';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros/tratamento-erros.service';
+import { UnidadeService } from '@app/services';
+import { CondominioService } from '@app/services';
+import { CepService } from '@app/shared/services';
+import { TratamentoErrosService } from '@app/shared/services';
 
 // Helper imports
 import { ValidadorCampos } from 'src/app/helpers/ValidadorCampos';
