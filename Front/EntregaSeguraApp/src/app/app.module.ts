@@ -47,11 +47,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { CondominiosComponent } from './components/condominios/condominios.component';
 // Layout Components
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CondominiosComponent
   ],
   imports: [
     BrowserModule,

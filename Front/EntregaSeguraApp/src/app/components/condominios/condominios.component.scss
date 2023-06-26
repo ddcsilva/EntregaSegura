@@ -1,0 +1,37 @@
+mat-toolbar {
+    background: #004a9f;
+    color: white;
+}
+
+table {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.campo-pesquisa {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    border-radius: 3px;
+}
+
+.campo-pesquisa:active {
+    border: 1px solid #BBB;
+}
+
+.campo-pesquisa:focus {
+    border: 1px solid #AAA;
+}
+
+.mat-toolbar-row {
+    font-size: 24px;
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-icon {
+        margin-right: 10px;
+    }
+}

@@ -1,0 +1,51 @@
+<mat-toolbar>
+    <mat-toolbar-row>
+        <span>
+            <mat-icon>apartment</mat-icon>
+            Lista de Condomínios
+        </span>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar">
+        <a routerLink="/estudantes/novo" mat-raised-button color="primary" class="ml-1">
+            <span>Novo Condomínio</span>
+        </a>
+    </div>
+</div>
+
+<div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <ng-container matColumnDef="column1">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let element"> {{element.column1}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="column2">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Sobrenome </th>
+            <td mat-cell *matCellDef="let element"> {{element.column2}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="column3">
+            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <td mat-cell *matCellDef="let element"> {{element.column3}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="editar">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
