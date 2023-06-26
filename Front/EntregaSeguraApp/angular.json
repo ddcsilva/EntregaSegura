@@ -28,9 +28,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "./node_modules/bootstrap/dist/css/bootstrap-grid.min.css",
-              "node_modules/ngx-spinner/animations/square-jelly-box.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -99,7 +96,6 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -107,8 +103,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": "7b17636a-a45a-400d-a529-3335c38a55c8"
   }
 }

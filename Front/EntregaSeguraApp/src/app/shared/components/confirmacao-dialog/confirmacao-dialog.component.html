@@ -1,9 +1,0 @@
-<h2 mat-dialog-title>{{dados.titulo}}</h2>
-<mat-dialog-content class="mat-typography">
-    <p><strong>{{dados.mensagem}}</strong></p>
-    <p *ngIf="dados.informacaoAdicional">{{dados.informacaoAdicional}}</p>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>{{dados.textoBotaoCancelar}}</button>
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>{{dados.textoBotaoConfirmar}}</button>
-</mat-dialog-actions>
