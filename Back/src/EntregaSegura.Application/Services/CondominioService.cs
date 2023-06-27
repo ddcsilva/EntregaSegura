@@ -12,7 +12,6 @@ public class CondominioService : BaseService, ICondominioService
     private readonly ICondominioRepository _condominioRepository;
     private readonly IUnidadeRepository _unidadeRepository;
     private readonly IFuncionarioRepository _funcionarioRepository;
-
     private readonly IMapper _mapper;
 
     public CondominioService(ICondominioRepository condominioRepository,
@@ -143,7 +142,7 @@ public class CondominioService : BaseService, ICondominioService
 
     private async Task<bool> TemAssociacoes(int condominioId)
     {
-        var temUnidades = await _unidadeRepository.BuscarPorCondicaoAsync(u => u.Id == condominioId);
+        var temUnidades = await _unidadeRepository.BuscarPorCondicaoAsync(u => u.CondominioId == condominioId);
         var temFuncionarios = await _funcionarioRepository.BuscarPorCondicaoAsync(f => f.Id == condominioId);
 
         return temUnidades.Any() || temFuncionarios.Any();

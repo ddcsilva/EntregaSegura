@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EntregaSegura.API.Controllers;
 
-[Authorize]
+// [Authorize]
 [ApiController]
 public class MainController : ControllerBase
 {
@@ -23,29 +23,28 @@ public class MainController : ControllerBase
         return !_notificadorErros.TemNotificacoes();
     }
 
-    protected ActionResult CustomResponse(object result = null, HttpStatusCode statusCode = HttpStatusCode.OK)
+    protected ActionResult CustomResponse(object result = null)
     {
-        var operacaoValida = OperacaoValida();
-
-        var response = new
+        if (OperacaoValida())
         {
-            success = operacaoValida,
-            statusCode = (int)statusCode,
-            data = result,
-            errors = operacaoValida ? new string[] { } : _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
-        };
+            return Ok(new
+            {
+                success = true,
+                data = result
+            });
+        }
 
-        return StatusCode((int)statusCode, response);
+        return BadRequest(new
+        {
+            success = false,
+            errors = _notificadorErros.ObterNotificacoes().Select(n => n.Mensagem)
+        });
     }
 
     protected ActionResult CustomResponse(ModelStateDictionary modelState)
     {
-        if (!modelState.IsValid)
-        {
-            NotificarErroModelInvalida(modelState);
-        }
-
-        return CustomResponse(null, HttpStatusCode.BadRequest);
+        if (!modelState.IsValid) NotificarErroModelInvalida(modelState);
+        return CustomResponse();
     }
 
     protected void NotificarErroModelInvalida(ModelStateDictionary modelState)
@@ -53,8 +52,8 @@ public class MainController : ControllerBase
         var erros = modelState.Values.SelectMany(e => e.Errors);
         foreach (var erro in erros)
         {
-            var mensagemErro = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
-            NotificarErro(mensagemErro);
+            var errorMsg = erro.Exception == null ? erro.ErrorMessage : erro.Exception.Message;
+            NotificarErro(errorMsg);
         }
     }
 

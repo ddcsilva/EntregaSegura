@@ -24,5 +24,5 @@ public class UnidadeDTO
 
     public string NomeCondominio { get; set; }
 
-    public IEnumerable<MoradorDTO> Moradores { get; set; }
+    public int QuantidadeMoradores { get; set; }
 }
