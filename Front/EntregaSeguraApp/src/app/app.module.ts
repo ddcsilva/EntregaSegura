@@ -44,7 +44,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { CondominiosComponent } from './components/condominios/condominios.component';
@@ -57,6 +57,7 @@ import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exc
 import { DetalhesCondominioComponent } from './components/condominios/detalhes-condominio/detalhes-condominio.component';
 import { TituloComponent } from './shared/components/titulo/titulo.component';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
+import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
 // Layout Components
 
 @NgModule({
@@ -123,7 +124,12 @@ import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dial
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useValue: obterPaginatorIntlPortugues()
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
