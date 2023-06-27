@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
@@ -11,11 +11,16 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit, AfterViewInit {
+  public mensagemDeCarregamentoSelecionada: string = '';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
   constructor(private observer: BreakpointObserver, private router: Router) { }
+
+  ngOnInit(): void {
+    this.selecionarMensagemDeCarregamento();
+  }  
 
   ngAfterViewInit() {
     this.observer
@@ -42,4 +47,23 @@ export class AppComponent {
         }
       });
   }
+
+  selecionarMensagemDeCarregamento(): void {
+    const index = Math.floor(Math.random() * this.mensagensDeCarregamento.length);
+    this.mensagemDeCarregamentoSelecionada = this.mensagensDeCarregamento[index];
+  }
+
+  public mensagensDeCarregamento: string[] = [
+    'Preparando tudo para você...',
+    'Quase lá...',
+    'Trabalhando duro...',
+    'Quase pronto...',
+    'Só um momento...',
+    'Finalizando os últimos detalhes...'
+  ];
+
+  public get mensagemDeCarregamento(): string {
+    return this.mensagemDeCarregamentoSelecionada;
+  }
+
 }

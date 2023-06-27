@@ -58,3 +58,8 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true"
+  [delay]="500">
+  <p style="color: white" [innerHTML]="mensagemDeCarregamento"></p>
+</ngx-spinner>

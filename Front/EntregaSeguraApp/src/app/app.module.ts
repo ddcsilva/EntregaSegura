@@ -48,19 +48,28 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { CondominiosComponent } from './components/condominios/condominios.component';
+import { NgxMaskModule } from 'ngx-mask';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
+import { FormatarCnpjPipe } from './shared/helpers/formatar-cnpj.pipe';
+import { FormatarTelefonePipe } from './shared/helpers/formatar-telefone.pipe';
 // Layout Components
 
 @NgModule({
   declarations: [
     AppComponent,
+    FormatarTelefonePipe,
+    FormatarCnpjPipe,
     CondominiosComponent
   ],
   imports: [
+    // Angular Modules
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    // Angular Material Modules
     MatAutocompleteModule,
     MatCheckboxModule,
     MatDatepickerModule,
@@ -96,7 +105,11 @@ import { CondominiosComponent } from './components/condominios/condominios.compo
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    // Third Party Modules
+    NgxMaskModule.forRoot(),
+    NgxSpinnerModule,
+    ToastrModule.forRoot()
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
