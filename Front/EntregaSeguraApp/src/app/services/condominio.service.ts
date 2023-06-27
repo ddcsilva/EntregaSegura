@@ -21,6 +21,21 @@ export class CondominioService {
     return this.fazerRequisicao(() => this.httpClient.get<Condominio[]>(url));
   }
 
+  public ObterCondominioPorId(id: number): Observable<Condominio> {
+    const url = `${this.urlBaseApi}/condominios/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.get<Condominio>(url));
+  }
+
+  public criar(condominio: Condominio): Observable<Condominio> {
+    const url = `${this.urlBaseApi}/condominios`;
+    return this.fazerRequisicao(() => this.httpClient.post<Condominio>(url, condominio));
+  }
+
+  public atualizar(id: number, condominio: Condominio): Observable<Condominio> {
+    const url = `${this.urlBaseApi}/condominios/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.put<Condominio>(url, condominio));
+  }
+
   public excluir(id: number): Observable<void> {
     const url = `${this.urlBaseApi}/condominios/${id}`;
     return this.fazerRequisicao(() => this.httpClient.delete<void>(url));

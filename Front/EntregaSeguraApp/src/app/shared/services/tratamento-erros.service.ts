@@ -18,7 +18,7 @@ export class TratamentoErrosService {
       } else if (this.erroDeClienteOuRede(errorResponse)) {
         mensagemErro = errorResponse.error.message;
       } else if (this.erroDoBackendComCorpoResposta(errorResponse)) {
-        mensagemErro = errorResponse.error.errors.join(', ');
+        mensagemErro = errorResponse.error.errors;
       } else {
         mensagemErro = `${errorResponse.message}`;
       }

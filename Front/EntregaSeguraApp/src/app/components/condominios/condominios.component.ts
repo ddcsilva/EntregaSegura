@@ -21,6 +21,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
   public colunas: string[] = ['nome', 'telefone', 'bairro', 'cidade', 'estado', 'acoes'];
   public dataSource: MatTableDataSource<Condominio> = new MatTableDataSource<Condominio>();
   public filtroCondominio: string = '';
+  public titulo: string = 'Lista de Condomínios';
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
@@ -32,7 +33,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
     private router: Router,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -51,7 +52,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
   }
 
   public editarCondominio(id: number): void {
-    this.router.navigate(['condominios/detalhe', id]);
+    this.router.navigate(['condominios', id]);
   }
 
   public excluirCondominio(id: number) {

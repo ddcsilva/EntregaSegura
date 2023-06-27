@@ -1,0 +1,17 @@
+mat-toolbar {
+    background: #004a9f;
+    color: white;
+}
+
+.mat-toolbar-row {
+    font-size: 24px;
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+
+    .mat-icon {
+        margin-right: 10px;
+    }
+}

@@ -1,17 +1,10 @@
-<mat-toolbar>
-    <mat-toolbar-row>
-        <span>
-            <mat-icon>apartment</mat-icon>
-            Lista de Condomínios
-        </span>
-    </mat-toolbar-row>
-</mat-toolbar>
+<app-titulo [icone]="'apartment'" [titulo]="titulo"></app-titulo>
 
 <div class="row end-xs mt-1">
     <div class="col-xs-12">
-        <input type="text" class="campo-pesquisa" placeholder="Pesquisar condomínio"
-                [(ngModel)]="filtroCondominio" (keyup)="filtarCondominios()">
-        <a routerLink="/estudantes/novo" mat-raised-button color="primary" class="ml-1">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar"
+               [(ngModel)]="filtroCondominio" (keyup)="filtarCondominios()">
+        <a routerLink="/condominios/novo" mat-raised-button color="primary" class="ml-1">
             <span>Novo Condomínio</span>
         </a>
     </div>
@@ -28,39 +21,40 @@
 
         <!-- Coluna - Telefone -->
         <ng-container matColumnDef="telefone">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
-            <td mat-cell *matCellDef="let condominio"> {{ condominio.telefone | formatarTelefone }} </td>
-            <td mat-cell *matCellDef="let condominio"> {{ condominio.telefone }} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="telefone-coluna"> Telefone </th>
+            <td mat-cell *matCellDef="let condominio" class="telefone-coluna"> {{ condominio.telefone | formatarTelefone }} </td>
         </ng-container>
 
         <!-- Coluna - Bairro -->
         <ng-container matColumnDef="bairro">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Bairro </th>
-            <td mat-cell *matCellDef="let condominio"> {{condominio.bairro}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="bairro-coluna"> Bairro </th>
+            <td mat-cell *matCellDef="let condominio" class="bairro-coluna"> {{condominio.bairro}} </td>
         </ng-container>
 
         <!-- Coluna - Cidade -->
         <ng-container matColumnDef="cidade">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cidade </th>
-            <td mat-cell *matCellDef="let condominio"> {{condominio.cidade}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="cidade-coluna"> Cidade </th>
+            <td mat-cell *matCellDef="let condominio" class="cidade-coluna"> {{condominio.cidade}} </td>
         </ng-container>
 
         <!-- Coluna - Estado -->
         <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
-            <td mat-cell *matCellDef="let condominio"> {{condominio.estado}} </td>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="estado-coluna"> Estado </th>
+            <td mat-cell *matCellDef="let condominio" class="estado-coluna"> {{condominio.estado}} </td>
         </ng-container>
 
         <!-- Coluna - Editar -->
         <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
             <td mat-cell *matCellDef="let element">
-                <button mat-icon-button color="primary" (click)="editarCondominio(element.id)">
-                    <mat-icon>edit</mat-icon>
-                </button>
-                <button mat-icon-button color="warn" (click)="excluirCondominio(element.id)">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                <div class="acoes-container">
+                    <button mat-icon-button color="primary" (click)="editarCondominio(element.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="excluirCondominio(element.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
             </td>
         </ng-container>
 

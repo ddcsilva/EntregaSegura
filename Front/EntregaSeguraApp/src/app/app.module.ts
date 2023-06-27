@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -54,6 +54,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { FormatarCnpjPipe } from './shared/helpers/formatar-cnpj.pipe';
 import { FormatarTelefonePipe } from './shared/helpers/formatar-telefone.pipe';
 import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exclusao-dialog.component';
+import { DetalhesCondominioComponent } from './components/condominios/detalhes-condominio/detalhes-condominio.component';
+import { TituloComponent } from './shared/components/titulo/titulo.component';
+import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 // Layout Components
 
 @NgModule({
@@ -62,7 +65,10 @@ import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exc
     FormatarTelefonePipe,
     FormatarCnpjPipe,
     CondominiosComponent,
-    ExclusaoDialogComponent
+    ExclusaoDialogComponent,
+    DetalhesCondominioComponent,
+    TituloComponent,
+    ConfirmacaoDialogComponent
   ],
   imports: [
     // Angular Modules
@@ -71,6 +77,7 @@ import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exc
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     // Angular Material Modules
     MatAutocompleteModule,
     MatCheckboxModule,
