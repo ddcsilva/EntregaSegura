@@ -1,0 +1,60 @@
+<app-titulo [icone]="'local_shipping'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar"
+               [(ngModel)]="filtroTransportadora" (keyup)="filtarTransportadoras()">
+        <a routerLink="/transportadoras/novo" mat-raised-button color="primary" class="ml-1">
+            <span>Nova Transportadora</span>
+        </a>
+    </div>
+</div>
+
+<div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <!-- Coluna - Nome -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let transportadora"> {{transportadora.nome}} </td>
+        </ng-container>
+
+        <!-- Coluna - Telefone -->
+        <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+            <td mat-cell *matCellDef="let transportadora"> {{ transportadora.telefone | formatarTelefone }} </td>
+        </ng-container>
+
+        <!-- Coluna - CNPJ -->
+        <ng-container matColumnDef="cnpj">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> CNPJ </th>
+            <td mat-cell *matCellDef="let transportadora"> {{transportadora.cnpj | formatarCnpj}} </td>
+        </ng-container>
+
+        <!-- Coluna - E-mail -->
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
+            <td mat-cell *matCellDef="let transportadora"> {{transportadora.email}} </td>
+        </ng-container>
+
+        <!-- Coluna - Ações -->
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let transportadora">
+                <div class="acoes-container">
+                    <button mat-icon-button color="primary" (click)="editarTransportadora(transportadora.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="excluirTransportadora(transportadora.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

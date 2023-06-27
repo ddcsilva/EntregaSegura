@@ -58,6 +58,8 @@ import { DetalhesCondominioComponent } from './components/condominios/detalhes-c
 import { TituloComponent } from './shared/components/titulo/titulo.component';
 import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
+import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
+import { DetalhesTransportadoraComponent } from './components/transportadoras/detalhes-transportadora/detalhes-transportadora.component';
 // Layout Components
 
 @NgModule({
@@ -69,7 +71,9 @@ import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-int
     ExclusaoDialogComponent,
     DetalhesCondominioComponent,
     TituloComponent,
-    ConfirmacaoDialogComponent
+    ConfirmacaoDialogComponent,
+    TransportadorasComponent,
+    DetalhesTransportadoraComponent
   ],
   imports: [
     // Angular Modules

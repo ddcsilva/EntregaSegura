@@ -43,15 +43,15 @@
             <td mat-cell *matCellDef="let condominio" class="estado-coluna"> {{condominio.estado}} </td>
         </ng-container>
 
-        <!-- Coluna - Editar -->
+        <!-- Coluna - Ações -->
         <ng-container matColumnDef="acoes">
             <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
-            <td mat-cell *matCellDef="let element">
+            <td mat-cell *matCellDef="let condominio">
                 <div class="acoes-container">
-                    <button mat-icon-button color="primary" (click)="editarCondominio(element.id)">
+                    <button mat-icon-button color="primary" (click)="editarCondominio(condominio.id)">
                         <mat-icon>edit</mat-icon>
                     </button>
-                    <button mat-icon-button color="warn" (click)="excluirCondominio(element.id)">
+                    <button mat-icon-button color="warn" (click)="excluirCondominio(condominio.id)">
                         <mat-icon>delete</mat-icon>
                     </button>
                 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -58,6 +58,7 @@ export class DetalhesCondominioComponent implements OnInit {
 
   public submeterFormulario(): void {
     this.spinner.show();
+    
     if (this.formulario.invalid) {
       this.spinner.hide();
       return;

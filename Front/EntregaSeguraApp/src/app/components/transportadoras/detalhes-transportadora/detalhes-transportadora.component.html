@@ -1,0 +1,88 @@
+<app-titulo [icone]="'local_shipping'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <a routerLink="/transportadoras" color="primary" mat-raised-button>
+            <mat-icon>chevron_left</mat-icon>
+            Voltar
+        </a>
+    </div>
+</div>
+
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()" class="form-content lg-form">
+                        <div class="row">
+                            <h2>Informações da Transportadora</h2>
+
+                            <!-- Campo Nome -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Nome</mat-label>
+                                    <input formControlName="nome" matInput placeholder="Nome" required>
+                                    <mat-icon matSuffix>business</mat-icon>
+                                    <mat-error *ngIf="formulario.get('nome')?.invalid">
+                                        Por favor, insira o nome da transportadora.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo CNPJ -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>CNPJ</mat-label>
+                                    <input formControlName="cnpj" matInput placeholder="CNPJ" mask="00.000.000/0000-00">
+                                    <mat-icon matSuffix>business_center</mat-icon>
+                                    <mat-error *ngIf="formulario.get('cnpj')?.invalid">
+                                        Por favor, insira um CNPJ válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo E-mail -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>E-mail</mat-label>
+                                    <input formControlName="email" matInput placeholder="E-mail" email>
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <mat-error *ngIf="formulario.get('email')?.invalid">
+                                        Por favor, insira um e-mail válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Telefone -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Telefone</mat-label>
+                                    <input formControlName="telefone" matInput placeholder="Telefone"
+                                        [mask]="mascaraTelefone">
+                                    <mat-icon matSuffix>phone</mat-icon>
+                                    <mat-error *ngIf="formulario.get('telefone')?.invalid">
+                                        Por favor, insira um telefone válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button mat-button color="accent" type="button"
+                                            (click)="reiniciarFormulario($event)" style="width: 100%">Limpar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button mat-raised-button color="primary" type="submit"
+                                            style="width: 100%">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
