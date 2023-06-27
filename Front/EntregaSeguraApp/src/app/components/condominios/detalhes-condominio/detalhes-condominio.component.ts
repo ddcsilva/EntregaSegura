@@ -194,7 +194,7 @@ export class DetalhesCondominioComponent implements OnInit {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.maxLength(100)]],
+      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       cnpj: ['', [Validators.required, ValidadorCampos.ValidaCNPJ]],
       telefone: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(2)]],
@@ -204,7 +204,7 @@ export class DetalhesCondominioComponent implements OnInit {
       bairro: [{ value: '', disabled: true }],
       cidade: [{ value: '', disabled: true }],
       estado: [{ value: '', disabled: true }],
-      quantidadeUnidades: ['', [Validators.required, Validators.min(1)]],
+      quantidadeUnidades: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       quantidadeAndares: ['', [Validators.required, Validators.min(1), Validators.max(40)]],
       quantidadeBlocos: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
     });
