@@ -17,7 +17,13 @@ export class CondominioService {
   ) { }
 
   public obterCondominios(): Observable<Condominio[]> {
-    return this.fazerRequisicao(() => this.httpClient.get<Condominio[]>(`${this.urlBaseApi}/condominios`));
+    const url = `${this.urlBaseApi}/condominios`;
+    return this.fazerRequisicao(() => this.httpClient.get<Condominio[]>(url));
+  }
+
+  public excluir(id: number): Observable<void> {
+    const url = `${this.urlBaseApi}/condominios/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.delete<void>(url));
   }
 
   private fazerRequisicao(operacaoHttp: Function): Observable<any> {

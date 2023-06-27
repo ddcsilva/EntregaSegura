@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -8,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { Condominio } from 'src/app/models/condominio.model';
 import { CondominioService } from 'src/app/services/condominio.service';
+import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
 @Component({
   selector: 'app-condominios',
@@ -16,7 +18,7 @@ import { CondominioService } from 'src/app/services/condominio.service';
 })
 export class CondominiosComponent implements OnInit, OnDestroy {
   public condominios: Condominio[] = [];
-  public colunas: string[] = ['nome', 'telefone', 'bairro', 'cidade', 'estado', 'editar'];
+  public colunas: string[] = ['nome', 'telefone', 'bairro', 'cidade', 'estado', 'acoes'];
   public dataSource: MatTableDataSource<Condominio> = new MatTableDataSource<Condominio>();
   public filtroCondominio: string = '';
   private destroy$ = new Subject<void>();
@@ -29,7 +31,8 @@ export class CondominiosComponent implements OnInit, OnDestroy {
     private condominioService: CondominioService,
     private router: Router,
     private toastr: ToastrService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +52,23 @@ export class CondominiosComponent implements OnInit, OnDestroy {
 
   public editarCondominio(id: number): void {
     this.router.navigate(['condominios/detalhe', id]);
+  }
+
+  public excluirCondominio(id: number) {
+    const dialogRef = this.dialog.open(ExclusaoDialogComponent);
+    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+      if (confirmacaoExclusao) {
+        this.condominioService.excluir(id).subscribe({
+          next: () => {
+            this.toastr.success('Condomínio excluído com sucesso', 'Sucesso!');
+            this.obterCondominios();
+          },
+          error: (error: any) => {
+            this.exibirErros(error);
+          }
+        });
+      }
+    });
   }
 
   private obterCondominios(): void {

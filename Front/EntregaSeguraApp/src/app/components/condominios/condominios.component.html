@@ -52,11 +52,14 @@
         </ng-container>
 
         <!-- Coluna - Editar -->
-        <ng-container matColumnDef="editar">
-            <th mat-header-cell *matHeaderCellDef> </th>
-            <td mat-cell *matCellDef="let condominio">
-                <button mat-icon-button color="primary" (click)="editarCondominio(condominio.id)">
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button color="primary" (click)="editarCondominio(element.id)">
                     <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button color="warn" (click)="excluirCondominio(element.id)">
+                    <mat-icon>delete</mat-icon>
                 </button>
             </td>
         </ng-container>

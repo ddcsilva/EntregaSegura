@@ -53,6 +53,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { FormatarCnpjPipe } from './shared/helpers/formatar-cnpj.pipe';
 import { FormatarTelefonePipe } from './shared/helpers/formatar-telefone.pipe';
+import { ExclusaoDialogComponent } from './shared/components/exclusao-dialog/exclusao-dialog.component';
 // Layout Components
 
 @NgModule({
@@ -60,7 +61,8 @@ import { FormatarTelefonePipe } from './shared/helpers/formatar-telefone.pipe';
     AppComponent,
     FormatarTelefonePipe,
     FormatarCnpjPipe,
-    CondominiosComponent
+    CondominiosComponent,
+    ExclusaoDialogComponent
   ],
   imports: [
     // Angular Modules
