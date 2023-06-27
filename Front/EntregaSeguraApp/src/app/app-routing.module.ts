@@ -4,6 +4,8 @@ import { CondominiosComponent } from './components/condominios/condominios.compo
 import { DetalhesCondominioComponent } from './components/condominios/detalhes-condominio/detalhes-condominio.component';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
 import { DetalhesTransportadoraComponent } from './components/transportadoras/detalhes-transportadora/detalhes-transportadora.component';
+import { UnidadesComponent } from './components/unidades/unidades.component';
+import { DetalhesUnidadeComponent } from './components/unidades/detalhes-unidade/detalhes-unidade.component';
 
 const routes: Routes = [
   {
@@ -17,6 +19,15 @@ const routes: Routes = [
   {
     path: 'condominios/:id',
     component: DetalhesCondominioComponent
+  },
+
+  {
+    path: 'unidades',
+    component: UnidadesComponent
+  },
+  {
+    path: 'unidades/:id',
+    component: DetalhesUnidadeComponent
   },
   
   {

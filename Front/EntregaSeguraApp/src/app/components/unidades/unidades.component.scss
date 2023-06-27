@@ -1,0 +1,51 @@
+table {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.campo-pesquisa {
+    outline: none;
+    border: 1px solid #ccc;
+    padding: 8px 10px;
+    border-radius: 3px;
+
+    &:active {
+        border: 1px solid #BBB;
+    }
+
+    &:focus {
+        border: 1px solid #AAA;
+    }
+}
+
+.acoes-container {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+
+    button {
+        margin-right: 8px;
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .estado-coluna, 
+    .cidade-coluna, 
+    .bairro-coluna {
+        display: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .telefone-coluna {
+        display: none;
+    }
+}
+
+mat-form-field {
+    margin-right: 1rem;
+}

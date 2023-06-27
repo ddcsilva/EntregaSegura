@@ -60,6 +60,8 @@ import { ConfirmacaoDialogComponent } from './shared/components/confirmacao-dial
 import { obterPaginatorIntlPortugues } from './shared/config/obter-paginator-intl-portugues';
 import { TransportadorasComponent } from './components/transportadoras/transportadoras.component';
 import { DetalhesTransportadoraComponent } from './components/transportadoras/detalhes-transportadora/detalhes-transportadora.component';
+import { UnidadesComponent } from './components/unidades/unidades.component';
+import { DetalhesUnidadeComponent } from './components/unidades/detalhes-unidade/detalhes-unidade.component';
 // Layout Components
 
 @NgModule({
@@ -73,7 +75,9 @@ import { DetalhesTransportadoraComponent } from './components/transportadoras/de
     TituloComponent,
     ConfirmacaoDialogComponent,
     TransportadorasComponent,
-    DetalhesTransportadoraComponent
+    DetalhesTransportadoraComponent,
+    UnidadesComponent,
+    DetalhesUnidadeComponent
   ],
   imports: [
     // Angular Modules

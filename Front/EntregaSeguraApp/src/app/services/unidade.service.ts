@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { TratamentoErrosService } from '../shared/services/tratamento-erros.service';
 import { Observable, catchError } from 'rxjs';
 import { UnidadesEmMassa } from '../models/unidades-em-massa.model';
+import { Unidade } from '../models/unidade.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,31 @@ export class UnidadeService {
     private httpClient: HttpClient,
     private tratamentoErrosService: TratamentoErrosService
   ) { }
+
+  public obterUnidades(): Observable<Unidade[]> {
+    const url = `${this.urlBaseApi}/unidades`;
+    return this.fazerRequisicao(() => this.httpClient.get<Unidade[]>(url));
+  }
+
+  public ObterUnidadePorId(id: number): Observable<Unidade> {
+    const url = `${this.urlBaseApi}/unidades/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.get<Unidade>(url));
+  }
+  
+  public criar(unidade: Unidade): Observable<Unidade> {
+    const url = `${this.urlBaseApi}/unidades`;
+    return this.fazerRequisicao(() => this.httpClient.post<Unidade>(url, unidade));
+  }
+
+  public atualizar(id: number, unidade: Unidade): Observable<Unidade> {
+    const url = `${this.urlBaseApi}/unidades/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.put<Unidade>(url, unidade));
+  }
+
+  public excluir(id: number): Observable<void> {
+    const url = `${this.urlBaseApi}/unidades/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.delete<void>(url));
+  }
 
   public adicionarEmMassa(unidades: UnidadesEmMassa): Observable<void> {
     const url = `${this.urlBaseApi}/unidades/adicionar-em-massa`;
