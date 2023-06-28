@@ -6,6 +6,8 @@ import { TransportadorasComponent } from './components/transportadoras/transport
 import { DetalhesTransportadoraComponent } from './components/transportadoras/detalhes-transportadora/detalhes-transportadora.component';
 import { UnidadesComponent } from './components/unidades/unidades.component';
 import { DetalhesUnidadeComponent } from './components/unidades/detalhes-unidade/detalhes-unidade.component';
+import { MoradoresComponent } from './components/moradores/moradores.component';
+import { DetalhesMoradorComponent } from './components/moradores/detalhes-morador/detalhes-morador.component';
 
 const routes: Routes = [
   {
@@ -20,7 +22,6 @@ const routes: Routes = [
     path: 'condominios/:id',
     component: DetalhesCondominioComponent
   },
-
   {
     path: 'unidades',
     component: UnidadesComponent
@@ -29,7 +30,14 @@ const routes: Routes = [
     path: 'unidades/:id',
     component: DetalhesUnidadeComponent
   },
-  
+  {
+    path: 'moradores',
+    component: MoradoresComponent
+  },
+  {
+    path: 'moradores/:id',
+    component: DetalhesMoradorComponent
+  },
   {
     path: 'transportadoras',
     component: TransportadorasComponent

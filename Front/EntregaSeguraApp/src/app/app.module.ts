@@ -62,6 +62,8 @@ import { TransportadorasComponent } from './components/transportadoras/transport
 import { DetalhesTransportadoraComponent } from './components/transportadoras/detalhes-transportadora/detalhes-transportadora.component';
 import { UnidadesComponent } from './components/unidades/unidades.component';
 import { DetalhesUnidadeComponent } from './components/unidades/detalhes-unidade/detalhes-unidade.component';
+import { MoradoresComponent } from './components/moradores/moradores.component';
+import { DetalhesMoradorComponent } from './components/moradores/detalhes-morador/detalhes-morador.component';
 // Layout Components
 
 @NgModule({
@@ -77,7 +79,9 @@ import { DetalhesUnidadeComponent } from './components/unidades/detalhes-unidade
     TransportadorasComponent,
     DetalhesTransportadoraComponent,
     UnidadesComponent,
-    DetalhesUnidadeComponent
+    DetalhesUnidadeComponent,
+    MoradoresComponent,
+    DetalhesMoradorComponent
   ],
   imports: [
     // Angular Modules
