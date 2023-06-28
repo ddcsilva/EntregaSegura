@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -8,14 +7,9 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 import { Condominio } from 'src/app/models/condominio.model';
 import { Morador } from 'src/app/models/morador.model';
 import { Unidade } from 'src/app/models/unidade.model';
-import { UnidadesEmMassa } from 'src/app/models/unidades-em-massa.model';
 import { CondominioService } from 'src/app/services/condominio.service';
 import { MoradorService } from 'src/app/services/morador.service';
 import { UnidadeService } from 'src/app/services/unidade.service';
-import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
-import { ValidadorCampos } from 'src/app/shared/helpers/validador-campos';
-import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/InformacoesConfirmacaoDialog.model';
-import { CepService } from 'src/app/shared/services/cep.service';
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
 
 @Component({

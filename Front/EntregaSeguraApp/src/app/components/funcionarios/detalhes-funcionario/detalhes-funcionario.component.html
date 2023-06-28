@@ -1,1 +1,141 @@
-<p>detalhes-funcionario works!</p>
+<app-titulo [icone]="'work'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <a routerLink="/funcionarios" color="primary" mat-raised-button>
+            <mat-icon>chevron_left</mat-icon>
+            Voltar
+        </a>
+    </div>
+</div>
+
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()" class="form-content lg-form">
+                        <div class="row">
+                            <h2>Informações do Funcionário</h2>
+
+                            <!-- Campo Condomínio -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Condomínio</mat-label>
+                                    <mat-select formControlName="condominioId" required>
+                                        <mat-option *ngFor="let condominio of condominios" [value]="condominio.id">
+                                            {{condominio.nome}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix>business</mat-icon>
+                                    <mat-error *ngIf="formulario.get('condominioId')?.invalid">
+                                        Por favor, selecione um condomínio.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Nome -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Nome</mat-label>
+                                    <input formControlName="nome" matInput placeholder="Nome" required>
+                                    <mat-icon matSuffix>person</mat-icon>
+                                    <mat-error *ngIf="formulario.get('nome')?.invalid">
+                                        Por favor, insira o nome do morador.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo CPF -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>CPF</mat-label>
+                                    <input formControlName="cpf" matInput placeholder="CPF" mask="000.000.000-00"
+                                        required>
+                                    <mat-icon matSuffix>credit_card</mat-icon>
+                                    <mat-error *ngIf="formulario.get('cpf')?.invalid">
+                                        Por favor, insira um CPF válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Telefone -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Telefone</mat-label>
+                                    <input formControlName="telefone" matInput placeholder="Telefone"
+                                        [mask]="mascaraTelefone" required>
+                                    <mat-icon matSuffix>phone</mat-icon>
+                                    <mat-error *ngIf="formulario.get('telefone')?.invalid">
+                                        Por favor, insira um telefone válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo E-mail -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>E-mail</mat-label>
+                                    <input formControlName="email" matInput placeholder="E-mail" email required>
+                                    <mat-icon matSuffix>mail</mat-icon>
+                                    <mat-error *ngIf="formulario.get('email')?.invalid">
+                                        Por favor, insira um e-mail válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Cargo -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Cargo</mat-label>
+                                    <input formControlName="cargo" matInput placeholder="Cargo" required>
+                                    <mat-icon matSuffix>phone_in_talk</mat-icon>
+                                    <mat-error *ngIf="formulario.get('cargo')?.invalid">
+                                        Por favor, insira um cargo válido.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Data de Admissão -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Data de Admissão</mat-label>
+                                    <input formControlName="dataAdmissao" matInput placeholder="Data de Admissão" required>
+                                    <mat-icon matSuffix>phone_in_talk</mat-icon>
+                                    <mat-error *ngIf="formulario.get('dataAdmissao')?.invalid">
+                                        Por favor, insira uma data de admissão válida.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo Data de Demissão -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Data de Demissão</mat-label>
+                                    <input formControlName="dataDemissao" matInput placeholder="Data de Demissão" required>
+                                    <mat-icon matSuffix>phone_in_talk</mat-icon>
+                                    <mat-error *ngIf="formulario.get('dataDemissao')?.invalid">
+                                        Por favor, insira uma data de demissão válida.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button mat-button color="accent" type="button"
+                                            (click)="reiniciarFormulario($event)" style="width: 100%">Limpar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button mat-raised-button color="primary" type="submit"
+                                            style="width: 100%">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>
