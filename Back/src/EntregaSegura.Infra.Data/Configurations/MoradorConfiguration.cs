@@ -34,19 +34,19 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnType("varchar(11)")
             .HasComment("CPF do morador");
 
-        builder.Property(m => m.Email)
-            .HasColumnName("MOR_EMAIL")
-            .HasColumnOrder(4)
-            .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasComment("Email do morador");
-
         builder.Property(m => m.Telefone)
             .HasColumnName("MOR_TELEFONE")
-            .HasColumnOrder(5)
+            .HasColumnOrder(4)
             .IsRequired()
             .HasColumnType("varchar(11)")
             .HasComment("Telefone do morador");
+
+        builder.Property(m => m.Email)
+            .HasColumnName("MOR_EMAIL")
+            .HasColumnOrder(5)
+            .IsRequired()
+            .HasColumnType("varchar(100)")
+            .HasComment("Email do morador");
 
         builder.Property(m => m.Ramal)
             .HasColumnName("MOR_RAMAL")

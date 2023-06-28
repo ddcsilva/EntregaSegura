@@ -10,8 +10,8 @@ public abstract class Empresa : EntityBase
         Email = string.IsNullOrEmpty(email) ? null : email;
     }
 
-    public string Nome { get; private set; }
-    public string Cnpj { get; private set; }
-    public string Telefone { get; private set; }
-    public string Email { get; private set; }
+    public string Nome { get; protected set; }
+    public string Cnpj { get; protected set; }
+    public string Telefone { get; protected set; }
+    public string Email { get; protected set; }
 }

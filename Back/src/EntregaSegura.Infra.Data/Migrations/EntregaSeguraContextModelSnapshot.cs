@@ -263,7 +263,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DataRecebimento = new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7533),
+                            DataRecebimento = new DateTime(2023, 6, 27, 22, 7, 0, 891, DateTimeKind.Local).AddTicks(5059),
                             Descricao = "Entrega Teste 1",
                             FuncionarioId = 1,
                             MoradorId = 1,
@@ -293,7 +293,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<int>("CondominioId")
                         .HasColumnType("int")
                         .HasColumnName("FUN_CONDOMINIO_ID")
-                        .HasColumnOrder(12)
+                        .HasColumnOrder(13)
                         .HasComment("Chave estrangeira do condomínio");
 
                     b.Property<string>("Cpf")
@@ -306,14 +306,14 @@ namespace EntregaSegura.Infra.Data.Migrations
                     b.Property<DateTime>("DataAdmissao")
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_ADMISSAO")
-                        .HasColumnOrder(8)
+                        .HasColumnOrder(9)
                         .HasComment("Data de admissão do funcionário");
 
                     b.Property<DateTime>("DataAtualizacao")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_ATUALIZACAO")
-                        .HasColumnOrder(11)
+                        .HasColumnOrder(12)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data da última atualização do funcionário");
 
@@ -321,22 +321,28 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_CRIACAO")
-                        .HasColumnOrder(10)
+                        .HasColumnOrder(11)
                         .HasDefaultValueSql("GETDATE()")
                         .HasComment("Data de criação do funcionário");
 
                     b.Property<DateTime?>("DataDemissao")
                         .HasColumnType("datetime")
                         .HasColumnName("FUN_DATA_DEMISSAO")
-                        .HasColumnOrder(9)
+                        .HasColumnOrder(10)
                         .HasComment("Data de demissão do funcionário");
 
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("FUN_EMAIL")
-                        .HasColumnOrder(4)
+                        .HasColumnOrder(5)
                         .HasComment("Email do funcionário");
+
+                    b.Property<string>("Foto")
+                        .HasColumnType("varchar(100)")
+                        .HasColumnName("MOR_FOTO")
+                        .HasColumnOrder(7)
+                        .HasComment("Foto do morador");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -349,13 +355,13 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(11)")
                         .HasColumnName("FUN_TELEFONE")
-                        .HasColumnOrder(5)
+                        .HasColumnOrder(4)
                         .HasComment("Telefone do funcionário");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int")
                         .HasColumnName("FUN_USER_ID")
-                        .HasColumnOrder(7)
+                        .HasColumnOrder(8)
                         .HasComment("Chave estrangeira do usuário");
 
                     b.HasKey("Id")
@@ -383,7 +389,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                             Cargo = 2,
                             CondominioId = 1,
                             Cpf = "12345678903",
-                            DataAdmissao = new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7503),
+                            DataAdmissao = new DateTime(2023, 6, 27, 22, 7, 0, 891, DateTimeKind.Local).AddTicks(5029),
                             Email = "funcionario1@teste.com",
                             Nome = "Funcionário Teste 1",
                             Telefone = "1234567892",
@@ -429,7 +435,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(100)")
                         .HasColumnName("MOR_EMAIL")
-                        .HasColumnOrder(4)
+                        .HasColumnOrder(5)
                         .HasComment("Email do morador");
 
                     b.Property<string>("Foto")
@@ -455,7 +461,7 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(11)")
                         .HasColumnName("MOR_TELEFONE")
-                        .HasColumnOrder(5)
+                        .HasColumnOrder(4)
                         .HasComment("Telefone do morador");
 
                     b.Property<int>("UnidadeId")
@@ -1134,28 +1140,28 @@ namespace EntregaSegura.Infra.Data.Migrations
                         new
                         {
                             Id = 1,
-                            ConcurrencyStamp = "f948cfb4-7909-406e-80a9-7061f7785364",
+                            ConcurrencyStamp = "29c0cb64-6ad3-4d44-86b7-879a77264632",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = 2,
-                            ConcurrencyStamp = "01081235-0104-4ddb-9400-4a06b62fcd65",
+                            ConcurrencyStamp = "25f8c7ac-3338-4b3e-83bd-ea2b8536add1",
                             Name = "Sindico",
                             NormalizedName = "SINDICO"
                         },
                         new
                         {
                             Id = 3,
-                            ConcurrencyStamp = "3daf821f-bc33-4884-b59d-75970a023b45",
+                            ConcurrencyStamp = "281d979e-7470-483d-8e1f-95dd7e407afe",
                             Name = "Funcionario",
                             NormalizedName = "FUNCIONARIO"
                         },
                         new
                         {
                             Id = 4,
-                            ConcurrencyStamp = "20b9f651-28fa-487e-844b-f0d737123eb2",
+                            ConcurrencyStamp = "966602ca-705e-43c4-91e3-184f671650dc",
                             Name = "Morador",
                             NormalizedName = "MORADOR"
                         });
@@ -1233,15 +1239,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "541965d4-ddb7-4987-8c2c-ecea386ce77b",
+                            ConcurrencyStamp = "b8e8fed6-ceb3-41f7-a321-25d57f4d3c44",
                             Email = "admin@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LOCALHOST",
                             NormalizedUserName = "ADMIN",
-                            PasswordHash = "AQAAAAEAACcQAAAAEINYgqmb/X/qV2+cF8AhBX8vs2p4c0vjWn3hqDsbFj2K52vzAZ9tTCcXreJB9aLgpg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPABdAg/4SkpSw9c16ZxrCVPAEZbMZF+HN8LafqwwnpYw38HQYmCIi4VDgim2dp3OQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1c13f6e9-6672-4ca8-bec6-c9236119116f",
+                            SecurityStamp = "7bb5e19d-0b9e-41e4-9d9b-59d1627ffec6",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         },
@@ -1249,15 +1255,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bc5af6f1-8245-4f76-9674-c322d12c3ac7",
+                            ConcurrencyStamp = "12b88951-9a9f-47f0-bf37-e24a763f8a5d",
                             Email = "sindico@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SINDICO@LOCALHOST",
                             NormalizedUserName = "SINDICO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGM/zcuZxsV+/l3GrXPn0KMeVDKGOSeMBojEaIQlNo86dVqCd9rb568xXQIOicPsng==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP14cn+rUhiPmmihGZ35DE0S64spfun6y2+u2cjCgF7foditKo+3mYdB9INZhapLTQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "3f79126d-4605-49d1-ba14-1814d5be8c5e",
+                            SecurityStamp = "cc078276-c610-4a7c-bef2-957c5db53b52",
                             TwoFactorEnabled = false,
                             UserName = "sindico"
                         },
@@ -1265,15 +1271,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "44be714d-58a2-4b72-8d88-416793af519a",
+                            ConcurrencyStamp = "cbd19d92-419a-4760-ad7d-133d2f39de39",
                             Email = "funcionario@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "FUNCIONARIO@LOCALHOST",
                             NormalizedUserName = "FUNCIONARIO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPAnyweMFvY1qDwgB1Z0BKYHhcjTheJ1xWG+sYMEgBvFoTfMR0tGNTId23uHaOnd/A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEC3hs7n7EweAwkLFk2swRM4jS+0iEHupS4tVbHjNX5bo0nvHQJJxZ3/tvR3NsmobYA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "59fb0837-513c-48c0-b954-88af205704d3",
+                            SecurityStamp = "c6e492f7-ee3d-4c3c-8dea-2e94c6aeb924",
                             TwoFactorEnabled = false,
                             UserName = "funcionario"
                         },
@@ -1281,15 +1287,15 @@ namespace EntregaSegura.Infra.Data.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "85b75cb4-d0e3-4599-bdb7-553ff45940ca",
+                            ConcurrencyStamp = "19063ac9-3b70-4e35-80a4-8446a4596b80",
                             Email = "morador@localhost",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "MORADOR@LOCALHOST",
                             NormalizedUserName = "MORADOR",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOGrQIaob1dIU46lqh/nydkPqkamg2Yv5OXhIkfzaeCcyopih5H9doxW2+1d+ilKXw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMA+NXLvOoYyM0T8tjZRVkf/4+wjFAU6+I+fqwEn+nl4s8E8xzrhWEqxvnV9/rPsvw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "22093e51-5029-47b5-9f48-e9a65b2af913",
+                            SecurityStamp = "6b0ff549-7c22-4f0b-b9d4-4af5b908953b",
                             TwoFactorEnabled = false,
                             UserName = "morador"
                         });

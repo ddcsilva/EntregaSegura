@@ -148,9 +148,10 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FUN_NOME = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Nome do funcionário"),
                     FUN_CPF = table.Column<string>(type: "varchar(11)", nullable: false, comment: "CPF do funcionário"),
-                    FUN_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do funcionário"),
                     FUN_TELEFONE = table.Column<string>(type: "varchar(11)", nullable: false, comment: "Telefone do funcionário"),
+                    FUN_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do funcionário"),
                     FUN_CARGO = table.Column<int>(type: "int", nullable: false, comment: "Cargo do funcionário"),
+                    MOR_FOTO = table.Column<string>(type: "varchar(100)", nullable: true, comment: "Foto do morador"),
                     FUN_USER_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira do usuário"),
                     FUN_DATA_ADMISSAO = table.Column<DateTime>(type: "datetime", nullable: false, comment: "Data de admissão do funcionário"),
                     FUN_DATA_DEMISSAO = table.Column<DateTime>(type: "datetime", nullable: true, comment: "Data de demissão do funcionário"),
@@ -268,8 +269,8 @@ namespace EntregaSegura.Infra.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MOR_NOME = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Nome do morador"),
                     MOR_CPF = table.Column<string>(type: "varchar(11)", nullable: false, comment: "CPF do morador"),
-                    MOR_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do morador"),
                     MOR_TELEFONE = table.Column<string>(type: "varchar(11)", nullable: false, comment: "Telefone do morador"),
+                    MOR_EMAIL = table.Column<string>(type: "varchar(100)", nullable: false, comment: "Email do morador"),
                     MOR_RAMAL = table.Column<string>(type: "varchar(5)", nullable: true, comment: "Ramal do morador"),
                     MOR_FOTO = table.Column<string>(type: "varchar(100)", nullable: true, comment: "Foto do morador"),
                     MOR_UNIDADE_ID = table.Column<int>(type: "int", nullable: false, comment: "Chave estrangeira da unidade do morador"),
@@ -344,10 +345,10 @@ namespace EntregaSegura.Infra.Data.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, "f948cfb4-7909-406e-80a9-7061f7785364", "Admin", "ADMIN" },
-                    { 2, "01081235-0104-4ddb-9400-4a06b62fcd65", "Sindico", "SINDICO" },
-                    { 3, "3daf821f-bc33-4884-b59d-75970a023b45", "Funcionario", "FUNCIONARIO" },
-                    { 4, "20b9f651-28fa-487e-844b-f0d737123eb2", "Morador", "MORADOR" }
+                    { 1, "29c0cb64-6ad3-4d44-86b7-879a77264632", "Admin", "ADMIN" },
+                    { 2, "25f8c7ac-3338-4b3e-83bd-ea2b8536add1", "Sindico", "SINDICO" },
+                    { 3, "281d979e-7470-483d-8e1f-95dd7e407afe", "Funcionario", "FUNCIONARIO" },
+                    { 4, "966602ca-705e-43c4-91e3-184f671650dc", "Morador", "MORADOR" }
                 });
 
             migrationBuilder.InsertData(
@@ -360,16 +361,16 @@ namespace EntregaSegura.Infra.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { 1, 0, "541965d4-ddb7-4987-8c2c-ecea386ce77b", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEINYgqmb/X/qV2+cF8AhBX8vs2p4c0vjWn3hqDsbFj2K52vzAZ9tTCcXreJB9aLgpg==", null, false, "1c13f6e9-6672-4ca8-bec6-c9236119116f", false, "admin" },
-                    { 2, 0, "bc5af6f1-8245-4f76-9674-c322d12c3ac7", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEGM/zcuZxsV+/l3GrXPn0KMeVDKGOSeMBojEaIQlNo86dVqCd9rb568xXQIOicPsng==", null, false, "3f79126d-4605-49d1-ba14-1814d5be8c5e", false, "sindico" },
-                    { 3, 0, "44be714d-58a2-4b72-8d88-416793af519a", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEPAnyweMFvY1qDwgB1Z0BKYHhcjTheJ1xWG+sYMEgBvFoTfMR0tGNTId23uHaOnd/A==", null, false, "59fb0837-513c-48c0-b954-88af205704d3", false, "funcionario" },
-                    { 4, 0, "85b75cb4-d0e3-4599-bdb7-553ff45940ca", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEOGrQIaob1dIU46lqh/nydkPqkamg2Yv5OXhIkfzaeCcyopih5H9doxW2+1d+ilKXw==", null, false, "22093e51-5029-47b5-9f48-e9a65b2af913", false, "morador" }
+                    { 1, 0, "b8e8fed6-ceb3-41f7-a321-25d57f4d3c44", "admin@localhost", true, false, null, "ADMIN@LOCALHOST", "ADMIN", "AQAAAAEAACcQAAAAEPABdAg/4SkpSw9c16ZxrCVPAEZbMZF+HN8LafqwwnpYw38HQYmCIi4VDgim2dp3OQ==", null, false, "7bb5e19d-0b9e-41e4-9d9b-59d1627ffec6", false, "admin" },
+                    { 2, 0, "12b88951-9a9f-47f0-bf37-e24a763f8a5d", "sindico@localhost", true, false, null, "SINDICO@LOCALHOST", "SINDICO", "AQAAAAEAACcQAAAAEP14cn+rUhiPmmihGZ35DE0S64spfun6y2+u2cjCgF7foditKo+3mYdB9INZhapLTQ==", null, false, "cc078276-c610-4a7c-bef2-957c5db53b52", false, "sindico" },
+                    { 3, 0, "cbd19d92-419a-4760-ad7d-133d2f39de39", "funcionario@localhost", true, false, null, "FUNCIONARIO@LOCALHOST", "FUNCIONARIO", "AQAAAAEAACcQAAAAEC3hs7n7EweAwkLFk2swRM4jS+0iEHupS4tVbHjNX5bo0nvHQJJxZ3/tvR3NsmobYA==", null, false, "c6e492f7-ee3d-4c3c-8dea-2e94c6aeb924", false, "funcionario" },
+                    { 4, 0, "19063ac9-3b70-4e35-80a4-8446a4596b80", "morador@localhost", true, false, null, "MORADOR@LOCALHOST", "MORADOR", "AQAAAAEAACcQAAAAEMA+NXLvOoYyM0T8tjZRVkf/4+wjFAU6+I+fqwEn+nl4s8E8xzrhWEqxvnV9/rPsvw==", null, false, "6b0ff549-7c22-4f0b-b9d4-4af5b908953b", false, "morador" }
                 });
 
             migrationBuilder.InsertData(
                 table: "TB_FUNCIONARIOS",
-                columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "FUN_NOME", "FUN_TELEFONE", "FUN_USER_ID" },
-                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7503), null, "funcionario1@teste.com", "Funcionário Teste 1", "1234567892", 2 });
+                columns: new[] { "FUN_ID", "FUN_CARGO", "FUN_CONDOMINIO_ID", "FUN_CPF", "FUN_DATA_ADMISSAO", "FUN_DATA_DEMISSAO", "FUN_EMAIL", "MOR_FOTO", "FUN_NOME", "FUN_TELEFONE", "FUN_USER_ID" },
+                values: new object[] { 1, 2, 1, "12345678903", new DateTime(2023, 6, 27, 22, 7, 0, 891, DateTimeKind.Local).AddTicks(5029), null, "funcionario1@teste.com", null, "Funcionário Teste 1", "1234567892", 2 });
 
             migrationBuilder.InsertData(
                 table: "TB_UNIDADES",
@@ -460,7 +461,7 @@ namespace EntregaSegura.Infra.Data.Migrations
             migrationBuilder.InsertData(
                 table: "TB_ENTREGAS",
                 columns: new[] { "ETG_ID", "ETG_DATA_RECEBIMENTO", "ETG_DATA_RETIRADA", "ETG_DESCRICAO", "FUN_ID", "MOR_ID", "ETG_OBSERVACAO", "ETG_STATUS", "TRA_ID" },
-                values: new object[] { 1, new DateTime(2023, 6, 18, 14, 8, 6, 561, DateTimeKind.Local).AddTicks(7533), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
+                values: new object[] { 1, new DateTime(2023, 6, 27, 22, 7, 0, 891, DateTimeKind.Local).AddTicks(5059), null, "Entrega Teste 1", 1, 1, "Observação Teste 1", 3, 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_CONDOMINIOS_CNPJ",
