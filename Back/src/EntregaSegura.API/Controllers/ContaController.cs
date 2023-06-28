@@ -52,7 +52,11 @@ public class ContaController : MainController
 
         var usuario = await _usuarioService.ObterUsuarioPeloLoginAsync(loginDTO.Email);
 
-        if (usuario == null) return NotFound();
+        if (usuario == null)
+        {
+            NotificarErro("Usuário ou senha incorretos.");
+            return CustomResponse();
+        }
 
         var resultadoAutenticacao = await _usuarioService.VerificarCredenciaisAsync(usuario, loginDTO.Senha);
 
@@ -63,7 +67,6 @@ public class ContaController : MainController
         var funcionario = await _funcionarioService.ObterFuncionarioPeloUsuarioAsync(usuario.Id);
 
         var nome = morador != null ? morador.Nome : (funcionario != null ? funcionario.Nome : "Admin");
-        var foto = morador != null ? morador.Foto : "";
 
         var retorno = new
         {
@@ -71,7 +74,7 @@ public class ContaController : MainController
             nome,
             email = usuario.Email,
             roles,
-            foto,
+            foto  = morador != null ? morador.Foto : (funcionario != null ? funcionario.Foto : null),
             token = _tokenService.GerarToken(usuario).Result
         };
 

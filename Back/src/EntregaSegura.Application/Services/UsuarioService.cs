@@ -36,7 +36,7 @@ public class UsuarioService : BaseService, IUsuarioService
 
         if (usuario == null)
         {
-            Notificar("Usuário não encontrado.");
+            Notificar("Usuário ou senha incorretos.");
             return SignInResult.Failed;
         }
 
@@ -100,13 +100,6 @@ public class UsuarioService : BaseService, IUsuarioService
     public async Task<UsuarioDTO> ObterUsuarioPeloLoginAsync(string email)
     {
         var usuario = await _userManager.Users.FirstOrDefaultAsync(u => u.Email == email);
-
-        if (usuario == null)
-        {
-            Notificar("Usuário não encontrado.");
-            return null;
-        }
-
         return _mapper.Map<UsuarioDTO>(usuario);
     }
 
