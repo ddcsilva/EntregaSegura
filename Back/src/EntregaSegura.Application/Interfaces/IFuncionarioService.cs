@@ -11,5 +11,6 @@ public interface IFuncionarioService : IDisposable
     Task<bool> AtualizarAsync(FuncionarioDTO funcionario);
     Task<bool> RemoverAsync(int id);
 
+    Task<IEnumerable<FuncionarioDTO>> ObterTodosFuncionariosECondominiosAsync();
     Task<FuncionarioDTO> ObterFuncionarioPeloUsuarioAsync(int usuarioId);
 }

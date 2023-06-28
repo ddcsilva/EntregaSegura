@@ -129,10 +129,15 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return true;
     }
 
+    public async Task<IEnumerable<FuncionarioDTO>> ObterTodosFuncionariosECondominiosAsync()
+    {
+        var funcionarios = await _funcionarioRepository.ObterTodosFuncionariosECondominiosAsync();
+        return _mapper.Map<IEnumerable<FuncionarioDTO>>(funcionarios);
+    }
+
     public async Task<FuncionarioDTO> ObterFuncionarioPeloUsuarioAsync(int usuarioId)
     {
         var funcionario = await _funcionarioRepository.BuscarPorCondicaoAsync(m => m.UserId == usuarioId);
-
         return _mapper.Map<FuncionarioDTO>(funcionario.FirstOrDefault());
     }
 

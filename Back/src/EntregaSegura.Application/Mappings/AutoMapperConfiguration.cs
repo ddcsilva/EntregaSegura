@@ -16,7 +16,8 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Entrega, EntregaDTO>();
 
         CreateMap<FuncionarioDTO, Funcionario>();
-        CreateMap<Funcionario, FuncionarioDTO>();
+        CreateMap<Funcionario, FuncionarioDTO>()
+            .ForMember(dest => dest.NomeCondominio, opt => opt.MapFrom(src => src.Condominio.Nome));
 
         CreateMap<MoradorDTO, Morador>();
         CreateMap<Morador, MoradorDTO>()

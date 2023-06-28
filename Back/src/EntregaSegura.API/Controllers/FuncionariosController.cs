@@ -19,7 +19,7 @@ public class FuncionariosController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<FuncionarioDTO>>> ObterTodosFuncionarios()
     {
-        var funcionarios = await _funcionarioService.ObterTodosFuncionariosAsync();
+        var funcionarios = await _funcionarioService.ObterTodosFuncionariosECondominiosAsync();
         return Ok(funcionarios);
     }
 
