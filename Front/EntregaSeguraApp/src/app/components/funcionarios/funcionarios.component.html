@@ -1,0 +1,60 @@
+<app-titulo [icone]="'work'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar"
+               [(ngModel)]="filtroFuncionario" (keyup)="filtrarFuncionarios()">
+        <a routerLink="/funcionarios/novo" mat-raised-button color="primary" class="ml-1">
+            <span>Novo Funcionário</span>
+        </a>
+    </div>
+</div>
+
+<div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <!-- Coluna - Nome -->
+        <ng-container matColumnDef="nome">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
+            <td mat-cell *matCellDef="let funcionario"> {{funcionario.nome}} </td>
+        </ng-container>
+
+        <!-- Coluna - Telefone -->
+        <ng-container matColumnDef="telefone">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
+            <td mat-cell *matCellDef="let funcionario"> {{ funcionario.telefone | formatarTelefone }} </td>
+        </ng-container>
+
+        <!-- Coluna - Ramal -->
+        <ng-container matColumnDef="cargo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Cargo </th>
+            <td mat-cell *matCellDef="let funcionario"> {{funcionario.cargo}} </td>
+        </ng-container>
+
+        <!-- Coluna - Condominio -->
+        <ng-container matColumnDef="nomeCondominio">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Condomínio </th>
+            <td mat-cell *matCellDef="let funcionario"> {{funcionario.nomeCondominio}} </td>
+        </ng-container>
+
+        <!-- Coluna - Ações -->
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let funcionario">
+                <div class="acoes-container">
+                    <button mat-icon-button color="primary" (click)="editarFuncionario(funcionario.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="excluirFuncionario(funcionario.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

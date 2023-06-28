@@ -26,7 +26,7 @@ public class MoradoresController : MainController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<MoradorDTO>> ObterMoradorPorId(int id)
     {
-        var morador = await _moradorService.ObterMoradorPorIdAsync(id);
+        var morador = await _moradorService.ObterMoradorPorIdComUnidadeECondominioAsync(id);
 
         if (morador == null) return NotFound();
 

@@ -21,6 +21,7 @@ public sealed class Morador : Pessoa
     }
 
     public string Ramal { get; private set; }
+    
     public int UnidadeId { get; private set; }
     public Unidade Unidade { get; private set; }
 

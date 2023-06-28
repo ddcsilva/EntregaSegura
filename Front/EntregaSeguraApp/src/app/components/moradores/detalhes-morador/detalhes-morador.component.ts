@@ -53,9 +53,9 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.definirOperacao();
-    this.validarformulario();
-    this.carregarMorador();
     this.carregarCondominios();
+    this.carregarMorador();
+    this.validarformulario();
 
     this.formControl.telefone.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);

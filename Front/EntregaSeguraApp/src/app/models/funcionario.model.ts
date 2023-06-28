@@ -1,13 +1,12 @@
-export interface Morador {
+export interface Funcionario {
     id: number;
     nome: string;
     cpf: string;
     telefone: string;
     email: string;
-    ramal: string;
+    cargo: string;
+    dataAdmissao: Date;
+    dataDemissao: Date;
     userId: number;
-    condominioId: number;
-    unidadeId: number;
     nomeCondominio: string;
-    descricaoUnidade: string;
 }

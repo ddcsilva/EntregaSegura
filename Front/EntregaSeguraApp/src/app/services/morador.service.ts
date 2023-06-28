@@ -46,5 +46,4 @@ export class MoradorService {
       catchError(this.tratamentoErrosService.tratarErro.bind(this.tratamentoErrosService))
     );
   }
-
 }

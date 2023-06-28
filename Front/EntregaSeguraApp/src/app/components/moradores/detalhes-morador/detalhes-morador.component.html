@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Unidade</mat-label>
-                                    <mat-select formControlName="unidadeId" required [disabled]="!unidades">
+                                    <mat-select formControlName="unidadeId" required>
                                         <mat-option *ngFor="let unidade of unidades" [value]="unidade.id">
                                             {{unidade.descricaoUnidade}}
                                         </mat-option>
@@ -66,7 +66,8 @@
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>CPF</mat-label>
-                                    <input formControlName="cpf" matInput placeholder="CPF" mask="000.000.000-00">
+                                    <input formControlName="cpf" matInput placeholder="CPF" mask="000.000.000-00"
+                                        required>
                                     <mat-icon matSuffix>credit_card</mat-icon>
                                     <mat-error *ngIf="formulario.get('cpf')?.invalid">
                                         Por favor, insira um CPF válido.
@@ -79,7 +80,7 @@
                                 <mat-form-field appearance="standard">
                                     <mat-label>Telefone</mat-label>
                                     <input formControlName="telefone" matInput placeholder="Telefone"
-                                        [mask]="mascaraTelefone">
+                                        [mask]="mascaraTelefone" required>
                                     <mat-icon matSuffix>phone</mat-icon>
                                     <mat-error *ngIf="formulario.get('telefone')?.invalid">
                                         Por favor, insira um telefone válido.
@@ -91,7 +92,7 @@
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>E-mail</mat-label>
-                                    <input formControlName="email" matInput placeholder="E-mail" email>
+                                    <input formControlName="email" matInput placeholder="E-mail" email required>
                                     <mat-icon matSuffix>mail</mat-icon>
                                     <mat-error *ngIf="formulario.get('email')?.invalid">
                                         Por favor, insira um e-mail válido.
@@ -103,7 +104,7 @@
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Ramal</mat-label>
-                                    <input formControlName="ramal" matInput placeholder="Ramal">
+                                    <input formControlName="ramal" matInput placeholder="Ramal" required>
                                     <mat-icon matSuffix>phone_in_talk</mat-icon>
                                     <mat-error *ngIf="formulario.get('ramal')?.invalid">
                                         Por favor, insira um ramal válido.
