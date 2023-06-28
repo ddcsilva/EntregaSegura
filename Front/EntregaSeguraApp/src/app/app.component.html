@@ -11,6 +11,7 @@
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
     <img class="avatar mat-elevation-z8" src="/assets/example.jpeg" />
 
+    <!-- Dados do Usuário Mockados temporariamente -->
     <h4 class="name">Danilo Silva</h4>
     <p class="designation">Funcionário</p>
 
@@ -51,7 +52,14 @@
       <mat-icon>help</mat-icon>
       <span>Suporte</span>
     </button>
-  </mat-sidenav>
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
+</mat-sidenav>
+
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>

@@ -1,10 +1,11 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -66,7 +67,11 @@ import { MoradoresComponent } from './components/moradores/moradores.component';
 import { DetalhesMoradorComponent } from './components/moradores/detalhes-morador/detalhes-morador.component';
 import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
-// Layout Components
+import { LoginComponent } from './components/login/login.component';
+import { registerLocaleData } from '@angular/common';
+import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
+
+registerLocaleData(ptBr)
 
 @NgModule({
   declarations: [
@@ -85,7 +90,8 @@ import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes
     MoradoresComponent,
     DetalhesMoradorComponent,
     FuncionariosComponent,
-    DetalhesFuncionarioComponent
+    DetalhesFuncionarioComponent,
+    LoginComponent
   ],
   imports: [
     // Angular Modules
@@ -142,9 +148,14 @@ import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes
   ],
   providers: [
     {
+      provide: LOCALE_ID,
+      useValue: "pt-BR"
+    },
+    {
       provide: MatPaginatorIntl,
       useValue: obterPaginatorIntlPortugues()
-    }
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })

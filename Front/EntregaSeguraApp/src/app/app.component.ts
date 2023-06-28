@@ -4,6 +4,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AutenticacaoService } from './services/autenticacao.service';
 
 @UntilDestroy()
 @Component({
@@ -16,11 +17,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private router: Router) { }
+  constructor(
+    private observer: BreakpointObserver,
+    private router: Router,
+    public autenticacaoService: AutenticacaoService
+  ) { }
 
   ngOnInit(): void {
     this.selecionarMensagemDeCarregamento();
-  }  
+  }
 
   ngAfterViewInit() {
     this.observer
@@ -66,4 +71,8 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this.mensagemDeCarregamentoSelecionada;
   }
 
+  public logout() {
+    this.autenticacaoService.logout();
+    this.router.navigate(['/login']);
+  }
 }

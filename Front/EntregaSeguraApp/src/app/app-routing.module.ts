@@ -10,14 +10,16 @@ import { MoradoresComponent } from './components/moradores/moradores.component';
 import { DetalhesMoradorComponent } from './components/moradores/detalhes-morador/detalhes-morador.component';
 import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './shared/helpers/auth.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CondominiosComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path: 'condominios',
+    path: 'condominios', canActivate: [AuthGuard],
     component: CondominiosComponent
   },
   {
