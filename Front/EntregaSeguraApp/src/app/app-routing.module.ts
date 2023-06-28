@@ -12,52 +12,84 @@ import { FuncionariosComponent } from './components/funcionarios/funcionarios.co
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './shared/helpers/auth.guard';
+import { MainComponent } from './components/main/main.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
   {
     path: 'login',
     component: LoginComponent
   },
   {
-    path: 'condominios', canActivate: [AuthGuard],
-    component: CondominiosComponent
+    path: '',
+    component: MainComponent,
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: 'dashboard',
+        canActivate: [AuthGuard],
+        component: CondominiosComponent
+      },
+      {
+        path: 'condominios',
+        canActivate: [AuthGuard],
+        component: CondominiosComponent
+      },
+      {
+        path: 'condominios/:id',
+        canActivate: [AuthGuard],
+        component: DetalhesCondominioComponent
+      },
+      {
+        path: 'unidades',
+        canActivate: [AuthGuard],
+        component: UnidadesComponent
+      },
+      {
+        path: 'unidades/:id',
+        canActivate: [AuthGuard],
+        component: DetalhesUnidadeComponent
+      },
+      {
+        path: 'moradores',
+        canActivate: [AuthGuard],
+        component: MoradoresComponent
+      },
+      {
+        path: 'moradores/:id',
+        canActivate: [AuthGuard],
+        component: DetalhesMoradorComponent
+      },
+      {
+        path: 'funcionarios',
+        canActivate: [AuthGuard],
+        component: FuncionariosComponent
+      },
+      {
+        path: 'funcionarios/:id',
+        canActivate: [AuthGuard],
+        component: DetalhesFuncionarioComponent
+      },
+      {
+        path: 'transportadoras',
+        canActivate: [AuthGuard],
+        component: TransportadorasComponent
+      },
+      {
+        path: 'transportadoras/:id',
+        canActivate: [AuthGuard],
+        component: DetalhesTransportadoraComponent
+      }
+    ]
   },
   {
-    path: 'condominios/:id',
-    component: DetalhesCondominioComponent
+    path: '**',
+    redirectTo: '/dashboard'
   },
-  {
-    path: 'unidades',
-    component: UnidadesComponent
-  },
-  {
-    path: 'unidades/:id',
-    component: DetalhesUnidadeComponent
-  },
-  {
-    path: 'moradores',
-    component: MoradoresComponent
-  },
-  {
-    path: 'moradores/:id',
-    component: DetalhesMoradorComponent
-  },
-  {
-    path: 'funcionarios',
-    component: FuncionariosComponent
-  },
-  {
-    path: 'funcionarios/:id',
-    component: DetalhesFuncionarioComponent
-  },
-  {
-    path: 'transportadoras',
-    component: TransportadorasComponent
-  },
-  {
-    path: 'transportadoras/:id',
-    component: DetalhesTransportadoraComponent
-  }
 ];
 
 @NgModule({

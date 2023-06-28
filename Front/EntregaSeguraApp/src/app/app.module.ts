@@ -70,6 +70,7 @@ import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes
 import { LoginComponent } from './components/login/login.component';
 import { registerLocaleData } from '@angular/common';
 import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
+import { MainComponent } from './components/main/main.component';
 
 registerLocaleData(ptBr)
 
@@ -91,7 +92,8 @@ registerLocaleData(ptBr)
     DetalhesMoradorComponent,
     FuncionariosComponent,
     DetalhesFuncionarioComponent,
-    LoginComponent
+    LoginComponent,
+    MainComponent
   ],
   imports: [
     // Angular Modules
