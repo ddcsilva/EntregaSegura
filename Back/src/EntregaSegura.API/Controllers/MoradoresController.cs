@@ -60,6 +60,8 @@ public class MoradoresController : MainController
 
         if (!ModelState.IsValid) return CustomResponse(ModelState);
 
+        moradorDTO.UserId = morador.UserId;
+
         await _moradorService.AtualizarAsync(moradorDTO);
 
         if (!OperacaoValida()) return CustomResponse();
