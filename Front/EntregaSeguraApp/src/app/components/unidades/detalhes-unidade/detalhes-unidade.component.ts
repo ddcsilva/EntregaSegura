@@ -57,7 +57,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
 
   public submeterFormulario(): void {
     this.spinner.show();
-    
+
     if (this.formulario.invalid) {
       this.spinner.hide();
       return;

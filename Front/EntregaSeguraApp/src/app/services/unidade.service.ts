@@ -26,6 +26,11 @@ export class UnidadeService {
     const url = `${this.urlBaseApi}/unidades/${id}`;
     return this.fazerRequisicao(() => this.httpClient.get<Unidade>(url));
   }
+
+  public ObterUnidadesPorCondominio(condominioId: number): Observable<Unidade[]> {
+    const url = `${this.urlBaseApi}/unidades/por-condominio/${condominioId}`;
+    return this.fazerRequisicao(() => this.httpClient.get<Unidade[]>(url));
+  }
   
   public criar(unidade: Unidade): Observable<Unidade> {
     const url = `${this.urlBaseApi}/unidades`;

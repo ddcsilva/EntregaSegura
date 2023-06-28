@@ -9,7 +9,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
 import { Condominio } from 'src/app/models/condominio.model';
 import { Transportadora } from 'src/app/models/transportadora.model';
-import { CondominioService } from 'src/app/services/condominio.service';
 import { TransportadoraService } from 'src/app/services/transportadora.service';
 import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
@@ -49,7 +48,7 @@ export class TransportadorasComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public filtarTransportadoras(): void {
+  public filtrarTransportadoras(): void {
     this.dataSource.filter = this.filtroTransportadora.trim().toLowerCase();
   }
 

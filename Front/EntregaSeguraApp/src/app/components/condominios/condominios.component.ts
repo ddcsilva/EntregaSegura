@@ -47,7 +47,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
     this.destroy$.complete();
   }
 
-  public filtarCondominios(): void {
+  public filtrarCondominios(): void {
     this.dataSource.filter = this.filtroCondominio.trim().toLowerCase();
   }
 
