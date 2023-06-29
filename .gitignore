@@ -572,3 +572,4 @@ FodyWeavers.xsd
 
 .vscode/
 internal_logs/
+Migrations/
