@@ -4,7 +4,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { delay, filter } from 'rxjs/operators';
 import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AutenticacaoService } from 'src/app/services/autenticacao.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @UntilDestroy()
@@ -21,8 +20,7 @@ export class MainComponent implements OnInit, AfterViewInit {
   constructor(
     private observer: BreakpointObserver,
     private router: Router,
-    private spinner: NgxSpinnerService,
-    public autenticacaoService: AutenticacaoService
+    private spinner: NgxSpinnerService
   ) { }
 
   ngOnInit(): void {
@@ -73,10 +71,5 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public get mensagemDeCarregamento(): string {
     return this.mensagemDeCarregamentoSelecionada;
-  }
-
-  public logout() {
-    this.autenticacaoService.logout();
-    this.router.navigate(['/login']);
   }
 }

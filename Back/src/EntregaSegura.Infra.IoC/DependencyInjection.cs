@@ -27,7 +27,6 @@ public static class DependencyInjection
         services.AddScoped<IMoradorRepository, MoradorRepository>();
         services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();
         services.AddScoped<IUnidadeRepository, UnidadeRepository>();
-        services.AddScoped<IUsuarioRepository, UsuarioRepository>();
     }
 
     private static void ResolverDependenciasServices(this IServiceCollection services)
@@ -38,8 +37,6 @@ public static class DependencyInjection
         services.AddScoped<IMoradorService, MoradorService>();
         services.AddScoped<ITransportadoraService, TransportadoraService>();
         services.AddScoped<IUnidadeService, UnidadeService>();
-        services.AddScoped<IUsuarioService, UsuarioService>();
-        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IImagemService, ImagemService>();
         services.AddScoped<IEmailService, EmailService>();
     }

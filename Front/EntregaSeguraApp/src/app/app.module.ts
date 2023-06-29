@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -67,9 +67,7 @@ import { MoradoresComponent } from './components/moradores/moradores.component';
 import { DetalhesMoradorComponent } from './components/moradores/detalhes-morador/detalhes-morador.component';
 import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
-import { LoginComponent } from './components/login/login.component';
 import { registerLocaleData } from '@angular/common';
-import { JwtInterceptor } from './shared/helpers/jwt.interceptor';
 import { MainComponent } from './components/main/main.component';
 
 registerLocaleData(ptBr)
@@ -92,7 +90,6 @@ registerLocaleData(ptBr)
     DetalhesMoradorComponent,
     FuncionariosComponent,
     DetalhesFuncionarioComponent,
-    LoginComponent,
     MainComponent
   ],
   imports: [
@@ -156,8 +153,7 @@ registerLocaleData(ptBr)
     {
       provide: MatPaginatorIntl,
       useValue: obterPaginatorIntlPortugues()
-    },
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}
+    }
   ],
   bootstrap: [AppComponent]
 })

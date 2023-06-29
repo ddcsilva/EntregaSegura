@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace EntregaSegura.API.Controllers;
 
-[Authorize]
 [ApiController]
 public class MainController : ControllerBase
 {

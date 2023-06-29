@@ -14,8 +14,7 @@ public sealed class Funcionario : Pessoa
         string foto, 
         CargoFuncionario cargo, 
         DateTime dataAdmissao, 
-        int condominioId, 
-        int userId) : base(nome, cpf, telefone, email, foto, userId)
+        int condominioId) : base(nome, cpf, telefone, email, foto)
     {
         Cargo = cargo;
         DataAdmissao = dataAdmissao;
@@ -32,9 +31,4 @@ public sealed class Funcionario : Pessoa
     public Condominio Condominio { get; private set; }
 
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToList();
-
-    public void DefinirUsuario(int userId)
-    {
-        UserId = userId;
-    }
 }

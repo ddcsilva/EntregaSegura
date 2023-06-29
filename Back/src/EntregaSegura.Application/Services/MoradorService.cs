@@ -11,20 +11,17 @@ public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
     private readonly IEntregaRepository _entregaRepository;
-    private readonly IUsuarioService _usuarioService;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public MoradorService(IMoradorRepository moradorRepository,
                           IEntregaRepository entregaRepository,
-                          IUsuarioService usuarioService,
                           IEmailService emailService,
                           IMapper mapper,
                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
         _entregaRepository = entregaRepository;
-        _usuarioService = usuarioService;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -59,25 +56,8 @@ public class MoradorService : BaseService, IMoradorService
 
         if (!await ValidarMorador(morador)) return false;
 
-        var usuarioDTO = new UsuarioDTO
-        {
-            UserName = morador.Email,
-            Email = morador.Email,
-            Senha = "123456"
-        };
-
         using (_moradorRepository.IniciarTrasacaoAsync())
         {
-            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO, "MORADOR");
-
-            if (usuarioRegistradoComSucesso == null)
-            {
-                Notificar("Ocorreu um erro ao adicionar o morador.");
-                return false;
-            }
-
-            morador.DefinirUsuario(usuarioRegistradoComSucesso.Id);
-
             _moradorRepository.Adicionar(morador);
 
             var adicionadoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
@@ -90,14 +70,9 @@ public class MoradorService : BaseService, IMoradorService
             }
 
             await _moradorRepository.SalvarTransacaoAsync();
-
-            (string assuntoEmail, string mensagemEmail) = ConstruirEmail(morador, usuarioDTO);
-
-            await _emailService.EnviarEmailAsync(usuarioDTO.Email, assuntoEmail, mensagemEmail);
         }
 
         moradorDTO.Id = morador.Id;
-        moradorDTO.UserId = morador.UserId;
 
         return true;
     }
@@ -150,29 +125,9 @@ public class MoradorService : BaseService, IMoradorService
         return true;
     }
 
-    public async Task<MoradorDTO> ObterMoradorPeloUsuarioAsync(int usuarioId)
-    {
-        var morador = await _moradorRepository.BuscarPorCondicaoAsync(m => m.UserId == usuarioId);
-
-        return _mapper.Map<MoradorDTO>(morador.FirstOrDefault());
-    }
-
     public void Dispose()
     {
         _moradorRepository?.Dispose();
-    }
-
-    private (string, string) ConstruirEmail(Morador morador, UsuarioDTO usuarioDTO)
-    {
-        string assuntoEmail = "Bem-vindo ao EntregaSegura!";
-        string mensagemEmail = $"Olá {morador.Nome},\n\n" +
-                               $"Sua conta no EntregaSegura foi criada com sucesso! " +
-                               $"Suas credenciais são:\n\n" +
-                               $"Usuário: {usuarioDTO.UserName}\n" +
-                               $"Senha: {usuarioDTO.Senha}\n\n" +
-                               $"Atenciosamente,\n" +
-                               $"Equipe EntregaSegura";
-        return (assuntoEmail, mensagemEmail);
     }
 
     private async Task<bool> ValidarMorador(Morador morador, bool ehAtualizacao = false)

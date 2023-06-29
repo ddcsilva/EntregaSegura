@@ -18,67 +18,85 @@
                         <div class="row">
                             <h2>Informações Gerais</h2>
 
-                            <!-- Campo Nome -->
+                            <!-- Campo - Nome -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Nome</mat-label>
-                                    <input formControlName="nome" matInput placeholder="Nome" required>
+                                    <input formControlName="nome" matInput placeholder="Nome">
                                     <mat-icon matSuffix>business</mat-icon>
-                                    <mat-error *ngIf="formulario.get('nome')?.invalid">
+                                    <mat-error *ngIf="formulario.get('nome')?.hasError('required')">
                                         Por favor, insira o nome do condomínio.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('nome')?.hasError('minlength')">
+                                        O tamanho do nome do Condomínio não deve ser menor que 2 caracteres.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('nome')?.hasError('maxlength')">
+                                        O tamanho do nome do Condomínio não deve ser maior que 100 caracteres.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo CNPJ -->
+                            <!-- Campo - CNPJ -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>CNPJ</mat-label>
                                     <input formControlName="cnpj" matInput placeholder="CNPJ" mask="00.000.000/0000-00"
                                         required>
                                     <mat-icon matSuffix>business_center</mat-icon>
-                                    <mat-error *ngIf="formulario.get('cnpj')?.invalid">
-                                        Por favor, insira um CNPJ válido.
+                                    <mat-error *ngIf="formulario.get('cnpj')?.hasError('required')">
+                                        Por favor, insira um CNPJ.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('cnpj')?.hasError('cnpjInvalido')">
+                                        O CNPJ informado é inválido.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo E-mail -->
+                            <!-- Campo - E-mail -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>E-mail</mat-label>
                                     <input formControlName="email" matInput placeholder="E-mail" required email>
                                     <mat-icon matSuffix>mail</mat-icon>
-                                    <mat-error *ngIf="formulario.get('email')?.invalid">
-                                        Por favor, insira um e-mail válido.
+                                    <mat-error *ngIf="formulario.get('email')?.hasError('required')">
+                                        Por favor, insira um e-mail.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('email')?.hasError('email')">
+                                        O e-mail informado é inválido.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Telefone -->
+                            <!-- Campo - Telefone -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Telefone</mat-label>
                                     <input formControlName="telefone" matInput placeholder="Telefone"
                                         [mask]="mascaraTelefone" required>
                                     <mat-icon matSuffix>phone</mat-icon>
-                                    <mat-error *ngIf="formulario.get('telefone')?.invalid">
-                                        Por favor, insira um telefone válido.
+                                    <mat-error *ngIf="formulario.get('telefone')?.hasError('required')">
+                                        Por favor, insira um telefone.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('telefone')?.hasError('minlength')">
+                                        O telefone informado é inválido.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
                             <h2>Endereço</h2>
 
-                            <!-- Campo CEP -->
+                            <!-- Campo - CEP -->
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <mat-form-field appearance="standard">
                                         <mat-label>CEP</mat-label>
                                         <input formControlName="cep" matInput placeholder="CEP" mask="00000-000"
                                             (blur)="buscarCep($event)" required>
-                                        <mat-error *ngIf="formulario.get('cep')?.invalid">
-                                            Por favor, insira um CEP válido.
+                                        <mat-error *ngIf="formulario.get('cep')?.hasError('required')">
+                                            Por favor, insira um CEP.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('cep')?.hasError('minlength')">
+                                            O CEP informado é inválido.
                                         </mat-error>
                                     </mat-form-field>
                                     <button mat-mini-fab color="primary" aria-label="Buscar CEP"
@@ -88,105 +106,113 @@
                                 </div>
                             </div>
 
-                            <!-- Campo Logradouro -->
+                            <!-- Campo - Logradouro -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Logradouro</mat-label>
                                     <input formControlName="logradouro" matInput placeholder="Logradouro" required>
                                     <mat-icon matSuffix>location_on</mat-icon>
-                                    <mat-error *ngIf="formulario.get('logradouro')?.invalid">
-                                        Por favor, insira o logradouro.
-                                    </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Numero -->
+                            <!-- Campo - Número -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Numero</mat-label>
                                     <input formControlName="numero" matInput placeholder="Numero" type="text" required
                                         mask="9999">
                                     <mat-icon matSuffix>place</mat-icon>
-                                    <mat-error *ngIf="formulario.get('numero')?.invalid">
+                                    <mat-error *ngIf="formulario.get('numero')?.hasError('required')">
                                         Por favor, insira o número.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('numero')?.hasError('pattern')">
+                                        O número informado é inválido.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Bairro -->
+                            <!-- Campo - Bairro -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Bairro</mat-label>
                                     <input formControlName="bairro" matInput placeholder="Bairro" required>
                                     <mat-icon matSuffix>place</mat-icon>
-                                    <mat-error *ngIf="formulario.get('bairro')?.invalid">
-                                        Por favor, insira o bairro.
-                                    </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Cidade -->
+                            <!-- Campo - Cidade -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Cidade</mat-label>
                                     <input formControlName="cidade" matInput placeholder="Cidade" required>
                                     <mat-icon matSuffix>place</mat-icon>
-                                    <mat-error *ngIf="formulario.get('cidade')?.invalid">
-                                        Por favor, insira a cidade.
-                                    </mat-error>
                                 </mat-form-field>
                             </div>
 
-
-                            <!-- Campo Estado -->
+                            <!-- Campo - Estado -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Estado</mat-label>
                                     <input formControlName="estado" matInput placeholder="Estado" required>
                                     <mat-icon matSuffix>place</mat-icon>
-                                    <mat-error *ngIf="formulario.get('estado')?.invalid">
-                                        Por favor, insira o estado.
-                                    </mat-error>
                                 </mat-form-field>
                             </div>
 
                             <h2>Detalhes do Condomínio</h2>
 
-                            <!-- Campo Quantidade Blocos no Condomínio -->
+                            <!-- Campo - Quantidade Blocos no Condomínio -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Quantidade Blocos</mat-label>
                                     <input formControlName="quantidadeBlocos" matInput placeholder="Quantidade Blocos"
                                         type="number" required>
                                     <mat-icon matSuffix>apartment</mat-icon>
-                                    <mat-error *ngIf="formulario.get('quantidadeBlocos')?.invalid">
+                                    <mat-error *ngIf="formulario.get('quantidadeBlocos')?.hasError('required')">
                                         Por favor, insira a quantidade de blocos.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeBlocos')?.hasError('min')">
+                                        A quantidade de blocos deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeBlocos')?.hasError('max')">
+                                        A quantidade de blocos deve ser menor que 20.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Quantidade Andares por Bloco -->
+                            <!-- Campo - Quantidade Andares por Bloco -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Quantidade Andares por Blocos</mat-label>
                                     <input formControlName="quantidadeAndares" matInput placeholder="Quantidade Andares"
                                         type="number" required>
                                     <mat-icon matSuffix>apartment</mat-icon>
-                                    <mat-error *ngIf="formulario.get('quantidadeAndares')?.invalid">
+                                    <mat-error *ngIf="formulario.get('quantidadeAndares')?.hasError('required')">
                                         Por favor, insira a quantidade de andares.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeAndares')?.hasError('min')">
+                                        A quantidade de andares deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeAndares')?.hasError('max')">
+                                        A quantidade de andares deve ser menor que 40.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Quantidade Unidades por Andar -->
+                            <!-- Campo - Quantidade Unidades por Andar -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Quantidade Unidades por Andar</mat-label>
                                     <input formControlName="quantidadeUnidades" matInput
                                         placeholder="Quantidade Unidades" type="number" required>
                                     <mat-icon matSuffix>apartment</mat-icon>
-                                    <mat-error *ngIf="formulario.get('quantidadeUnidades')?.invalid">
+                                    <mat-error *ngIf="formulario.get('quantidadeUnidades')?.hasError('required')">
                                         Por favor, insira a quantidade de unidades.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeUnidades')?.hasError('min')">
+                                        A quantidade de unidades deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('quantidadeUnidades')?.hasError('max')">
+                                        A quantidade de unidades deve ser menor que 10.
                                     </mat-error>
                                 </mat-form-field>
                             </div>

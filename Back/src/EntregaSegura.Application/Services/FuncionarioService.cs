@@ -10,18 +10,15 @@ namespace EntregaSegura.Application.Services;
 public class FuncionarioService : BaseService, IFuncionarioService
 {
     private readonly IFuncionarioRepository _funcionarioRepository;
-    private readonly IUsuarioService _usuarioService;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public FuncionarioService(IFuncionarioRepository funcionarioRepository,
-                              IUsuarioService usuarioService,
                               IEmailService emailService,
                               IMapper mapper,
                               INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _funcionarioRepository = funcionarioRepository;
-        _usuarioService = usuarioService;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -44,25 +41,8 @@ public class FuncionarioService : BaseService, IFuncionarioService
 
         if (!await ValidarFuncionario(funcionario)) return false;
 
-        var usuarioDTO = new UsuarioDTO
-        {
-            UserName = funcionario.Email,
-            Email = funcionario.Email,
-            Senha = "123456"
-        };
-
         using (_funcionarioRepository.IniciarTrasacaoAsync())
         {
-            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO, "FUNCIONARIO");
-
-            if (usuarioRegistradoComSucesso == null)
-            {
-                Notificar("Ocorreu um erro ao adicionar o funcionário.");
-                return false;
-            }
-
-            funcionario.DefinirUsuario(usuarioRegistradoComSucesso.Id);
-
             _funcionarioRepository.Adicionar(funcionario);
 
             var adicionadoComSucesso = await _funcionarioRepository.SalvarAlteracoesAsync();
@@ -75,14 +55,9 @@ public class FuncionarioService : BaseService, IFuncionarioService
             }
 
             await _funcionarioRepository.SalvarTransacaoAsync();
-
-            (string assuntoEmail, string mensagemEmail) = ConstruirEmail(funcionario, usuarioDTO);
-
-            await _emailService.EnviarEmailAsync(funcionarioDTO.Email, assuntoEmail, mensagemEmail);
         }
 
         funcionarioDTO.Id = funcionario.Id;
-        funcionarioDTO.UserId = funcionario.UserId;
 
         return true;
     }
@@ -135,28 +110,9 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return _mapper.Map<IEnumerable<FuncionarioDTO>>(funcionarios);
     }
 
-    public async Task<FuncionarioDTO> ObterFuncionarioPeloUsuarioAsync(int usuarioId)
-    {
-        var funcionario = await _funcionarioRepository.BuscarPorCondicaoAsync(m => m.UserId == usuarioId);
-        return _mapper.Map<FuncionarioDTO>(funcionario.FirstOrDefault());
-    }
-
     public void Dispose()
     {
         _funcionarioRepository?.Dispose();
-    }
-
-    private (string, string) ConstruirEmail(Funcionario funcionario, UsuarioDTO usuarioDTO)
-    {
-        string assuntoEmail = "Bem-vindo ao EntregaSegura!";
-        string mensagemEmail = $"Olá {funcionario.Nome},\n\n" +
-                               $"Sua conta no EntregaSegura foi criada com sucesso! " +
-                               $"Suas credenciais são:\n\n" +
-                               $"Usuário: {usuarioDTO.UserName}\n" +
-                               $"Senha: {usuarioDTO.Senha}\n\n" +
-                               $"Atenciosamente,\n" +
-                               $"Equipe EntregaSegura";
-        return (assuntoEmail, mensagemEmail);
     }
 
     private async Task<bool> ValidarFuncionario(Funcionario funcionario, bool ehAtualizacao = false)

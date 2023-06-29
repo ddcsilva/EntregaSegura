@@ -13,5 +13,4 @@ public interface IMoradorService
 
     Task<IEnumerable<MoradorDTO>> ObterTodosMoradoresComUnidadeECondominioAsync();
     Task<MoradorDTO> ObterMoradorPorIdComUnidadeECondominioAsync(int id);
-    Task<MoradorDTO> ObterMoradorPeloUsuarioAsync(int usuarioId);
 }

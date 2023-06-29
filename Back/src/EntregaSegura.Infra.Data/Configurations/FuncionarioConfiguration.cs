@@ -60,12 +60,6 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .HasColumnType("varchar(100)")
             .HasComment("Foto do morador");
 
-        builder.Property(f => f.UserId)
-            .HasColumnName("FUN_USER_ID")
-            .HasColumnOrder(8)
-            .IsRequired()
-            .HasComment("Chave estrangeira do usuário");
-
         builder.Property(f => f.DataAdmissao)
             .HasColumnName("FUN_DATA_ADMISSAO")
             .HasColumnOrder(9)
@@ -107,12 +101,6 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .WithMany(c => c.Funcionarios)
             .HasForeignKey(f => f.CondominioId)
             .HasConstraintName("FK_FUNCIONARIO_CONDOMINIO")
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder.HasOne(f => f.User)
-            .WithOne()
-            .HasForeignKey<Funcionario>(f => f.UserId)
-            .HasConstraintName("FK_FUNCIONARIOS_USERS")
             .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasMany(f => f.Entregas)

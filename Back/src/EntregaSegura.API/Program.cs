@@ -7,7 +7,7 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddContexts(builder.Configuration);
+builder.Services.AddContext(builder.Configuration);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
@@ -58,8 +58,6 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-
-builder.Services.AddIdentityConfiguration(builder.Configuration);
 
 builder.Services.Configure<ApiBehaviorOptions>(options =>
 {

@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { UnidadesEmMassa } from 'src/app/models/unidades-em-massa.model';
-import { CondominioService } from 'src/app/services/condominio.service';
-import { UnidadeService } from 'src/app/services/unidade.service';
-import { ConfirmacaoDialogComponent } from 'src/app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
-import { ValidadorCampos } from 'src/app/shared/helpers/validador-campos';
-import { InformacoesConfirmacaoDialog } from 'src/app/shared/models/InformacoesConfirmacaoDialog.model';
-import { CepService } from 'src/app/shared/services/cep.service';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+import { Condominio } from '@app/models/condominio.model';
+import { UnidadesEmMassa } from '@app/models/unidades-em-massa.model';
+import { CondominioService } from '@app/services/condominio.service';
+import { UnidadeService } from '@app/services/unidade.service';
+import { ConfirmacaoDialogComponent } from '@app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
+import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
+import { InformacoesConfirmacaoDialog } from '@app/shared/models/InformacoesConfirmacaoDialog.model';
+import { CepService } from '@app/shared/services/cep.service';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 
 @Component({
   selector: 'app-detalhes-condominio',
@@ -58,7 +58,7 @@ export class DetalhesCondominioComponent implements OnInit {
 
   public submeterFormulario(): void {
     this.spinner.show();
-    
+
     if (this.formulario.invalid) {
       this.spinner.hide();
       return;
@@ -197,11 +197,11 @@ export class DetalhesCondominioComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       cnpj: ['', [Validators.required, ValidadorCampos.ValidaCNPJ]],
+      email: ['', [Validators.required, Validators.email]],
       telefone: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', [Validators.required, Validators.email, Validators.minLength(2)]],
-      cep: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(8)]],
+      cep: ['', [Validators.required, Validators.minLength(8)]],
       logradouro: [{ value: '', disabled: true }],
-      numero: ['', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.maxLength(4)]],
+      numero: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
       bairro: [{ value: '', disabled: true }],
       cidade: [{ value: '', disabled: true }],
       estado: [{ value: '', disabled: true }],

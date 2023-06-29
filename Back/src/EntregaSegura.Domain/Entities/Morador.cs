@@ -11,8 +11,7 @@ public sealed class Morador : Pessoa
         string email, 
         string ramal, 
         string foto, 
-        int unidadeId, 
-        int userId) : base(nome, cpf, telefone, email, foto, userId)
+        int unidadeId) : base(nome, cpf, telefone, email, foto)
     {
         Ramal = string.IsNullOrEmpty(ramal) ? null : ramal;
         UnidadeId = unidadeId;
@@ -26,9 +25,4 @@ public sealed class Morador : Pessoa
     public Unidade Unidade { get; private set; }
 
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
-
-    public void DefinirUsuario(int userId)
-    {
-        UserId = userId;
-    }
 }
