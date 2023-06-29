@@ -5,11 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { Unidade } from 'src/app/models/unidade.model';
-import { CondominioService } from 'src/app/services/condominio.service';
-import { UnidadeService } from 'src/app/services/unidade.service';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+import { Condominio } from '@app/models/condominio.model';
+import { Unidade } from '@app/models/unidade.model';
+import { CondominioService } from '@app/services/condominio.service';
+import { UnidadeService } from '@app/services/unidade.service';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 
 @Component({
   selector: 'app-detalhes-unidade',
