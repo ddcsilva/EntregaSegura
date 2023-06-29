@@ -87,7 +87,7 @@ public class UnidadeService : BaseService, IUnidadeService
             {
                 for (int unidade = 1; unidade <= unidadesDTO.QuantidadeUnidadesPorAndar; unidade++)
                 {
-                    var unidadeParaAdicionar = new Unidade(unidade, andar, bloco.ToString(), unidadesDTO.CondominioId);
+                    var unidadeParaAdicionar = new Unidade(unidade, andar, bloco, unidadesDTO.CondominioId);
                     _unidadeRepository.Adicionar(unidadeParaAdicionar);
                 }
             }
@@ -171,7 +171,7 @@ public class UnidadeService : BaseService, IUnidadeService
 
         if (_unidadeRepository.BuscarPorCondicaoAsync(u => u.Numero == unidade.Numero && u.Andar == unidade.Andar && u.Bloco == unidade.Bloco && u.CondominioId == unidade.CondominioId && (!ehAtualizacao || u.Id != unidade.Id)).Result.Any())
         {
-            Notificar("Já existe uma unidade com este número no mesmo andar, bloco e condomínio.");
+            Notificar("Já existe uma unidade com este número no mesmo andar neste bloco e condomínio.");
             return false;
         }
 

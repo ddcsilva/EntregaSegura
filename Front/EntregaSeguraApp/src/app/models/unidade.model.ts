@@ -1,8 +1,8 @@
 export interface Unidade {
     id: number;
-    bloco: string;
+    bloco: number;
     andar: number;
-    numero: string;
+    numero: number;
     descricaoUnidade: string;
     condominioId: number;
     nomeCondominio: string;

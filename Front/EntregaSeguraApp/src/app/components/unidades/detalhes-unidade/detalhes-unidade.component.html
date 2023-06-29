@@ -18,7 +18,7 @@
                         <div class="row">
                             <h2>Informações da Unidade</h2>
 
-                            <!-- Campo Condomínio -->
+                            <!-- Campo - Condomínio -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Condomínio</mat-label>
@@ -28,20 +28,26 @@
                                         </mat-option>
                                     </mat-select>
                                     <mat-icon matSuffix>business</mat-icon>
-                                    <mat-error *ngIf="formulario.get('condominioId')?.invalid">
+                                    <mat-error *ngIf="formulario.get('condominioId')?.hasError('required')">
                                         Por favor, selecione um condomínio.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo Bloco -->
+                            <!-- Campo - Bloco -->
                             <div class="col-md-6">
                                 <mat-form-field appearance="standard">
                                     <mat-label>Bloco</mat-label>
-                                    <input formControlName="bloco" matInput placeholder="Bloco" required>
+                                    <input formControlName="bloco" matInput placeholder="Bloco" type="number" required>
                                     <mat-icon matSuffix>view_quilt</mat-icon>
-                                    <mat-error *ngIf="formulario.get('bloco')?.invalid">
-                                        Por favor, insira um bloco válido.
+                                    <mat-error *ngIf="formulario.get('bloco')?.hasError('required')">
+                                        Por favor, insira um bloco.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('bloco')?.hasError('min')">
+                                        O bloco deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('bloco')?.hasError('max')">
+                                        O bloco deve ser menor que 20.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -52,8 +58,14 @@
                                     <mat-label>Andar</mat-label>
                                     <input formControlName="andar" matInput placeholder="Andar">
                                     <mat-icon matSuffix>stairs</mat-icon>
-                                    <mat-error *ngIf="formulario.get('andar')?.invalid">
-                                        Por favor, insira um andar válido.
+                                    <mat-error *ngIf="formulario.get('andar')?.hasError('required')">
+                                        Por favor, insira um andar.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('andar')?.hasError('min')">
+                                        O andar deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('andar')?.hasError('max')">
+                                        O andar deve ser menor que 40.
                                     </mat-error>
                                 </mat-form-field>
                             </div>
@@ -64,8 +76,14 @@
                                     <mat-label>Número</mat-label>
                                     <input formControlName="numero" matInput placeholder="Número">
                                     <mat-icon matSuffix>filter_1</mat-icon>
-                                    <mat-error *ngIf="formulario.get('numero')?.invalid">
-                                        Por favor, insira um número válido.
+                                    <mat-error *ngIf="formulario.get('numero')?.hasError('required')">
+                                        Por favor, insira um número.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('numero')?.hasError('min')">
+                                        O número deve ser maior que 0.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('numero')?.hasError('max')">
+                                        O número deve ser menor que 10.
                                     </mat-error>
                                 </mat-form-field>
                             </div>

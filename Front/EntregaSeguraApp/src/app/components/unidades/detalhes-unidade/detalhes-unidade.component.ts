@@ -137,7 +137,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
-      bloco: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(5)]],
+      bloco: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
       andar: ['', [Validators.required, Validators.min(1), Validators.max(40)]],
       numero: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
       condominioId: ['', Validators.required]

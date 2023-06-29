@@ -58,7 +58,7 @@ public static class ModelBuilderExtensions
                         CondominioId = 1,
                         Numero = unidade,
                         Andar = andar,
-                        Bloco = bloco.ToString()
+                        Bloco = bloco
                     });
                 }
             }

@@ -41,7 +41,7 @@ public class UnidadeConfiguration : IEntityTypeConfiguration<Unidade>
         builder.Property(u => u.Bloco)
             .HasColumnName("UND_BLOCO")
             .HasColumnOrder(5)
-            .HasColumnType("varchar(10)")
+            .HasColumnType("int")
             .HasComment("Bloco da unidade");
 
         builder.Property(u => u.DataCriacao)

@@ -8,11 +8,11 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { Unidade } from 'src/app/models/unidade.model';
-import { CondominioService } from 'src/app/services/condominio.service';
-import { UnidadeService } from 'src/app/services/unidade.service';
-import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { Condominio } from '@app/models/condominio.model';
+import { Unidade } from '@app/models/unidade.model';
+import { CondominioService } from '@app/services/condominio.service';
+import { UnidadeService } from '@app/services/unidade.service';
+import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
 @Component({
   selector: 'app-unidades',
@@ -22,6 +22,7 @@ import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dial
 export class UnidadesComponent implements OnInit, OnDestroy {
   public unidades: Unidade[] = [];
   public condominios: Condominio[] = [];
+  public condominioId: number | null = null;
   public condominioSelecionado: number = 0;
   public colunas: string[] = ['bloco', 'andar', 'numero', 'nomeCondominio', 'acoes'];
   public dataSource: MatTableDataSource<Unidade> = new MatTableDataSource<Unidade>();
@@ -55,7 +56,12 @@ export class UnidadesComponent implements OnInit, OnDestroy {
   }
 
   public filtrarUnidades(): void {
-    this.dataSource.filter = this.filtroUnidade.trim().toLowerCase();
+    this.atualizarFiltro();
+  }
+
+  public aplicarFiltroPorCondominio(event: MatSelectChange) {
+    this.condominioId = event.value;
+    this.atualizarFiltro();
   }
 
   public editarUnidade(id: number): void {
@@ -79,15 +85,23 @@ export class UnidadesComponent implements OnInit, OnDestroy {
     });
   }
 
-  public aplicarFiltroPorCondominio(event: MatSelectChange) {
-    const condominioId = event.value;
-    if (condominioId === null) {
-      this.dataSource.filter = '';
-    } else {
-      this.dataSource.filterPredicate = (data: Unidade, filter: string) => data.condominioId === Number(filter);
-      this.dataSource.filter = String(condominioId);
-    }
-  }
+  private atualizarFiltro(): void {
+    this.dataSource.filterPredicate = (data: Unidade, filter: string) => {
+      const termosDeBusca = filter.split(';');
+      const filtroPorTexto = termosDeBusca[0].trim().toLowerCase();
+  
+      const resultadoFiltroPorTexto = data.nomeCondominio.toLowerCase().includes(filtroPorTexto)
+        || data.bloco.toString() === filtroPorTexto
+        || data.andar.toString() === filtroPorTexto
+        || data.numero.toString() === filtroPorTexto;
+  
+      const resultadoFiltroPorCondominio = this.condominioId === null || data.condominioId === this.condominioId;
+  
+      return resultadoFiltroPorTexto && resultadoFiltroPorCondominio;
+    };
+  
+    this.dataSource.filter = `${this.filtroUnidade};${this.condominioId}`;
+  }  
 
   private obterUnidades(): void {
     this.unidadeService.obterUnidades().pipe(takeUntil(this.destroy$)).subscribe({

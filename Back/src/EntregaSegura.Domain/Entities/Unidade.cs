@@ -4,7 +4,7 @@ public class Unidade : EntityBase
 {
     private readonly IList<Morador> _moradores;
 
-    public Unidade(int numero, int andar, string bloco, int condominioId)
+    public Unidade(int numero, int andar, int bloco, int condominioId)
     {
         Numero = numero;
         Andar = andar;
@@ -16,7 +16,7 @@ public class Unidade : EntityBase
 
     public int Numero { get; private set; }
     public int Andar { get; private set; }
-    public string Bloco { get; private set; }
+    public int Bloco { get; private set; }
     
     public int CondominioId { get; private set; }
     public Condominio Condominio { get; private set; }
