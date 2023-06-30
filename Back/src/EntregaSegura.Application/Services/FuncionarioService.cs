@@ -10,15 +10,18 @@ namespace EntregaSegura.Application.Services;
 public class FuncionarioService : BaseService, IFuncionarioService
 {
     private readonly IFuncionarioRepository _funcionarioRepository;
+    private readonly IEntregaRepository _entregaRepository;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public FuncionarioService(IFuncionarioRepository funcionarioRepository,
+                              IEntregaRepository entregaRepository,
                               IEmailService emailService,
                               IMapper mapper,
                               INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _funcionarioRepository = funcionarioRepository;
+        _entregaRepository = entregaRepository;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -91,6 +94,12 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return false;
         }
 
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Este funcionário não pode ser removido pois existem registros associados a ele.");
+            return false;
+        }
+
         _funcionarioRepository.Remover(funcionario);
 
         var removidoComSucesso = await _funcionarioRepository.SalvarAlteracoesAsync();
@@ -141,5 +150,12 @@ public class FuncionarioService : BaseService, IFuncionarioService
         }
 
         return true;
+    }
+
+    private async Task<bool> TemAssociacoes(int moradorId)
+    {
+        var entregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.MoradorId == moradorId);
+
+        return entregas.Any();
     }
 }
