@@ -10,7 +10,7 @@ import { CondominioService } from '@app/services/condominio.service';
 import { FuncionarioService } from '@app/services/funcionario.service';
 import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
-import { Cargo } from '@app/models/enums/cargo.enum';
+import { CargoFuncionario } from '@app/models/enums/cargo-funcionario.enum';
 
 @Component({
   selector: 'app-detalhes-funcionario',
@@ -23,7 +23,7 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
   public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
   public condominios: Condominio[] = [];
-  public cargos = Object.values(Cargo);
+  public cargos = Object.values(CargoFuncionario);
 
   private funcionarioId: number = 0;
   private funcionario: Funcionario = {} as Funcionario;
