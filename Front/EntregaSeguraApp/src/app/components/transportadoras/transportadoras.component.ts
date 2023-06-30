@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { Transportadora } from 'src/app/models/transportadora.model';
-import { TransportadoraService } from 'src/app/services/transportadora.service';
-import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { Condominio } from '@app/models/condominio.model';
+import { Transportadora } from '@app/models/transportadora.model';
+import { TransportadoraService } from '@app/services/transportadora.service';
+import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
 @Component({
   selector: 'app-transportadoras',

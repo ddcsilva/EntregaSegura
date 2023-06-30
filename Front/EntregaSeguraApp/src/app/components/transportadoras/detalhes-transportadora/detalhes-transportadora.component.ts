@@ -9,6 +9,7 @@ import { Transportadora } from 'src/app/models/transportadora.model';
 import { TransportadoraService } from 'src/app/services/transportadora.service';
 import { ValidadorCampos } from 'src/app/shared/helpers/validador-campos';
 import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+
 @Component({
   selector: 'app-detalhes-transportadora',
   templateUrl: './detalhes-transportadora.component.html',
@@ -121,8 +122,8 @@ export class DetalhesTransportadoraComponent implements OnInit {
     this.formulario = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       cnpj: ['', [ValidadorCampos.ValidaCNPJ]],
-      telefone: ['', [Validators.minLength(10)]],
-      email: ['', [Validators.email, Validators.minLength(2)]]
+      email: ['', [Validators.email]],
+      telefone: ['', [Validators.minLength(10)]]
     });
   }
 
