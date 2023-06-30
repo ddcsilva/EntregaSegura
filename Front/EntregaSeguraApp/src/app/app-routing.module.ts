@@ -14,6 +14,7 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { SuporteComponent } from './components/suporte/suporte.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 
 const routes: Routes = [
   {
@@ -63,7 +64,7 @@ const routes: Routes = [
       },
       {
         path: 'entregas/:id',
-        component: DetalhesMoradorComponent
+        component: DetalhesEntregaComponent
       },
       {
         path: 'funcionarios',
