@@ -69,6 +69,10 @@ import { FuncionariosComponent } from './components/funcionarios/funcionarios.co
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
 import { registerLocaleData } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
+import { EntregasComponent } from './components/entregas/entregas.component';
+import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SuporteComponent } from './components/suporte/suporte.component';
 
 registerLocaleData(ptBr)
 
@@ -90,7 +94,11 @@ registerLocaleData(ptBr)
     DetalhesMoradorComponent,
     FuncionariosComponent,
     DetalhesFuncionarioComponent,
-    MainComponent
+    MainComponent,
+    EntregasComponent,
+    DetalhesEntregaComponent,
+    DashboardComponent,
+    SuporteComponent
   ],
   imports: [
     // Angular Modules
