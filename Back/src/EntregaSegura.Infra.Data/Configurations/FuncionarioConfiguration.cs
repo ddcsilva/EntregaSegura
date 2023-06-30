@@ -56,20 +56,20 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataAdmissao)
             .HasColumnName("FUN_DATA_ADMISSAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data de admissão do funcionário");
 
         builder.Property(f => f.DataDemissao)
             .HasColumnName("FUN_DATA_DEMISSAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(8)
             .HasColumnType("datetime")
             .HasComment("Data de demissão do funcionário");
 
         builder.Property(f => f.DataCriacao)
             .HasColumnName("FUN_DATA_CRIACAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -78,7 +78,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataAtualizacao)
             .HasColumnName("FUN_DATA_ATUALIZACAO")
-            .HasColumnOrder(12)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -87,7 +87,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.CondominioId)
             .HasColumnName("FUN_CONDOMINIO_ID")
-            .HasColumnOrder(13)
+            .HasColumnOrder(11)
             .IsRequired()
             .HasComment("Chave estrangeira do condomínio");
 

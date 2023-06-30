@@ -57,13 +57,13 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
 
         builder.Property(m => m.UnidadeId)
             .HasColumnName("MOR_UNIDADE_ID")
-            .HasColumnOrder(8)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasComment("Chave estrangeira da unidade do morador");
 
         builder.Property(m => m.DataCriacao)
             .HasColumnName("MOR_DATA_CRIACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -72,7 +72,7 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
 
         builder.Property(m => m.DataAtualizacao)
             .HasColumnName("MOR_DATA_ATUALIZACAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")

@@ -12,7 +12,10 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Transportadora, TransportadoraDTO>().ReverseMap();
 
         CreateMap<EntregaDTO, Entrega>();
-        CreateMap<Entrega, EntregaDTO>();
+        CreateMap<Entrega, EntregaDTO>()
+            .ForMember(dest => dest.NomeTransportadora, opt => opt.MapFrom(src => src.Transportadora.Nome))
+            .ForMember(dest => dest.NomeMorador, opt => opt.MapFrom(src => src.Morador.Nome))
+            .ForMember(dest => dest.NomeFuncionario, opt => opt.MapFrom(src => src.Funcionario.Nome));
 
         CreateMap<FuncionarioDTO, Funcionario>();
         CreateMap<Funcionario, FuncionarioDTO>()

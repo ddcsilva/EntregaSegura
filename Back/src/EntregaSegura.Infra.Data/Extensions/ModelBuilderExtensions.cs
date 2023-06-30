@@ -118,7 +118,7 @@ public static class ModelBuilderExtensions
             DataRecebimento = DateTime.Now,
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
-            Status = StatusEntrega.AguardandoRetirada
+            Status = StatusEntrega.Recebida
         });
     }
 }
