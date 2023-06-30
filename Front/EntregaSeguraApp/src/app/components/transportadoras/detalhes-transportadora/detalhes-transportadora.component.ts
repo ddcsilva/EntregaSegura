@@ -5,10 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import { Transportadora } from 'src/app/models/transportadora.model';
-import { TransportadoraService } from 'src/app/services/transportadora.service';
-import { ValidadorCampos } from 'src/app/shared/helpers/validador-campos';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+import { Transportadora } from '@app/models/transportadora.model';
+import { TransportadoraService } from '@app/services/transportadora.service';
+import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 
 @Component({
   selector: 'app-detalhes-transportadora',

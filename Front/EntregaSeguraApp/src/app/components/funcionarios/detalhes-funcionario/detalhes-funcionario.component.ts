@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { Funcionario } from 'src/app/models/funcionario.model';
-import { CondominioService } from 'src/app/services/condominio.service';
-import { FuncionarioService } from 'src/app/services/funcionario.service';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+import { Condominio } from '@app/models/condominio.model';
+import { Funcionario } from '@app/models/funcionario.model';
+import { CondominioService } from '@app/services/condominio.service';
+import { FuncionarioService } from '@app/services/funcionario.service';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 
 @Component({
   selector: 'app-detalhes-funcionario',

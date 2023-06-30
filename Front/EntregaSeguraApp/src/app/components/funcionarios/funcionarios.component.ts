@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { Funcionario } from 'src/app/models/funcionario.model';
-import { FuncionarioService } from 'src/app/services/funcionario.service';
-import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { Funcionario } from '@app/models/funcionario.model';
+import { FuncionarioService } from '@app/services/funcionario.service';
+import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
 @Component({
   selector: 'app-funcionarios',
