@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import { Morador } from 'src/app/models/morador.model';
-import { MoradorService } from 'src/app/services/morador.service';
-import { ExclusaoDialogComponent } from 'src/app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { Morador } from '@app/models/morador.model';
+import { MoradorService } from '@app/services/morador.service';
+import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
 
 @Component({
   selector: 'app-moradores',

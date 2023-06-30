@@ -51,7 +51,8 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
         builder.Property(m => m.Ramal)
             .HasColumnName("MOR_RAMAL")
             .HasColumnOrder(6)
-            .HasColumnType("varchar(5)")
+            .IsRequired()
+            .HasColumnType("int")
             .HasComment("Ramal do morador");
 
         builder.Property(m => m.Foto)

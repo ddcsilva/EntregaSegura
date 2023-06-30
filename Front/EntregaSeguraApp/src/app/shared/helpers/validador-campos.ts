@@ -70,4 +70,58 @@ export class ValidadorCampos {
 
         return null;
     }
+
+    static ValidaCPF(control: AbstractControl): { [key: string]: boolean } | null {
+        const cpf = control.value;
+        if (cpf) {
+            const val = cpf.replace(/\D/g, '');
+    
+            if (val.length !== 11) {
+                return { 'cpfInvalido': true };
+            }
+    
+            if (!val.match(/^[0-9]+$/)) {
+                return { 'cpfInvalido': true };
+            }
+    
+            let tempCpf = val.substring(0, 9);
+            let soma = 0;
+            const multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+    
+            for (let i = 0; i < 9; i++) {
+                soma += parseInt(tempCpf.charAt(i), 10) * multiplicador1[i];
+            }
+    
+            let resto = (soma % 11);
+            if (resto < 2) {
+                resto = 0;
+            } else {
+                resto = 11 - resto;
+            }
+    
+            let digito = resto.toString();
+            tempCpf = tempCpf + digito;
+            soma = 0;
+    
+            const multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+            for (let i = 0; i < 10; i++) {
+                soma += parseInt(tempCpf.charAt(i), 10) * multiplicador2[i];
+            }
+    
+            resto = (soma % 11);
+            if (resto < 2) {
+                resto = 0;
+            } else {
+                resto = 11 - resto;
+            }
+    
+            digito = digito + resto.toString();
+    
+            if (val.slice(-2) !== digito) {
+                return { 'cpfInvalido': true };
+            }
+        }
+    
+        return null;
+    }    
 }

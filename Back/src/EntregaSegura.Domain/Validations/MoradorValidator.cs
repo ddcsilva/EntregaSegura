@@ -21,9 +21,9 @@ public class MoradorValidator : AbstractValidator<Morador>
            .Must(TelefoneValidation.ValidarTelefone).WithMessage("O campo {PropertyName} fornecido é inválido");
 
         RuleFor(c => c.Ramal)
-            .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
-            .Length(1, 5).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
-            .When(c => !string.IsNullOrWhiteSpace(c.Ramal));
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .GreaterThanOrEqualTo(1).WithMessage("O campo {PropertyName} não pode ser menor que 1")
+            .LessThanOrEqualTo(9999).WithMessage("O campo {PropertyName} não pode ser maior que 9999");
 
         RuleFor(c => c.Foto)
             .Length(1, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")

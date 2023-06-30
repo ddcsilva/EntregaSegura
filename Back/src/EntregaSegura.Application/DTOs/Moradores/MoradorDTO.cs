@@ -24,7 +24,7 @@ public class MoradorDTO
     public string Email { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    public string Ramal { get; set; }
+    public int Ramal { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public int UnidadeId { get; set; }

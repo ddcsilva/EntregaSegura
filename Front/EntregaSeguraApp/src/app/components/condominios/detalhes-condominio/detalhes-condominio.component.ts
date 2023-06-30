@@ -201,7 +201,7 @@ export class DetalhesCondominioComponent implements OnInit {
       telefone: ['', [Validators.required, Validators.minLength(10)]],
       cep: ['', [Validators.required, Validators.minLength(8)]],
       logradouro: [{ value: '', disabled: true }],
-      numero: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
+      numero: ['', [Validators.required, Validators.pattern("^[1-9][0-9]*$")]],
       bairro: [{ value: '', disabled: true }],
       cidade: [{ value: '', disabled: true }],
       estado: [{ value: '', disabled: true }],

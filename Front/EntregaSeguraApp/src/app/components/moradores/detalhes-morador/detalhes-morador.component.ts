@@ -4,13 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { Condominio } from 'src/app/models/condominio.model';
-import { Morador } from 'src/app/models/morador.model';
-import { Unidade } from 'src/app/models/unidade.model';
-import { CondominioService } from 'src/app/services/condominio.service';
-import { MoradorService } from 'src/app/services/morador.service';
-import { UnidadeService } from 'src/app/services/unidade.service';
-import { TratamentoErrosService } from 'src/app/shared/services/tratamento-erros.service';
+import { Condominio } from '@app/models/condominio.model';
+import { Morador } from '@app/models/morador.model';
+import { Unidade } from '@app/models/unidade.model';
+import { CondominioService } from '@app/services/condominio.service';
+import { MoradorService } from '@app/services/morador.service';
+import { UnidadeService } from '@app/services/unidade.service';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
+import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
 
 @Component({
   selector: 'app-detalhes-morador',
@@ -163,11 +164,11 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
     this.formulario = this.formBuilder.group({
       condominioId: ['', Validators.required],
       unidadeId: [{ value: '', disabled: true }, Validators.required],
-      nome: ['', Validators.required],
-      cpf: ['', Validators.required],
-      telefone: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
+      telefone: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.email]],
-      ramal: ['']
+      ramal: ['', [Validators.required, Validators.pattern("^[1-9][0-9]*$")]]
     });
   }
 

@@ -9,17 +9,17 @@ public sealed class Morador : Pessoa
         string cpf, 
         string telefone, 
         string email, 
-        string ramal, 
+        int ramal, 
         string foto, 
         int unidadeId) : base(nome, cpf, telefone, email, foto)
     {
-        Ramal = string.IsNullOrEmpty(ramal) ? null : ramal;
+        Ramal = ramal;
         UnidadeId = unidadeId;
 
         _entregas = new List<Entrega>();
     }
 
-    public string Ramal { get; private set; }
+    public int Ramal { get; private set; }
     
     public int UnidadeId { get; private set; }
     public Unidade Unidade { get; private set; }

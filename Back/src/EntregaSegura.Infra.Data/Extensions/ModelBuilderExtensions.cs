@@ -75,7 +75,7 @@ public static class ModelBuilderExtensions
             Cpf = "12345678901",
             Email = "morador1@teste.com",
             Telefone = "1234567890",
-            Ramal = "123",
+            Ramal = 123,
             Foto = "foto1.jpg"
         });
     }
