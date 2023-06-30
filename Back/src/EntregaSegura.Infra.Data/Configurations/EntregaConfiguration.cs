@@ -57,21 +57,15 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
             .HasColumnType("varchar(200)")
             .HasComment("Descrição da entrega");
 
-        builder.Property(e => e.Observacao)
-            .HasColumnName("ETG_OBSERVACAO")
-            .HasColumnOrder(8)
-            .HasColumnType("varchar(200)")
-            .HasComment("Observação da entrega");
-
         builder.Property(e => e.Status)
             .HasColumnName("ETG_STATUS")
-            .HasColumnOrder(9)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasComment("Status da entrega");
 
         builder.Property(e => e.DataCriacao)
             .HasColumnName("ETG_DATA_CRIACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(9)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -80,7 +74,7 @@ public class EntregaConfiguration : IEntityTypeConfiguration<Entrega>
 
         builder.Property(e => e.DataAtualizacao)
             .HasColumnName("ETG_DATA_ATUALIZACAO")
-            .HasColumnOrder(11)
+            .HasColumnOrder(10)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")

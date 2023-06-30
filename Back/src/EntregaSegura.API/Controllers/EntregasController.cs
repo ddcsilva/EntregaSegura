@@ -18,7 +18,7 @@ public class EntregasController : MainController
     [HttpGet]
     public async Task<ActionResult<IEnumerable<EntregaDTO>>> ObterTodasEntregas()
     {
-        var entregas = await _entregaService.ObterTodasEntregasAsync();
+        var entregas = await _entregaService.ObterTodasEntregasComMoradoresEFuncionariosETransportadorasAsync();
         return Ok(entregas);
     }
 

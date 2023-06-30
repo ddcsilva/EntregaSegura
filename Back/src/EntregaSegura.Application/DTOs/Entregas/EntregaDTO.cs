@@ -12,21 +12,21 @@ public class EntregaDTO
     public string Descricao { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    public DateTime DataEntrega { get; set; }
+    public DateTime DataRecebimento { get; private set; }
 
     public DateTime? DataRetirada { get; set; }
 
-    public int FuncionarioId { get; set; }
-
-    public string NomeFuncionario { get; set; }
-
-    public int UnidadeId { get; set; }
-
-    public string BlocoUnidade { get; set; }
-
-    public string NumeroUnidade { get; set; }
+    public string Status { get; private set; }
 
     public int TransportadoraId { get; set; }
 
     public string NomeTransportadora { get; set; }
+
+    public int MoradorId { get; set; }
+
+    public string NomeMorador { get; set; }
+
+    public int FuncionarioId { get; set; }
+
+    public string NomeFuncionario { get; set; }
 }

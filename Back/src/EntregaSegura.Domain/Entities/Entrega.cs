@@ -4,20 +4,18 @@ namespace EntregaSegura.Domain.Entities;
 
 public sealed class Entrega : EntityBase
 {
-    public Entrega(string descricao, string observacao, int transportadoraId, int moradorId, int funcionarioId)
+    public Entrega(string descricao, int transportadoraId, int moradorId, int funcionarioId)
     {
         Descricao = descricao;
-        Observacao = observacao;
         TransportadoraId = transportadoraId;
         MoradorId = moradorId;
         FuncionarioId = funcionarioId;
         Status = StatusEntrega.Recebida;
     }
 
+    public string Descricao { get; private set; }
     public DateTime DataRecebimento { get; private set; }
     public DateTime? DataRetirada { get; private set; }
-    public string Descricao { get; private set; }
-    public string Observacao { get; private set; }
     public StatusEntrega Status { get; private set; }
 
     public int TransportadoraId { get; private set; }

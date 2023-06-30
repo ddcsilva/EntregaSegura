@@ -12,6 +12,8 @@ public interface IEntregaService : IDisposable
     Task<bool> AtualizarAsync(EntregaDTO entrega);
     Task<bool> RemoverAsync(int id);
 
+    Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEFuncionariosETransportadorasAsync();
+
     Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId);
     Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId);
     Task<IEnumerable<Entrega>> ObterEntregasPorTransportadoraAsync(int transportadoraId);

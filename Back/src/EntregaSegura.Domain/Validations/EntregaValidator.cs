@@ -19,10 +19,6 @@ public class EntregaValidator : AbstractValidator<Entrega>
         RuleFor(e => e.Descricao)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
             .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
-            
-        RuleFor(e => e.Observacao)
-            .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres")
-            .When(c => c.Observacao != null);
 
         RuleFor(e => e.Status)
             .IsInEnum().WithMessage("O campo {PropertyName} precisa ser fornecido");
