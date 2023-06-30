@@ -19,8 +19,8 @@ import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
   styleUrls: ['./detalhes-morador.component.scss']
 })
 export class DetalhesMoradorComponent implements OnInit, OnDestroy {
-  public novoMorador: boolean = false;
   public titulo: string = '';
+  public novoMorador: boolean = false;
   public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
   public condominios: Condominio[] = [];

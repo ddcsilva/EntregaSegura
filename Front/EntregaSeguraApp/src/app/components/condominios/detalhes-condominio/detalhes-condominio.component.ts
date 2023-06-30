@@ -21,8 +21,8 @@ import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.se
   styleUrls: ['./detalhes-condominio.component.scss']
 })
 export class DetalhesCondominioComponent implements OnInit {
-  public novoCondominio: boolean = false;
   public titulo: string = '';
+  public novoCondominio: boolean = false;
   public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
 

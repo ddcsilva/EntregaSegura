@@ -17,11 +17,11 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
   styleUrls: ['./funcionarios.component.scss']
 })
 export class FuncionariosComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Lista de Funcionários';
   public funcionarios: Funcionario[] = [];
   public colunas: string[] = ['nome', 'telefone', 'cargo', 'nomeCondominio', 'acoes'];
   public dataSource: MatTableDataSource<Funcionario> = new MatTableDataSource<Funcionario>();
   public filtroFuncionario: string = '';
-  public titulo: string = 'Lista de Funcionários';
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;

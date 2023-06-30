@@ -18,8 +18,8 @@ import { CargoFuncionario } from '@app/models/enums/cargo-funcionario.enum';
   styleUrls: ['./detalhes-funcionario.component.scss']
 })
 export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
-  public novoFuncionario: boolean = false;
   public titulo: string = '';
+  public novoFuncionario: boolean = false;
   public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
   public condominios: Condominio[] = [];

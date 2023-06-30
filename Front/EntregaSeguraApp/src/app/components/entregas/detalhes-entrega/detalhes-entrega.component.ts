@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./detalhes-entrega.component.scss']
 })
 export class DetalhesEntregaComponent implements OnInit {
-
+  public titulo: string = '';
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -20,6 +20,7 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
   styleUrls: ['./unidades.component.scss']
 })
 export class UnidadesComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Lista de Unidades';
   public unidades: Unidade[] = [];
   public condominios: Condominio[] = [];
   public condominioId: number | null = null;
@@ -27,7 +28,6 @@ export class UnidadesComponent implements OnInit, OnDestroy {
   public colunas: string[] = ['bloco', 'andar', 'numero', 'nomeCondominio', 'acoes'];
   public dataSource: MatTableDataSource<Unidade> = new MatTableDataSource<Unidade>();
   public filtroUnidade: string = '';
-  public titulo: string = 'Lista de Unidades';
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;

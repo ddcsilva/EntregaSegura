@@ -16,8 +16,8 @@ import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.se
   styleUrls: ['./detalhes-transportadora.component.scss']
 })
 export class DetalhesTransportadoraComponent implements OnInit {
-  public novaTransportadora: boolean = false;
   public titulo: string = '';
+  public novaTransportadora: boolean = false;
   public mascaraTelefone: string = '(00) 0000-00009';
   public formulario: FormGroup = new FormGroup({});
 

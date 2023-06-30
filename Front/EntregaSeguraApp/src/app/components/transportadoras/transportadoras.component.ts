@@ -18,11 +18,11 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
   styleUrls: ['./transportadoras.component.scss']
 })
 export class TransportadorasComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Lista de Transportadoras';
   public transportadoras: Transportadora[] = [];
   public colunas: string[] = ['nome', 'telefone', 'cnpj', 'email', 'acoes'];
   public dataSource: MatTableDataSource<Transportadora> = new MatTableDataSource<Transportadora>();
   public filtroTransportadora: string = '';
-  public titulo: string = 'Lista de Transportadoras';
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;

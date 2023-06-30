@@ -17,11 +17,11 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
   styleUrls: ['./moradores.component.scss']
 })
 export class MoradoresComponent implements OnInit, OnDestroy {
+  public titulo: string = 'Lista de Moradores';
   public moradores: Morador[] = [];
   public colunas: string[] = ['nome', 'telefone', 'ramal', 'nomeCondominio', 'descricaoUnidade', 'acoes'];
   public dataSource: MatTableDataSource<Morador> = new MatTableDataSource<Morador>();
   public filtroMorador: string = '';
-  public titulo: string = 'Lista de Moradores';
   private destroy$ = new Subject<void>();
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
