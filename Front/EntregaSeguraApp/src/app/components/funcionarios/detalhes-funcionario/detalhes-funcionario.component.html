@@ -104,9 +104,9 @@
                                 <mat-form-field appearance="standard">
                                     <mat-label>Cargo</mat-label>
                                     <mat-select formControlName="cargo" required>
-                                        <mat-option value="Sindico">Sindico</mat-option>
-                                        <mat-option value="Porteiro">Porteiro</mat-option>
-                                        <mat-option value="Zelador">Zelador</mat-option>
+                                        <mat-option *ngFor="let cargo of cargos" [value]="cargo">
+                                            {{cargo}}
+                                        </mat-option>
                                     </mat-select>
                                     <mat-error *ngIf="formulario.get('cargo')?.invalid">
                                         Por favor, insira um cargo válido.
