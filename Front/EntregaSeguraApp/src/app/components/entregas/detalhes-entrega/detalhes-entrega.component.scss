@@ -1,0 +1,38 @@
+.mat-form-field {
+    width: 100%;
+}
+
+h2 {
+    padding-left: 0.5rem;
+    margin-bottom: 0;
+}
+
+.row,
+.form-row {
+    align-items: center;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group button {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::ng-deep .mat-select-arrow {
+    display: none;
+}
+
+::ng-deep .mat-select-arrow-wrapper::before {
+    display: none;
+}

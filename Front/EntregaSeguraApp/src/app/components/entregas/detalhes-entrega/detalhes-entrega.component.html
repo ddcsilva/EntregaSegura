@@ -1,1 +1,129 @@
-<p>detalhes-entrega works!</p>
+<app-titulo [icone]="'people'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <a routerLink="/entregas" color="primary" mat-raised-button>
+            <mat-icon>chevron_left</mat-icon>
+            Voltar
+        </a>
+    </div>
+</div>
+
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <mat-card>
+                <mat-card-content>
+                    <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()" class="form-content lg-form">
+                        <div class="row">
+                            <h2>Informações da Entrega</h2>
+
+                            <!-- Campo - Transportadora -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Transportadora</mat-label>
+                                    <mat-select formControlName="transportadoraId" required>
+                                        <mat-option *ngFor="let transportadora of transportadoras"
+                                            [value]="transportadora.id">
+                                            {{transportadora.nome}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix>local_shipping</mat-icon>
+                                    <mat-error *ngIf="formulario.get('transportadoraId')?.hasError('required')">
+                                        Por favor, selecione uma transportadora.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo - Morador -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Morador</mat-label>
+                                    <mat-select formControlName="moradorId" required>
+                                        <mat-option *ngFor="let morador of moradores" [value]="morador.id">
+                                            {{morador.nome}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-icon matSuffix>person</mat-icon>
+                                    <mat-error *ngIf="formulario.get('moradorId')?.hasError('required')">
+                                        Por favor, selecione um morador.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo - Descrição -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Descrição</mat-label>
+                                    <input formControlName="descricao" matInput placeholder="Descrição" required>
+                                    <mat-icon matSuffix>notes</mat-icon>
+                                    <mat-error *ngIf="formulario.get('descricao')?.hasError('required')">
+                                        Por favor, insira uma descrição.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('descricao')?.hasError('minlength')">
+                                        O tamanho descrição não deve ser menor que 2 caracteres.
+                                    </mat-error>
+                                    <mat-error *ngIf="formulario.get('nome')?.hasError('maxlength')">
+                                        O tamanho descrição não deve ser maior que 100 caracteres.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo - Status -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Status</mat-label>
+                                    <mat-icon matSuffix>done</mat-icon>
+                                    <mat-select formControlName="status" required>
+                                        <mat-option *ngFor="let status of todosStatus" [value]="status">
+                                            {{status}}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="formulario.get('status')?.invalid">
+                                        Por favor, selecione um status.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo - Data de Recebimento -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Data de Recebimento</mat-label>
+                                    <input [matDatepicker]="pickerDataRecebimento" formControlName="dataRecebimento"
+                                        matInput placeholder="Data de Recebimento" [readonly]="novaEntrega">
+                                    <mat-datepicker-toggle matSuffix
+                                        [for]="pickerDataRecebimento"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerDataRecebimento></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <!-- Campo - Data de Retirada -->
+                            <div class="col-md-6">
+                                <mat-form-field appearance="standard">
+                                    <mat-label>Data de Retirada</mat-label>
+                                    <input [matDatepicker]="pickerDataRetirada" formControlName="dataRetirada" matInput
+                                        placeholder="Data de Retirada">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerDataRetirada"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerDataRetirada></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button mat-button color="accent" type="button"
+                                            (click)="reiniciarFormulario($event)" style="width: 100%">Limpar</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button mat-raised-button color="primary" type="submit"
+                                            style="width: 100%">Salvar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+</div>

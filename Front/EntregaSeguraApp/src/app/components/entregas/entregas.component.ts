@@ -72,6 +72,14 @@ export class EntregasComponent implements OnInit, OnDestroy {
     });
   }
 
+  public confirmarRetirada(id: number) {
+
+  }
+
+  public notificarEntrega(id: number) {
+
+  }
+
   private obterEntregas(): void {
     this.entregaService.obterEntregas().pipe(takeUntil(this.destroy$)).subscribe({
       next: (response) => {
