@@ -10,11 +10,10 @@ public sealed class Funcionario : Pessoa
         string nome, 
         string cpf, 
         string telefone, 
-        string email, 
-        string foto, 
+        string email,
         CargoFuncionario cargo, 
         DateTime dataAdmissao, 
-        int condominioId) : base(nome, cpf, telefone, email, foto)
+        int condominioId) : base(nome, cpf, telefone, email)
     {
         Cargo = cargo;
         DataAdmissao = dataAdmissao;

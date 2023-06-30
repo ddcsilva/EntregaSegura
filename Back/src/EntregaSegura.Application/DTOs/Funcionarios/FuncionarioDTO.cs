@@ -12,26 +12,24 @@ public class FuncionarioDTO
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(11, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 11)]
-    public string CPF { get; set; }
+    public string Cpf { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(11, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 11)]
+    [RegularExpression("^[0-9]*$", ErrorMessage = "O Telefone deve conter apenas números.")]
+    [StringLength(11, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 10)]
     public string Telefone { get; set; }
 
     [Required(ErrorMessage = "O campo {0} é obrigatório.")]
-    [StringLength(100, ErrorMessage = "O campo {0} deve ter entre {2} e {1} caracteres.", MinimumLength = 2)]
+    [EmailAddress(ErrorMessage = "O campo {0} é inválido.")]
     public string Email { get; set; }
 
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public string Cargo { get; set; }
 
+    [Required(ErrorMessage = "O campo {0} é obrigatório.")]
     public DateTime DataAdmissao { get; set; }
 
     public DateTime? DataDemissao { get; set; }
-
-    public string FotoUpload { get; set; }
-
-    public string Foto { get; set; }
 
     public int CondominioId { get; set; }
 

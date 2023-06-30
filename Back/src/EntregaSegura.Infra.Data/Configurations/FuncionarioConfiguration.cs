@@ -54,12 +54,6 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .IsRequired()
             .HasComment("Cargo do funcionário");
 
-        builder.Property(m => m.Foto)
-            .HasColumnName("MOR_FOTO")
-            .HasColumnOrder(7)
-            .HasColumnType("varchar(100)")
-            .HasComment("Foto do morador");
-
         builder.Property(f => f.DataAdmissao)
             .HasColumnName("FUN_DATA_ADMISSAO")
             .HasColumnOrder(9)

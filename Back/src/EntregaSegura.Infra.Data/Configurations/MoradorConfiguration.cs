@@ -55,12 +55,6 @@ public class MoradorConfiguration : IEntityTypeConfiguration<Morador>
             .HasColumnType("int")
             .HasComment("Ramal do morador");
 
-        builder.Property(m => m.Foto)
-            .HasColumnName("MOR_FOTO")
-            .HasColumnOrder(7)
-            .HasColumnType("varchar(100)")
-            .HasComment("Foto do morador");
-
         builder.Property(m => m.UnidadeId)
             .HasColumnName("MOR_UNIDADE_ID")
             .HasColumnOrder(8)

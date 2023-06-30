@@ -20,19 +20,15 @@ public class MoradorValidator : AbstractValidator<Morador>
            .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
            .Must(TelefoneValidation.ValidarTelefone).WithMessage("O campo {PropertyName} fornecido é inválido");
 
-        RuleFor(c => c.Ramal)
-            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-            .GreaterThanOrEqualTo(1).WithMessage("O campo {PropertyName} não pode ser menor que 1")
-            .LessThanOrEqualTo(9999).WithMessage("O campo {PropertyName} não pode ser maior que 9999");
-
-        RuleFor(c => c.Foto)
-            .Length(1, 100).WithMessage("O campo {PropertyName} deve ter entre {MinLength} e {MaxLength} caracteres")
-            .When(c => !string.IsNullOrWhiteSpace(c.Foto));
-
         RuleFor(m => m.Email)
             .NotEmpty().WithMessage("O campo {PropertyName} deve ser fornecido")
             .EmailAddress().WithMessage("O campo {PropertyName} fornecido é inválido")
             .When(c => !string.IsNullOrWhiteSpace(c.Email));
+
+        RuleFor(c => c.Ramal)
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            .GreaterThanOrEqualTo(1).WithMessage("O campo {PropertyName} não pode ser menor que 1")
+            .LessThanOrEqualTo(9999).WithMessage("O campo {PropertyName} não pode ser maior que 9999");
 
         RuleFor(m => m.UnidadeId)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");

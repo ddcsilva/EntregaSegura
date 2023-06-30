@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -9,6 +9,7 @@ import { Funcionario } from '@app/models/funcionario.model';
 import { CondominioService } from '@app/services/condominio.service';
 import { FuncionarioService } from '@app/services/funcionario.service';
 import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
+import { ValidadorCampos } from '@app/shared/helpers/validador-campos';
 
 @Component({
   selector: 'app-detalhes-funcionario',
@@ -69,7 +70,8 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
     let operacao: Observable<Funcionario>;
 
     if (this.novoFuncionario) {
-      operacao = this.criarFuncionario(funcionario as Funcionario);
+      const { dataDemissao, ...funcionarioSemDataDemissao } = funcionario;
+      operacao = this.criarFuncionario(funcionarioSemDataDemissao as Funcionario);
     } else {
       funcionario.id = this.funcionarioId;
       operacao = this.atualizarFuncionario(funcionario as Funcionario);
@@ -90,6 +92,10 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
     this.formulario.reset();
     this.formulario.markAsPristine();
     this.formulario.markAsUntouched();
+  }
+
+  public limparData(control: FormControl) {
+    control.setValue(null);
   }
 
   private definirOperacao(): void {
@@ -140,9 +146,9 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
       condominioId: ['', Validators.required],
-      nome: ['', Validators.required],
-      cpf: ['', Validators.required],
-      telefone: ['', Validators.required],
+      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
+      telefone: ['', [Validators.required, Validators.minLength(10)]],
       email: ['', [Validators.required, Validators.email]],
       cargo: ['', Validators.required],
       dataAdmissao: ['', Validators.required],

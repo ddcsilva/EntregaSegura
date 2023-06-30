@@ -66,7 +66,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
     {
         var funcionario = _mapper.Map<Funcionario>(funcionarioDTO);
 
-        if (!await ValidarFuncionario(funcionario)) return false;
+        if (!await ValidarFuncionario(funcionario, ehAtualizacao: true)) return false;
 
         _funcionarioRepository.Atualizar(funcionario);
 

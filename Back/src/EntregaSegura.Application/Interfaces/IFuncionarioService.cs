@@ -1,4 +1,5 @@
 using EntregaSegura.Application.DTOs;
+using EntregaSegura.Domain.Entities.Enums;
 
 namespace EntregaSegura.Application.Interfaces;
 

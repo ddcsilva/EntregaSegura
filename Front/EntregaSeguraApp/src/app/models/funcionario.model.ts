@@ -6,7 +6,7 @@ export interface Funcionario {
     email: string;
     cargo: string;
     dataAdmissao: Date;
-    dataDemissao: Date;
+    dataDemissao?: Date;
     userId: number;
     nomeCondominio: string;
 }

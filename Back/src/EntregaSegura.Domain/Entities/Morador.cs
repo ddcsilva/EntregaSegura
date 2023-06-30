@@ -9,9 +9,8 @@ public sealed class Morador : Pessoa
         string cpf, 
         string telefone, 
         string email, 
-        int ramal, 
-        string foto, 
-        int unidadeId) : base(nome, cpf, telefone, email, foto)
+        int ramal,
+        int unidadeId) : base(nome, cpf, telefone, email)
     {
         Ramal = ramal;
         UnidadeId = unidadeId;
