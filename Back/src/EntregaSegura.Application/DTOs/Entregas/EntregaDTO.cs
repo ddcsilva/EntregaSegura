@@ -29,4 +29,6 @@ public class EntregaDTO
     public int FuncionarioId { get; set; }
 
     public string NomeFuncionario { get; set; }
+
+    public string DescricaoUnidade { get; set; }
 }

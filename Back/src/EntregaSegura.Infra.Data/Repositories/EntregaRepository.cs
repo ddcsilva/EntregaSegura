@@ -11,10 +11,11 @@ public class EntregaRepository : RepositoryBase<Entrega>, IEntregaRepository
     {
     }
 
-    public async Task<IEnumerable<Entrega>> ObterTodasEntregasComMoradoresEFuncionariosETransportadorasAsync(bool rastrearAlteracoes = false)
+    public async Task<IEnumerable<Entrega>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(bool rastrearAlteracoes = false)
     {
         IQueryable<Entrega> query = _context.Entregas
             .Include(e => e.Morador)
+                .ThenInclude(m => m.Unidade)
             .Include(e => e.Funcionario)
             .Include(e => e.Transportadora);
 

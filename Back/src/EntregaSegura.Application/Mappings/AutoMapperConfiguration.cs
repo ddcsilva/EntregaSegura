@@ -15,7 +15,8 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Entrega, EntregaDTO>()
             .ForMember(dest => dest.NomeTransportadora, opt => opt.MapFrom(src => src.Transportadora.Nome))
             .ForMember(dest => dest.NomeMorador, opt => opt.MapFrom(src => src.Morador.Nome))
-            .ForMember(dest => dest.NomeFuncionario, opt => opt.MapFrom(src => src.Funcionario.Nome));
+            .ForMember(dest => dest.NomeFuncionario, opt => opt.MapFrom(src => src.Funcionario.Nome))
+            .ForMember(dest => dest.DescricaoUnidade, opt => opt.MapFrom(src => $"Unidade {src.Morador.Unidade.Numero}, Bloco {src.Morador.Unidade.Bloco}, {src.Morador.Unidade.Andar}º andar"));
 
         CreateMap<FuncionarioDTO, Funcionario>();
         CreateMap<Funcionario, FuncionarioDTO>()

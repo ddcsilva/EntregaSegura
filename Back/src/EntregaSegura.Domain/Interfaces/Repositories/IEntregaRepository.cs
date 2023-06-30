@@ -4,5 +4,5 @@ namespace EntregaSegura.Domain.Interfaces;
 
 public interface IEntregaRepository : IRepositoryBase<Entrega>
 {
-    Task<IEnumerable<Entrega>> ObterTodasEntregasComMoradoresEFuncionariosETransportadorasAsync(bool rastrearAlteracoes = false);
+    Task<IEnumerable<Entrega>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(bool rastrearAlteracoes = false);
 }
