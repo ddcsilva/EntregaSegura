@@ -10,32 +10,109 @@ namespace EntregaSegura.Application.Services;
 public class EntregaService : BaseService, IEntregaService
 {
     private readonly IEntregaRepository _entregaRepository;
+    private readonly IFuncionarioRepository _funcionarioRepository;
+    private readonly IMoradorRepository _moradorRepository;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public EntregaService(IEntregaRepository entregaRepository,
+                          IFuncionarioRepository funcionarioRepository,
+                          IMoradorRepository moradorRepository,
                           IEmailService emailService,
                           IMapper mapper,
                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _entregaRepository = entregaRepository;
+        _funcionarioRepository = funcionarioRepository;
+        _moradorRepository = moradorRepository;
         _emailService = emailService;
         _mapper = mapper;
     }
 
-    public Task<Entrega> Adicionar(Entrega entrega)
+    public async Task<IEnumerable<EntregaDTO>> ObterTodasEntregasAsync()
     {
-        throw new NotImplementedException();
+        var entregas = await _entregaRepository.BuscarTodosAsync();
+        return _mapper.Map<IEnumerable<EntregaDTO>>(entregas);
     }
 
-    public Task<Entrega> Atualizar(Entrega entrega)
+    public async Task<EntregaDTO> ObterEntregaPorIdAsync(int id, bool rastrearAlteracoes = false)
     {
-        throw new NotImplementedException();
+        var entrega = await _entregaRepository.BuscarPorIdAsync(id, rastrearAlteracoes);
+        return _mapper.Map<EntregaDTO>(entrega);
+    }
+
+    public async Task<bool> AdicionarAsync(EntregaDTO entregaDTO)
+    {
+        var entrega = _mapper.Map<Entrega>(entregaDTO);
+        
+        if (!ValidarEntrega(entrega)) return false;
+
+        _entregaRepository.Adicionar(entrega);
+
+        var adicionadoComSucesso = await _entregaRepository.SalvarAlteracoesAsync();
+
+        if (!adicionadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao adicionar a entrega.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> AtualizarAsync(EntregaDTO entregaDTO)
+    {
+        var entrega = _mapper.Map<Entrega>(entregaDTO);
+
+        if (!ValidarEntrega(entrega, ehAtualizacao: true)) return false;
+
+        _entregaRepository.Atualizar(entrega);
+
+        var atualizadoComSucesso = await _entregaRepository.SalvarAlteracoesAsync();
+
+        if (!atualizadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao atualizar a entrega.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> RemoverAsync(int id)
+    {
+        var entrega = await _entregaRepository.BuscarPorIdAsync(id);
+
+        if (entrega == null)
+        {
+            Notificar("Não foi possível encontrar a entrega informada.");
+            return false;
+        }
+
+        if (await TemAssociacoes(id))
+        {
+            Notificar("Este condomínio não pode ser removido pois existem registros associados a ele.");
+            return false;
+        }
+
+        _entregaRepository.Remover(entrega);
+
+        var removidoComSucesso = await _entregaRepository.SalvarAlteracoesAsync();
+
+        if (!removidoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao remover a entrega.");
+            return false;
+        }
+
+        return true;
     }
 
     public void Dispose()
     {
-        throw new NotImplementedException();
+        _entregaRepository?.Dispose();
+        _funcionarioRepository?.Dispose();
+        _moradorRepository?.Dispose();
     }
 
     public Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId)
@@ -68,18 +145,18 @@ public class EntregaService : BaseService, IEntregaService
         throw new NotImplementedException();
     }
 
-    public Task<Entrega> ObterPorIdAsync(int id)
+    private bool ValidarEntrega(Entrega entrega, bool ehAtualizacao = false)
     {
-        throw new NotImplementedException();
+        if (!ExecutarValidacao(new EntregaValidator(), entrega)) return false;
+
+        return true;
     }
 
-    public Task<IEnumerable<Entrega>> ObterTodosAsync()
+    private async Task<bool> TemAssociacoes(int condominioId)
     {
-        throw new NotImplementedException();
-    }
+        var temMoradores = await _moradorRepository.BuscarPorCondicaoAsync(m => m.Id == condominioId);
+        var temFuncionarios = await _funcionarioRepository.BuscarPorCondicaoAsync(f => f.Id == condominioId);
 
-    public Task<bool> Remover(int id)
-    {
-        throw new NotImplementedException();
+        return temMoradores.Any() || temFuncionarios.Any();
     }
 }
