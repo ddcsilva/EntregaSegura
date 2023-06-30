@@ -177,7 +177,7 @@ export class DetalhesCondominioComponent implements OnInit {
     if (!this.novoCondominio) {
       this.spinner.show();
 
-      this.condominioService.ObterCondominioPorId(this.condominioId).subscribe({
+      this.condominioService.obterCondominioPorId(this.condominioId).subscribe({
         next: (condominio: Condominio) => {
           this.condominio = { ...condominio };
           this.formulario.patchValue(this.condominio);
