@@ -1,10 +1,49 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Entrega } from '@app/models/entrega.model';
+import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
+import { environment } from '@environments/environment';
+import { Observable, catchError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntregaService {
+  private urlBaseApi = environment.urlBaseApi;
 
-constructor() { }
+  constructor(
+    private httpClient: HttpClient,
+    private tratamentoErrosService: TratamentoErrosService
+  ) { }
 
+  public obterEntregas(): Observable<Entrega[]> {
+    const url = `${this.urlBaseApi}/entregas`;
+    return this.fazerRequisicao(() => this.httpClient.get<Entrega[]>(url));
+  }
+
+  public obterEntregaPorId(id: number): Observable<Entrega> {
+    const url = `${this.urlBaseApi}/entregas/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.get<Entrega>(url));
+  }
+
+  public criar(entrega: Entrega): Observable<Entrega> {
+    const url = `${this.urlBaseApi}/entregas`;
+    return this.fazerRequisicao(() => this.httpClient.post<Entrega>(url, entrega));
+  }
+
+  public atualizar(id: number, entrega: Entrega): Observable<Entrega> {
+    const url = `${this.urlBaseApi}/entregas/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.put<Entrega>(url, entrega));
+  }
+
+  public excluir(id: number): Observable<void> {
+    const url = `${this.urlBaseApi}/entregas/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.delete<void>(url));
+  }
+
+  private fazerRequisicao(operacaoHttp: Function): Observable<any> {
+    return operacaoHttp().pipe(
+      catchError(this.tratamentoErrosService.tratarErro.bind(this.tratamentoErrosService))
+    );
+  }
 }

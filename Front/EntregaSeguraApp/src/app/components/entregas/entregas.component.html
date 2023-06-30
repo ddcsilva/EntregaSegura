@@ -1,1 +1,60 @@
 <app-titulo [icone]="'inventory'" [titulo]="titulo"></app-titulo>
+
+<div class="row end-xs mt-1">
+    <div class="col-xs-12">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar"
+               [(ngModel)]="filtroEntrega" (keyup)="filtrarEntregas()">
+        <a routerLink="/entregas/novo" mat-raised-button color="primary" class="ml-1">
+            <span>Nova Entrega</span>
+        </a>
+    </div>
+</div>
+
+<div class="mt-1 mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+
+        <!-- Coluna - Data de Recebimento -->
+        <ng-container matColumnDef="dataRecebimento">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Data de Recebimento </th>
+            <td mat-cell *matCellDef="let entrega"> {{entrega.dataRecebimento | date: 'dd/MM/yyyy'}} </td>
+        </ng-container>
+
+        <!-- Coluna - Morador -->
+        <ng-container matColumnDef="nomeMorador">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Morador </th>
+            <td mat-cell *matCellDef="let entrega"> {{ entrega.nomeMorador }} </td>
+        </ng-container>
+
+        <!-- Coluna - Unidade -->
+        <ng-container matColumnDef="descricaoUnidade">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Unidade </th>
+            <td mat-cell *matCellDef="let entrega"> {{entrega.descricaoUnidade}} </td>
+        </ng-container>
+
+        <!-- Coluna - Status -->
+        <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let entrega"> {{entrega.status}} </td>
+        </ng-container>
+
+        <!-- Coluna - Ações -->
+        <ng-container matColumnDef="acoes">
+            <th mat-header-cell *matHeaderCellDef>&nbsp;</th>
+            <td mat-cell *matCellDef="let entrega">
+                <div class="acoes-container">
+                    <button mat-icon-button color="primary" (click)="editarEntrega(entrega.id)">
+                        <mat-icon>edit</mat-icon>
+                    </button>
+                    <button mat-icon-button color="warn" (click)="excluirEntrega(entrega.id)">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </div>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="colunas"></tr>
+        <tr mat-row *matRowDef="let row; columns: colunas;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

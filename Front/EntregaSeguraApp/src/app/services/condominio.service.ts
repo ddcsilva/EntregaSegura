@@ -21,7 +21,7 @@ export class CondominioService {
     return this.fazerRequisicao(() => this.httpClient.get<Condominio[]>(url));
   }
 
-  public ObterCondominioPorId(id: number): Observable<Condominio> {
+  public obterCondominioPorId(id: number): Observable<Condominio> {
     const url = `${this.urlBaseApi}/condominios/${id}`;
     return this.fazerRequisicao(() => this.httpClient.get<Condominio>(url));
   }
