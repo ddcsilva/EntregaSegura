@@ -11,6 +11,9 @@ import { DetalhesMoradorComponent } from './components/moradores/detalhes-morado
 import { FuncionariosComponent } from './components/funcionarios/funcionarios.component';
 import { DetalhesFuncionarioComponent } from './components/funcionarios/detalhes-funcionario/detalhes-funcionario.component';
 import { MainComponent } from './components/main/main.component';
+import { EntregasComponent } from './components/entregas/entregas.component';
+import { SuporteComponent } from './components/suporte/suporte.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
@@ -28,7 +31,7 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: CondominiosComponent
+        component: DashboardComponent
       },
       {
         path: 'condominios',
@@ -55,6 +58,14 @@ const routes: Routes = [
         component: DetalhesMoradorComponent
       },
       {
+        path: 'entregas',
+        component: EntregasComponent
+      },
+      {
+        path: 'entregas/:id',
+        component: DetalhesMoradorComponent
+      },
+      {
         path: 'funcionarios',
         component: FuncionariosComponent
       },
@@ -69,6 +80,10 @@ const routes: Routes = [
       {
         path: 'transportadoras/:id',
         component: DetalhesTransportadoraComponent
+      },
+      {
+        path: 'suporte',
+        component: SuporteComponent
       }
     ]
   },
