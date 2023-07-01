@@ -68,6 +68,9 @@ export class DetalhesEntregaComponent implements OnInit {
     }
 
     const entrega: Partial<Entrega> = this.formulario.getRawValue();
+    // TODO: Remover essa linha quando implementar o login
+    entrega.funcionarioId = 1;
+
     let operacao: Observable<Entrega>;
 
     if (this.novaEntrega) {
@@ -79,7 +82,7 @@ export class DetalhesEntregaComponent implements OnInit {
 
     operacao.subscribe({
       next: () => {
-        this.toastr.success(`Entrega ${this.entregaId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso');
+        this.toastr.success(`Entrega ${this.entregaId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
         this.router.navigate(['/entregas']);
       },
       error: (error: any) => this.tratarErros(error),
@@ -120,7 +123,7 @@ export class DetalhesEntregaComponent implements OnInit {
         },
         error: (error: any) => {
           this.spinner.hide();
-          this.toastr.error(error.message, 'Erro!');
+          this.toastr.error(error.message, 'Houve um erro!');
           console.error(error);
         },
         complete: () => this.spinner.hide()
@@ -156,7 +159,7 @@ export class DetalhesEntregaComponent implements OnInit {
       moradorId: ['', Validators.required],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
       status: ['', Validators.required],
-      dataRecebimento: [{value: this.novaEntrega ? new Date() : '', disabled: this.novaEntrega}], 
+      dataRecebimento: [{ value: this.novaEntrega ? new Date() : '', disabled: this.novaEntrega }],
       dataRetirada: [''],
     });
   }
@@ -176,7 +179,7 @@ export class DetalhesEntregaComponent implements OnInit {
         if (mensagemErro.message && typeof mensagemErro.message === 'string') {
           const mensagensErro = mensagemErro.message.split(',');
           for (const mensagem of mensagensErro) {
-            this.toastr.error(mensagem.trim(), 'Erro!');
+            this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
       }

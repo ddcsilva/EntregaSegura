@@ -41,6 +41,11 @@ export class EntregaService {
     return this.fazerRequisicao(() => this.httpClient.delete<void>(url));
   }
 
+  public confirmarRetirada(id: number): Observable<void> {
+    const url = `${this.urlBaseApi}/entregas/confirmar-retirada/${id}`;
+    return this.fazerRequisicao(() => this.httpClient.put<void>(url, null));
+  }
+
   private fazerRequisicao(operacaoHttp: Function): Observable<any> {
     return operacaoHttp().pipe(
       catchError(this.tratamentoErrosService.tratarErro.bind(this.tratamentoErrosService))

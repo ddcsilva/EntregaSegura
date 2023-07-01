@@ -6,7 +6,9 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Entrega } from '@app/models/entrega.model';
 import { EntregaService } from '@app/services/entrega.service';
+import { ConfirmacaoDialogComponent } from '@app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
+import { InformacoesConfirmacaoDialog } from '@app/shared/models/InformacoesConfirmacaoDialog.model';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
@@ -73,11 +75,60 @@ export class EntregasComponent implements OnInit, OnDestroy {
   }
 
   public confirmarRetirada(id: number) {
+    let entrega = this.entregas.find(e => e.id === id);
 
+    if (entrega) {
+      const dialogConfig = {
+        data: {
+          titulo: 'Confirmação de Retirada de Entrega',
+          mensagem: `Tem certeza de que deseja confirmar a retirada da entrega pelo morador ${entrega.nomeMorador}?`,
+          informacaoAdicional: `A entrega está endereçada para a unidade ${entrega.descricaoUnidade}. Ao confirmar, o status da entrega será alterado para "Retirada" e não poderá ser revertido.`,
+          textoBotaoCancelar: 'Cancelar',
+          textoBotaoConfirmar: 'Confirmar',
+        } as InformacoesConfirmacaoDialog
+      }
+
+      const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.entregaService.confirmarRetirada(id).subscribe({
+            next: () => {
+              this.toastr.success('Retirada da entrega pelo morador confirmada com sucesso!', 'Sucesso!');
+              this.obterEntregas();
+            },
+            error: (error: any) => {
+              this.exibirErros(error);
+            }
+          });
+        }
+      });
+    }
   }
 
   public notificarEntrega(id: number) {
+    let entrega = this.entregas.find(e => e.id === id);
 
+    if (entrega) {
+      const dialogConfig = {
+        data: {
+          titulo: 'Confirmação de Envio de Notificação',
+          mensagem: `Tem certeza de que deseja enviar uma notificação de entrega para o morador ${entrega.nomeMorador}?`,
+          informacaoAdicional: `Será enviada uma notificação para o e-mail ${entrega.emailMorador} para informar que a entrega está disponível para retirada.`,
+          textoBotaoCancelar: 'Cancelar',
+          textoBotaoConfirmar: 'Confirmar',
+        } as InformacoesConfirmacaoDialog
+      }
+
+      const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          // TODO: Implementar ação de confirmação de retirada
+          this.toastr.success('Notificação enviada para o morador com sucesso!', 'Sucesso!');
+        }
+      });
+    }
   }
 
   private obterEntregas(): void {
@@ -99,11 +150,11 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
-      this.toastr.error(erro, 'Erro!');
+      this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
+      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir!', 'Houve um erro!');
     }
   }
 }

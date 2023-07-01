@@ -8,6 +8,7 @@ export interface Entrega {
     nomeTransportadora: string;
     moradorId: number;
     nomeMorador: string;
+    emailMorador: string;
     funcionarioId: number;
     nomeFuncionario: string;
     descricaoUnidade: string;

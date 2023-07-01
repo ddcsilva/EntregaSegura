@@ -102,7 +102,7 @@ export class DetalhesCondominioComponent implements OnInit {
 
               this.unidadeService.adicionarEmMassa(unidadesEmMassaDTO).subscribe({
                 next: () => {
-                  this.toastr.success('Unidades criadas com sucesso!', 'Sucesso');
+                  this.toastr.success('Unidades criadas com sucesso!', 'Operação Realizada com Sucesso!');
                 },
                 error: (error: any) => this.tratarErros(error)
               });
@@ -110,7 +110,7 @@ export class DetalhesCondominioComponent implements OnInit {
           });
         }
 
-        this.toastr.success(`Condomínio ${this.condominioId ? 'atualizado' : 'criado'} com sucesso!`, 'Sucesso');
+        this.toastr.success(`Condomínio ${this.condominioId ? 'atualizado' : 'criado'} com sucesso!`, 'Operação Realizada com Sucesso!');
         this.router.navigate(['/condominios']);
       },
       error: (error: any) => this.tratarErros(error),
@@ -134,7 +134,7 @@ export class DetalhesCondominioComponent implements OnInit {
         next: dados => {
           this.spinner.hide();
           if (dados.erro) {
-            this.toastr.error('CEP não encontrado!', 'Erro');
+            this.toastr.error('CEP não encontrado!', 'Houve um erro!');
             this.habilitarCamposEndereco();
           } else {
             this.habilitarCamposEndereco();
@@ -151,7 +151,7 @@ export class DetalhesCondominioComponent implements OnInit {
         },
         error: () => {
           this.spinner.hide();
-          this.toastr.error('Erro ao buscar o CEP!', 'Erro');
+          this.toastr.error('Erro ao buscar o CEP!', 'Houve um erro!');
 
           this.habilitarCamposEndereco();
         }
@@ -185,7 +185,7 @@ export class DetalhesCondominioComponent implements OnInit {
         },
         error: (error: any) => {
           this.spinner.hide();
-          this.toastr.error(error.message, 'Erro!');
+          this.toastr.error(error.message, 'Houve um erro!');
           console.error(error);
         },
         complete: () => this.spinner.hide()
@@ -247,7 +247,7 @@ export class DetalhesCondominioComponent implements OnInit {
         if (mensagemErro.message && typeof mensagemErro.message === 'string') {
           const mensagensErro = mensagemErro.message.split(',');
           for (const mensagem of mensagensErro) {
-            this.toastr.error(mensagem.trim(), 'Erro!');
+            this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
       }

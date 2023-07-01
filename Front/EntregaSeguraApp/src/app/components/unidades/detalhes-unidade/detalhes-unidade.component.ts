@@ -75,7 +75,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
 
     operacao.subscribe({
       next: () => {
-        this.toastr.success(`Unidade ${this.unidadeId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso');
+        this.toastr.success(`Unidade ${this.unidadeId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
         this.router.navigate(['/unidades']);
       },
       error: (error: any) => this.tratarErros(error),
@@ -116,7 +116,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
         },
         error: (error: any) => {
           this.spinner.hide();
-          this.toastr.error(error.message, 'Erro!');
+          this.toastr.error(error.message, 'Houve um erro!');
           console.error(error);
         },
         complete: () => this.spinner.hide()
@@ -159,7 +159,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
         if (mensagemErro.message && typeof mensagemErro.message === 'string') {
           const mensagensErro = mensagemErro.message.split(',');
           for (const mensagem of mensagensErro) {
-            this.toastr.error(mensagem.trim(), 'Erro!');
+            this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
       }

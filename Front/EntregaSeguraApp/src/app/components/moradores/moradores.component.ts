@@ -91,11 +91,11 @@ export class MoradoresComponent implements OnInit, OnDestroy {
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
-      this.toastr.error(erro, 'Erro!');
+      this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Erro!'));
+      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
     } else {
-      this.toastr.error(erro.message || 'Erro ao excluir', 'Erro!');
+      this.toastr.error(erro.message || 'Erro ao excluir', 'Houve um erro!');
     }
   }
 }
