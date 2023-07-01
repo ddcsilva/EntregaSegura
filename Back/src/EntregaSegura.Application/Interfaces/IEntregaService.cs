@@ -13,6 +13,7 @@ public interface IEntregaService : IDisposable
     Task<bool> RemoverAsync(int id);
 
     Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync();
+    Task<EntregaDTO> ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false);
 
     Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId);
     Task<IEnumerable<Entrega>> ObterEntregasPorFuncionarioAsync(int funcionarioId);

@@ -2,6 +2,7 @@ using AutoMapper;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Entities.Enums;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Domain.Validations;
 
@@ -47,10 +48,16 @@ public class EntregaService : BaseService, IEntregaService
         return _mapper.Map<EntregaDTO>(entrega);
     }
 
+    public async Task<EntregaDTO> ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false)
+    {
+        var entrega = await _entregaRepository.ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(id, rastrearAlteracoes);
+        return _mapper.Map<EntregaDTO>(entrega);
+    }
+
     public async Task<bool> AdicionarAsync(EntregaDTO entregaDTO)
     {
         var entrega = _mapper.Map<Entrega>(entregaDTO);
-        
+
         if (!ValidarEntrega(entrega)) return false;
 
         _entregaRepository.Adicionar(entrega);
@@ -112,15 +119,13 @@ public class EntregaService : BaseService, IEntregaService
 
     public async Task<bool> NotificarEntregaAsync(int id)
     {
-        var entrega = await _entregaRepository.BuscarPorIdAsync(id);
+        var entrega = await _entregaRepository.ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(id);
 
         if (entrega == null)
         {
             Notificar("Não foi possível encontrar a entrega informada.");
             return false;
         }
-
-        entrega.AtualizarParaNotificada();
 
         var morador = await _moradorRepository.BuscarPorIdAsync(entrega.MoradorId);
 
@@ -130,20 +135,27 @@ public class EntregaService : BaseService, IEntregaService
             return false;
         }
 
-        // var email = new EmailDTO
-        // {
-        //     Para = morador.Email,
-        //     Assunto = $"Entrega de {entrega.TipoEntrega.GetDescription()}",
-        //     Mensagem = $"Olá {morador.Nome}, <br /><br />" +
-        //                $"A entrega de {entrega.TipoEntrega.GetDescription()} que você aguardava foi realizada com sucesso! <br /><br />" +
-        //                $"A entrega foi realizada pelo funcionário {funcionario.Nome} {funcionario.Sobrenome} " +
-        //                $"e a transportadora responsável foi a {entrega.Transportadora}. <br /><br />" +
-        //                $"Agradecemos a preferência e estamos à disposição para qualquer dúvida. <br /><br />" +
-        //                $"Atenciosamente, <br />" +
-        //                $"Equipe Entrega Segura"
-        // };
+        (string assuntoEmail, string mensagemEmail) = ConstruirEmail(entrega);
 
-        // await _emailService.EnviarAsync(email);
+        var emailEnviadoComSucesso = await _emailService.EnviarEmailAsync(morador.Email, assuntoEmail, mensagemEmail);
+
+        if (!emailEnviadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao enviar o e-mail de notificação da entrega.");
+            return false;
+        }
+
+        entrega.AtualizarParaNotificada();
+
+        _entregaRepository.Atualizar(entrega);
+
+        var atualizadoComSucesso = await _entregaRepository.SalvarAlteracoesAsync();
+
+        if (!atualizadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao notificar a entrega.");
+            return false;
+        }
 
         return true;
     }
@@ -158,9 +170,9 @@ public class EntregaService : BaseService, IEntregaService
             return false;
         }
 
-        if (await TemAssociacoes(id))
+        if (PossuiRestricoes(entrega))
         {
-            Notificar("Este condomínio não pode ser removido pois existem registros associados a ele.");
+            Notificar("Não é possível remover a entrega pois já foi notificada ou retirada.");
             return false;
         }
 
@@ -214,6 +226,19 @@ public class EntregaService : BaseService, IEntregaService
         throw new NotImplementedException();
     }
 
+    private (string, string) ConstruirEmail(Entrega entrega)
+    {
+        string assuntoEmail = "Entrega pendente de retirada";
+        string mensagemEmail = $"Olá {entrega.Morador.Nome},\n\n" +
+                               $"Você possui uma entrega pendente de retirada!\n\n" +
+                               $"A entrega foi realizada pela transportadora {entrega.Transportadora.Nome} no dia {entrega.DataRecebimento}\n" +
+                               $"Pedimos, por gentileza, que retire sua entrega o quanto antes.\n\n" +
+                               $"Atenciosamente,\n" +
+                               $"Equipe Entrega Segura";
+
+        return (assuntoEmail, mensagemEmail);
+    }
+
     private bool ValidarEntrega(Entrega entrega, bool ehAtualizacao = false)
     {
         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return false;
@@ -222,16 +247,18 @@ public class EntregaService : BaseService, IEntregaService
         {
             Notificar("A data de recebimento não pode ser maior que a data atual.");
             return false;
-        }        
+        }
 
         return true;
     }
 
-    private async Task<bool> TemAssociacoes(int condominioId)
+    private bool PossuiRestricoes(Entrega entrega)
     {
-        var temMoradores = await _moradorRepository.BuscarPorCondicaoAsync(m => m.Id == condominioId);
-        var temFuncionarios = await _funcionarioRepository.BuscarPorCondicaoAsync(f => f.Id == condominioId);
+        if (entrega.Status != StatusEntrega.Recebida || entrega.Status != StatusEntrega.Notificada)
+        {
+            return true;
+        }
 
-        return temMoradores.Any() || temFuncionarios.Any();
+        return false;
     }
 }

@@ -124,8 +124,15 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
       dialogRef.afterClosed().subscribe(result => {
         if (result) {
-          // TODO: Implementar ação de confirmação de retirada
-          this.toastr.success('Notificação enviada para o morador com sucesso!', 'Sucesso!');
+          this.entregaService.notificarEntrega(id).subscribe({
+            next: () => {
+              this.toastr.success('Notificação enviada para o morador com sucesso!', 'Sucesso!');
+              this.obterEntregas();
+            },
+            error: (error: any) => {
+              this.exibirErros(error);
+            }
+          });
         }
       });
     }

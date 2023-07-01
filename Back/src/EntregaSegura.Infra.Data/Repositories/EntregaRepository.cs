@@ -24,4 +24,19 @@ public class EntregaRepository : RepositoryBase<Entrega>, IEntregaRepository
 
         return await query.ToListAsync();
     }
+
+    public async Task<Entrega> ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false)
+    {
+        IQueryable<Entrega> query = _context.Entregas
+            .Include(e => e.Morador)
+                .ThenInclude(m => m.Unidade)
+            .Include(e => e.Funcionario)
+            .Include(e => e.Transportadora)
+            .Where(e => e.Id == id);
+
+        if (!rastrearAlteracoes)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync();
+    }
 }

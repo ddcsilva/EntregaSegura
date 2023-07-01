@@ -72,7 +72,6 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { SuporteComponent } from './components/suporte/suporte.component';
 
 registerLocaleData(ptBr)
 
@@ -97,8 +96,7 @@ registerLocaleData(ptBr)
     MainComponent,
     EntregasComponent,
     DetalhesEntregaComponent,
-    DashboardComponent,
-    SuporteComponent
+    DashboardComponent
   ],
   imports: [
     // Angular Modules

@@ -2,5 +2,5 @@ namespace EntregaSegura.Application.Interfaces;
 
 public interface IEmailService
 {
-    Task EnviarEmailAsync(string email, string assunto, string mensagem);
+    Task<bool> EnviarEmailAsync(string email, string assunto, string mensagem);
 }

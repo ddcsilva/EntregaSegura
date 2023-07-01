@@ -1,73 +1,67 @@
 <mat-toolbar class="mat-elevation-z8">
-    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
+    <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+  </button>
+  <img src="/assets/images/entrega-segura-logo.png" alt="LogoEntregaSegura" class="logo">
+  EntregaSegura
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+    <img class="avatar mat-elevation-z8" src="/assets/example.jpeg" />
+
+    <!-- Dados do Usuário Mockados temporariamente -->
+    <h4 class="name">Danilo Silva</h4>
+    <p class="designation">Funcionário</p>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button" routerLink="/dashboard">
+      <mat-icon>dashboard</mat-icon>
+      <span>Dashboard</span>
     </button>
-    <img src="/assets/images/entrega-segura-logo.png" alt="LogoEntregaSegura" class="logo">
-    EntregaSegura
-  </mat-toolbar>
-  
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-      <img class="avatar mat-elevation-z8" src="/assets/example.jpeg" />
-  
-      <!-- Dados do Usuário Mockados temporariamente -->
-      <h4 class="name">Danilo Silva</h4>
-      <p class="designation">Funcionário</p>
-  
-      <mat-divider></mat-divider>
-  
-      <button mat-button class="menu-button" routerLink="/dashboard">
-        <mat-icon>dashboard</mat-icon>
-        <span>Dashboard</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/condominios">
-        <mat-icon>apartment</mat-icon>
-        <span>Condomínios</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/unidades">
-        <mat-icon>home</mat-icon>
-        <span>Unidades</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/moradores">
-        <mat-icon>people</mat-icon>
-        <span>Moradores</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/entregas">
-        <mat-icon>inventory</mat-icon>
-        <span>Entregas</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/funcionarios">
-        <mat-icon>work</mat-icon>
-        <span>Funcionários</span>
-      </button>
-      <button mat-button class="menu-button" routerLink="/transportadoras">
-        <mat-icon>local_shipping</mat-icon>
-        <span>Transportadoras</span>
-      </button>
-  
-      <mat-divider></mat-divider>
-  
-      <button mat-button class="menu-button" routerLink="/suporte">
-        <mat-icon>help</mat-icon>
-        <span>Suporte</span>
-      </button>
-      <mat-divider></mat-divider>
-  
-      <button mat-button class="menu-button">
-        <mat-icon>logout</mat-icon>
-        <span>Logout</span>
-      </button>
+    <button mat-button class="menu-button" routerLink="/condominios">
+      <mat-icon>apartment</mat-icon>
+      <span>Condomínios</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/unidades">
+      <mat-icon>home</mat-icon>
+      <span>Unidades</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/moradores">
+      <mat-icon>people</mat-icon>
+      <span>Moradores</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/entregas">
+      <mat-icon>inventory</mat-icon>
+      <span>Entregas</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/funcionarios">
+      <mat-icon>work</mat-icon>
+      <span>Funcionários</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/transportadoras">
+      <mat-icon>local_shipping</mat-icon>
+      <span>Transportadoras</span>
+    </button>
+
+    <mat-divider></mat-divider>
+
+    <button mat-button class="menu-button">
+      <mat-icon>logout</mat-icon>
+      <span>Logout</span>
+    </button>
   </mat-sidenav>
-  
-    <mat-sidenav-content>
-      <div class="content mat-elevation-z8">
-        <router-outlet></router-outlet>
-      </div>
-    </mat-sidenav-content>
-  </mat-sidenav-container>
-  
-  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true"
-    [delay]="500">
-    <p style="color: white" [innerHTML]="mensagemDeCarregamento"></p>
-  </ngx-spinner>
+
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true"
+  [delay]="500">
+  <p style="color: white" [innerHTML]="mensagemDeCarregamento"></p>
+</ngx-spinner>
