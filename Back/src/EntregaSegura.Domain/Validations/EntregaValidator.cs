@@ -8,12 +8,10 @@ public class EntregaValidator : AbstractValidator<Entrega>
     public EntregaValidator()
     {
         RuleFor(e => e.DataRecebimento)
-            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-            .LessThanOrEqualTo(DateTime.Today).WithMessage("O campo {PropertyName} precisa ser menor ou igual à data atual");
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido");
 
         RuleFor(e => e.DataRetirada)
             .GreaterThanOrEqualTo(c => c.DataRecebimento).WithMessage("O campo {PropertyName} precisa ser maior ou igual à data de recebimento")
-            .LessThanOrEqualTo(DateTime.Today).WithMessage("O campo {PropertyName} precisa ser menor ou igual à data atual")
             .When(c => c.DataRetirada.HasValue);
 
         RuleFor(e => e.Descricao)

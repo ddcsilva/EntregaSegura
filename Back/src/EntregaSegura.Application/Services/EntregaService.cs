@@ -85,6 +85,69 @@ public class EntregaService : BaseService, IEntregaService
         return true;
     }
 
+    public async Task<bool> ConfirmarRetiradaAsync(int id)
+    {
+        var entrega = await _entregaRepository.BuscarPorIdAsync(id);
+
+        if (entrega == null)
+        {
+            Notificar("Não foi possível encontrar a entrega informada.");
+            return false;
+        }
+
+        entrega.AtualizarParaRetirada();
+
+        _entregaRepository.Atualizar(entrega);
+
+        var atualizadoComSucesso = await _entregaRepository.SalvarAlteracoesAsync();
+
+        if (!atualizadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao confirmar a retirada da entrega.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> NotificarEntregaAsync(int id)
+    {
+        var entrega = await _entregaRepository.BuscarPorIdAsync(id);
+
+        if (entrega == null)
+        {
+            Notificar("Não foi possível encontrar a entrega informada.");
+            return false;
+        }
+
+        entrega.AtualizarParaNotificada();
+
+        var morador = await _moradorRepository.BuscarPorIdAsync(entrega.MoradorId);
+
+        if (morador == null)
+        {
+            Notificar("Não foi possível encontrar o morador associado a entrega informada.");
+            return false;
+        }
+
+        // var email = new EmailDTO
+        // {
+        //     Para = morador.Email,
+        //     Assunto = $"Entrega de {entrega.TipoEntrega.GetDescription()}",
+        //     Mensagem = $"Olá {morador.Nome}, <br /><br />" +
+        //                $"A entrega de {entrega.TipoEntrega.GetDescription()} que você aguardava foi realizada com sucesso! <br /><br />" +
+        //                $"A entrega foi realizada pelo funcionário {funcionario.Nome} {funcionario.Sobrenome} " +
+        //                $"e a transportadora responsável foi a {entrega.Transportadora}. <br /><br />" +
+        //                $"Agradecemos a preferência e estamos à disposição para qualquer dúvida. <br /><br />" +
+        //                $"Atenciosamente, <br />" +
+        //                $"Equipe Entrega Segura"
+        // };
+
+        // await _emailService.EnviarAsync(email);
+
+        return true;
+    }
+
     public async Task<bool> RemoverAsync(int id)
     {
         var entrega = await _entregaRepository.BuscarPorIdAsync(id);
@@ -154,6 +217,12 @@ public class EntregaService : BaseService, IEntregaService
     private bool ValidarEntrega(Entrega entrega, bool ehAtualizacao = false)
     {
         if (!ExecutarValidacao(new EntregaValidator(), entrega)) return false;
+
+        if (entrega.DataRecebimento.Date > DateTime.Today.Date && ehAtualizacao)
+        {
+            Notificar("A data de recebimento não pode ser maior que a data atual.");
+            return false;
+        }        
 
         return true;
     }

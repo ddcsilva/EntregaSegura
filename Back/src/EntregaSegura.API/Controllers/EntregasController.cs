@@ -66,6 +66,36 @@ public class EntregasController : MainController
         return Ok(entregaDTO);
     }
 
+    [HttpPut]
+    [Route("confirmar-retirada/{id:int}")]
+    public async Task<ActionResult> ConfirmarRetirada(int id)
+    {
+        var entregaDTO = await _entregaService.ObterEntregaPorIdAsync(id);
+
+        if (entregaDTO == null) return NotFound();
+
+        await _entregaService.ConfirmarRetiradaAsync(id);
+
+        if (!OperacaoValida()) return CustomResponse();
+
+        return Ok();
+    }
+
+    [HttpPut]
+    [Route("notificar-entrega/{id:int}")]
+    public async Task<ActionResult> NotificarEntrega(int id)
+    {
+        var entregaDTO = await _entregaService.ObterEntregaPorIdAsync(id);
+
+        if (entregaDTO == null) return NotFound();
+
+        await _entregaService.NotificarEntregaAsync(id);
+
+        if (!OperacaoValida()) return CustomResponse();
+
+        return Ok();
+    }
+
     [HttpDelete("{id:int}")]
     public async Task<ActionResult> Remover(int id)
     {

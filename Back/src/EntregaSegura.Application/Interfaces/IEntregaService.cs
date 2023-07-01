@@ -20,4 +20,7 @@ public interface IEntregaService : IDisposable
     Task<IEnumerable<Entrega>> ObterEntregasComStatusAguardandoRetiradaPorMoradorAsync(int moradorId);
     Task<IEnumerable<Entrega>> ObterEntregasComStatusRetiradaPorMoradorAsync(int moradorId);
     Task<IEnumerable<Entrega>> ObterEntregasRecebidasPorFuncionarioAsync(int funcionarioId);
+
+    Task<bool> ConfirmarRetiradaAsync(int id);
+    Task<bool> NotificarEntregaAsync(int id);
 }

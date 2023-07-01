@@ -24,4 +24,15 @@ public sealed class Entrega : EntityBase
     public Morador Morador { get; private set; }
     public int FuncionarioId { get; private set; }
     public Funcionario Funcionario { get; private set; }
+
+    public void AtualizarParaNotificada()
+    {
+        Status = StatusEntrega.Notificada;
+    }
+
+    public void AtualizarParaRetirada()
+    {
+        DataRetirada = DateTime.Now;
+        Status = StatusEntrega.Retirada;
+    }
 }
