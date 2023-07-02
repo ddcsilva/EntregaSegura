@@ -1,6 +1,6 @@
 namespace EntregaSegura.Domain.Entities;
 
-public class Unidade : EntityBase
+public sealed class Unidade : EntityBase
 {
     private readonly IList<Morador> _moradores;
 
