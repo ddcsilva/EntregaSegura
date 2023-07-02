@@ -1,7 +1,9 @@
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Helpers;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Entities.Enums;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Domain.Validations;
 
@@ -11,17 +13,20 @@ public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
     private readonly IEntregaRepository _entregaRepository;
+    private readonly IUsuarioService _usuarioService;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public MoradorService(IMoradorRepository moradorRepository,
                           IEntregaRepository entregaRepository,
+                          IUsuarioService usuarioService,
                           IEmailService emailService,
                           IMapper mapper,
                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
         _entregaRepository = entregaRepository;
+        _usuarioService = usuarioService;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -56,8 +61,24 @@ public class MoradorService : BaseService, IMoradorService
 
         if (!await ValidarMorador(morador)) return false;
 
+        var usuarioDTO = new UsuarioDTO
+        {
+            Nome = morador.Nome,
+            Login = morador.Email,
+            Email = morador.Email,
+            Senha = Criptografia.CriptografarSenha("123456"),
+        };
+
         using (_moradorRepository.IniciarTrasacaoAsync())
         {
+            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO, PerfilUsuario.Morador);
+
+            if (usuarioRegistradoComSucesso == null)
+            {
+                Notificar("Ocorreu um erro ao adicionar o morador.");
+                return false;
+            }
+
             _moradorRepository.Adicionar(morador);
 
             var adicionadoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();

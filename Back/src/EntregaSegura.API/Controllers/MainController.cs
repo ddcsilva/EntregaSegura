@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace EntregaSegura.API.Controllers;
 
 [ApiController]
+[Authorize]
 public class MainController : ControllerBase
 {
     private readonly INotificadorErros _notificadorErros;

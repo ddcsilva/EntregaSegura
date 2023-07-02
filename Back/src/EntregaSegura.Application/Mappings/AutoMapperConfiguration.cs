@@ -33,5 +33,8 @@ public class AutoMapperConfiguration : Profile
         CreateMap<Unidade, UnidadeDTO>()
             .ForMember(dest => dest.NomeCondominio, opt => opt.MapFrom(src => src.Condominio.Nome))
             .ForMember(dest => dest.DescricaoUnidade, opt => opt.MapFrom(src => $"Unidade {src.Numero}, Bloco {src.Bloco}, {src.Andar}º andar"));
+
+        CreateMap<UsuarioDTO, Usuario>();
+        CreateMap<Usuario, UsuarioDTO>();
     }
 }

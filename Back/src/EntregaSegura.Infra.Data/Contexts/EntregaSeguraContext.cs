@@ -14,6 +14,7 @@ public class EntregaSeguraContext : DbContext
     public DbSet<Morador> Moradores => Set<Morador>();
     public DbSet<Transportadora> Transportadoras => Set<Transportadora>();
     public DbSet<Unidade> Unidades => Set<Unidade>();
+    public DbSet<Usuario> Usuarios => Set<Usuario>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

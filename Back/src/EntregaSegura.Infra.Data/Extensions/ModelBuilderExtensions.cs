@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Entities.Enums;
-using Microsoft.AspNetCore.Identity;
 
 namespace EntregaSegura.Infra.Data.Extensions;
 
@@ -15,6 +14,7 @@ public static class ModelBuilderExtensions
         PopularFuncionarios(modelBuilder);
         PopularTransportadoras(modelBuilder);
         PopularEntregas(modelBuilder);
+        PopularUsuarios(modelBuilder);
     }
 
     private static void PopularCondominios(ModelBuilder modelBuilder)
@@ -119,6 +119,20 @@ public static class ModelBuilderExtensions
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
             Status = StatusEntrega.Recebida
+        });
+    }
+
+    private static void PopularUsuarios(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Usuario>().HasData(new
+        {
+            Id = 1,
+            Nome = "Danilo Silva",
+            Login = "danilo.silva@msn.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Perfil = PerfilUsuario.Administrador,
+            Token = "",
+            Email = "danilo.silva@msn.com"
         });
     }
 }
