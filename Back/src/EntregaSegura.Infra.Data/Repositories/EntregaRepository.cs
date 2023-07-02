@@ -7,9 +7,7 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class EntregaRepository : RepositoryBase<Entrega>, IEntregaRepository
 {
-    public EntregaRepository(EntregaSeguraContext context) : base(context)
-    {
-    }
+    public EntregaRepository(EntregaSeguraContext context) : base(context) { }
 
     public async Task<IEnumerable<Entrega>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(bool rastrearAlteracoes = false)
     {

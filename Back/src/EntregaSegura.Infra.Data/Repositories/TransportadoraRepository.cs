@@ -6,7 +6,5 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class TransportadoraRepository : RepositoryBase<Transportadora>, ITransportadoraRepository
 {
-    public TransportadoraRepository(EntregaSeguraContext context) : base(context)
-    {
-    }
+    public TransportadoraRepository(EntregaSeguraContext context) : base(context) { }
 }

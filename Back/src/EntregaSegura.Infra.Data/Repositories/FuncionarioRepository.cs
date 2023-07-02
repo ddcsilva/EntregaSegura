@@ -7,9 +7,7 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class FuncionarioRepository : RepositoryBase<Funcionario>, IFuncionarioRepository
 {
-    public FuncionarioRepository(EntregaSeguraContext context) : base(context)
-    {
-    }
+    public FuncionarioRepository(EntregaSeguraContext context) : base(context) { }
 
     public async Task<IEnumerable<Funcionario>> ObterTodosFuncionariosECondominiosAsync(bool rastrearAlteracoes = false)
     {

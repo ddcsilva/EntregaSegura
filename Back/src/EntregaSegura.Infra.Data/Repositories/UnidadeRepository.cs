@@ -8,9 +8,7 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class UnidadeRepository : RepositoryBase<Unidade>, IUnidadeRepository
 {
-    public UnidadeRepository(EntregaSeguraContext context) : base(context)
-    {
-    }
+    public UnidadeRepository(EntregaSeguraContext context) : base(context) { }
 
     public async Task<IEnumerable<Unidade>> ObterTodasUnidadesComCondominioAsync(bool rastrearAlteracoes = false)
     {

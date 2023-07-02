@@ -7,10 +7,7 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class MoradorRepository : RepositoryBase<Morador>, IMoradorRepository
 {
-    public MoradorRepository(EntregaSeguraContext context) : base(context)
-    {
-        
-    }
+    public MoradorRepository(EntregaSeguraContext context) : base(context) { }
 
     public async Task<IEnumerable<Morador>> ObterTodosMoradoresComUnidadeECondominioAsync(bool rastrearAlteracoes = false)
     {

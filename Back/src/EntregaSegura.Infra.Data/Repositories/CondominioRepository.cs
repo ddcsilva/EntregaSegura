@@ -6,7 +6,5 @@ namespace EntregaSegura.Infra.Data.Repositories;
 
 public class CondominioRepository : RepositoryBase<Condominio>, ICondominioRepository
 {
-    public CondominioRepository(EntregaSeguraContext context) : base(context)
-    {
-    }
+    public CondominioRepository(EntregaSeguraContext context) : base(context) { }
 }
