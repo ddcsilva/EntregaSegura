@@ -14,7 +14,7 @@ export class TratamentoErrosService {
 
     if (errorResponse instanceof HttpErrorResponse) {
       if (this.apiEstaForaDoAr(errorResponse)) {
-        mensagemErro = 'Nosso serviço está temporariamente indisponível. Por favor, tente novamente mais tarde.';
+        mensagemErro = 'Nosso serviço está temporariamente indisponível. Tente novamente mais tarde.';
       } else if (this.erroDeClienteOuRede(errorResponse)) {
         mensagemErro = errorResponse.error.message;
       } else if (this.erroDoBackendComCorpoResposta(errorResponse)) {

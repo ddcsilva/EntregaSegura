@@ -1,10 +1,11 @@
-import { Papel } from "./papel.model";
+import { PerfilUsuario } from "./enums/perfil-usuario.model";
 
 export interface Usuario {
     id: number;
     nome: string;
+    login: string;
+    senha: string;
     email: string;
-    foto: string;
-    papeis: Papel[];
-    token?: string;
+    token: string;
+    perfilUsuario: PerfilUsuario;
 }

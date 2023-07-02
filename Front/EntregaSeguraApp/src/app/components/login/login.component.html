@@ -1,0 +1,43 @@
+<mat-card class="login-card">
+  <div class="login-header">
+    <div class="header-content">
+      <mat-card-title class="login-title">Acesse sua conta</mat-card-title>
+    </div>
+  </div>
+  <mat-card-content class="login-content">
+    <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()">
+      <mat-form-field class="login-input" appearance="outline">
+        <mat-label>E-mail</mat-label>
+        <input formControlName="login" matInput email required>
+        <mat-icon matSuffix>mail_outline</mat-icon>
+        <mat-error *ngIf="formulario.get('login')?.hasError('required')">
+          Por favor, insira um e-mail.
+        </mat-error>
+        <mat-error *ngIf="formulario.get('login')?.hasError('login')">
+          O e-mail informado é inválido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="login-input" appearance="outline">
+        <mat-label>Senha</mat-label>
+        <input type="password" formControlName="senha" matInput required>
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error *ngIf="formulario.get('senha')?.hasError('required')">
+          Por favor, insira uma senha.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="forgot-password-wrapper">
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+      </div>
+
+      <button [disabled]="formulario.invalid" mat-raised-button color="primary" class="login-button" type="submit">
+        <div class="button-content">
+          <mat-spinner *ngIf="carregando" color="accent" diameter="20"></mat-spinner>
+          <span>Entrar</span>
+        </div>
+      </button>
+
+    </form>
+  </mat-card-content>
+</mat-card>

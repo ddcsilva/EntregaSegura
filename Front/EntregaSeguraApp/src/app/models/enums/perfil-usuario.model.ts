@@ -1,4 +1,4 @@
-export enum Papel {
+export enum PerfilUsuario {
     Admin = 'ADMIN',
     Sindico = 'SINDICO',
     Funcionario = 'FUNCIONARIO',

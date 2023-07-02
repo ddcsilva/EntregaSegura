@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -72,6 +72,8 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LoginComponent } from './components/login/login.component';
+import { TokenInterceptor } from './helpers/interceptors/token.interceptor';
 
 registerLocaleData(ptBr)
 
@@ -96,7 +98,8 @@ registerLocaleData(ptBr)
     MainComponent,
     EntregasComponent,
     DetalhesEntregaComponent,
-    DashboardComponent
+    DashboardComponent,
+    LoginComponent
   ],
   imports: [
     // Angular Modules
@@ -159,6 +162,11 @@ registerLocaleData(ptBr)
     {
       provide: MatPaginatorIntl,
       useValue: obterPaginatorIntlPortugues()
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

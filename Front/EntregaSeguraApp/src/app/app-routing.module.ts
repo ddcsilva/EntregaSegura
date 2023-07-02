@@ -14,6 +14,8 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
+import { LoginComponent } from './components/login/login.component';
+import { AutenticacaoGuard } from './helpers/guards/autenticacao.guard';
 
 const routes: Routes = [
   {
@@ -21,17 +23,18 @@ const routes: Routes = [
     redirectTo: '/dashboard',
     pathMatch: 'full'
   },
-  // {
-  //   path: 'login',
-  //   component: LoginComponent
-  // },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {
     path: '',
     component: MainComponent,
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        canActivate: [AutenticacaoGuard]
       },
       {
         path: 'condominios',
