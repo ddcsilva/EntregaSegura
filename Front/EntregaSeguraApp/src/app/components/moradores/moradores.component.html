@@ -16,13 +16,13 @@
         <!-- Coluna - Nome -->
         <ng-container matColumnDef="nome">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome </th>
-            <td mat-cell *matCellDef="let morador"> {{morador.nome}} </td>
+            <td mat-cell *matCellDef="let morador"> {{morador.pessoa.nome}} </td>
         </ng-container>
 
         <!-- Coluna - Telefone -->
         <ng-container matColumnDef="telefone">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Telefone </th>
-            <td mat-cell *matCellDef="let morador"> {{ morador.telefone | formatarTelefone }} </td>
+            <td mat-cell *matCellDef="let morador"> {{ morador.pessoa.telefone | formatarTelefone }} </td>
         </ng-container>
 
         <!-- Coluna - Ramal -->

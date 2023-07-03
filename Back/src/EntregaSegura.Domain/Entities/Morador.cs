@@ -1,19 +1,14 @@
 namespace EntregaSegura.Domain.Entities;
 
-public sealed class Morador : Pessoa
+public sealed class Morador : EntityBase
 {
     private readonly IList<Entrega> _entregas;
 
-    public Morador(
-        string nome, 
-        string cpf, 
-        string telefone, 
-        string email, 
-        int ramal,
-        int unidadeId) : base(nome, cpf, telefone, email)
+    public Morador(int ramal, int unidadeId, int pessoaId)
     {
         Ramal = ramal;
         UnidadeId = unidadeId;
+        PessoaId = pessoaId;
 
         _entregas = new List<Entrega>();
     }
@@ -22,6 +17,9 @@ public sealed class Morador : Pessoa
     
     public int UnidadeId { get; private set; }
     public Unidade Unidade { get; private set; }
+    
+    public int PessoaId { get; private set; }
+    public Pessoa Pessoa { get; private set; }
 
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
 }

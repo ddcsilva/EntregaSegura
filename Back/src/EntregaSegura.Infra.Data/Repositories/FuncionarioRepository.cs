@@ -12,11 +12,25 @@ public class FuncionarioRepository : RepositoryBase<Funcionario>, IFuncionarioRe
     public async Task<IEnumerable<Funcionario>> ObterTodosFuncionariosECondominiosAsync(bool rastrearAlteracoes = false)
     {
         IQueryable<Funcionario> query = _context.Funcionarios
+            .Include(f => f.Pessoa)
             .Include(f => f.Condominio);
 
         if (!rastrearAlteracoes)
             query = query.AsNoTracking();
 
         return await query.ToListAsync();
+    }
+
+    public async Task<Funcionario> ObterFuncionarioPorIdECondominioAsync(int id, bool rastrearAlteracoes = false)
+    {
+        IQueryable<Funcionario> query = _context.Funcionarios
+            .Include(f => f.Pessoa)
+            .Include(f => f.Condominio)
+            .Where(f => f.Id == id);
+
+        if (!rastrearAlteracoes)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync();
     }
 }

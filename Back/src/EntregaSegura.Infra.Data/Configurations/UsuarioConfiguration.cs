@@ -19,66 +19,66 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .ValueGeneratedOnAdd()
             .HasComment("Chave primária do usuário");
 
-        builder.Property(u => u.Nome)
-            .HasColumnName("USR_NOME")
+        builder.Property(u => u.Login)
+            .HasColumnName("USR_LOGIN")
             .HasColumnOrder(2)
             .IsRequired()
             .HasColumnType("varchar(100)")
-            .HasComment("Nome do usuário");
-
-        builder.Property(u => u.Login)
-            .HasColumnName("USR_LOGIN")
-            .HasColumnOrder(3)
-            .IsRequired()
-            .HasColumnType("varchar(50)")
             .HasComment("Login do usuário");
 
         builder.Property(u => u.Senha)
             .HasColumnName("USR_SENHA")
-            .HasColumnOrder(4)
+            .HasColumnOrder(3)
             .IsRequired()
             .HasColumnType("varchar(50)")
             .HasComment("Senha do usuário");
 
-        builder.Property(u => u.Email)
-            .HasColumnName("USR_EMAIL")
-            .HasColumnOrder(5)
-            .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasComment("E-mail do usuário");
-
         builder.Property(u => u.Token)
             .HasColumnName("USR_TOKEN")
-            .HasColumnOrder(6)
+            .HasColumnOrder(4)
             .HasColumnType("varchar(100)")
-            .HasComment("Token do usuário");
+            .HasComment("Token de acesso do usuário");
 
         builder.Property(u => u.Perfil)
             .HasColumnName("USR_PERFIL")
+            .HasColumnOrder(5)
+            .IsRequired()
+            .HasComment("Perfil de acesso do usuário");
+
+        builder.Property(u => u.Foto)
+            .HasColumnName("USR_FOTO")
+            .HasColumnOrder(6)
+            .HasColumnType("varchar(100)")
+            .HasComment("Foto do usuário");
+
+        builder.Property(u => u.PessoaId)
+            .HasColumnName("USR_PESSOA_ID")
             .HasColumnOrder(7)
             .IsRequired()
-            .HasComment("Perfil do usuário");
+            .HasComment("Chave estrangeira da pessoa do usuário");
 
         builder.Property(u => u.DataCriacao)
-            .HasColumnName("USR_DTCRIACAO")
+            .HasColumnName("USR_DATA_CRIACAO")
             .HasColumnOrder(8)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de criação do usuário");
 
         builder.Property(u => u.DataAtualizacao)
-            .HasColumnName("USR_DTATUALIZACAO")
+            .HasColumnName("USR_DATA_ATUALIZACAO")
             .HasColumnOrder(9)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de atualização do usuário");
 
+        builder.HasOne(u => u.Pessoa)
+            .WithOne()
+            .HasForeignKey<Usuario>(u => u.PessoaId)
+            .HasConstraintName("FK_USUARIOS_PESSOAS")
+            .OnDelete(DeleteBehavior.Restrict);
+
         builder.HasIndex(u => u.Login)
             .HasDatabaseName("IX_USR_LOGIN")
-            .IsUnique();
-
-        builder.HasIndex(u => u.Email)
-            .HasDatabaseName("IX_USR_EMAIL")
             .IsUnique();
     }
 }

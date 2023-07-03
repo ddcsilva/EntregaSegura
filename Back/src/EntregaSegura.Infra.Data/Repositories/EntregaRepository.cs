@@ -14,7 +14,10 @@ public class EntregaRepository : RepositoryBase<Entrega>, IEntregaRepository
         IQueryable<Entrega> query = _context.Entregas
             .Include(e => e.Morador)
                 .ThenInclude(m => m.Unidade)
+            .Include(e => e.Morador)
+                .ThenInclude(m => m.Pessoa)
             .Include(e => e.Funcionario)
+                .ThenInclude(f => f.Pessoa)
             .Include(e => e.Transportadora);
 
         if (!rastrearAlteracoes)
@@ -28,7 +31,10 @@ public class EntregaRepository : RepositoryBase<Entrega>, IEntregaRepository
         IQueryable<Entrega> query = _context.Entregas
             .Include(e => e.Morador)
                 .ThenInclude(m => m.Unidade)
+            .Include(e => e.Morador)
+                .ThenInclude(m => m.Pessoa)
             .Include(e => e.Funcionario)
+                .ThenInclude(f => f.Pessoa)
             .Include(e => e.Transportadora)
             .Where(e => e.Id == id);
 

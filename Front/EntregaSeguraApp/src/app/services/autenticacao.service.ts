@@ -35,6 +35,7 @@ export class AutenticacaoService {
 
   public armazenarToken(token: string): void {
     localStorage.setItem('token', token);
+    this.atualizarDadosDoUsuario();
   }
 
   public obterToken(): string | null {
@@ -72,6 +73,18 @@ export class AutenticacaoService {
     }
 
     return '';
+  }
+
+  public tokenExpirado(): boolean {
+    const jwtHelper = new JwtHelperService();
+    const token = this.obterToken();
+
+    if (token) {
+      return jwtHelper.isTokenExpired(token);
+    } else {
+      console.error('Token não encontrado!');
+      return true;
+    }
   }
 
   private atualizarDadosDoUsuario() {

@@ -28,11 +28,11 @@ public class UsuarioService : BaseService, IUsuarioService
 
     public async Task<UsuarioDTO> ObterUsuarioPorLoginAsync(string login, bool rastrearAlteracoes = false)
     {
-        var usuario = await _usuarioRepository.ObterUsuarioPorLoginAsync(login, rastrearAlteracoes);
+        var usuario = await _usuarioRepository.ObterUsuarioPorLoginComDadosPessoaAsync(login, rastrearAlteracoes);
         return _mapper.Map<UsuarioDTO>(usuario);
     }
 
-    public async Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO, PerfilUsuario perfil)
+    public async Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO)
     {
         var usuario = _mapper.Map<Usuario>(usuarioDTO);
 
@@ -55,13 +55,30 @@ public class UsuarioService : BaseService, IUsuarioService
 
     public string GerarToken(UsuarioDTO usuarioDTO)
     {
+        var perfil = "";
+        switch (usuarioDTO.Perfil)
+        {
+            case PerfilUsuario.Administrador:
+                perfil = "Administrador";
+                break;
+            case PerfilUsuario.Sindico:
+                perfil = "Sindico";
+                break;
+            case PerfilUsuario.Funcionario:
+                perfil = "Funcionario";
+                break;
+            case PerfilUsuario.Morador:
+                perfil = "Morador";
+                break;
+        }
+
         var jwtTokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes("ChaveSecretaParaCriacaoDoToken");
         var identity = new ClaimsIdentity(new Claim[]
         {
-            new Claim("Nome", "Danilo Silva"),
-            new Claim("Email", usuarioDTO.Login),
-            new Claim("Perfil", "Administrador")
+            new Claim("Nome", usuarioDTO.Pessoa.Nome),
+            new Claim("Email", usuarioDTO.Pessoa.Email),
+            new Claim("Perfil", perfil)
         });
 
         var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -89,14 +106,8 @@ public class UsuarioService : BaseService, IUsuarioService
 
         if (ehAtualizacao && !VerificarForcaSenha(usuario.Senha)) return false;
 
-        if (!ehAtualizacao && (await _usuarioRepository.BuscarPorCondicaoAsync(u => u.Login == usuario.Login)).Any())
-        {
-            Notificar("Já existe um usuário com o login informado.");
-            return false;
-        }
-
-        if (!string.IsNullOrWhiteSpace(usuario.Email)
-            && (await _usuarioRepository.BuscarPorCondicaoAsync(u => u.Email == usuario.Email && u.Id != usuario.Id)).Any())
+        if (!string.IsNullOrWhiteSpace(usuario.Login)
+            && (await _usuarioRepository.BuscarPorCondicaoAsync(u => u.Login == usuario.Login && u.Id != usuario.Id)).Any())
         {
             Notificar("Já existe um usuário com o e-mail informado.");
             return false;

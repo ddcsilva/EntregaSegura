@@ -20,56 +20,28 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .ValueGeneratedOnAdd()
             .HasComment("Chave primária do funcionário");
 
-        builder.Property(f => f.Nome)
-            .HasColumnName("FUN_NOME")
-            .HasColumnOrder(2)
-            .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasComment("Nome do funcionário");
-
-        builder.Property(f => f.Cpf)
-            .HasColumnName("FUN_CPF")
-            .HasColumnOrder(3)
-            .IsRequired()
-            .HasColumnType("varchar(11)")
-            .HasComment("CPF do funcionário");
-
-        builder.Property(f => f.Telefone)
-            .HasColumnName("FUN_TELEFONE")
-            .HasColumnOrder(4)
-            .IsRequired()
-            .HasColumnType("varchar(11)")
-            .HasComment("Telefone do funcionário");
-
-        builder.Property(f => f.Email)
-            .HasColumnName("FUN_EMAIL")
-            .HasColumnOrder(5)
-            .IsRequired()
-            .HasColumnType("varchar(100)")
-            .HasComment("Email do funcionário");
-
-        builder.Property(f => f.Cargo)
-            .HasColumnName("FUN_CARGO")
-            .HasColumnOrder(6)
-            .IsRequired()
-            .HasComment("Cargo do funcionário");
-
         builder.Property(f => f.DataAdmissao)
             .HasColumnName("FUN_DATA_ADMISSAO")
-            .HasColumnOrder(7)
+            .HasColumnOrder(2)
             .IsRequired()
             .HasColumnType("datetime")
             .HasComment("Data de admissão do funcionário");
 
         builder.Property(f => f.DataDemissao)
             .HasColumnName("FUN_DATA_DEMISSAO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(3)
             .HasColumnType("datetime")
             .HasComment("Data de demissão do funcionário");
 
+        builder.Property(f => f.PessoaId)
+            .HasColumnName("FUN_PESSOA_ID")
+            .HasColumnOrder(4)
+            .IsRequired()
+            .HasComment("Chave estrangeira da pessoa");
+
         builder.Property(f => f.DataCriacao)
             .HasColumnName("FUN_DATA_CRIACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(5)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -78,7 +50,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.DataAtualizacao)
             .HasColumnName("FUN_DATA_ATUALIZACAO")
-            .HasColumnOrder(10)
+            .HasColumnOrder(6)
             .IsRequired()
             .HasColumnType("datetime")
             .HasDefaultValueSql("GETDATE()")
@@ -87,7 +59,7 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
 
         builder.Property(f => f.CondominioId)
             .HasColumnName("FUN_CONDOMINIO_ID")
-            .HasColumnOrder(11)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasComment("Chave estrangeira do condomínio");
 
@@ -103,12 +75,10 @@ public class FuncionarioConfiguration : IEntityTypeConfiguration<Funcionario>
             .HasConstraintName("FK_FUNCIONARIO_ENTREGA")
             .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasIndex(f => f.Cpf)
-            .HasDatabaseName("IX_FUNCIONARIO_CPF")
-            .IsUnique();
-
-        builder.HasIndex(f => f.Email)
-            .HasDatabaseName("IX_FUNCIONARIO_EMAIL")
-            .IsUnique();
+        builder.HasOne(f => f.Pessoa)
+            .WithOne()
+            .HasForeignKey<Funcionario>(f => f.PessoaId)
+            .HasConstraintName("FK_FUNCIONARIOS_PESSOA")
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

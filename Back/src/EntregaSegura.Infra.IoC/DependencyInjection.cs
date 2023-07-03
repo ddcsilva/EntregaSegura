@@ -23,6 +23,7 @@ public static class DependencyInjection
     {
         services.AddScoped<ICondominioRepository, CondominioRepository>();
         services.AddScoped<IEntregaRepository, EntregaRepository>();
+        services.AddScoped<IPessoaRepository, PessoaRepository>();
         services.AddScoped<IFuncionarioRepository, FuncionarioRepository>();
         services.AddScoped<IMoradorRepository, MoradorRepository>();
         services.AddScoped<ITransportadoraRepository, TransportadoraRepository>();

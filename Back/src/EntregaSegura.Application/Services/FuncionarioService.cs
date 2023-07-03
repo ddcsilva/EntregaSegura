@@ -128,22 +128,22 @@ public class FuncionarioService : BaseService, IFuncionarioService
     {
         if (!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return false;
 
-        if (!string.IsNullOrWhiteSpace(funcionario.Cpf)
-            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Cpf == funcionario.Cpf && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Cpf)
+            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Cpf == funcionario.Pessoa.Cpf && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
         {
             Notificar("Já existe um funcionário com este CPF informado.");
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(funcionario.Nome)
-            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Nome == funcionario.Nome && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Nome)
+            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Nome == funcionario.Pessoa.Nome && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
         {
             Notificar("Já existe um funcionário com este nome informado.");
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(funcionario.Email)
-            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Email == funcionario.Email && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Nome)
+            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Email == funcionario.Pessoa.Email && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
         {
             Notificar("Já existe um funcionário com este e-mail informado.");
             return false;

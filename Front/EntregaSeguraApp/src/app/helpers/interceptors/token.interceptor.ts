@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
   HttpErrorResponse
 } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { EMPTY, Observable, catchError, throwError } from 'rxjs';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
@@ -32,12 +32,18 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     return next.handle(request).pipe(
-      catchError((erro) => {
-        if (erro instanceof HttpErrorResponse && erro.status === 401) {
-          this.toastr.error('Você não está autenticado!', 'Atenção!');
+      catchError((erro: HttpErrorResponse) => {
+        if (erro.status === 401) {
+          if (this.autenticacaoService.tokenExpirado()) {
+            this.toastr.error('Sua sessão expirou, por favor, faça login novamente', 'Atenção!');
+          } else {
+            this.toastr.error('Você não está autenticado!', 'Atenção!');
+          }
           this.router.navigate(['login']);
+          return EMPTY;
+        } else {
+          return throwError(() => erro);
         }
-        return throwError(() => new Error("Houve um erro ao processar a requisição!"));
       })
     );
   }

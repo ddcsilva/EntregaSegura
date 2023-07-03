@@ -41,7 +41,7 @@
                                     <mat-label>Morador</mat-label>
                                     <mat-select formControlName="moradorId" required>
                                         <mat-option *ngFor="let morador of moradores" [value]="morador.id">
-                                            {{morador.nome}}
+                                            {{morador.pessoa.nome}}
                                         </mat-option>
                                     </mat-select>
                                     <mat-icon matSuffix>person</mat-icon>

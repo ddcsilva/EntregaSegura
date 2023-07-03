@@ -17,10 +17,8 @@ export class AutenticacaoGuard implements CanActivate {
     if (this.autenticacaoService.usuarioEstaAutenticado()) {
       return true;
     } else {
-      this.toastr.error('Você não está autenticado!', 'Atenção!');
       this.router.navigate(['login']);
       return false;
     }
   }
 }
- 

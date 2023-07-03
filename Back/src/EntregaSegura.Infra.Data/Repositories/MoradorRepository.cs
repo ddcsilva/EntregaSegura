@@ -12,8 +12,9 @@ public class MoradorRepository : RepositoryBase<Morador>, IMoradorRepository
     public async Task<IEnumerable<Morador>> ObterTodosMoradoresComUnidadeECondominioAsync(bool rastrearAlteracoes = false)
     {
         IQueryable<Morador> query = _context.Moradores
+            .Include(m => m.Pessoa)
             .Include(m => m.Unidade)
-            .ThenInclude(u => u.Condominio);
+                .ThenInclude(u => u.Condominio);
 
         if (!rastrearAlteracoes)
             query = query.AsNoTracking();
@@ -22,15 +23,16 @@ public class MoradorRepository : RepositoryBase<Morador>, IMoradorRepository
     }
 
     public async Task<Morador> ObterMoradorPorIdComUnidadeECondominioAsync(int id, bool rastrearAlteracoes = false)
-    {       
+    {
         IQueryable<Morador> query = _context.Moradores
+            .Include(m => m.Pessoa)
             .Include(m => m.Unidade)
-            .ThenInclude(u => u.Condominio)
+                .ThenInclude(u => u.Condominio)
             .Where(m => m.Id == id);
 
         if (!rastrearAlteracoes)
             query = query.AsNoTracking();
-        
+
         return await query.FirstOrDefaultAsync();
     }
 }

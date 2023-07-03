@@ -12,12 +12,18 @@ namespace EntregaSegura.Application.Services;
 public class MoradorService : BaseService, IMoradorService
 {
     private readonly IMoradorRepository _moradorRepository;
-    private readonly IEntregaRepository _entregaRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IPessoaRepository _pessoaRepository;
     private readonly IUsuarioService _usuarioService;
+    private readonly IUnidadeRepository _unidadeRepository;
+    private readonly IEntregaRepository _entregaRepository;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public MoradorService(IMoradorRepository moradorRepository,
+                          IUsuarioRepository usuarioRepository,
+                          IPessoaRepository pessoaRepository,
+                          IUnidadeRepository unidadeRepository,
                           IEntregaRepository entregaRepository,
                           IUsuarioService usuarioService,
                           IEmailService emailService,
@@ -25,8 +31,11 @@ public class MoradorService : BaseService, IMoradorService
                           INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _moradorRepository = moradorRepository;
-        _entregaRepository = entregaRepository;
+        _usuarioRepository = usuarioRepository;
+        _pessoaRepository = pessoaRepository;
         _usuarioService = usuarioService;
+        _unidadeRepository = unidadeRepository;
+        _entregaRepository = entregaRepository;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -63,27 +72,29 @@ public class MoradorService : BaseService, IMoradorService
 
         var usuarioDTO = new UsuarioDTO
         {
-            Nome = morador.Nome,
-            Login = morador.Email,
-            Email = morador.Email,
+            Login = morador.Pessoa.Email,
             Senha = Criptografia.CriptografarSenha("123456"),
+            Perfil = PerfilUsuario.Morador
         };
 
         using (_moradorRepository.IniciarTrasacaoAsync())
         {
-            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO, PerfilUsuario.Morador);
-
-            if (usuarioRegistradoComSucesso == null)
-            {
-                Notificar("Ocorreu um erro ao adicionar o morador.");
-                return false;
-            }
-
             _moradorRepository.Adicionar(morador);
 
             var adicionadoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
 
             if (!adicionadoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao adicionar o morador.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            usuarioDTO.PessoaId = morador.PessoaId;
+
+            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
+
+            if (usuarioRegistradoComSucesso == null)
             {
                 Notificar("Ocorreu um erro ao adicionar o morador.");
                 await _moradorRepository.DescartarTransacaoAsync();
@@ -119,7 +130,7 @@ public class MoradorService : BaseService, IMoradorService
 
     public async Task<bool> RemoverAsync(int id)
     {
-        var morador = await _moradorRepository.BuscarPorIdAsync(id);
+        var morador = await _moradorRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
 
         if (morador == null)
         {
@@ -133,14 +144,45 @@ public class MoradorService : BaseService, IMoradorService
             return false;
         }
 
-        _moradorRepository.Remover(morador);
+        var usuario = await _usuarioRepository.ObterUsuarioPorPessoaAsync(morador.PessoaId, rastrearAlteracoes: true);
+        var pessoa = await _pessoaRepository.BuscarPorIdAsync(morador.PessoaId, rastrearAlteracoes: true);
 
-        var removidoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
-
-        if (!removidoComSucesso)
+        using (_moradorRepository.IniciarTrasacaoAsync())
         {
-            Notificar("Ocorreu um erro ao remover o morador.");
-            return false;
+            _usuarioRepository.Remover(usuario);
+
+            var usuarioRemovidoComSucesso = await _usuarioRepository.SalvarAlteracoesAsync();
+
+            if (!usuarioRemovidoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o morador.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            _moradorRepository.Remover(morador);
+
+            var moradorRemovidoComSucesso = await _moradorRepository.SalvarAlteracoesAsync();
+
+            if (!moradorRemovidoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o morador.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            await _moradorRepository.SalvarTransacaoAsync();
+
+            _pessoaRepository.Remover(pessoa);
+
+            var pessoaRemovidaComSucesso = await _pessoaRepository.SalvarAlteracoesAsync();
+
+            if (!pessoaRemovidaComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o morador.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
         }
 
         return true;
@@ -153,24 +195,24 @@ public class MoradorService : BaseService, IMoradorService
 
     private async Task<bool> ValidarMorador(Morador morador, bool ehAtualizacao = false)
     {
-        if (!ExecutarValidacao(new MoradorValidator(), morador)) return false;
+        if (!ExecutarValidacao(new MoradorValidator(), morador) && !ExecutarValidacao(new PessoaValidator(), morador.Pessoa)) return false;
 
-        if (!string.IsNullOrWhiteSpace(morador.Cpf)
-            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Cpf == morador.Cpf && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(morador.Pessoa.Cpf)
+            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Cpf == morador.Pessoa.Cpf && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
         {
             Notificar("Já existe um morador com este CPF informado.");
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(morador.Nome)
-            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Nome == morador.Nome && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(morador.Pessoa.Nome)
+            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Nome == morador.Pessoa.Nome && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
         {
             Notificar("Já existe um morador com este nome informado.");
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(morador.Email)
-            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Email == morador.Email && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
+        if (!string.IsNullOrWhiteSpace(morador.Pessoa.Email)
+            && (await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Email == morador.Pessoa.Email && (ehAtualizacao ? c.Id != morador.Id : true))).Any())
         {
             Notificar("Já existe um morador com este e-mail informado.");
             return false;
@@ -181,8 +223,8 @@ public class MoradorService : BaseService, IMoradorService
 
     private async Task<bool> TemAssociacoes(int moradorId)
     {
-        var entregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.MoradorId == moradorId);
+        var possuiEntregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.MoradorId == moradorId);
 
-        return entregas.Any();
+        return possuiEntregas.Any();
     }
 }

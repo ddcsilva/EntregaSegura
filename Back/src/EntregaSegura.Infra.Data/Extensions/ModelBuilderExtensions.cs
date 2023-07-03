@@ -10,11 +10,12 @@ public static class ModelBuilderExtensions
     {
         PopularCondominios(modelBuilder);
         PopularUnidades(modelBuilder);
+        PopularPessoas(modelBuilder);
         PopularMoradores(modelBuilder);
         PopularFuncionarios(modelBuilder);
+        PopularUsuarios(modelBuilder);
         PopularTransportadoras(modelBuilder);
         PopularEntregas(modelBuilder);
-        PopularUsuarios(modelBuilder);
     }
 
     private static void PopularCondominios(ModelBuilder modelBuilder)
@@ -65,18 +66,44 @@ public static class ModelBuilderExtensions
         }
     }
 
+    private static void PopularPessoas(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Pessoa>().HasData(new
+        {
+            Id = 1,
+            Nome = "João da Silva",
+            Cpf = "05245246023",
+            Email = "joao.silva@email.com",
+            Telefone = "1234567890"
+        });
+
+        modelBuilder.Entity<Pessoa>().HasData(new
+        {
+            Id = 2,
+            Nome = "Maria da Silva",
+            Cpf = "16522195011",
+            Email = "maria.silva@email.com",
+            Telefone = "1234567891"
+        });
+
+        modelBuilder.Entity<Pessoa>().HasData(new
+        {
+            Id = 3,
+            Nome = "José da Silva",
+            Cpf = "38813954077",
+            Email = "jose.silva@email.com",
+            Telefone = "1234567892"
+        });
+    }
+
     private static void PopularMoradores(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Morador>().HasData(new
         {
             Id = 1,
-            UnidadeId = 1,
-            Nome = "Morador Teste 1",
-            Cpf = "12345678901",
-            Email = "morador1@teste.com",
-            Telefone = "1234567890",
             Ramal = 123,
-            Foto = "foto1.jpg"
+            UnidadeId = 1,
+            PessoaId = 1
         });
     }
 
@@ -85,13 +112,53 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Funcionario>().HasData(new
         {
             Id = 1,
+            DataAdmissao = DateTime.Now,
             CondominioId = 1,
-            Nome = "Funcionário Teste 1",
-            Cpf = "12345678903",
-            Email = "funcionario1@teste.com",
-            Telefone = "1234567892",
-            Cargo = CargoFuncionario.Porteiro,
-            DataAdmissao = DateTime.Now
+            PessoaId = 2
+        });
+
+        modelBuilder.Entity<Funcionario>().HasData(new
+        {
+            Id = 2,
+            DataAdmissao = DateTime.Now,
+            CondominioId = 1,
+            PessoaId = 3
+        });
+    }
+
+    private static void PopularUsuarios(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Usuario>().HasData(new
+        {
+            Id = 1,
+            Login = "joao.silva@email.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Token = "",
+            Foto = "foto1.jpg",
+            Perfil = PerfilUsuario.Morador,
+            PessoaId = 1
+        });
+
+        modelBuilder.Entity<Usuario>().HasData(new
+        {
+            Id = 2,
+            Login = "maria.silva@email.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Token = "",
+            Foto = "foto2.jpg",
+            Perfil = PerfilUsuario.Funcionario,
+            PessoaId = 2
+        });
+
+        modelBuilder.Entity<Usuario>().HasData(new
+        {
+            Id = 3,
+            Login = "jose.silva@email.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Token = "",
+            Foto = "foto3.jpg",
+            Perfil = PerfilUsuario.Sindico,
+            PessoaId = 3
         });
     }
 
@@ -119,20 +186,6 @@ public static class ModelBuilderExtensions
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
             Status = StatusEntrega.Recebida
-        });
-    }
-
-    private static void PopularUsuarios(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Usuario>().HasData(new
-        {
-            Id = 1,
-            Nome = "Danilo Silva",
-            Login = "danilo.silva@msn.com",
-            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
-            Perfil = PerfilUsuario.Administrador,
-            Token = "",
-            Email = "danilo.silva@msn.com"
         });
     }
 }

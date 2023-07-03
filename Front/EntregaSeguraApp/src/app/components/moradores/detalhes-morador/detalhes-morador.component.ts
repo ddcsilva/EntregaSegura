@@ -52,11 +52,11 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
     this.carregarMorador();
     this.validarformulario();
 
-    this.formControl.telefone.valueChanges.subscribe((value: any) => {
+    this.formulario.get('pessoa')?.get('telefone')?.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);
     });
 
-    this.formControl.condominioId.valueChanges.subscribe((condominioId: any) => {
+    this.formulario.get('condominioId')?.valueChanges.subscribe((condominioId: any) => {
       if (condominioId) {
         this.carregarUnidades(condominioId);
       }
@@ -82,7 +82,6 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
     if (this.novoMorador) {
       operacao = this.criarMorador(morador as Morador);
     } else {
-      morador.id = this.moradorId;
       operacao = this.atualizarMorador(morador as Morador);
     }
 
@@ -123,9 +122,10 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
 
       this.moradorService.obterMoradorPorId(this.moradorId).subscribe({
         next: (morador: Morador) => {
+          console.log(morador);
           this.morador = { ...morador };
           this.formulario.patchValue(this.morador);
-          this.titulo = 'Edição: ' + this.morador.nome;
+          this.titulo = 'Edição: ' + this.morador.pessoa.nome;
         },
         error: (error: any) => {
           this.spinner.hide();
@@ -162,12 +162,16 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
+      id: [0],
       condominioId: ['', Validators.required],
       unidadeId: [{ value: '', disabled: true }, Validators.required],
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
-      telefone: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', [Validators.required, Validators.email]],
+      pessoa: this.formBuilder.group({
+        id: [0],
+        nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+        cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
+        telefone: ['', [Validators.required, Validators.minLength(10)]],
+        email: ['', [Validators.required, Validators.email]]
+      }),
       ramal: ['', [Validators.required, Validators.pattern("^[1-9][0-9]*$")]]
     });
   }

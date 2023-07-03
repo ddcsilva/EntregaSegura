@@ -50,69 +50,73 @@
                                 </mat-form-field>
                             </div>
 
-                            <!-- Campo - Nome -->
-                            <div class="col-md-6">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>Nome</mat-label>
-                                    <input formControlName="nome" matInput placeholder="Nome" required>
-                                    <mat-icon matSuffix>person</mat-icon>
-                                    <mat-error *ngIf="formulario.get('nome')?.hasError('required')">
-                                        Por favor, insira um nome.
-                                    </mat-error>
-                                    <mat-error *ngIf="formulario.get('nome')?.hasError('minlength')">
-                                        O tamanho do nome do morador não deve ser menor que 2 caracteres.
-                                    </mat-error>
-                                    <mat-error *ngIf="formulario.get('nome')?.hasError('maxlength')">
-                                        O tamanho do nome do morador não deve ser maior que 100 caracteres.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                            <div formGroupName="pessoa" class="form-group-pessoa">
+                                <div class="row">
+                                <!-- Campo - Nome -->
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Nome</mat-label>
+                                        <input formControlName="nome" matInput placeholder="Nome" required>
+                                        <mat-icon matSuffix>person</mat-icon>
+                                        <mat-error *ngIf="formulario.get('pessoa.nome')?.hasError('required')">
+                                            Por favor, insira um nome.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('pessoa.nome')?.hasError('minlength')">
+                                            O tamanho do nome do morador não deve ser menor que 2 caracteres.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('pessoa.nome')?.hasError('maxlength')">
+                                            O tamanho do nome do morador não deve ser maior que 100 caracteres.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
 
-                            <!-- Campo - CPF -->
-                            <div class="col-md-6">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>CPF</mat-label>
-                                    <input formControlName="cpf" matInput placeholder="CPF" mask="000.000.000-00"
-                                        required>
-                                    <mat-icon matSuffix>credit_card</mat-icon>
-                                    <mat-error *ngIf="formulario.get('cpf')?.hasError('required')">
-                                        Por favor, insira um CPF.
-                                    </mat-error>
-                                    <mat-error *ngIf="formulario.get('cpf')?.hasError('cpfInvalido')">
-                                        O CPF informado é inválido.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                                <!-- Campo - CPF -->
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>CPF</mat-label>
+                                        <input formControlName="cpf" matInput placeholder="CPF" mask="000.000.000-00"
+                                            required>
+                                        <mat-icon matSuffix>credit_card</mat-icon>
+                                        <mat-error *ngIf="formulario.get('pessoa.cpf')?.hasError('required')">
+                                            Por favor, insira um CPF.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('pessoa.cpf')?.hasError('cpfInvalido')">
+                                            O CPF informado é inválido.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
 
-                            <!-- Campo - Telefone -->
-                            <div class="col-md-6">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>Telefone</mat-label>
-                                    <input formControlName="telefone" matInput placeholder="Telefone"
-                                        [mask]="mascaraTelefone" required>
-                                    <mat-icon matSuffix>phone</mat-icon>
-                                    <mat-error *ngIf="formulario.get('telefone')?.hasError('required')">
-                                        Por favor, insira um telefone.
-                                    </mat-error>
-                                    <mat-error *ngIf="formulario.get('telefone')?.hasError('minlength')">
-                                        O telefone informado é inválido.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                                <!-- Campo - Telefone -->
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>Telefone</mat-label>
+                                        <input formControlName="telefone" matInput placeholder="Telefone"
+                                            [mask]="mascaraTelefone" required>
+                                        <mat-icon matSuffix>phone</mat-icon>
+                                        <mat-error *ngIf="formulario.get('pessoa.telefone')?.hasError('required')">
+                                            Por favor, insira um telefone.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('pessoa.telefone')?.hasError('minlength')">
+                                            O telefone informado é inválido.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
 
-                            <!-- Campo - E-mail -->
-                            <div class="col-md-6">
-                                <mat-form-field appearance="standard">
-                                    <mat-label>E-mail</mat-label>
-                                    <input formControlName="email" matInput placeholder="E-mail" email required>
-                                    <mat-icon matSuffix>mail</mat-icon>
-                                    <mat-error *ngIf="formulario.get('email')?.hasError('required')">
-                                        Por favor, insira um e-mail.
-                                    </mat-error>
-                                    <mat-error *ngIf="formulario.get('email')?.hasError('email')">
-                                        O e-mail informado é inválido.
-                                    </mat-error>
-                                </mat-form-field>
+                                <!-- Campo - E-mail -->
+                                <div class="col-md-6">
+                                    <mat-form-field appearance="standard">
+                                        <mat-label>E-mail</mat-label>
+                                        <input formControlName="email" matInput placeholder="E-mail" email required>
+                                        <mat-icon matSuffix>mail</mat-icon>
+                                        <mat-error *ngIf="formulario.get('pessoa.email')?.hasError('required')">
+                                            Por favor, insira um e-mail.
+                                        </mat-error>
+                                        <mat-error *ngIf="formulario.get('pessoa.email')?.hasError('email')">
+                                            O e-mail informado é inválido.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                </div>
                             </div>
 
                             <!-- Campo - Ramal -->
@@ -120,7 +124,7 @@
                                 <mat-form-field appearance="standard">
                                     <mat-label>Ramal</mat-label>
                                     <input formControlName="ramal" matInput placeholder="Ramal" type="text" required
-                                    mask="9999">
+                                        mask="9999">
                                     <mat-icon matSuffix>phone_in_talk</mat-icon>
                                     <mat-error *ngIf="formulario.get('ramal')?.hasError('required')">
                                         Por favor, insira um ramal.

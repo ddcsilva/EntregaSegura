@@ -33,9 +33,17 @@ export class MainComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.spinner.show();
     this.selecionarMensagemDeCarregamento();
-    this.definirDadosUsuario();
+  
+    this.usuarioService.obterNomeDaClaim().subscribe(nome => {
+      this.nomeUsuario = nome;
+    });
+  
+    this.usuarioService.obterPerfilDaClaim().subscribe(perfil => {
+      this.perfilUsuario = perfil;
+    });
+  
     this.spinner.hide();
-  }
+  }  
 
   ngAfterViewInit() {
     this.observer
@@ -83,25 +91,5 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public logout(): void {
     this.autenticacaoService.efetuarLogout();
-  }
-
-  private definirDadosUsuario(): void {
-    this.usuarioService.obterNomeDaClaim().subscribe({
-      next: (nome) => {
-        this.nomeUsuario = nome;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
-
-    this.usuarioService.obterPerfilDaClaim().subscribe({
-      next: (perfil) => {
-        this.perfilUsuario = perfil;
-      },
-      error: (error: any) => {
-        console.log(error);
-      }
-    });
   }
 }

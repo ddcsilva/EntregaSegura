@@ -13,7 +13,7 @@
         <mat-error *ngIf="formulario.get('login')?.hasError('required')">
           Por favor, insira um e-mail.
         </mat-error>
-        <mat-error *ngIf="formulario.get('login')?.hasError('login')">
+        <mat-error *ngIf="formulario.get('login')?.hasError('email')">
           O e-mail informado é inválido.
         </mat-error>
       </mat-form-field>

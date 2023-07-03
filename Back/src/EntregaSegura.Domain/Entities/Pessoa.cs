@@ -1,8 +1,8 @@
 namespace EntregaSegura.Domain.Entities;
 
-public abstract class Pessoa : EntityBase
+public class Pessoa : EntityBase
 {
-    protected Pessoa(string nome, string cpf, string telefone, string email)
+    public Pessoa(string nome, string cpf, string telefone, string email)
     {
         Nome = nome;
         Cpf = cpf;
@@ -10,8 +10,8 @@ public abstract class Pessoa : EntityBase
         Email = email;
     }
 
-    public string Nome { get; protected set; }
-    public string Cpf { get; protected set; }
-    public string Telefone { get; protected set; }
-    public string Email { get; protected set; }
+    public string Nome { get; private set; }
+    public string Cpf { get; private set; }
+    public string Telefone { get; private set; }
+    public string Email { get; private set; }
 }

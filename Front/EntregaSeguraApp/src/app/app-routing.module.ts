@@ -30,11 +30,11 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
+    canActivate: [AutenticacaoGuard],
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent,
-        canActivate: [AutenticacaoGuard]
+        component: DashboardComponent        
       },
       {
         path: 'condominios',

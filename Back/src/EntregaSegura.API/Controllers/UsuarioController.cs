@@ -37,7 +37,7 @@ public class UsuarioController : MainController
             return CustomResponse();
         }
 
-        usuario.Token = _usuarioService.GerarToken(usuarioDTO);
+        usuario.Token = _usuarioService.GerarToken(usuario);
 
         return Ok(new {
             Message = "Usuário autenticado com sucesso",

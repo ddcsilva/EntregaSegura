@@ -137,7 +137,7 @@ public class EntregaService : BaseService, IEntregaService
 
         (string assuntoEmail, string mensagemEmail) = ConstruirEmail(entrega);
 
-        var emailEnviadoComSucesso = await _emailService.EnviarEmailAsync(morador.Email, assuntoEmail, mensagemEmail);
+        var emailEnviadoComSucesso = await _emailService.EnviarEmailAsync(morador.Pessoa.Email, assuntoEmail, mensagemEmail);
 
         if (!emailEnviadoComSucesso)
         {
@@ -229,7 +229,7 @@ public class EntregaService : BaseService, IEntregaService
     private (string, string) ConstruirEmail(Entrega entrega)
     {
         string assuntoEmail = "Entrega pendente de retirada";
-        string mensagemEmail = $"Olá {entrega.Morador.Nome},\n\n" +
+        string mensagemEmail = $"Olá {entrega.Morador.Pessoa.Nome},\n\n" +
                                $"Você possui uma entrega pendente de retirada!\n\n" +
                                $"A entrega foi realizada pela transportadora {entrega.Transportadora.Nome} no dia {entrega.DataRecebimento}\n" +
                                $"Pedimos, por gentileza, que retire sua entrega o quanto antes.\n\n" +
