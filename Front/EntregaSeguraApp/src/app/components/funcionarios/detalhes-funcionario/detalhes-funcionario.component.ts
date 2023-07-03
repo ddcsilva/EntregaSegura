@@ -50,7 +50,7 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
     this.carregarFuncionario();
     this.validarformulario();
 
-    this.formControl.telefone.valueChanges.subscribe((value: any) => {
+    this.formulario.get('pessoa')?.get('telefone')?.valueChanges.subscribe((value: any) => {
       this.atualizarMascaraTelefone(value);
     });
   }
@@ -122,7 +122,7 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
         next: (funcionario: Funcionario) => {
           this.funcionario = { ...funcionario };
           this.formulario.patchValue(this.funcionario);
-          this.titulo = 'Edição: ' + this.funcionario.nome;
+          this.titulo = 'Edição: ' + this.funcionario.pessoa.nome;
         },
         error: (error: any) => {
           this.spinner.hide();
@@ -147,11 +147,15 @@ export class DetalhesFuncionarioComponent implements OnInit, OnDestroy {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
+      id: [0],
       condominioId: ['', Validators.required],
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
-      telefone: ['', [Validators.required, Validators.minLength(10)]],
-      email: ['', [Validators.required, Validators.email]],
+      pessoa: this.formBuilder.group({
+        id: [0],
+        nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+        cpf: ['', [Validators.required, ValidadorCampos.ValidaCPF]],
+        telefone: ['', [Validators.required, Validators.minLength(10)]],
+        email: ['', [Validators.required, Validators.email]]
+      }),
       cargo: ['', Validators.required],
       dataAdmissao: ['', Validators.required],
       dataDemissao: ['']
