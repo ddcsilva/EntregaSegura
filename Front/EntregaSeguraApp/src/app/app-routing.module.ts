@@ -16,6 +16,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 import { LoginComponent } from './components/login/login.component';
 import { AutenticacaoGuard } from './helpers/guards/autenticacao.guard';
+import { PossuiPerfilGuard } from './helpers/guards/possui-perfil.guard';
 
 const routes: Routes = [
   {
@@ -34,11 +35,15 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: DashboardComponent        
+        component: DashboardComponent
       },
       {
         path: 'condominios',
-        component: CondominiosComponent
+        component: CondominiosComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Funcionario']
+        }
       },
       {
         path: 'condominios/:id',
