@@ -26,7 +26,7 @@ public class FuncionariosController : MainController
     [HttpGet("{id:int}")]
     public async Task<ActionResult<FuncionarioDTO>> ObterFuncionarioPorId(int id)
     {
-        var funcionario = await _funcionarioService.ObterFuncionarioPorIdAsync(id);
+        var funcionario = await _funcionarioService.ObterFuncionarioPorIdECondominioAsync(id);
 
         if (funcionario == null) return NotFound();
 
