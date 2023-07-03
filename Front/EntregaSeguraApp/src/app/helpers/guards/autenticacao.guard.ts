@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +9,7 @@ export class AutenticacaoGuard implements CanActivate {
 
   constructor(
     private autenticacaoService: AutenticacaoService, 
-    private router: Router,
-    private toastr: ToastrService) { }
+    private router: Router) { }
 
   canActivate(): boolean {
     if (this.autenticacaoService.usuarioEstaAutenticado()) {

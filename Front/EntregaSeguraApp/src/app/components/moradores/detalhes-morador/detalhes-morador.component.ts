@@ -122,7 +122,6 @@ export class DetalhesMoradorComponent implements OnInit, OnDestroy {
 
       this.moradorService.obterMoradorPorId(this.moradorId).subscribe({
         next: (morador: Morador) => {
-          console.log(morador);
           this.morador = { ...morador };
           this.formulario.patchValue(this.morador);
           this.titulo = 'Edição: ' + this.morador.pessoa.nome;

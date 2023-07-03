@@ -6,7 +6,6 @@ import { NavigationEnd, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
-import { ToastrService } from 'ngx-toastr';
 import { UsuarioService } from '@app/services/usuario.service';
 
 @UntilDestroy()
@@ -85,7 +84,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     'Finalizando os últimos detalhes...'
   ];
 
-  public get mensagemDeCarregamento(): string {
+  get mensagemDeCarregamento(): string {
     return this.mensagemDeCarregamentoSelecionada;
   }
 
