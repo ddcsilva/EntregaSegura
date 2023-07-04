@@ -71,9 +71,10 @@ import { registerLocaleData } from '@angular/common';
 import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginComponent } from './components/login/login.component';
 import { TokenInterceptor } from './helpers/interceptors/token.interceptor';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { LayoutModule } from '@angular/cdk/layout';
 
 registerLocaleData(ptBr)
 
@@ -98,8 +99,8 @@ registerLocaleData(ptBr)
     MainComponent,
     EntregasComponent,
     DetalhesEntregaComponent,
-    DashboardComponent,
-    LoginComponent
+    LoginComponent,
+    DashboardComponent
   ],
   imports: [
     // Angular Modules
@@ -149,7 +150,8 @@ registerLocaleData(ptBr)
     // Third Party Modules
     NgxMaskModule.forRoot(),
     NgxSpinnerModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    LayoutModule
   ],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

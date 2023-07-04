@@ -24,7 +24,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             Nome = "Condomínio Boa Vista",
-            Cnpj = "55787865000131",
+            Cnpj = "04958718000146",
             Telefone = "1140028922",
             Email = "contato@boavista.com.br",
             QuantidadeBlocos = 2,
@@ -71,6 +71,15 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Pessoa>().HasData(new
         {
             Id = 1,
+            Nome = "Administrador",
+            Cpf = "00000000000",
+            Email = "sistema.entrega.segura@gmail.com",
+            Telefone = "0000000000"
+        });
+
+        modelBuilder.Entity<Pessoa>().HasData(new
+        {
+            Id = 2,
             Nome = "João da Silva",
             Cpf = "05245246023",
             Email = "joao.silva@email.com",
@@ -79,7 +88,7 @@ public static class ModelBuilderExtensions
 
         modelBuilder.Entity<Pessoa>().HasData(new
         {
-            Id = 2,
+            Id = 3,
             Nome = "Maria da Silva",
             Cpf = "16522195011",
             Email = "maria.silva@email.com",
@@ -88,7 +97,7 @@ public static class ModelBuilderExtensions
 
         modelBuilder.Entity<Pessoa>().HasData(new
         {
-            Id = 3,
+            Id = 4,
             Nome = "José da Silva",
             Cpf = "38813954077",
             Email = "jose.silva@email.com",
@@ -103,7 +112,7 @@ public static class ModelBuilderExtensions
             Id = 1,
             Ramal = 123,
             UnidadeId = 1,
-            PessoaId = 1
+            PessoaId = 2
         });
     }
 
@@ -112,17 +121,19 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Funcionario>().HasData(new
         {
             Id = 1,
-            DataAdmissao = DateTime.Now,
+            DataAdmissao = DateTime.Now.Date,
+            Cargo = CargoFuncionario.Porteiro,
             CondominioId = 1,
-            PessoaId = 2
+            PessoaId = 3
         });
 
         modelBuilder.Entity<Funcionario>().HasData(new
         {
             Id = 2,
-            DataAdmissao = DateTime.Now,
+            DataAdmissao = DateTime.Now.Date,
+            Cargo = CargoFuncionario.Sindico,
             CondominioId = 1,
-            PessoaId = 3
+            PessoaId = 4
         });
     }
 
@@ -131,34 +142,45 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 1,
-            Login = "joao.silva@email.com",
+            Login = "admin@localhost",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
             Token = "",
-            Foto = "foto1.jpg",
-            Perfil = PerfilUsuario.Morador,
+            Foto = "",
+            Perfil = PerfilUsuario.Administrador,
             PessoaId = 1
         });
 
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 2,
-            Login = "maria.silva@email.com",
+            Login = "joao.silva@email.com",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
             Token = "",
-            Foto = "foto2.jpg",
-            Perfil = PerfilUsuario.Funcionario,
+            Foto = "foto1.jpg",
+            Perfil = PerfilUsuario.Morador,
             PessoaId = 2
         });
 
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 3,
+            Login = "maria.silva@email.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Token = "",
+            Foto = "foto2.jpg",
+            Perfil = PerfilUsuario.Funcionario,
+            PessoaId = 3
+        });
+
+        modelBuilder.Entity<Usuario>().HasData(new
+        {
+            Id = 4,
             Login = "jose.silva@email.com",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
             Token = "",
             Foto = "foto3.jpg",
             Perfil = PerfilUsuario.Sindico,
-            PessoaId = 3
+            PessoaId = 4
         });
     }
 
@@ -168,7 +190,7 @@ public static class ModelBuilderExtensions
         {
             Id = 1,
             Nome = "Transportadora Teste 1",
-            Cnpj = "12345678912347",
+            Cnpj = "60674818000111",
             Telefone = "1234567894",
             Email = "transportadora1@teste.com"
         });
@@ -182,10 +204,35 @@ public static class ModelBuilderExtensions
             TransportadoraId = 1,
             MoradorId = 1,
             FuncionarioId = 1,
-            DataRecebimento = DateTime.Now,
+            DataRecebimento = DateTime.Now.Date,
             Descricao = "Entrega Teste 1",
             Observacao = "Observação Teste 1",
             Status = StatusEntrega.Recebida
+        });
+
+        modelBuilder.Entity<Entrega>().HasData(new
+        {
+            Id = 2,
+            TransportadoraId = 1,
+            MoradorId = 1,
+            FuncionarioId = 2,
+            DataRecebimento = DateTime.Now.Date,
+            DataRetirada = DateTime.Now.Date,
+            Descricao = "Entrega Teste 2",
+            Observacao = "Observação Teste 2",
+            Status = StatusEntrega.Retirada
+        });
+
+        modelBuilder.Entity<Entrega>().HasData(new
+        {
+            Id = 3,
+            TransportadoraId = 1,
+            MoradorId = 1,
+            FuncionarioId = 2,
+            DataRecebimento = DateTime.Now.Date,
+            Descricao = "Entrega Teste 3",
+            Observacao = "Observação Teste 3",
+            Status = StatusEntrega.Notificada
         });
     }
 }

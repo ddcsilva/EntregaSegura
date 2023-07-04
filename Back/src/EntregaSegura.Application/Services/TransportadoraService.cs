@@ -137,9 +137,9 @@ public class TransportadoraService : BaseService, ITransportadoraService
         return true;
     }
 
-    private async Task<bool> TemAssociacoes(int entregaId)
+    private async Task<bool> TemAssociacoes(int transportadoraId)
     {
-        var temEntregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.Id == entregaId);
+        var temEntregas = await _entregaRepository.BuscarPorCondicaoAsync(e => e.TransportadoraId == transportadoraId);
 
         return temEntregas.Any();
     }

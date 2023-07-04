@@ -45,7 +45,7 @@
                     <button mat-icon-button class="button-verde" *ngIf="entrega.status !== 'Retirada'" (click)="confirmarRetirada(entrega.id)">
                         <mat-icon>check_circle</mat-icon>
                     </button>                    
-                    <button mat-icon-button (click)="notificarEntrega(entrega.id)">
+                    <button mat-icon-button *ngIf="entrega.status !== 'Retirada'" (click)="notificarEntrega(entrega.id)">
                         <mat-icon>email</mat-icon>
                     </button>                    
                     <button mat-icon-button color="primary" (click)="editarEntrega(entrega.id)">

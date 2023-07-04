@@ -127,7 +127,7 @@ public class EntregaService : BaseService, IEntregaService
             return false;
         }
 
-        var morador = await _moradorRepository.BuscarPorIdAsync(entrega.MoradorId);
+        var morador = await _moradorRepository.ObterMoradorPorIdComUnidadeECondominioAsync(entrega.MoradorId);
 
         if (morador == null)
         {
@@ -231,7 +231,7 @@ public class EntregaService : BaseService, IEntregaService
         string assuntoEmail = "Entrega pendente de retirada";
         string mensagemEmail = $"Olá {entrega.Morador.Pessoa.Nome},\n\n" +
                                $"Você possui uma entrega pendente de retirada!\n\n" +
-                               $"A entrega foi realizada pela transportadora {entrega.Transportadora.Nome} no dia {entrega.DataRecebimento}\n" +
+                               $"A entrega foi realizada pela transportadora {entrega.Transportadora.Nome} no dia {entrega.DataRecebimento} \n\n" +
                                $"Pedimos, por gentileza, que retire sua entrega o quanto antes.\n\n" +
                                $"Atenciosamente,\n" +
                                $"Equipe Entrega Segura";

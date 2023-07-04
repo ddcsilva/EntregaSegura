@@ -11,6 +11,7 @@ public class FuncionarioDTO
     public DateTime DataAdmissao { get; set; }
 
     public DateTime? DataDemissao { get; set; }
+    public string Cargo { get; set; }
     public int CondominioId { get; set; }
     public string NomeCondominio { get; set; }
     public PessoaDTO Pessoa { get; set; }

@@ -158,9 +158,9 @@ export class DetalhesEntregaComponent implements OnInit {
       transportadoraId: ['', Validators.required],
       moradorId: ['', Validators.required],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      status: ['', Validators.required],
+      status: [{value: this.novaEntrega ? StatusEntrega.Recebida : '', disabled: true}, Validators.required],
       dataRecebimento: [{ value: this.novaEntrega ? new Date() : '', disabled: this.novaEntrega }],
-      dataRetirada: [''],
+      dataRetirada: [{value: null, disabled: true}],
     });
   }
 

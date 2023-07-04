@@ -42,52 +42,96 @@ const routes: Routes = [
         component: CondominiosComponent,
         canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
         data: {
-          perfis: ['Administrador', 'Funcionario']
+          perfis: ['Administrador', 'Sindico']
         }
       },
       {
         path: 'condominios/:id',
-        component: DetalhesCondominioComponent
+        component: DetalhesCondominioComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico']
+        }
       },
       {
         path: 'unidades',
-        component: UnidadesComponent
+        component: UnidadesComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico']
+        }
       },
       {
         path: 'unidades/:id',
-        component: DetalhesUnidadeComponent
+        component: DetalhesUnidadeComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico']
+        }
       },
       {
         path: 'moradores',
-        component: MoradoresComponent
+        component: MoradoresComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico']
+        }
       },
       {
         path: 'moradores/:id',
-        component: DetalhesMoradorComponent
+        component: DetalhesMoradorComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico']
+        }
       },
       {
         path: 'entregas',
-        component: EntregasComponent
+        component: EntregasComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico', 'Funcionario']
+        }
       },
       {
         path: 'entregas/:id',
-        component: DetalhesEntregaComponent
+        component: DetalhesEntregaComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico', 'Funcionario']
+        }
       },
       {
         path: 'funcionarios',
-        component: FuncionariosComponent
+        component: FuncionariosComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador']
+        }
       },
       {
         path: 'funcionarios/:id',
-        component: DetalhesFuncionarioComponent
+        component: DetalhesFuncionarioComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador']
+        }
       },
       {
         path: 'transportadoras',
-        component: TransportadorasComponent
+        component: TransportadorasComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico', 'Funcionario']
+        }
       },
       {
         path: 'transportadoras/:id',
-        component: DetalhesTransportadoraComponent
+        component: DetalhesTransportadoraComponent,
+        canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
+        data: {
+          perfis: ['Administrador', 'Sindico', 'Funcionario']
+        }
       }
     ]
   },

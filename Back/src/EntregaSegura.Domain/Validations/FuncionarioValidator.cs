@@ -8,7 +8,7 @@ public class FuncionarioValidator : AbstractValidator<Funcionario>
 {
     public FuncionarioValidator()
     {
-        RuleFor(c => c.DataAdmissao)
+        RuleFor(c => c.DataAdmissao.Date)
             .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
             .LessThanOrEqualTo(DateTime.Today).WithMessage("O campo {PropertyName} precisa ser menor ou igual à data atual");
 
