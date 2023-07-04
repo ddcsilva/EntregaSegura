@@ -4,13 +4,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="wwwroot\**" />
+    <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="wwwroot\**" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.16" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EntregaSegura.Infra.IoC\EntregaSegura.Infra.IoC.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 </Project>
