@@ -65,7 +65,6 @@ O projeto inclui testes unitários tanto para o back-end (.NET) quanto para o fr
   - Extensions: Extensões personalizadas de infraestrutura.
   - Migrations: Migrações do banco de dados geradas pelo Entity Framework Core.
   - Repositories: Implementações dos repositórios definidos na camada de Domínio.
-  - UnitOfWork: Implementação do padrão Unit of Work para gerenciar transações.
 
 ## :hammer_and_wrench: Instalação
 
@@ -75,14 +74,11 @@ O projeto inclui testes unitários tanto para o back-end (.NET) quanto para o fr
 
 (Informações de uso serão adicionadas posteriormente)
 
-## :bust_in_silhouette: Desenvolvedor
+## :bust_in_silhouette: Desenvolvedores
 
-Danilo Silva - [GitHub](https://github.com/ddcsilva)
+* Danilo Silva - [GitHub](https://github.com/ddcsilva) - [Email](danilo.silva@msn.com)
+* Jamil Zazu - [GitHub](https://github.com/jamilzazu) - [Email](jamillzazu@gmail.com)
 
 ## :balance_scale: Licença
 
 Este projeto é disponibilizado sob a licença MIT License. Essa licença permite o uso, a cópia, a modificação e a distribuição do código-fonte para fins não comerciais, desde que a atribuição seja feita ao autor original.
-
-## :mailbox: Contato
-
-danilo.silva@msn.com
