@@ -6,9 +6,9 @@ public sealed class Condominio : Empresa
     private readonly IList<Funcionario> _funcionarios;
 
     public Condominio(
-        string nome, 
-        string cnpj, 
-        string telefone, 
+        string nome,
+        string cnpj,
+        string telefone,
         string email,
         int quantidadeBlocos,
         int quantidadeUnidades,
@@ -44,6 +44,7 @@ public sealed class Condominio : Empresa
     public string Cidade { get; private set; }
     public string Estado { get; private set; }
 
+    // Propriedades de Navegação
     public IReadOnlyCollection<Unidade> Unidades => _unidades.ToArray();
     public IReadOnlyCollection<Funcionario> Funcionarios => _funcionarios.ToArray();
 }

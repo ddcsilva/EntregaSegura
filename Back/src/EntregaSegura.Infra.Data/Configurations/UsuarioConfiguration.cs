@@ -33,40 +33,34 @@ public class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
             .HasColumnType("varchar(50)")
             .HasComment("Senha do usuário");
 
-        builder.Property(u => u.Token)
-            .HasColumnName("USR_TOKEN")
-            .HasColumnOrder(4)
-            .HasColumnType("varchar(100)")
-            .HasComment("Token de acesso do usuário");
-
         builder.Property(u => u.Perfil)
             .HasColumnName("USR_PERFIL")
-            .HasColumnOrder(5)
+            .HasColumnOrder(4)
             .IsRequired()
             .HasComment("Perfil de acesso do usuário");
 
         builder.Property(u => u.Foto)
             .HasColumnName("USR_FOTO")
-            .HasColumnOrder(6)
+            .HasColumnOrder(5)
             .HasColumnType("varchar(100)")
             .HasComment("Foto do usuário");
 
         builder.Property(u => u.PessoaId)
             .HasColumnName("USR_PESSOA_ID")
-            .HasColumnOrder(7)
+            .HasColumnOrder(6)
             .IsRequired()
             .HasComment("Chave estrangeira da pessoa do usuário");
 
         builder.Property(u => u.DataCriacao)
             .HasColumnName("USR_DATA_CRIACAO")
-            .HasColumnOrder(8)
+            .HasColumnOrder(7)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de criação do usuário");
 
         builder.Property(u => u.DataAtualizacao)
             .HasColumnName("USR_DATA_ATUALIZACAO")
-            .HasColumnOrder(9)
+            .HasColumnOrder(8)
             .IsRequired()
             .HasDefaultValueSql("GETDATE()")
             .HasComment("Data de atualização do usuário");

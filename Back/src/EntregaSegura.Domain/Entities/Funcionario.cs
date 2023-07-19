@@ -20,12 +20,11 @@ public sealed class Funcionario : EntityBase
     public DateTime DataAdmissao { get; private set; }
     public DateTime? DataDemissao { get; private set; }
     public CargoFuncionario Cargo { get; private set; }
-
     public int CondominioId { get; private set; }
-    public Condominio Condominio { get; private set; }
-
     public int PessoaId { get; private set; }
-    public Pessoa Pessoa { get; private set; }
 
+    // Propriedades de Navegação
+    public Condominio Condominio { get; private set; }
+    public Pessoa Pessoa { get; private set; }
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToList();
 }

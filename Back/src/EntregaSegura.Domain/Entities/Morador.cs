@@ -14,12 +14,11 @@ public sealed class Morador : EntityBase
     }
 
     public int Ramal { get; private set; }
-    
     public int UnidadeId { get; private set; }
-    public Unidade Unidade { get; private set; }
-    
     public int PessoaId { get; private set; }
-    public Pessoa Pessoa { get; private set; }
 
+    // Propriedades de Navegação
+    public Unidade Unidade { get; private set; }
+    public Pessoa Pessoa { get; private set; }
     public IReadOnlyCollection<Entrega> Entregas => _entregas.ToArray();
 }

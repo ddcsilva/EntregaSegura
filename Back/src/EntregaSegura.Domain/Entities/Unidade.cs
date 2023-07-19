@@ -10,16 +10,16 @@ public sealed class Unidade : EntityBase
         Andar = andar;
         Bloco = bloco;
         CondominioId = condominioId;
-        
+
         _moradores = new List<Morador>();
     }
 
     public int Numero { get; private set; }
     public int Andar { get; private set; }
     public int Bloco { get; private set; }
-    
     public int CondominioId { get; private set; }
-    public Condominio Condominio { get; private set; }
 
+    // Propriedades de Navegação
+    public Condominio Condominio { get; private set; }
     public IReadOnlyCollection<Morador> Moradores => _moradores.ToArray();
 }
