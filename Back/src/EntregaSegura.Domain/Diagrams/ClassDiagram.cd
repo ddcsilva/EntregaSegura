@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="EntregaSegura.Domain.Entities.Condominio">
+    <Position X="10.75" Y="7" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>CAgAAAAAECQAAQIEAAAAAACAAAAgQAAAAAAAAAABAAg=</HashCode>
+      <FileName>Entities\Condominio.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Empresa">
+    <Position X="12.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Entities\Empresa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.EntityBase">
+    <Position X="14" Y="0.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Entities\EntityBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Entrega">
+    <Position X="22" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEAAQDAABAAAAAAAQAAABgBAAAAAAAAAAAAhA=</HashCode>
+      <FileName>Entities\Entrega.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Funcionario">
+    <Position X="6" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAAAAAAEAgAAAAAAAAUAAAABAAAACABAAAA=</HashCode>
+      <FileName>Entities\Funcionario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Morador">
+    <Position X="14.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EIAAAAAAAAAAAAAkAQAAQAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Morador.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Pessoa">
+    <Position X="19.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgCAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAA=</HashCode>
+      <FileName>Entities\Pessoa.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Transportadora">
+    <Position X="13.75" Y="7" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Transportadora.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Unidade">
+    <Position X="9.25" Y="3.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAIAAACABBAAA=</HashCode>
+      <FileName>Entities\Unidade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EntregaSegura.Domain.Entities.Usuario">
+    <Position X="17.5" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AIAAAAAAAAAAAAAEAQAAAAAAACAAAAAAAAAQQAAAAAA=</HashCode>
+      <FileName>Entities\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
