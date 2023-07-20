@@ -1,0 +1,93 @@
+@startuml
+
+left to right direction
+
+actor Morador as morador
+actor Funcionario as funcionario
+actor Sindico as sindico
+actor Administrador as administrador
+
+usuário ---- (Realizar login)
+
+(Realizar login) -- administrador
+(Realizar login) -- sindico
+(Realizar login) -- funcionario
+(Realizar login) -- morador
+
+administrador -up-|> sindico
+sindico -up-|> funcionario
+funcionario -right-|> morador
+
+usecase "Listar Funcionários" as listar_funcionarios
+usecase "Cadastrar Funcionário" as cadastrar_funcionario
+usecase "Editar Funcionário" as editar_funcionario
+usecase "Deletar Funcionário" as deletar_funcionario
+
+usecase "Listar Condomínios" as listar_condominios
+usecase "Cadastrar Condomínio" as cadastrar_condominio
+usecase "Editar Condomínio" as editar_condominio
+usecase "Deletar Condomínio" as deletar_condominio
+
+usecase "Listar Unidades" as listar_unidades
+usecase "Cadastrar Unidade" as cadastrar_unidade
+usecase "Editar Unidade" as editar_unidade
+usecase "Deletar Unidade" as deletar_unidade
+
+usecase "Listar Moradores" as listar_moradores
+usecase "Cadastrar Morador" as cadastrar_morador
+usecase "Editar Morador" as editar_morador
+usecase "Deletar Morador" as deletar_morador
+usecase "Consultar Endereço por CEP" as consultar_endereco
+
+usecase "Listar Entregas" as listar_entregas
+usecase "Cadastrar Entrega" as cadastrar_entrega
+usecase "Editar Entrega" as editar_entrega
+usecase "Deletar Entrega" as deletar_entrega
+usecase "Confirmar Entrega" as confirmar_entrega
+usecase "Notificar Morador" as notificar_entrega
+
+usecase "Listar Transportadoras" as listar_transportadoras
+usecase "Cadastrar Transportadora" as cadastrar_transportadora
+usecase "Editar Transportadora" as editar_transportadora
+usecase "Deletar Transportadora" as deletar_transportadora
+
+usecase “Carregar Dashboard” as carregar_dashboard
+
+administrador --> listar_funcionarios
+administrador --> cadastrar_funcionario
+administrador --> editar_funcionario
+administrador --> deletar_funcionario
+
+sindico --> listar_condominios
+sindico --> cadastrar_condominio
+sindico --> editar_condominio
+sindico --> deletar_condominio
+
+cadastrar_condominio ..> consultar_endereco : <<extend>>
+editar_condominio ..> consultar_endereco : <<extend>>
+
+sindico --> listar_unidades
+sindico --> cadastrar_unidade
+sindico --> editar_unidade
+sindico --> deletar_unidade
+
+sindico --> listar_moradores
+sindico --> cadastrar_morador
+sindico --> editar_morador
+sindico --> deletar_morador
+
+funcionario -up-> listar_entregas
+funcionario -up-> cadastrar_entrega
+funcionario -up-> editar_entrega
+funcionario -up-> deletar_entrega
+funcionario -up-> notificar_entrega
+funcionario -up-> confirmar_entrega
+
+funcionario -up-> listar_transportadoras
+funcionario -up-> cadastrar_transportadora
+funcionario -up-> editar_transportadora
+funcionario -up-> deletar_transportadora
+
+morador -up-> carregar_dashboard
+
+@enduml
