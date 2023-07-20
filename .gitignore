@@ -436,3 +436,4 @@ FodyWeavers.xsd
 
 .vscode/
 Migrations/
+.DS_Store
