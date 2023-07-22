@@ -8,12 +8,12 @@
     <form [formGroup]="formulario" (ngSubmit)="submeterFormulario()">
       <mat-form-field class="login-input" appearance="outline">
         <mat-label>E-mail</mat-label>
-        <input formControlName="login" matInput email required>
+        <input formControlName="login" matInput required>
         <mat-icon matSuffix>mail_outline</mat-icon>
         <mat-error *ngIf="formulario.get('login')?.hasError('required')">
           Por favor, insira um e-mail.
         </mat-error>
-        <mat-error *ngIf="formulario.get('login')?.hasError('email')">
+        <mat-error *ngIf="formulario.get('login')?.hasError('loginInvalido')">
           O e-mail informado é inválido.
         </mat-error>
       </mat-form-field>

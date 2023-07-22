@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoginValidator } from '@app/helpers/validators/login-validator.validator';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
 import { UsuarioService } from '@app/services/usuario.service';
 import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
@@ -19,7 +20,6 @@ export class LoginComponent implements OnInit {
     private readonly formBuilder: FormBuilder,
     private readonly router: Router,
     private readonly autenticacaoService: AutenticacaoService,
-    private readonly usuarioService: UsuarioService,
     private readonly toastr: ToastrService,
     private readonly tratamentoErrosService: TratamentoErrosService
   ) { }
@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
-      login: ['', [Validators.required, Validators.email]],
+      login: ['', [Validators.required, LoginValidator()]],
       senha: ['', [Validators.required]]
     });
   }
