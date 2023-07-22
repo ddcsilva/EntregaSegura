@@ -142,8 +142,8 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 1,
-            Login = "admin@localhost",
-            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Login = "admin",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
             Token = "",
             Foto = "",
             Perfil = PerfilUsuario.Administrador,
@@ -153,8 +153,8 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 2,
-            Login = "joao.silva@email.com",
-            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Login = "danilo.silva@msn.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
             Token = "",
             Foto = "foto1.jpg",
             Perfil = PerfilUsuario.Morador,
@@ -164,8 +164,8 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Usuario>().HasData(new
         {
             Id = 3,
-            Login = "maria.silva@email.com",
-            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Login = "jamillzazu@gmail.com",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
             Token = "",
             Foto = "foto2.jpg",
             Perfil = PerfilUsuario.Funcionario,
@@ -176,7 +176,7 @@ public static class ModelBuilderExtensions
         {
             Id = 4,
             Login = "jose.silva@email.com",
-            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj",
+            Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
             Token = "",
             Foto = "foto3.jpg",
             Perfil = PerfilUsuario.Sindico,
