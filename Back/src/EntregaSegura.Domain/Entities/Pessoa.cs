@@ -1,6 +1,6 @@
 namespace EntregaSegura.Domain.Entities;
 
-public abstract class Pessoa : EntityBase
+public class Pessoa : EntityBase
 {
     public Pessoa(string nome, string cpf, string telefone, string email)
     {
