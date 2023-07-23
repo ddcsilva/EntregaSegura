@@ -10,7 +10,7 @@ import { Unidade } from '../models/unidade.model';
   providedIn: 'root'
 })
 export class UnidadeService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,
@@ -31,7 +31,7 @@ export class UnidadeService {
     const url = `${this.urlBaseApi}/unidades/por-condominio/${condominioId}`;
     return this.fazerRequisicao(() => this.httpClient.get<Unidade[]>(url));
   }
-  
+
   public criar(unidade: Unidade): Observable<Unidade> {
     const url = `${this.urlBaseApi}/unidades`;
     return this.fazerRequisicao(() => this.httpClient.post<Unidade>(url, unidade));

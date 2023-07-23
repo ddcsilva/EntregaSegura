@@ -9,7 +9,7 @@ import { TratamentoErrosService } from '../shared/services/tratamento-erros.serv
   providedIn: 'root'
 })
 export class CondominioService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,

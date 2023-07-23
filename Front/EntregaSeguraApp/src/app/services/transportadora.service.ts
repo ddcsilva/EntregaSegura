@@ -9,7 +9,7 @@ import { Transportadora } from '../models/transportadora.model';
   providedIn: 'root'
 })
 export class TransportadoraService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,

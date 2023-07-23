@@ -9,7 +9,7 @@ import { Morador } from '../models/morador.model';
   providedIn: 'root'
 })
 export class MoradorService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,

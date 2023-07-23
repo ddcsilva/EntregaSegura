@@ -9,7 +9,7 @@ import { Observable, catchError } from 'rxjs';
   providedIn: 'root'
 })
 export class EntregaService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,

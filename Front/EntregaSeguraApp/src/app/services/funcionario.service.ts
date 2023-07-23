@@ -9,7 +9,7 @@ import { Funcionario } from '../models/funcionario.model';
   providedIn: 'root'
 })
 export class FuncionarioService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
 
   constructor(
     private httpClient: HttpClient,
