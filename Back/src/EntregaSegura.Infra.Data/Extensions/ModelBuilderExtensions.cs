@@ -80,18 +80,18 @@ public static class ModelBuilderExtensions
         modelBuilder.Entity<Pessoa>().HasData(new
         {
             Id = 2,
-            Nome = "João da Silva",
+            Nome = "Danilo Silva",
             Cpf = "05245246023",
-            Email = "joao.silva@email.com",
+            Email = "danilo.silva@msn.com",
             Telefone = "1234567890"
         });
 
         modelBuilder.Entity<Pessoa>().HasData(new
         {
             Id = 3,
-            Nome = "Maria da Silva",
+            Nome = "Jamil Zazu",
             Cpf = "16522195011",
-            Email = "maria.silva@email.com",
+            Email = "jamillzazu@gmail.com",
             Telefone = "1234567891"
         });
 
@@ -144,7 +144,6 @@ public static class ModelBuilderExtensions
             Id = 1,
             Login = "admin",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
-            Token = "",
             Foto = "",
             Perfil = PerfilUsuario.Administrador,
             PessoaId = 1
@@ -155,8 +154,7 @@ public static class ModelBuilderExtensions
             Id = 2,
             Login = "danilo.silva@msn.com",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
-            Token = "",
-            Foto = "foto1.jpg",
+            Foto = "Resources/Imagens/202ba371-ab78-43cc-a242-8738fd605914.jpg",
             Perfil = PerfilUsuario.Morador,
             PessoaId = 2
         });
@@ -166,8 +164,7 @@ public static class ModelBuilderExtensions
             Id = 3,
             Login = "jamillzazu@gmail.com",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
-            Token = "",
-            Foto = "foto2.jpg",
+            Foto = "Resources/Imagens/71650833-43a9-4d8d-a251-a66235ac5471.jpg",
             Perfil = PerfilUsuario.Funcionario,
             PessoaId = 3
         });
@@ -177,8 +174,7 @@ public static class ModelBuilderExtensions
             Id = 4,
             Login = "jose.silva@email.com",
             Senha = "b8gf2lXaUxY/ZK9dbzVkUb5Lgg5T4jMdow+QosWpBI4kX8Lj", // Senha: 123456
-            Token = "",
-            Foto = "foto3.jpg",
+            Foto = "Resources/Imagens/ff838ac2-86c1-4c23-bc06-156471459995.jpg",
             Perfil = PerfilUsuario.Sindico,
             PessoaId = 4
         });
