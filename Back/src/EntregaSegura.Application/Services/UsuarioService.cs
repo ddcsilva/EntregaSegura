@@ -32,6 +32,31 @@ public class UsuarioService : BaseService, IUsuarioService
         return _mapper.Map<UsuarioDTO>(usuario);
     }
 
+    public async Task<bool> AtualizarFotoUsuarioAsync(string login, string caminhoFoto)
+    {
+        var usuario = await _usuarioRepository.ObterUsuarioPorLoginComDadosPessoaAsync(login, true);
+
+        if (usuario == null)
+        {
+            Notificar("Usuário não encontrado.");
+            return false;
+        }
+
+        usuario.AtualizarFoto(caminhoFoto);
+
+        _usuarioRepository.Atualizar(usuario);
+
+        var atualizadoComSucesso = await _usuarioRepository.SalvarAlteracoesAsync();
+
+        if (!atualizadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao atualizar a foto do usuário.");
+            return false;
+        }
+
+        return true;
+    }
+
     public async Task<UsuarioDTO> CriarContaUsuarioAsync(UsuarioDTO usuarioDTO)
     {
         var usuario = _mapper.Map<Usuario>(usuarioDTO);
@@ -78,7 +103,8 @@ public class UsuarioService : BaseService, IUsuarioService
         {
             new Claim("Nome", usuarioDTO.Pessoa.Nome),
             new Claim("Email", usuarioDTO.Pessoa.Email),
-            new Claim("Perfil", perfil)
+            new Claim("Perfil", perfil),
+            new Claim("Foto", usuarioDTO.Foto ?? "")
         });
 
         var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -137,5 +163,5 @@ public class UsuarioService : BaseService, IUsuarioService
         }
 
         return true;
-    }    
+    }
 }

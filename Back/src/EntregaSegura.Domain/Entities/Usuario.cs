@@ -21,4 +21,9 @@ public sealed class Usuario : EntityBase
 
     // Propriedade de Navegação
     public Pessoa Pessoa { get; private set; }
+
+    public void AtualizarFoto(string caminhoFoto)
+    {
+        Foto = caminhoFoto;
+    }
 }

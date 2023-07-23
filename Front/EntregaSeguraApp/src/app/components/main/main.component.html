@@ -3,13 +3,14 @@
     <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
     <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
   </button>
-  <img src="/assets/images/entrega-segura-logo.png" alt="LogoEntregaSegura" class="logo">
+  <img src="/assets/imagens/entrega-segura-logo.png" alt="LogoEntregaSegura" class="logo">
   EntregaSegura
 </mat-toolbar>
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
-    <img class="avatar mat-elevation-z8" src="/assets/example.jpeg" />
+    <input type="file" style="display:none" #fileInput (change)="uploadFoto($event)" accept="image/*">
+    <img class="avatar mat-elevation-z8" [src]="caminhoFoto" (click)="fileInput.click()" />
 
     <h4 class="name">{{nomeUsuario}}</h4>
     <p class="designation">{{perfilUsuario}}</p>
@@ -60,7 +61,6 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
-<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true"
-  [delay]="500">
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#1b6ec2" type="square-jelly-box" [fullScreen]="true" [delay]="500">
   <p style="color: white" [innerHTML]="mensagemDeCarregamento"></p>
 </ngx-spinner>

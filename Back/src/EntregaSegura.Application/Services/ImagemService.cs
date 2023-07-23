@@ -1,22 +1,21 @@
 using EntregaSegura.Application.Interfaces;
+using Microsoft.AspNetCore.Http;
 
 namespace EntregaSegura.Application.Services;
 
 public class ImagemService : IImagemService
 {
-    public async Task<bool> SalvarImagemAsync(string imagemBase64, string nomeArquivo)
+    public async Task<string> Carregar(IFormFile arquivo, string nomeArquivo)
     {
-        if (string.IsNullOrEmpty(imagemBase64))
-        {
-            return false;
-        }
+        var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), @"Resources\Imagens", nomeArquivo);
+        using Stream stream = new FileStream(caminhoArquivo, FileMode.Create);
+        await arquivo.CopyToAsync(stream);
 
-        var imagemBytes = Convert.FromBase64String(imagemBase64);
+        return ObterCaminhoRelativoServidor(nomeArquivo);
+    }
 
-        var caminhoArquivo = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images", nomeArquivo);
-
-        await File.WriteAllBytesAsync(caminhoArquivo, imagemBytes);
-
-        return true;
+    private string ObterCaminhoRelativoServidor(string nomeArquivo)
+    {
+        return Path.Combine(@"Resources\Imagens", nomeArquivo);
     }
 }

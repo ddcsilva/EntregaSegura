@@ -12,7 +12,7 @@ import { UsuarioService } from './usuario.service';
   providedIn: 'root'
 })
 export class AutenticacaoService {
-  private urlBaseApi = environment.urlBaseApi;
+  private urlBaseApi = `${environment.urlBaseApi}/api`;
   private dadosUsuario: any;
 
   constructor(
@@ -67,9 +67,25 @@ export class AutenticacaoService {
     return '';
   }
 
+  public obterEmailArmazenadoNoToken(): string {
+    if (this.dadosUsuario) {
+      return this.dadosUsuario.email;
+    }
+
+    return '';
+  }
+
   public obterPerfilArmazenadoNoToken(): string {
     if (this.dadosUsuario) {
       return this.dadosUsuario.perfil;
+    }
+
+    return '';
+  }
+
+  public obterFotoArmazenadaNoToken(): string {
+    if (this.dadosUsuario) {
+      return this.dadosUsuario.foto;
     }
 
     return '';
@@ -91,7 +107,9 @@ export class AutenticacaoService {
     const dadosUsuario = this.decodificarToken();
     if (dadosUsuario) {
       this.usuarioService.definirNomeNaClaim(dadosUsuario.Nome);
+      this.usuarioService.definirEmailNaClaim(dadosUsuario.Email);
       this.usuarioService.definirPerfilNaClaim(dadosUsuario.Perfil);
+      this.usuarioService.definirFotoNaClaim(dadosUsuario.Foto);
     }
   }
 

@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Http;
+
 namespace EntregaSegura.Application.Interfaces;
 
 public interface IImagemService
 {
-    Task<bool> SalvarImagemAsync(string imagemBase64, string nomeArquivo);
+    Task<string> Carregar(IFormFile arquivo, string nomeArquivo);
 }

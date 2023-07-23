@@ -7,6 +7,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
 import { UsuarioService } from '@app/services/usuario.service';
+import { ToastrService } from 'ngx-toastr';
 
 @UntilDestroy()
 @Component({
@@ -17,7 +18,9 @@ import { UsuarioService } from '@app/services/usuario.service';
 export class MainComponent implements OnInit, AfterViewInit {
   public mensagemDeCarregamentoSelecionada: string = '';
   public nomeUsuario: string = '';
+  public emailUsuario: string = '';
   public perfilUsuario: string = '';
+  public caminhoFoto: string = '';
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
@@ -25,6 +28,7 @@ export class MainComponent implements OnInit, AfterViewInit {
     private observer: BreakpointObserver,
     private router: Router,
     private spinner: NgxSpinnerService,
+    private readonly toastrService: ToastrService,
     private readonly usuarioService: UsuarioService,
     private readonly autenticacaoService: AutenticacaoService
   ) { }
@@ -32,17 +36,27 @@ export class MainComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.spinner.show();
     this.selecionarMensagemDeCarregamento();
-  
+
     this.usuarioService.obterNomeDaClaim().subscribe(nome => {
       this.nomeUsuario = nome;
     });
-  
+
+    this.usuarioService.obterEmailDaClaim().subscribe(email => {
+      this.emailUsuario = email;
+    });
+
     this.usuarioService.obterPerfilDaClaim().subscribe(perfil => {
       this.perfilUsuario = perfil;
     });
-  
+
+    this.usuarioService.obterFotoDaClaim().subscribe(foto => {
+      this.caminhoFoto = foto;
+    });
+
+    this.definirFoto();
+
     this.spinner.hide();
-  }  
+  }
 
   ngAfterViewInit() {
     this.observer
@@ -90,5 +104,28 @@ export class MainComponent implements OnInit, AfterViewInit {
 
   public logout(): void {
     this.autenticacaoService.efetuarLogout();
+  }
+
+  private definirFoto(): void {
+    if (this.caminhoFoto) {
+      this.caminhoFoto = this.usuarioService.obterCaminhoFoto(this.caminhoFoto);
+    } else {
+      this.caminhoFoto = '/assets/imagens/usuarios/sem-foto.png';
+    }
+  }
+
+  public uploadFoto(event: any): void {
+    const arquivo = event.target.files[0];
+    this.usuarioService.uploadFoto(this.emailUsuario, arquivo).subscribe({
+      next: (response) => {
+        this.caminhoFoto = response;
+        this.usuarioService.definirFotoNaClaim(this.caminhoFoto);
+        this.definirFoto();
+        this.toastrService.success('Foto carregada com sucesso!');
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
   }
 }

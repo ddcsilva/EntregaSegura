@@ -11,10 +11,15 @@ namespace EntregaSegura.API.Controllers;
 public class UsuarioController : MainController
 {
     private readonly IUsuarioService _usuarioService;
+    private readonly IImagemService _imagemService;
 
-    public UsuarioController(INotificadorErros notificadorErros, IUsuarioService usuarioService) : base(notificadorErros)
+    public UsuarioController(
+        INotificadorErros notificadorErros,
+        IUsuarioService usuarioService,
+        IImagemService imagemService) : base(notificadorErros)
     {
         _usuarioService = usuarioService;
+        _imagemService = imagemService;
     }
 
     [AllowAnonymous]
@@ -39,9 +44,29 @@ public class UsuarioController : MainController
 
         usuario.Token = _usuarioService.GerarToken(usuario);
 
-        return Ok(new {
+        return Ok(new
+        {
             Message = "Usuário autenticado com sucesso",
             Token = usuario.Token
         });
+    }
+
+    [HttpPost("carregar-foto/{login}")]
+    public async Task<IActionResult> CarregarFoto(string login, IFormFile foto)
+    {
+        var usuario = await _usuarioService.ObterUsuarioPorLoginAsync(login);
+
+        if (usuario == null) return NotFound();
+
+        var nomeArquivo = Guid.NewGuid() + Path.GetExtension(foto.FileName);
+
+        var caminhoFoto = await _imagemService.Carregar(foto, nomeArquivo);
+
+        if (!await _usuarioService.AtualizarFotoUsuarioAsync(login, caminhoFoto))
+        {
+            return CustomResponse();
+        }
+
+        return Ok(caminhoFoto);
     }
 }
