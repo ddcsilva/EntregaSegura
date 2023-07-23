@@ -10,11 +10,8 @@
         <mat-label>E-mail</mat-label>
         <input formControlName="login" matInput required>
         <mat-icon matSuffix>mail_outline</mat-icon>
-        <mat-error *ngIf="formulario.get('login')?.hasError('required')">
-          Por favor, insira um e-mail.
-        </mat-error>
         <mat-error *ngIf="formulario.get('login')?.hasError('loginInvalido')">
-          O e-mail informado é inválido.
+          Por favor, insira um e-mail.
         </mat-error>
       </mat-form-field>
 
