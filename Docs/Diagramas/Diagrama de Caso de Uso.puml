@@ -51,8 +51,6 @@ usecase "Cadastrar Transportadora" as cadastrar_transportadora
 usecase "Editar Transportadora" as editar_transportadora
 usecase "Deletar Transportadora" as deletar_transportadora
 
-usecase “Carregar Dashboard” as carregar_dashboard
-
 administrador --> listar_funcionarios
 administrador --> cadastrar_funcionario
 administrador --> editar_funcionario
@@ -88,6 +86,6 @@ funcionario -up-> cadastrar_transportadora
 funcionario -up-> editar_transportadora
 funcionario -up-> deletar_transportadora
 
-morador -up-> carregar_dashboard
+morador -up-> listar_entregas
 
 @enduml
