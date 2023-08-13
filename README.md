@@ -27,7 +27,7 @@ Este projeto foi criado com:
 
 ## :white_check_mark: Testes
 
-O projeto inclui testes unitários tanto para o back-end (.NET) quanto para o front-end (Angular).
+O projeto inclui testes unitários para o back-end (.NET).
 
 ## :clipboard: Funcionalidades
 
