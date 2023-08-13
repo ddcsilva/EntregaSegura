@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ad2a26cf-48d9-45e6-bc9e-81fdafbde6a0",
+		"_postman_id": "b797f2fb-18f5-47e4-9f37-49135b364de4",
 		"name": "Sistema de Gerenciamento de Entregas",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "7845618"
@@ -250,7 +250,38 @@
 				},
 				{
 					"name": "Login",
-					"item": []
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"Foto\": null,\r\n  \"Id\": 0,\r\n  \"Login\": \"danilo.silva@msn.com\",\r\n  \"Perfil\": 0,\r\n  \"Pessoa\": null,\r\n  \"PessoaId\": 0,\r\n  \"Senha\": \"123456\",\r\n  \"Token\": null\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:5001/api/usuario/autenticacao",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"api",
+										"usuario",
+										"autenticacao"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
 					"name": "Moradores",
