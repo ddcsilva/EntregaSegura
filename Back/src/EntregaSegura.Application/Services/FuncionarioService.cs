@@ -68,7 +68,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
         {
             Login = funcionario.Pessoa.Email,
             Senha = Criptografia.CriptografarSenha("123456"),
-            Perfil = PerfilUsuario.Morador
+            Perfil = funcionario.Cargo == CargoFuncionario.Sindico ? PerfilUsuario.Sindico : PerfilUsuario.Funcionario
         };
 
         using (_funcionarioRepository.IniciarTrasacaoAsync())
