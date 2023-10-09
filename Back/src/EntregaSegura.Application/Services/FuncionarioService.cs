@@ -1,7 +1,9 @@
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
+using EntregaSegura.Application.Helpers;
 using EntregaSegura.Application.Interfaces;
 using EntregaSegura.Domain.Entities;
+using EntregaSegura.Domain.Entities.Enums;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Domain.Validations;
 
@@ -10,18 +12,30 @@ namespace EntregaSegura.Application.Services;
 public class FuncionarioService : BaseService, IFuncionarioService
 {
     private readonly IFuncionarioRepository _funcionarioRepository;
+    private readonly IMoradorRepository _moradorRepository;
+    private readonly IUsuarioRepository _usuarioRepository;
+    private readonly IPessoaRepository _pessoaRepository;
     private readonly IEntregaRepository _entregaRepository;
+    private readonly IUsuarioService _usuarioService;
     private readonly IEmailService _emailService;
     private readonly IMapper _mapper;
 
     public FuncionarioService(IFuncionarioRepository funcionarioRepository,
+                              IMoradorRepository moradorRepository,
+                              IUsuarioRepository usuarioRepository,
+                              IPessoaRepository pessoaRepository,
                               IEntregaRepository entregaRepository,
+                              IUsuarioService usuarioService,
                               IEmailService emailService,
                               IMapper mapper,
                               INotificadorErros notificadorErros) : base(notificadorErros)
     {
         _funcionarioRepository = funcionarioRepository;
+        _moradorRepository = moradorRepository;
+        _usuarioRepository = usuarioRepository;
+        _pessoaRepository = pessoaRepository;
         _entregaRepository = entregaRepository;
+        _usuarioService = usuarioService;
         _emailService = emailService;
         _mapper = mapper;
     }
@@ -50,6 +64,13 @@ public class FuncionarioService : BaseService, IFuncionarioService
 
         if (!await ValidarFuncionario(funcionario)) return false;
 
+        var usuarioDTO = new UsuarioDTO
+        {
+            Login = funcionario.Pessoa.Email,
+            Senha = Criptografia.CriptografarSenha("123456"),
+            Perfil = PerfilUsuario.Morador
+        };
+
         using (_funcionarioRepository.IniciarTrasacaoAsync())
         {
             _funcionarioRepository.Adicionar(funcionario);
@@ -63,7 +84,28 @@ public class FuncionarioService : BaseService, IFuncionarioService
                 return false;
             }
 
+            usuarioDTO.PessoaId = funcionario.PessoaId;
+
+            var usuarioRegistradoComSucesso = await _usuarioService.CriarContaUsuarioAsync(usuarioDTO);
+
+            if (usuarioRegistradoComSucesso == null)
+            {
+                Notificar("Ocorreu um erro ao adicionar o funcionário.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
             await _funcionarioRepository.SalvarTransacaoAsync();
+        }
+
+        (string assuntoEmail, string mensagemEmail) = ConstruirEmail(funcionario);
+
+        var emailEnviadoComSucesso = await _emailService.EnviarEmailAsync(funcionario.Pessoa.Email, assuntoEmail, mensagemEmail);
+
+        if (!emailEnviadoComSucesso)
+        {
+            Notificar("Ocorreu um erro ao enviar o e-mail de registro do usuário.");
+            return false;
         }
 
         funcionarioDTO.Id = funcionario.Id;
@@ -92,7 +134,7 @@ public class FuncionarioService : BaseService, IFuncionarioService
 
     public async Task<bool> RemoverAsync(int id)
     {
-        var funcionario = await _funcionarioRepository.BuscarPorIdAsync(id);
+        var funcionario = await _funcionarioRepository.BuscarPorIdAsync(id, rastrearAlteracoes: true);
 
         if (funcionario == null)
         {
@@ -106,14 +148,45 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return false;
         }
 
-        _funcionarioRepository.Remover(funcionario);
+        var usuario = await _usuarioRepository.ObterUsuarioPorPessoaAsync(funcionario.PessoaId, rastrearAlteracoes: true);
+        var pessoa = await _pessoaRepository.BuscarPorIdAsync(funcionario.PessoaId, rastrearAlteracoes: true);
 
-        var removidoComSucesso = await _funcionarioRepository.SalvarAlteracoesAsync();
-
-        if (!removidoComSucesso)
+        using (_funcionarioRepository.IniciarTrasacaoAsync())
         {
-            Notificar("Ocorreu um erro ao remover o funcionário.");
-            return false;
+            _usuarioRepository.Remover(usuario);
+
+            var usuarioRemovidoComSucesso = await _usuarioRepository.SalvarAlteracoesAsync();
+
+            if (!usuarioRemovidoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o funcionário.");
+                await _funcionarioRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            _funcionarioRepository.Remover(funcionario);
+
+            var funcionarioRemovidoComSucesso = await _funcionarioRepository.SalvarAlteracoesAsync();
+
+            if (!funcionarioRemovidoComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o funcionário.");
+                await _funcionarioRepository.DescartarTransacaoAsync();
+                return false;
+            }
+
+            await _funcionarioRepository.SalvarTransacaoAsync();
+
+            _pessoaRepository.Remover(pessoa);
+
+            var pessoaRemovidaComSucesso = await _pessoaRepository.SalvarAlteracoesAsync();
+
+            if (!pessoaRemovidaComSucesso)
+            {
+                Notificar("Ocorreu um erro ao remover o funcionário.");
+                await _moradorRepository.DescartarTransacaoAsync();
+                return false;
+            }
         }
 
         return true;
@@ -130,6 +203,21 @@ public class FuncionarioService : BaseService, IFuncionarioService
         _funcionarioRepository?.Dispose();
     }
 
+    private (string, string) ConstruirEmail(Funcionario funcionario)
+    {
+
+        string assuntoEmail = "Bem-vindo ao EntregaSegura!";
+        string mensagemEmail = $"Olá {funcionario.Pessoa.Nome},\n\n" +
+                               $"Sua conta no EntregaSegura foi criada com sucesso! " +
+                               $"Suas credenciais são:\n\n" +
+                               $"Usuário: {funcionario.Pessoa.Email}\n" +
+                               $"Senha: 123456 \n\n" +
+                               $"Atenciosamente,\n" +
+                               $"Equipe EntregaSegura";
+
+        return (assuntoEmail, mensagemEmail);
+    }
+
     private async Task<bool> ValidarFuncionario(Funcionario funcionario, bool ehAtualizacao = false)
     {
         if (!ExecutarValidacao(new FuncionarioValidator(), funcionario)) return false;
@@ -140,6 +228,14 @@ public class FuncionarioService : BaseService, IFuncionarioService
             Notificar("Já existe um funcionário com este CPF informado.");
             return false;
         }
+        else
+        {
+            if ((await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Cpf == funcionario.Pessoa.Cpf)).Any())
+            {
+                Notificar("Não é permitido cadastrar um funcionário com o CPF de um morador.");
+                return false;
+            }
+        }
 
         if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Nome)
             && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Nome == funcionario.Pessoa.Nome && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
@@ -148,11 +244,34 @@ public class FuncionarioService : BaseService, IFuncionarioService
             return false;
         }
 
-        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Nome)
+        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Email)
             && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Email == funcionario.Pessoa.Email && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
         {
             Notificar("Já existe um funcionário com este e-mail informado.");
             return false;
+        }
+        else
+        {
+            if ((await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Email == funcionario.Pessoa.Email)).Any())
+            {
+                Notificar("Não é permitido cadastrar um funcionário com o e-mail de um morador.");
+                return false;
+            }
+        }
+
+        if (!string.IsNullOrWhiteSpace(funcionario.Pessoa.Telefone)
+            && (await _funcionarioRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Telefone == funcionario.Pessoa.Telefone && (ehAtualizacao ? c.Id != funcionario.Id : true))).Any())
+        {
+            Notificar("Já existe um funcionário com este telefone informado.");
+            return false;
+        }
+        else
+        {
+            if ((await _moradorRepository.BuscarPorCondicaoAsync(c => c.Pessoa.Telefone == funcionario.Pessoa.Telefone)).Any())
+            {
+                Notificar("Não é permitido cadastrar um funcionário com o telefone de um morador.");
+                return false;
+            }
         }
 
         return true;
