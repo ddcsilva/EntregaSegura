@@ -110,7 +110,7 @@ public class MoradorService : BaseService, IMoradorService
 
         if (!emailEnviadoComSucesso)
         {
-            Notificar("Ocorreu um erro ao enviar o e-mail de notificação da entrega.");
+            Notificar("Ocorreu um erro ao enviar o e-mail de registro do usuário.");
             return false;
         }
 
