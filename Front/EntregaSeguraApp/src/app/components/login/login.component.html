@@ -24,10 +24,6 @@
         </mat-error>
       </mat-form-field>
 
-      <div class="forgot-password-wrapper">
-        <a href="#" class="forgot-password">Esqueceu a senha?</a>
-      </div>
-
       <button [disabled]="formulario.invalid" mat-raised-button color="primary" class="login-button" type="submit">
         <div class="button-content">
           <mat-spinner *ngIf="carregando" color="accent" diameter="20"></mat-spinner>
