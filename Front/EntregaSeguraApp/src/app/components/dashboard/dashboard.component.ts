@@ -14,18 +14,12 @@ export class DashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
+          { title: 'Card 1', cols: 1, rows: 1 }
         ];
       }
 
       return [
-        { title: '', cols: 2, rows: 1 },
-        { title: '', cols: 1, rows: 1 },
-        { title: '', cols: 1, rows: 2 },
-        { title: '', cols: 1, rows: 1 }
+        { title: '', cols: 2, rows: 1 }
       ];
     })
   );
