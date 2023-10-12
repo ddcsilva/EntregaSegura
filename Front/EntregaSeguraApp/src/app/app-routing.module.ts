@@ -34,10 +34,6 @@ const routes: Routes = [
     canActivate: [AutenticacaoGuard],
     children: [
       {
-        path: 'dashboard',
-        component: DashboardComponent
-      },
-      {
         path: 'condominios',
         component: CondominiosComponent,
         canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
