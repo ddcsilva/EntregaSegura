@@ -16,8 +16,8 @@ export class EntregaService {
     private tratamentoErrosService: TratamentoErrosService
   ) { }
 
-  public obterEntregas(): Observable<Entrega[]> {
-    const url = `${this.urlBaseApi}/entregas`;
+  public obterEntregas(emailUsuario: string, perfilUsuario: string): Observable<Entrega[]> {
+    const url = `${this.urlBaseApi}/entregas/${emailUsuario}/${perfilUsuario}`;
     return this.fazerRequisicao(() => this.httpClient.get<Entrega[]>(url));
   }
 

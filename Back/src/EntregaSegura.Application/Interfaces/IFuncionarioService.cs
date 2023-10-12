@@ -14,4 +14,5 @@ public interface IFuncionarioService : IDisposable
 
     Task<IEnumerable<FuncionarioDTO>> ObterTodosFuncionariosECondominiosAsync();
     Task<FuncionarioDTO> ObterFuncionarioPorIdECondominioAsync(int id);
+    Task<FuncionarioDTO> ObterFuncionarioIdPorPessoaIdAsync(int pessoaId);
 }

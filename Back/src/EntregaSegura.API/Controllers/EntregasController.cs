@@ -15,10 +15,10 @@ public class EntregasController : MainController
         _entregaService = entregaService;
     }
 
-    [HttpGet]
-    public async Task<ActionResult<IEnumerable<EntregaDTO>>> ObterTodasEntregas()
+    [HttpGet("{emailUsuario}/{perfilUsuario}")]
+    public async Task<ActionResult<IEnumerable<EntregaDTO>>> ObterTodasEntregas(string emailUsuario = null, string perfilUsuario = null)
     {
-        var entregas = await _entregaService.ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync();
+        var entregas = await _entregaService.ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(emailUsuario, perfilUsuario);
         return Ok(entregas);
     }
 

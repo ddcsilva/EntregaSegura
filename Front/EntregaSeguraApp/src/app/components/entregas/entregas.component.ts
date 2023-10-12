@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Entrega } from '@app/models/entrega.model';
 import { EntregaService } from '@app/services/entrega.service';
+import { UsuarioService } from '@app/services/usuario.service';
 import { ConfirmacaoDialogComponent } from '@app/shared/components/confirmacao-dialog/confirmacao-dialog.component';
 import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/exclusao-dialog.component';
 import { InformacoesConfirmacaoDialog } from '@app/shared/models/InformacoesConfirmacaoDialog.model';
@@ -21,10 +22,12 @@ import { Subject, takeUntil } from 'rxjs';
 export class EntregasComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Entregas';
   public entregas: Entrega[] = [];
-  public colunas: string[] = ['dataRecebimento', 'nomeMorador', 'descricaoUnidade', 'status', 'acoes'];
+  public colunas: string[] = [];
   public dataSource: MatTableDataSource<Entrega> = new MatTableDataSource<Entrega>();
   public filtroEntrega: string = '';
   private destroy$ = new Subject<void>();
+  public emailUsuario: string = '';
+  public perfilUsuario: string = '';
 
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatTable, { static: true }) table!: MatTable<Entrega>;
@@ -32,6 +35,7 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
   constructor(
     private entregaService: EntregaService,
+    private usuarioService: UsuarioService,
     private router: Router,
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
@@ -40,6 +44,21 @@ export class EntregasComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.spinner.show();
+
+    if (this.perfilUsuario !== 'Morador') {
+      this.colunas = ['dataRecebimento', 'nomeMorador', 'descricaoUnidade', 'status', 'acoes'];
+    } else {
+      this.colunas = ['dataRecebimento', 'nomeMorador', 'descricaoUnidade', 'status'];
+    }
+
+    this.usuarioService.obterEmailDaClaim().subscribe(email => {
+      this.emailUsuario = email;
+    });
+
+    this.usuarioService.obterPerfilDaClaim().subscribe(perfil => {
+      this.perfilUsuario = perfil;
+    });
+
     this.obterEntregas();
     this.dataSource.paginator = this.paginator;
   }
@@ -139,7 +158,7 @@ export class EntregasComponent implements OnInit, OnDestroy {
   }
 
   private obterEntregas(): void {
-    this.entregaService.obterEntregas().pipe(takeUntil(this.destroy$)).subscribe({
+    this.entregaService.obterEntregas(this.emailUsuario, this.perfilUsuario).pipe(takeUntil(this.destroy$)).subscribe({
       next: (response) => {
         this.entregas = response;
         this.dataSource = new MatTableDataSource<Entrega>(this.entregas);

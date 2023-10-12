@@ -12,7 +12,7 @@ public interface IEntregaService : IDisposable
     Task<bool> AtualizarAsync(EntregaDTO entrega);
     Task<bool> RemoverAsync(int id);
 
-    Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync();
+    Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(string emailUsuario = null, string perfilUsuario = null);
     Task<EntregaDTO> ObterEntregaComMoradorEUnidadeEFuncionarioETransportadoraPorIdAsync(int id, bool rastrearAlteracoes = false);
 
     Task<IEnumerable<Entrega>> ObterEntregasPorMoradorAsync(int moradorId);

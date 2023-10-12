@@ -101,6 +101,7 @@ public class UsuarioService : BaseService, IUsuarioService
         var key = Encoding.ASCII.GetBytes("ChaveSecretaParaCriacaoDoToken");
         var identity = new ClaimsIdentity(new Claim[]
         {
+            new Claim("Id", usuarioDTO.Pessoa.Id.ToString()),
             new Claim("Nome", usuarioDTO.Pessoa.Nome),
             new Claim("Email", usuarioDTO.Pessoa.Email),
             new Claim("Perfil", perfil),

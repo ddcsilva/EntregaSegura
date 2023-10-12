@@ -33,4 +33,30 @@ public class FuncionarioRepository : RepositoryBase<Funcionario>, IFuncionarioRe
 
         return await query.FirstOrDefaultAsync();
     }
+
+    public async Task<Funcionario> ObterFuncionarioPorEmailAsync(string email, bool rastrearAlteracoes = false)
+    {
+        IQueryable<Funcionario> query = _context.Funcionarios
+            .Include(f => f.Pessoa)
+            .Include(f => f.Condominio)
+            .Where(f => f.Pessoa.Email == email);
+
+        if (!rastrearAlteracoes)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync();
+    }
+
+    public async Task<Funcionario> ObterFuncionarioIdPorPessoaIdAsync(int pessoaId, bool rastrearAlteracoes = false)
+    {
+        IQueryable<Funcionario> query = _context.Funcionarios
+            .Include(f => f.Pessoa)
+            .Include(f => f.Condominio)
+            .Where(f => f.PessoaId == pessoaId);
+
+        if (!rastrearAlteracoes)
+            query = query.AsNoTracking();
+
+        return await query.FirstOrDefaultAsync();
+    }
 }

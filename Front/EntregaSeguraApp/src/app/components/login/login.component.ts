@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
           this.carregando = false;
           this.autenticacaoService.armazenarToken(response.token);
           this.toastr.success('Login realizado com sucesso!', 'Sucesso!');
-          this.router.navigate(['dashboard']);
+          this.router.navigate(['entregas']);
         },
         error: (error: any) => {
           this.formulario.reset();

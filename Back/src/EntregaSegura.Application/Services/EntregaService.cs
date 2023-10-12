@@ -36,9 +36,9 @@ public class EntregaService : BaseService, IEntregaService
         return _mapper.Map<IEnumerable<EntregaDTO>>(entregas);
     }
 
-    public async Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync()
+    public async Task<IEnumerable<EntregaDTO>> ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(string emailUsuario = null, string perfilUsuario = null)
     {
-        var entregas = await _entregaRepository.ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync();
+        var entregas = await _entregaRepository.ObterTodasEntregasComMoradoresEUnidadesEFuncionariosETransportadorasAsync(emailUsuario, perfilUsuario);
         return _mapper.Map<IEnumerable<EntregaDTO>>(entregas);
     }
 

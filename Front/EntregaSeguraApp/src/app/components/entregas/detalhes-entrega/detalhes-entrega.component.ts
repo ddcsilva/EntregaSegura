@@ -6,8 +6,10 @@ import { StatusEntrega } from '@app/models/enums/status-entrega.enum';
 import { Morador } from '@app/models/morador.model';
 import { Transportadora } from '@app/models/transportadora.model';
 import { EntregaService } from '@app/services/entrega.service';
+import { FuncionarioService } from '@app/services/funcionario.service';
 import { MoradorService } from '@app/services/morador.service';
 import { TransportadoraService } from '@app/services/transportadora.service';
+import { UsuarioService } from '@app/services/usuario.service';
 import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -25,6 +27,7 @@ export class DetalhesEntregaComponent implements OnInit {
   public moradores: Morador[] = [];
   public transportadoras: Transportadora[] = [];
   public todosStatus = Object.values(StatusEntrega);
+  public idPessoa: string = '';
 
   private entregaId: number = 0;
   private entrega: Entrega = {} as Entrega;
@@ -39,7 +42,9 @@ export class DetalhesEntregaComponent implements OnInit {
     private readonly transportadoraService: TransportadoraService,
     private readonly toastr: ToastrService,
     private readonly spinner: NgxSpinnerService,
-    private readonly tratamentoErrosService: TratamentoErrosService
+    private readonly tratamentoErrosService: TratamentoErrosService,
+    private readonly usuarioService: UsuarioService,
+    private readonly funcionarioService: FuncionarioService
   ) { }
 
   get formControl(): any {
@@ -47,6 +52,10 @@ export class DetalhesEntregaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.usuarioService.obterIdDaClaim().subscribe(id => {
+      this.idPessoa = id;
+    });
+
     this.definirOperacao();
     this.carregarMoradores();
     this.carregarTransportadoras();
@@ -68,26 +77,34 @@ export class DetalhesEntregaComponent implements OnInit {
     }
 
     const entrega: Partial<Entrega> = this.formulario.getRawValue();
-    // TODO: Remover essa linha quando implementar o login
-    entrega.funcionarioId = 1;
+    this.funcionarioService.obterFuncionarioIdPorPessoaId(Number(this.idPessoa)).pipe(takeUntil(this.destroy$)).subscribe({
+      next: (funcionarioId: number) => {
+        entrega.funcionarioId = funcionarioId;
 
-    let operacao: Observable<Entrega>;
+        let operacao: Observable<Entrega>;
 
-    if (this.novaEntrega) {
-      operacao = this.criarEntrega(entrega as Entrega);
-    } else {
-      entrega.id = this.entregaId;
-      operacao = this.atualizarEntrega(entrega as Entrega);
-    }
+        if (this.novaEntrega) {
+          operacao = this.criarEntrega(entrega as Entrega);
+        } else {
+          entrega.id = this.entregaId;
+          operacao = this.atualizarEntrega(entrega as Entrega);
+        }
 
-    operacao.subscribe({
-      next: () => {
-        this.toastr.success(`Entrega ${this.entregaId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
-        this.router.navigate(['/entregas']);
+        operacao.subscribe({
+          next: () => {
+            this.toastr.success(`Entrega ${this.entregaId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
+            this.router.navigate(['/entregas']);
+          },
+          error: (error: any) => this.tratarErros(error),
+          complete: () => this.spinner.hide()
+        });
       },
-      error: (error: any) => this.tratarErros(error),
-      complete: () => this.spinner.hide()
+      error: (error: any) => {
+        this.tratarErros(error);
+      }
     });
+
+
   }
 
   public reiniciarFormulario(event: any): void {
@@ -158,9 +175,9 @@ export class DetalhesEntregaComponent implements OnInit {
       transportadoraId: ['', Validators.required],
       moradorId: ['', Validators.required],
       descricao: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
-      status: [{value: this.novaEntrega ? StatusEntrega.Recebida : '', disabled: true}, Validators.required],
+      status: [{ value: this.novaEntrega ? StatusEntrega.Recebida : '', disabled: true }, Validators.required],
       dataRecebimento: [{ value: this.novaEntrega ? new Date() : '', disabled: this.novaEntrega }],
-      dataRetirada: [{value: null, disabled: true}],
+      dataRetirada: [{ value: null, disabled: true }],
     });
   }
 

@@ -33,6 +33,16 @@ public class FuncionariosController : MainController
         return Ok(funcionario);
     }
 
+    [HttpGet("pessoa/{pessoaId}")]
+    public async Task<ActionResult<int>> ObterFuncionarioIdPorPessoaId(int pessoaId)
+    {
+        var funcionario = await _funcionarioService.ObterFuncionarioIdPorPessoaIdAsync(pessoaId);
+
+        if (funcionario == null) return NotFound();
+
+        return Ok(funcionario.Id);
+    }
+
     [HttpPost]
     public async Task<ActionResult> Adicionar([FromBody] FuncionarioDTO funcionarioDTO)
     {

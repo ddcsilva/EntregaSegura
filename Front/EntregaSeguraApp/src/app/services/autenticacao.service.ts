@@ -106,6 +106,7 @@ export class AutenticacaoService {
   private atualizarDadosDoUsuario() {
     const dadosUsuario = this.decodificarToken();
     if (dadosUsuario) {
+      this.usuarioService.definirIdNaClaim(dadosUsuario.Id);
       this.usuarioService.definirNomeNaClaim(dadosUsuario.Nome);
       this.usuarioService.definirEmailNaClaim(dadosUsuario.Email);
       this.usuarioService.definirPerfilNaClaim(dadosUsuario.Perfil);

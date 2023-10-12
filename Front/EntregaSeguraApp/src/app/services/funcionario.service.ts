@@ -26,6 +26,11 @@ export class FuncionarioService {
     return this.fazerRequisicao(() => this.httpClient.get<Funcionario>(url));
   }
 
+  public obterFuncionarioIdPorPessoaId(pessoaId: number): Observable<number> {
+    const url = `${this.urlBaseApi}/funcionarios/pessoa/${pessoaId}`;
+    return this.fazerRequisicao(() => this.httpClient.get<Funcionario>(url));
+  }
+
   public criar(funcionario: Funcionario): Observable<Funcionario> {
     const url = `${this.urlBaseApi}/funcionarios`;
     return this.fazerRequisicao(() => this.httpClient.post<Funcionario>(url, funcionario));

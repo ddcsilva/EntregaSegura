@@ -17,10 +17,6 @@
 
     <mat-divider></mat-divider>
 
-    <button mat-button class="menu-button" routerLink="/dashboard">
-      <mat-icon>dashboard</mat-icon>
-      <span>Dashboard</span>
-    </button>
     <button mat-button class="menu-button" routerLink="/condominios" *ngIf="perfilUsuario === 'Administrador' || perfilUsuario === 'Sindico'">
       <mat-icon>apartment</mat-icon>
       <span>Condomínios</span>
@@ -33,7 +29,7 @@
       <mat-icon>people</mat-icon>
       <span>Moradores</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/entregas" *ngIf="perfilUsuario !== 'Morador'">
+    <button mat-button class="menu-button" routerLink="/entregas">
       <mat-icon>inventory</mat-icon>
       <span>Entregas</span>
     </button>

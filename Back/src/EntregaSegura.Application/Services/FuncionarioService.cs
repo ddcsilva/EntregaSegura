@@ -52,6 +52,12 @@ public class FuncionarioService : BaseService, IFuncionarioService
         return _mapper.Map<FuncionarioDTO>(funcionario);
     }
 
+    public async Task<FuncionarioDTO> ObterFuncionarioIdPorPessoaIdAsync(int pessoaId)
+    {
+        var funcionario = await _funcionarioRepository.ObterFuncionarioIdPorPessoaIdAsync(pessoaId);
+        return _mapper.Map<FuncionarioDTO>(funcionario);
+    }
+
     public async Task<FuncionarioDTO> ObterFuncionarioPorIdECondominioAsync(int id)
     {
         var funcionario = await _funcionarioRepository.ObterFuncionarioPorIdECondominioAsync(id);

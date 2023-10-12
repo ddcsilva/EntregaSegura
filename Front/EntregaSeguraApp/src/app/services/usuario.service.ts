@@ -9,12 +9,21 @@ import { BehaviorSubject, Observable, catchError } from 'rxjs';
 })
 export class UsuarioService {
   private urlBaseApi = `${environment.urlBaseApi}/api`;
+  private id$ = new BehaviorSubject<string>("");
   private nome$ = new BehaviorSubject<string>("");
   private email$ = new BehaviorSubject<string>("");
   private perfil$ = new BehaviorSubject<string>("");
   private foto$ = new BehaviorSubject<string>("");
 
   constructor(private httpClient: HttpClient) { }
+
+  public obterIdDaClaim(): Observable<string> {
+    return this.id$.asObservable();
+  }
+
+  public definirIdNaClaim(id: string) {
+    this.id$.next(id);
+  }
 
   public obterPerfilDaClaim(): Observable<string> {
     return this.perfil$.asObservable();

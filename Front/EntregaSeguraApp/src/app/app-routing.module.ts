@@ -21,7 +21,7 @@ import { PossuiPerfilGuard } from './helpers/guards/possui-perfil.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/entregas',
     pathMatch: 'full'
   },
   {
@@ -90,7 +90,7 @@ const routes: Routes = [
         component: EntregasComponent,
         canActivate: [AutenticacaoGuard, PossuiPerfilGuard],
         data: {
-          perfis: ['Administrador', 'Sindico', 'Funcionario']
+          perfis: ['Administrador', 'Sindico', 'Funcionario', 'Morador']
         }
       },
       {
@@ -137,7 +137,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: '/dashboard'
+    redirectTo: '/entregas'
   },
 ];
 
