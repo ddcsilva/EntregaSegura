@@ -66,14 +66,6 @@ O projeto inclui testes unitários para o back-end (.NET).
   - Migrations: Migrações do banco de dados geradas pelo Entity Framework Core.
   - Repositories: Implementações dos repositórios definidos na camada de Domínio.
 
-## :hammer_and_wrench: Instalação
-
-(Informações de instalação serão adicionadas posteriormente)
-
-## :computer: Uso
-
-(Informações de uso serão adicionadas posteriormente)
-
 ## :bust_in_silhouette: Desenvolvedores
 
 * Danilo Silva - [GitHub](https://github.com/ddcsilva) - [Email](danilo.silva@msn.com)
