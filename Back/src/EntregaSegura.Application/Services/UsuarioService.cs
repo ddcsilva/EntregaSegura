@@ -98,7 +98,7 @@ public class UsuarioService : BaseService, IUsuarioService
         }
 
         var jwtTokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes("ChaveSecretaParaCriacaoDoToken");
+        var key = Encoding.ASCII.GetBytes("ChaveSecretaParaCriacaoDoToken123456");
         var identity = new ClaimsIdentity(new Claim[]
         {
             new Claim("Id", usuarioDTO.Pessoa.Id.ToString()),
