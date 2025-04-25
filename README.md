@@ -69,7 +69,6 @@ O projeto inclui testes unitários para o back-end (.NET).
 ## :bust_in_silhouette: Desenvolvedores
 
 * Danilo Silva - [GitHub](https://github.com/ddcsilva) - [Email](danilo.silva@msn.com)
-* Jamil Zazu - [GitHub](https://github.com/jamilzazu) - [Email](jamillzazu@gmail.com)
 
 ## :balance_scale: Licença
 
