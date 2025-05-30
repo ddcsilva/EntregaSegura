@@ -12,9 +12,9 @@ interface JwtPayload {
 export class TokenStorageService {
   private readonly TOKEN_KEY = environment.auth.tokenKey;
 
-  setToken(token: string): void {
+  salvarToken(token: string): void {
     try {
-      if (this.isLocalStorageAvailable()) {
+      if (this.verificarDisponibilidadeLocalStorage()) {
         localStorage.setItem(this.TOKEN_KEY, token);
       }
     } catch (error) {
@@ -22,9 +22,9 @@ export class TokenStorageService {
     }
   }
 
-  getToken(): string | null {
+  obterToken(): string | null {
     try {
-      if (this.isLocalStorageAvailable()) {
+      if (this.verificarDisponibilidadeLocalStorage()) {
         return localStorage.getItem(this.TOKEN_KEY);
       }
     } catch (error) {
@@ -33,9 +33,9 @@ export class TokenStorageService {
     return null;
   }
 
-  removeToken(): void {
+  removerToken(): void {
     try {
-      if (this.isLocalStorageAvailable()) {
+      if (this.verificarDisponibilidadeLocalStorage()) {
         localStorage.removeItem(this.TOKEN_KEY);
       }
     } catch (error) {
@@ -43,9 +43,9 @@ export class TokenStorageService {
     }
   }
 
-  isTokenExpired(token: string): boolean {
+  verificarTokenExpirado(token: string): boolean {
     try {
-      const payload = this.decodeJwt(token);
+      const payload = this.decodificarJwt(token);
       const currentTime = Math.floor(Date.now() / 1000);
       return payload.exp < currentTime;
     } catch {
@@ -53,7 +53,7 @@ export class TokenStorageService {
     }
   }
 
-  private decodeJwt(token: string): JwtPayload {
+  private decodificarJwt(token: string): JwtPayload {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(
@@ -65,7 +65,7 @@ export class TokenStorageService {
     return JSON.parse(jsonPayload) as JwtPayload;
   }
 
-  private isLocalStorageAvailable(): boolean {
+  private verificarDisponibilidadeLocalStorage(): boolean {
     try {
       const test = '__localStorage_test__';
       localStorage.setItem(test, test);

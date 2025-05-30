@@ -1,7 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 
-import { AuthService } from '@core/services/auth.service';
+import { AutenticacaoService } from '@core/services/autenticacao.service';
 
 /**
  * Guarda de rota baseada em papéis
@@ -10,15 +10,15 @@ import { AuthService } from '@core/services/auth.service';
  */
 export const papelGuard = (papeisPermitidos: string[]): CanActivateFn => {
   return () => {
-    const authService = inject(AuthService);
+    const autenticacaoService = inject(AutenticacaoService);
     const router = inject(Router);
 
-    if (!authService.isAuthenticated()) {
-      router.navigate(['/auth/login']);
+    if (!autenticacaoService.estaAutenticado()) {
+      router.navigate(['/autenticacao/login']);
       return false;
     }
 
-    const papelUsuario = authService.userRole();
+    const papelUsuario = autenticacaoService.papel();
 
     if (papelUsuario && papeisPermitidos.includes(papelUsuario)) {
       return true;

@@ -94,7 +94,7 @@
       </div>
 
       <!-- Erro geral -->
-      <div *ngIf="authService.error()" class="rounded-lg border border-red-200 bg-red-50 p-4" data-testid="auth-error">
+      <div *ngIf="authService.erro()" class="rounded-lg border border-red-200 bg-red-50 p-4" data-testid="auth-error">
         <div class="flex">
           <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -104,7 +104,7 @@
             />
           </svg>
           <p class="ml-2 text-sm text-red-700">
-            {{ authService.error() }}
+            {{ authService.erro() }}
           </p>
         </div>
       </div>
@@ -115,12 +115,12 @@
           type="submit"
           variant="primary"
           size="lg"
-          [fullWidth]="true"
-          [disabled]="loginForm.invalid"
-          [loading]="authService.isLoading()"
+          [larguraTotal]="true"
+          [desabilitado]="loginForm.invalid"
+          [carregando]="authService.carregando()"
           data-testid="login-button"
         >
-          {{ authService.isLoading() ? 'Entrando...' : 'Entrar' }}
+          {{ authService.carregando() ? 'Entrando...' : 'Entrar' }}
         </es-button>
       </div>
     </form>

@@ -7,37 +7,34 @@ import { environment, Environment } from '@environments';
 export class EnvironmentService {
   public readonly config: Environment = environment;
 
-  // 🔍 Getters para acesso tipado
-  public get isProduction(): boolean {
+  public get ehAmbienteProducao(): boolean {
     return this.config.production;
   }
 
-  public get isDevelopment(): boolean {
+  public get ehAmbienteDesenvolvimento(): boolean {
     return !this.config.production;
   }
 
-  public get apiBaseUrl(): string {
+  public get urlApi(): string {
     return this.config.api.baseUrl;
   }
 
-  public get isDebugEnabled(): boolean {
+  public get debugHabilitado(): boolean {
     return this.config.features.enableDebugMode;
   }
 
-  public get itemsPerPage(): number {
+  public get quantidadeItensPorPagina(): number {
     return this.config.ui.itemsPerPage;
   }
 
-  // 🚨 Helper para features flags
-  public isFeatureEnabled(feature: keyof Environment['features']): boolean {
+  public featureHabilitada(feature: keyof Environment['features']): boolean {
     return this.config.features[feature];
   }
 
-  // 📊 Helper para logging
-  public shouldLog(level: 'debug' | 'info' | 'warn' | 'error'): boolean {
+  public deveLogar(nivel: 'debug' | 'info' | 'warn' | 'error'): boolean {
     const levels = ['debug', 'info', 'warn', 'error'];
     const currentLevelIndex = levels.indexOf(this.config.logging.level);
-    const requestedLevelIndex = levels.indexOf(level);
+    const requestedLevelIndex = levels.indexOf(nivel);
 
     return requestedLevelIndex >= currentLevelIndex;
   }

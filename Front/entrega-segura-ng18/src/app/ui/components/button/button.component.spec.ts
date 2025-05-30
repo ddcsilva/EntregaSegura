@@ -8,22 +8,22 @@ describe('ButtonComponent', () => {
     });
 
     const button = screen.getByRole('button', { name: /clique aqui/i });
-    expect(button).toBeInTheDocument();
+    expect(button).toBeTruthy();
   });
 
-  it('deve aplicar classes CSS baseadas na variant', async () => {
-    await render('<es-button variant="success">Sucesso</es-button>', {
+  it('deve aplicar classes CSS baseadas na variante', async () => {
+    await render('<es-button variante="success">Sucesso</es-button>', {
       imports: [ButtonComponent],
     });
 
     const button = screen.getByTestId('es-button');
-    expect(button).toHaveClass('bg-success-600');
+    expect(button.className).toContain('bg-success-600');
   });
 
   it('deve emitir evento de click quando clicado', async () => {
     const mockClick = jest.fn();
 
-    await render('<es-button (buttonClick)="onClick($event)">Clique</es-button>', {
+    await render('<es-button (clique)="onClick($event)">Clique</es-button>', {
       imports: [ButtonComponent],
       componentProperties: {
         onClick: mockClick,
@@ -36,22 +36,24 @@ describe('ButtonComponent', () => {
     expect(mockClick).toHaveBeenCalledTimes(1);
   });
 
-  it('deve estar desabilitado quando prop disabled for true', async () => {
-    await render('<es-button [disabled]="true">Desabilitado</es-button>', {
+  it('deve estar desabilitado quando prop desabilitado for true', async () => {
+    await render('<es-button [desabilitado]="true">Desabilitado</es-button>', {
       imports: [ButtonComponent],
     });
 
-    const button = screen.getByRole('button');
-    expect(button).toBeDisabled();
+    const button = screen.getByRole('button') as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
   });
 
-  it('deve mostrar loading spinner quando loading for true', async () => {
-    await render('<es-button [loading]="true">Carregando</es-button>', {
+  it('deve mostrar loading spinner quando carregando for true', async () => {
+    await render('<es-button [carregando]="true">Carregando</es-button>', {
       imports: [ButtonComponent],
     });
 
     const spinner = screen.getByRole('button').querySelector('svg');
-    expect(spinner).toBeInTheDocument();
-    expect(spinner).toHaveClass('animate-spin');
+    expect(spinner).toBeTruthy();
+
+    const spinnerElement = spinner as SVGElement;
+    expect(spinnerElement.getAttribute('class')).toContain('animate-spin');
   });
 });

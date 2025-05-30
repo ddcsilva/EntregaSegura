@@ -2,22 +2,22 @@ import { TestBed } from '@angular/core/testing';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Component } from '@angular/core';
 
-import { authGuard } from './auth.guard';
-import { AuthService } from '@core/services/auth.service';
+import { autenticacaoGuard } from './autenticacao.guard';
+import { AutenticacaoService } from '@core/services/autenticacao.service';
 
 // Mock component para testes de roteamento
 @Component({ template: '' })
 class MockComponent {}
 
-describe('authGuard', () => {
-  let authService: jest.Mocked<AuthService>;
+describe('autenticacaoGuard', () => {
+  let autenticacaoService: jest.Mocked<AutenticacaoService>;
   let router: jest.Mocked<Router>;
   let mockRoute: ActivatedRouteSnapshot;
   let mockState: RouterStateSnapshot;
 
   beforeEach(() => {
-    const authServiceMock = {
-      isAuthenticated: jest.fn(),
+    const autenticacaoServiceMock = {
+      estaAutenticado: jest.fn(),
     };
 
     const routerMock = {
@@ -27,12 +27,12 @@ describe('authGuard', () => {
     TestBed.configureTestingModule({
       declarations: [MockComponent],
       providers: [
-        { provide: AuthService, useValue: authServiceMock },
+        { provide: AutenticacaoService, useValue: autenticacaoServiceMock },
         { provide: Router, useValue: routerMock },
       ],
     });
 
-    authService = TestBed.inject(AuthService) as jest.Mocked<AuthService>;
+    autenticacaoService = TestBed.inject(AutenticacaoService) as jest.Mocked<AutenticacaoService>;
     router = TestBed.inject(Router) as jest.Mocked<Router>;
 
     // Mock ActivatedRouteSnapshot
@@ -71,74 +71,74 @@ describe('authGuard', () => {
       root: {} as ActivatedRouteSnapshot,
     };
 
-    authService.isAuthenticated.mockClear();
+    autenticacaoService.estaAutenticado.mockClear();
     router.navigate.mockClear();
   });
 
   describe('usuário autenticado', () => {
     beforeEach(() => {
-      authService.isAuthenticated.mockReturnValue(true);
+      autenticacaoService.estaAutenticado.mockReturnValue(true);
     });
 
     it('deve permitir acesso quando usuário está autenticado', () => {
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(true);
-      expect(authService.isAuthenticated).toHaveBeenCalled();
+      expect(autenticacaoService.estaAutenticado).toHaveBeenCalled();
       expect(router.navigate).not.toHaveBeenCalled();
     });
 
     it('deve permitir acesso a rotas protegidas', () => {
-      mockState.url = '/admin/users';
+      mockState.url = '/admin/usuarios';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(true);
-      expect(authService.isAuthenticated).toHaveBeenCalled();
+      expect(autenticacaoService.estaAutenticado).toHaveBeenCalled();
       expect(router.navigate).not.toHaveBeenCalled();
     });
 
     it('deve permitir acesso a rotas com parâmetros', () => {
-      mockState.url = '/entregas/123/edit';
+      mockState.url = '/entregas/123/editar';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(true);
-      expect(authService.isAuthenticated).toHaveBeenCalled();
+      expect(autenticacaoService.estaAutenticado).toHaveBeenCalled();
       expect(router.navigate).not.toHaveBeenCalled();
     });
   });
 
   describe('usuário não autenticado', () => {
     beforeEach(() => {
-      authService.isAuthenticated.mockReturnValue(false);
+      autenticacaoService.estaAutenticado.mockReturnValue(false);
     });
 
     it('deve negar acesso e redirecionar para login', () => {
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(authService.isAuthenticated).toHaveBeenCalled();
+      expect(autenticacaoService.estaAutenticado).toHaveBeenCalled();
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
         queryParams: { returnUrl: '/dashboard' },
       });
     });
 
     it('deve preservar URL de destino no returnUrl', () => {
-      mockState.url = '/admin/settings';
+      mockState.url = '/admin/configuracoes';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
-        queryParams: { returnUrl: '/admin/settings' },
+        queryParams: { returnUrl: '/admin/configuracoes' },
       });
     });
 
     it('deve lidar com URLs complexas com query params', () => {
       mockState.url = '/entregas?status=pendente&page=2';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
@@ -147,20 +147,20 @@ describe('authGuard', () => {
     });
 
     it('deve lidar com URLs com fragmentos', () => {
-      mockState.url = '/dashboard#section-reports';
+      mockState.url = '/dashboard#relatorios';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
-        queryParams: { returnUrl: '/dashboard#section-reports' },
+        queryParams: { returnUrl: '/dashboard#relatorios' },
       });
     });
 
     it('deve lidar com URL raiz', () => {
       mockState.url = '/';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
@@ -170,10 +170,10 @@ describe('authGuard', () => {
   });
 
   describe('edge cases', () => {
-    it('deve lidar com authService retornando undefined', () => {
-      authService.isAuthenticated.mockReturnValue(false);
+    it('deve lidar com autenticacaoService retornando undefined', () => {
+      autenticacaoService.estaAutenticado.mockReturnValue(false);
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
@@ -184,9 +184,9 @@ describe('authGuard', () => {
     it('deve lidar com URL vazia', () => {
       mockState.url = '';
 
-      authService.isAuthenticated.mockReturnValue(false);
+      autenticacaoService.estaAutenticado.mockReturnValue(false);
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
@@ -194,59 +194,59 @@ describe('authGuard', () => {
       });
     });
 
-    it('deve chamar isAuthenticated uma vez por execução', () => {
-      authService.isAuthenticated.mockReturnValue(true);
+    it('deve chamar estaAutenticado uma vez por execução', () => {
+      autenticacaoService.estaAutenticado.mockReturnValue(true);
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
-      expect(authService.isAuthenticated).toHaveBeenCalledTimes(1);
+      expect(autenticacaoService.estaAutenticado).toHaveBeenCalledTimes(1);
       expect(result).toBe(true);
     });
 
     it('deve funcionar com diferentes tipos de rotas', () => {
       const testCases = [
         '/dashboard',
-        '/admin/users',
-        '/entregas/create',
-        '/profile/settings',
+        '/admin/usuarios',
+        '/entregas/criar',
+        '/perfil/configuracoes',
         '/condominios/123/entregas',
       ];
 
-      authService.isAuthenticated.mockReturnValue(true);
+      autenticacaoService.estaAutenticado.mockReturnValue(true);
 
       testCases.forEach(url => {
         mockState.url = url;
-        authService.isAuthenticated.mockClear();
+        autenticacaoService.estaAutenticado.mockClear();
 
-        const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+        const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
         expect(result).toBe(true);
-        expect(authService.isAuthenticated).toHaveBeenCalledTimes(1);
+        expect(autenticacaoService.estaAutenticado).toHaveBeenCalledTimes(1);
       });
     });
   });
 
   describe('integração com injeção de dependências', () => {
     it('deve injetar AuthService corretamente', () => {
-      authService.isAuthenticated.mockReturnValue(true);
+      autenticacaoService.estaAutenticado.mockReturnValue(true);
 
       TestBed.runInInjectionContext(() => {
-        const injectedAuthService = TestBed.inject(AuthService);
-        expect(injectedAuthService).toBe(authService);
+        const injectedAutenticacaoService = TestBed.inject(AutenticacaoService);
+        expect(injectedAutenticacaoService).toBe(autenticacaoService);
 
-        const result = authGuard(mockRoute, mockState);
+        const result = autenticacaoGuard(mockRoute, mockState);
         expect(result).toBe(true);
       });
     });
 
     it('deve injetar Router corretamente', () => {
-      authService.isAuthenticated.mockReturnValue(false);
+      autenticacaoService.estaAutenticado.mockReturnValue(false);
 
       TestBed.runInInjectionContext(() => {
         const injectedRouter = TestBed.inject(Router);
         expect(injectedRouter).toBe(router);
 
-        const result = authGuard(mockRoute, mockState);
+        const result = autenticacaoGuard(mockRoute, mockState);
         expect(result).toBe(false);
       });
     });

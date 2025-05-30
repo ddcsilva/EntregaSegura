@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { finalize } from 'rxjs';
 
-import { AuthService } from '@core/services';
+import { AutenticacaoService } from '@core/services';
 import { ButtonComponent } from '@ui/components/button/button.component';
 import { LoginRequest } from '@core/models';
 
@@ -18,7 +18,7 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  public readonly authService = inject(AuthService);
+  public readonly authService = inject(AutenticacaoService);
 
   // Signals para estado local
   public readonly showPassword = signal(false);

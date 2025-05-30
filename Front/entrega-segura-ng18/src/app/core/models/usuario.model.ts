@@ -4,6 +4,6 @@ export interface Usuario {
   id: number;
   nome: string;
   email: string;
-  perfil: Papel;
+  papel: Papel;
   foto?: string;
 }

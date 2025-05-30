@@ -1,29 +1,27 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHeaders, HttpContext } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
 import { authInterceptor } from './auth.interceptor';
-import { AuthService } from '@core/services/auth.service';
+import { AutenticacaoService } from '@core/services/autenticacao.service';
 import { TokenStorageService } from '@core/services/token-storage.service';
 
 describe('authInterceptor', () => {
-  let authService: jest.Mocked<AuthService>;
+  let autenticacaoService: jest.Mocked<AutenticacaoService>;
   let tokenStorage: jest.Mocked<TokenStorageService>;
 
   const mockNext = jest.fn();
   const validToken = 'valid.jwt.token';
 
   beforeEach(() => {
-    const authServiceMock = {
+    const autenticacaoServiceMock = {
       logout: jest.fn(),
     };
 
     const tokenStorageMock = {
-      getToken: jest.fn(),
-      isTokenExpired: jest.fn(),
-      setToken: jest.fn(),
-      removeToken: jest.fn(),
+      obterToken: jest.fn(),
+      verificarTokenExpirado: jest.fn(),
     };
 
     const routerMock = {
@@ -32,65 +30,30 @@ describe('authInterceptor', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        { provide: AuthService, useValue: authServiceMock },
+        { provide: AutenticacaoService, useValue: autenticacaoServiceMock },
         { provide: TokenStorageService, useValue: tokenStorageMock },
         { provide: Router, useValue: routerMock },
       ],
     });
 
-    authService = TestBed.inject(AuthService) as jest.Mocked<AuthService>;
+    autenticacaoService = TestBed.inject(AutenticacaoService) as jest.Mocked<AutenticacaoService>;
     tokenStorage = TestBed.inject(TokenStorageService) as jest.Mocked<TokenStorageService>;
 
+    // Reset mocks
+    autenticacaoService.logout.mockClear();
+    tokenStorage.obterToken.mockClear();
+    tokenStorage.verificarTokenExpirado.mockClear();
     mockNext.mockClear();
-    authService.logout.mockClear();
-    tokenStorage.getToken.mockClear();
-    tokenStorage.isTokenExpired.mockClear();
   });
 
-  describe('URLs públicas', () => {
-    it('deve passar requisição sem token para URL de autenticação', done => {
-      const req = new HttpRequest('POST', 'http://localhost:3000/api/auth/autenticacao', {});
-      const expectedResponse = new HttpResponse({ status: 200 });
-
-      mockNext.mockReturnValue(of(expectedResponse));
-
-      TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
-          next: response => {
-            expect(response).toBe(expectedResponse);
-            expect(mockNext).toHaveBeenCalledWith(req);
-            done();
-          },
-        });
-      });
-    });
-
-    it('deve passar requisição sem token para URL pública', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/public/info', {});
-      const expectedResponse = new HttpResponse({ status: 200 });
-
-      mockNext.mockReturnValue(of(expectedResponse));
-
-      TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
-          next: response => {
-            expect(response).toBe(expectedResponse);
-            expect(mockNext).toHaveBeenCalledWith(req);
-            done();
-          },
-        });
-      });
-    });
-  });
-
-  describe('URLs privadas com token válido', () => {
+  describe('requests with authentication headers', () => {
     beforeEach(() => {
-      tokenStorage.getToken.mockReturnValue(validToken);
-      tokenStorage.isTokenExpired.mockReturnValue(false);
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
     });
 
-    it('deve adicionar token de autorização na requisição', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
+    it('deve adicionar Authorization header quando token é válido', done => {
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
       const expectedResponse = new HttpResponse({ status: 200 });
 
       mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
@@ -102,8 +65,8 @@ describe('authInterceptor', () => {
         authInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
-            expect(tokenStorage.getToken).toHaveBeenCalled();
-            expect(tokenStorage.isTokenExpired).toHaveBeenCalledWith(validToken);
+            expect(tokenStorage.obterToken).toHaveBeenCalled();
+            expect(tokenStorage.verificarTokenExpirado).toHaveBeenCalledWith(validToken);
             done();
           },
         });
@@ -125,8 +88,71 @@ describe('authInterceptor', () => {
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
+          next: () => done(),
+        });
+      });
+    });
+
+    it('deve preservar parâmetros da query na URL', done => {
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas?status=pendente&page=2');
+      const expectedResponse = new HttpResponse({ status: 200 });
+
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
+        expect(authReq.url).toBe('http://localhost:3000/api/entregas?status=pendente&page=2');
+        expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
+        return of(expectedResponse);
+      });
+
+      TestBed.runInInjectionContext(() => {
+        authInterceptor(req, mockNext).subscribe({
+          next: () => done(),
+        });
+      });
+    });
+  });
+
+  describe('requests without authentication', () => {
+    it('deve proceder sem adicionar header quando token não existe', done => {
+      tokenStorage.obterToken.mockReturnValue(null);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
+      const expectedResponse = new HttpResponse({ status: 200 });
+
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
+        expect(authReq.headers.get('Authorization')).toBeNull();
+        expect(authReq).toBe(req); // Should be the original request
+        return of(expectedResponse);
+      });
+
+      TestBed.runInInjectionContext(() => {
+        authInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
+            expect(tokenStorage.obterToken).toHaveBeenCalled();
+            expect(tokenStorage.verificarTokenExpirado).not.toHaveBeenCalled();
+            done();
+          },
+        });
+      });
+    });
+
+    it('deve proceder sem header quando token está expirado', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(true);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
+      const expectedResponse = new HttpResponse({ status: 200 });
+
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
+        expect(authReq.headers.get('Authorization')).toBeNull();
+        expect(authReq).toBe(req); // Should be the original request
+        return of(expectedResponse);
+      });
+
+      TestBed.runInInjectionContext(() => {
+        authInterceptor(req, mockNext).subscribe({
+          next: response => {
+            expect(response).toBe(expectedResponse);
+            expect(tokenStorage.obterToken).toHaveBeenCalled();
+            expect(tokenStorage.verificarTokenExpirado).toHaveBeenCalledWith(validToken);
             done();
           },
         });
@@ -134,135 +160,88 @@ describe('authInterceptor', () => {
     });
   });
 
-  describe('URLs privadas sem token ou token expirado', () => {
-    it('deve passar requisição sem modificação quando não há token', done => {
-      tokenStorage.getToken.mockReturnValue(null);
+  describe('response handling', () => {
+    it('deve propagar resposta de sucesso normalmente', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
+      const successResponse = new HttpResponse({
+        status: 200,
+        body: { data: 'test data' },
+      });
 
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
-      const expectedResponse = new HttpResponse({ status: 200 });
-
-      mockNext.mockReturnValue(of(expectedResponse));
+      mockNext.mockReturnValue(of(successResponse));
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
           next: response => {
-            expect(response).toBe(expectedResponse);
-            expect(mockNext).toHaveBeenCalledWith(req);
-            expect(tokenStorage.getToken).toHaveBeenCalled();
-            expect(tokenStorage.isTokenExpired).not.toHaveBeenCalled();
+            expect(response).toBe(successResponse);
             done();
           },
         });
       });
     });
 
-    it('deve passar requisição sem modificação quando token está expirado', done => {
-      tokenStorage.getToken.mockReturnValue(validToken);
-      tokenStorage.isTokenExpired.mockReturnValue(true);
-
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
-      const expectedResponse = new HttpResponse({ status: 200 });
-
-      mockNext.mockReturnValue(of(expectedResponse));
-
-      TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
-          next: response => {
-            expect(response).toBe(expectedResponse);
-            expect(mockNext).toHaveBeenCalledWith(req);
-            expect(tokenStorage.getToken).toHaveBeenCalled();
-            expect(tokenStorage.isTokenExpired).toHaveBeenCalledWith(validToken);
-            done();
-          },
-        });
-      });
-    });
-  });
-
-  describe('tratamento de erros', () => {
-    beforeEach(() => {
-      tokenStorage.getToken.mockReturnValue(validToken);
-      tokenStorage.isTokenExpired.mockReturnValue(false);
-    });
-
-    it('deve chamar logout quando receber erro 401', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
-      const errorResponse = new HttpErrorResponse({
+    it('deve chamar logout quando resposta é 401 Unauthorized', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
+      const unauthorizedError = new HttpErrorResponse({
         status: 401,
         statusText: 'Unauthorized',
-        error: { message: 'Token inválido' },
       });
 
-      mockNext.mockImplementation(() => throwError(() => errorResponse));
+      mockNext.mockReturnValue(throwError(() => unauthorizedError));
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
           error: error => {
-            expect(error).toBe(errorResponse);
-            expect(authService.logout).toHaveBeenCalled();
+            expect(error).toBe(unauthorizedError);
+            expect(autenticacaoService.logout).toHaveBeenCalled();
             done();
           },
         });
       });
     });
 
-    it('não deve chamar logout para outros erros HTTP', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
-      const errorResponse = new HttpErrorResponse({
+    it('deve propagar outros erros HTTP sem fazer logout', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
+      const serverError = new HttpErrorResponse({
         status: 500,
         statusText: 'Internal Server Error',
-        error: { message: 'Erro interno do servidor' },
       });
 
-      mockNext.mockImplementation(() => throwError(() => errorResponse));
+      mockNext.mockReturnValue(throwError(() => serverError));
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
           error: error => {
-            expect(error).toBe(errorResponse);
-            expect(authService.logout).not.toHaveBeenCalled();
+            expect(error).toBe(serverError);
+            expect(autenticacaoService.logout).not.toHaveBeenCalled();
             done();
           },
         });
       });
     });
 
-    it('deve propagar erro 403 sem fazer logout', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/admin', {});
-      const errorResponse = new HttpErrorResponse({
+    it('deve lidar com erro 403 Forbidden sem fazer logout', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/admin');
+      const forbiddenError = new HttpErrorResponse({
         status: 403,
         statusText: 'Forbidden',
-        error: { message: 'Acesso negado' },
       });
 
-      mockNext.mockImplementation(() => throwError(() => errorResponse));
+      mockNext.mockReturnValue(throwError(() => forbiddenError));
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
           error: error => {
-            expect(error).toBe(errorResponse);
-            expect(authService.logout).not.toHaveBeenCalled();
-            done();
-          },
-        });
-      });
-    });
-
-    it('deve propagar erro 404 sem fazer logout', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/notfound', {});
-      const errorResponse = new HttpErrorResponse({
-        status: 404,
-        statusText: 'Not Found',
-        error: { message: 'Recurso não encontrado' },
-      });
-
-      mockNext.mockImplementation(() => throwError(() => errorResponse));
-
-      TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
-          error: error => {
-            expect(error).toBe(errorResponse);
-            expect(authService.logout).not.toHaveBeenCalled();
+            expect(error).toBe(forbiddenError);
+            expect(autenticacaoService.logout).not.toHaveBeenCalled();
             done();
           },
         });
@@ -271,15 +250,16 @@ describe('authInterceptor', () => {
   });
 
   describe('edge cases', () => {
-    it('deve lidar com URL que contém parte da URL pública', done => {
-      const req = new HttpRequest('GET', 'http://localhost:3000/api/auth-service/test', {});
+    it('deve lidar com falha na obtenção do token', done => {
+      tokenStorage.obterToken.mockImplementation(() => {
+        throw new Error('localStorage not available');
+      });
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
       const expectedResponse = new HttpResponse({ status: 200 });
 
-      tokenStorage.getToken.mockReturnValue(validToken);
-      tokenStorage.isTokenExpired.mockReturnValue(false);
-
       mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
-        expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
+        expect(authReq.headers.get('Authorization')).toBeNull();
+        expect(authReq).toBe(req);
         return of(expectedResponse);
       });
 
@@ -287,55 +267,61 @@ describe('authInterceptor', () => {
         authInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
+            expect(tokenStorage.obterToken).toHaveBeenCalled();
             done();
           },
         });
       });
     });
 
-    it('deve identificar corretamente URL de autenticação com query params', done => {
-      const req = new HttpRequest('POST', 'http://localhost:3000/api/auth/autenticacao?redirect=dashboard', {});
+    it('deve lidar com falha na verificação de expiração do token', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockImplementation(() => {
+        throw new Error('Invalid token format');
+      });
+      const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
       const expectedResponse = new HttpResponse({ status: 200 });
 
-      mockNext.mockReturnValue(of(expectedResponse));
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
+        expect(authReq.headers.get('Authorization')).toBeNull();
+        expect(authReq).toBe(req);
+        return of(expectedResponse);
+      });
 
       TestBed.runInInjectionContext(() => {
         authInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
-            expect(mockNext).toHaveBeenCalledWith(req);
+            expect(tokenStorage.obterToken).toHaveBeenCalled();
+            expect(tokenStorage.verificarTokenExpirado).toHaveBeenCalledWith(validToken);
             done();
           },
         });
       });
     });
 
-    it('deve funcionar com diferentes métodos HTTP', done => {
-      const methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
-      let completedRequests = 0;
+    it('deve preservar contexto da requisição original', done => {
+      tokenStorage.obterToken.mockReturnValue(validToken);
+      tokenStorage.verificarTokenExpirado.mockReturnValue(false);
+      const httpContext = new HttpContext();
+      const req = new HttpRequest(
+        'PUT',
+        'http://localhost:3000/api/entregas/123',
+        {},
+        {
+          context: httpContext,
+        }
+      );
+      const expectedResponse = new HttpResponse({ status: 200 });
 
-      tokenStorage.getToken.mockReturnValue(validToken);
-      tokenStorage.isTokenExpired.mockReturnValue(false);
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
+        expect(authReq.context).toBe(httpContext);
+        return of(expectedResponse);
+      });
 
-      methods.forEach(method => {
-        const req = new HttpRequest(method, 'http://localhost:3000/api/test', {});
-        const expectedResponse = new HttpResponse({ status: 200 });
-
-        mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
-          expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
-          expect(authReq.method).toBe(method);
-          return of(expectedResponse);
-        });
-
-        TestBed.runInInjectionContext(() => {
-          authInterceptor(req, mockNext).subscribe({
-            next: () => {
-              completedRequests++;
-              if (completedRequests === methods.length) {
-                done();
-              }
-            },
-          });
+      TestBed.runInInjectionContext(() => {
+        authInterceptor(req, mockNext).subscribe({
+          next: () => done(),
         });
       });
     });

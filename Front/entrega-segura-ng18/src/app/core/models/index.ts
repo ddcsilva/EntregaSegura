@@ -4,6 +4,6 @@ export * from './papel.model';
 
 // Modelos de autenticação
 export * from './login.model';
-export * from './auth-response.model';
-export * from './auth-state.model';
+export * from './autenticacao.model';
+export * from './estado-autenticacao.model';
 export * from './jwt-payload.model';

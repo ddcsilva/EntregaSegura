@@ -1,12 +1,12 @@
 <button
-  [class]="buttonClasses"
-  [disabled]="disabled || loading"
-  [type]="type"
-  (click)="handleClick($event)"
+  [class]="classes"
+  [disabled]="desabilitado || carregando"
+  [type]="tipo"
+  (click)="acionarClique($event)"
   data-testid="es-button"
 >
   <svg
-    *ngIf="loading"
+    *ngIf="carregando"
     class="-ml-1 mr-2 h-4 w-4 animate-spin"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"

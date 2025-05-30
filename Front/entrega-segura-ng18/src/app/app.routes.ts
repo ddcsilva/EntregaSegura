@@ -1,21 +1,22 @@
 import { Routes } from '@angular/router';
-import { authGuard, roleGuard } from '@core/guards';
+import { autenticacaoGuard, papelGuard } from '@core/guards';
+import { Papel } from '@core/models';
 
 export const routes: Routes = [
   {
-    path: 'auth',
+    path: 'autenticacao',
     loadChildren: () => import('./features/auth/auth.routes').then(r => r.authRoutes),
   },
   {
     path: 'dashboard',
     loadComponent: () => import('./features/dashboard/dashboard.component').then(c => c.DashboardComponent),
-    canActivate: [authGuard],
+    canActivate: [autenticacaoGuard],
     title: 'Dashboard - EntregaSegura',
   },
   {
     path: 'admin',
     loadChildren: () => import('./features/admin/admin.routes').then(r => r.adminRoutes),
-    canActivate: [roleGuard(['Administrador'])],
+    canActivate: [papelGuard([Papel.ADMIN])],
     title: 'Administração - EntregaSegura',
   },
   {

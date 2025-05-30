@@ -5,9 +5,6 @@ import { RouterOutlet } from '@angular/router';
   selector: 'es-root',
   standalone: true,
   imports: [RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  template: '<router-outlet></router-outlet>',
 })
-export class AppComponent {
-  title = 'entrega-segura-ng18';
-}
+export class AppComponent {}

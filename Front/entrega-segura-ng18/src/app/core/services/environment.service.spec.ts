@@ -22,43 +22,43 @@ describe('EnvironmentService', () => {
     });
   });
 
-  describe('isProduction getter', () => {
+  describe('ehAmbienteProducao getter', () => {
     it('deve retornar o valor de production do environment', () => {
       const expected = service.config.production;
 
-      expect(service.isProduction).toBe(expected);
+      expect(service.ehAmbienteProducao).toBe(expected);
     });
   });
 
-  describe('isDevelopment getter', () => {
+  describe('ehAmbienteDesenvolvimento getter', () => {
     it('deve retornar o oposto de production', () => {
       const expected = !service.config.production;
 
-      expect(service.isDevelopment).toBe(expected);
+      expect(service.ehAmbienteDesenvolvimento).toBe(expected);
     });
   });
 
-  describe('apiBaseUrl getter', () => {
+  describe('urlApi getter', () => {
     it('deve retornar a URL base da API', () => {
       const expected = service.config.api.baseUrl;
 
-      expect(service.apiBaseUrl).toBe(expected);
+      expect(service.urlApi).toBe(expected);
     });
   });
 
-  describe('isDebugEnabled getter', () => {
+  describe('debugHabilitado getter', () => {
     it('deve retornar se debug está habilitado', () => {
       const expected = service.config.features.enableDebugMode;
 
-      expect(service.isDebugEnabled).toBe(expected);
+      expect(service.debugHabilitado).toBe(expected);
     });
   });
 
-  describe('itemsPerPage getter', () => {
+  describe('quantidadeItensPorPagina getter', () => {
     it('deve retornar o número de itens por página', () => {
       const expected = service.config.ui.itemsPerPage;
 
-      expect(service.itemsPerPage).toBe(expected);
+      expect(service.quantidadeItensPorPagina).toBe(expected);
     });
   });
 
@@ -71,10 +71,10 @@ describe('EnvironmentService', () => {
       ) as keyof typeof features;
 
       if (enabledFeature) {
-        expect(service.isFeatureEnabled(enabledFeature)).toBe(true);
+        expect(service.featureHabilitada(enabledFeature)).toBe(true);
       } else {
         // Se nenhuma feature está habilitada, teste com enableDebugMode
-        expect(service.isFeatureEnabled('enableDebugMode')).toBe(features.enableDebugMode);
+        expect(service.featureHabilitada('enableDebugMode')).toBe(features.enableDebugMode);
       }
     });
 
@@ -86,20 +86,20 @@ describe('EnvironmentService', () => {
       ) as keyof typeof features;
 
       if (disabledFeature) {
-        expect(service.isFeatureEnabled(disabledFeature)).toBe(false);
+        expect(service.featureHabilitada(disabledFeature)).toBe(false);
       } else {
         // Se todas as features estão habilitadas, teste um cenário específico
-        expect(service.isFeatureEnabled('enableAnalytics')).toBe(features.enableAnalytics);
+        expect(service.featureHabilitada('enableAnalytics')).toBe(features.enableAnalytics);
       }
     });
 
     it('deve testar todas as features disponíveis', () => {
-      expect(service.isFeatureEnabled('enableAnalytics')).toBe(service.config.features.enableAnalytics);
-      expect(service.isFeatureEnabled('enableDebugMode')).toBe(service.config.features.enableDebugMode);
-      expect(service.isFeatureEnabled('enableMockData')).toBe(service.config.features.enableMockData);
-      expect(service.isFeatureEnabled('enableServiceWorker')).toBe(service.config.features.enableServiceWorker);
-      expect(service.isFeatureEnabled('enableErrorReporting')).toBe(service.config.features.enableErrorReporting);
-      expect(service.isFeatureEnabled('enablePerformanceMonitoring')).toBe(
+      expect(service.featureHabilitada('enableAnalytics')).toBe(service.config.features.enableAnalytics);
+      expect(service.featureHabilitada('enableDebugMode')).toBe(service.config.features.enableDebugMode);
+      expect(service.featureHabilitada('enableMockData')).toBe(service.config.features.enableMockData);
+      expect(service.featureHabilitada('enableServiceWorker')).toBe(service.config.features.enableServiceWorker);
+      expect(service.featureHabilitada('enableErrorReporting')).toBe(service.config.features.enableErrorReporting);
+      expect(service.featureHabilitada('enablePerformanceMonitoring')).toBe(
         service.config.features.enablePerformanceMonitoring
       );
     });
@@ -109,21 +109,21 @@ describe('EnvironmentService', () => {
     it('deve retornar true para nível igual ao configurado', () => {
       const currentLevel = service.config.logging.level;
 
-      expect(service.shouldLog(currentLevel)).toBe(true);
+      expect(service.deveLogar(currentLevel)).toBe(true);
     });
 
     it('deve retornar true para nível superior ao configurado', () => {
       const currentLevel = service.config.logging.level;
 
       if (currentLevel === 'debug') {
-        expect(service.shouldLog('info')).toBe(true);
-        expect(service.shouldLog('warn')).toBe(true);
-        expect(service.shouldLog('error')).toBe(true);
+        expect(service.deveLogar('info')).toBe(true);
+        expect(service.deveLogar('warn')).toBe(true);
+        expect(service.deveLogar('error')).toBe(true);
       } else if (currentLevel === 'info') {
-        expect(service.shouldLog('warn')).toBe(true);
-        expect(service.shouldLog('error')).toBe(true);
+        expect(service.deveLogar('warn')).toBe(true);
+        expect(service.deveLogar('error')).toBe(true);
       } else if (currentLevel === 'warn') {
-        expect(service.shouldLog('error')).toBe(true);
+        expect(service.deveLogar('error')).toBe(true);
       }
     });
 
@@ -131,14 +131,14 @@ describe('EnvironmentService', () => {
       const currentLevel = service.config.logging.level;
 
       if (currentLevel === 'error') {
-        expect(service.shouldLog('debug')).toBe(false);
-        expect(service.shouldLog('info')).toBe(false);
-        expect(service.shouldLog('warn')).toBe(false);
+        expect(service.deveLogar('debug')).toBe(false);
+        expect(service.deveLogar('info')).toBe(false);
+        expect(service.deveLogar('warn')).toBe(false);
       } else if (currentLevel === 'warn') {
-        expect(service.shouldLog('debug')).toBe(false);
-        expect(service.shouldLog('info')).toBe(false);
+        expect(service.deveLogar('debug')).toBe(false);
+        expect(service.deveLogar('info')).toBe(false);
       } else if (currentLevel === 'info') {
-        expect(service.shouldLog('debug')).toBe(false);
+        expect(service.deveLogar('debug')).toBe(false);
       }
     });
 
@@ -147,7 +147,7 @@ describe('EnvironmentService', () => {
       const levels = ['debug', 'info', 'warn', 'error'] as const;
 
       levels.forEach(level => {
-        const result = service.shouldLog(level);
+        const result = service.deveLogar(level);
         expect(typeof result).toBe('boolean');
       });
     });
@@ -155,18 +155,18 @@ describe('EnvironmentService', () => {
     it('deve respeitar a hierarquia de níveis', () => {
       // Debug permite todos
       if (service.config.logging.level === 'debug') {
-        expect(service.shouldLog('debug')).toBe(true);
-        expect(service.shouldLog('info')).toBe(true);
-        expect(service.shouldLog('warn')).toBe(true);
-        expect(service.shouldLog('error')).toBe(true);
+        expect(service.deveLogar('debug')).toBe(true);
+        expect(service.deveLogar('info')).toBe(true);
+        expect(service.deveLogar('warn')).toBe(true);
+        expect(service.deveLogar('error')).toBe(true);
       }
 
       // Error só permite error
       if (service.config.logging.level === 'error') {
-        expect(service.shouldLog('debug')).toBe(false);
-        expect(service.shouldLog('info')).toBe(false);
-        expect(service.shouldLog('warn')).toBe(false);
-        expect(service.shouldLog('error')).toBe(true);
+        expect(service.deveLogar('debug')).toBe(false);
+        expect(service.deveLogar('info')).toBe(false);
+        expect(service.deveLogar('warn')).toBe(false);
+        expect(service.deveLogar('error')).toBe(true);
       }
     });
   });
@@ -208,44 +208,44 @@ describe('EnvironmentService', () => {
 
   describe('helpers', () => {
     it('deve verificar se feature está habilitada', () => {
-      expect(service.isFeatureEnabled('enableDebugMode')).toBe(true);
-      expect(service.isFeatureEnabled('enableAnalytics')).toBe(false);
+      expect(service.featureHabilitada('enableDebugMode')).toBe(true);
+      expect(service.featureHabilitada('enableAnalytics')).toBe(false);
     });
 
     it('deve retornar false para feature inexistente', () => {
-      expect(service.isFeatureEnabled('nonExistentFeature' as never)).toBeUndefined();
+      expect(service.featureHabilitada('nonExistentFeature' as never)).toBeUndefined();
     });
 
     it('deve verificar logging por nível', () => {
-      expect(service.shouldLog('debug')).toBe(true);
-      expect(service.shouldLog('info')).toBe(true);
-      expect(service.shouldLog('warn')).toBe(true);
-      expect(service.shouldLog('error')).toBe(true);
+      expect(service.deveLogar('debug')).toBe(true);
+      expect(service.deveLogar('info')).toBe(true);
+      expect(service.deveLogar('warn')).toBe(true);
+      expect(service.deveLogar('error')).toBe(true);
     });
 
     it('deve verificar diferentes níveis de log', () => {
       // Como o environment está em debug, todos os níveis devem ser permitidos
-      expect(service.shouldLog('debug')).toBe(true);
-      expect(service.shouldLog('info')).toBe(true);
-      expect(service.shouldLog('warn')).toBe(true);
-      expect(service.shouldLog('error')).toBe(true);
+      expect(service.deveLogar('debug')).toBe(true);
+      expect(service.deveLogar('info')).toBe(true);
+      expect(service.deveLogar('warn')).toBe(true);
+      expect(service.deveLogar('error')).toBe(true);
     });
   });
 
   describe('edge cases', () => {
     it('deve lidar com propriedades undefined graciosamente', () => {
       // Testa se o service lida bem com propriedades que podem não existir
-      expect(() => service.isFeatureEnabled('enableDebugMode')).not.toThrow();
-      expect(() => service.shouldLog('debug')).not.toThrow();
+      expect(() => service.featureHabilitada('enableDebugMode')).not.toThrow();
+      expect(() => service.deveLogar('debug')).not.toThrow();
     });
 
     it('deve retornar valores padrão seguros', () => {
       // Verifica se todos os getters retornam valores válidos
-      expect(typeof service.isProduction).toBe('boolean');
-      expect(typeof service.isDevelopment).toBe('boolean');
-      expect(typeof service.apiBaseUrl).toBe('string');
-      expect(typeof service.isDebugEnabled).toBe('boolean');
-      expect(typeof service.itemsPerPage).toBe('number');
+      expect(typeof service.ehAmbienteProducao).toBe('boolean');
+      expect(typeof service.ehAmbienteDesenvolvimento).toBe('boolean');
+      expect(typeof service.urlApi).toBe('string');
+      expect(typeof service.debugHabilitado).toBe('boolean');
+      expect(typeof service.quantidadeItensPorPagina).toBe('number');
     });
 
     it('deve acessar configurações aninhadas', () => {
@@ -257,12 +257,12 @@ describe('EnvironmentService', () => {
     });
 
     it('deve verificar features específicas', () => {
-      expect(service.isFeatureEnabled('enableDebugMode')).toBe(true);
-      expect(service.isFeatureEnabled('enableAnalytics')).toBe(false);
-      expect(service.isFeatureEnabled('enableMockData')).toBe(false);
-      expect(service.isFeatureEnabled('enableServiceWorker')).toBe(false);
-      expect(service.isFeatureEnabled('enableErrorReporting')).toBe(false);
-      expect(service.isFeatureEnabled('enablePerformanceMonitoring')).toBe(true);
+      expect(service.featureHabilitada('enableDebugMode')).toBe(true);
+      expect(service.featureHabilitada('enableAnalytics')).toBe(false);
+      expect(service.featureHabilitada('enableMockData')).toBe(false);
+      expect(service.featureHabilitada('enableServiceWorker')).toBe(false);
+      expect(service.featureHabilitada('enableErrorReporting')).toBe(false);
+      expect(service.featureHabilitada('enablePerformanceMonitoring')).toBe(true);
     });
   });
 });

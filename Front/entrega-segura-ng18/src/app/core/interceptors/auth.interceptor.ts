@@ -2,12 +2,12 @@ import { HttpInterceptorFn, HttpErrorResponse } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { catchError, throwError } from 'rxjs';
 
-import { AuthService } from '@core/services/auth.service';
+import { AutenticacaoService } from '@core/services/autenticacao.service';
 import { TokenStorageService } from '@core/services/token-storage.service';
 import { environment } from '@environments';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
+  const autenticacaoService = inject(AutenticacaoService);
   const tokenStorage = inject(TokenStorageService);
 
   const urlsPublicas = [`${environment.api.endpoints.auth}/autenticacao`, '/api/public'];
@@ -18,23 +18,28 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req);
   }
 
-  const token = tokenStorage.getToken();
+  try {
+    const token = tokenStorage.obterToken();
 
-  if (token && !tokenStorage.isTokenExpired(token)) {
-    const authReq = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    if (token && !tokenStorage.verificarTokenExpirado(token)) {
+      const authReq = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    return next(authReq).pipe(
-      catchError((error: HttpErrorResponse) => {
-        if (error.status === 401) {
-          authService.logout();
-        }
-        return throwError(() => error);
-      })
-    );
+      return next(authReq).pipe(
+        catchError((error: HttpErrorResponse) => {
+          if (error.status === 401) {
+            autenticacaoService.logout();
+          }
+          return throwError(() => error);
+        })
+      );
+    }
+  } catch (error) {
+    // Se houver erro na obtenção ou verificação do token, continua sem token
+    console.warn('Erro ao processar token:', error);
   }
 
   return next(req);
