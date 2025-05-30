@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.se
 @Component({
   selector: 'app-detalhes-condominio',
   templateUrl: './detalhes-condominio.component.html',
-  styleUrls: ['./detalhes-condominio.component.scss']
+  styleUrls: ['./detalhes-condominio.component.scss'],
 })
 export class DetalhesCondominioComponent implements OnInit {
   public titulo: string = '';
@@ -40,7 +40,7 @@ export class DetalhesCondominioComponent implements OnInit {
     private readonly spinner: NgxSpinnerService,
     private readonly tratamentoErrosService: TratamentoErrosService,
     private readonly dialog: MatDialog
-  ) { }
+  ) {}
 
   get formControl(): any {
     return this.formulario.controls;
@@ -86,35 +86,54 @@ export class DetalhesCondominioComponent implements OnInit {
               informacaoAdicional: 'Esta operação não pode ser desfeita.',
               textoBotaoCancelar: 'Cancelar',
               textoBotaoConfirmar: 'Confirmar',
-            } as InformacoesConfirmacaoDialog
+            } as InformacoesConfirmacaoDialog,
           };
 
-          const dialogRef = this.dialog.open(ConfirmacaoDialogComponent, dialogConfig);
+          const dialogRef = this.dialog.open(
+            ConfirmacaoDialogComponent,
+            dialogConfig
+          );
 
-          dialogRef.afterClosed().subscribe(result => {
+          dialogRef.afterClosed().subscribe((result) => {
             if (result) {
               const unidadesEmMassaDTO: UnidadesEmMassa = {
                 condominioId: this.condominio.id ? this.condominio.id : 0,
-                quantidadeBlocos: this.condominio.quantidadeBlocos ? this.condominio.quantidadeBlocos : 0,
-                quantidadeAndaresPorBloco: this.condominio.quantidadeAndares ? this.condominio.quantidadeAndares : 0,
-                quantidadeUnidadesPorAndar: this.condominio.quantidadeUnidades ? this.condominio.quantidadeUnidades : 0
+                quantidadeBlocos: this.condominio.quantidadeBlocos
+                  ? this.condominio.quantidadeBlocos
+                  : 0,
+                quantidadeAndaresPorBloco: this.condominio.quantidadeAndares
+                  ? this.condominio.quantidadeAndares
+                  : 0,
+                quantidadeUnidadesPorAndar: this.condominio.quantidadeUnidades
+                  ? this.condominio.quantidadeUnidades
+                  : 0,
               };
 
-              this.unidadeService.adicionarEmMassa(unidadesEmMassaDTO).subscribe({
-                next: () => {
-                  this.toastr.success('Unidades criadas com sucesso!', 'Operação Realizada com Sucesso!');
-                },
-                error: (error: any) => this.tratarErros(error)
-              });
+              this.unidadeService
+                .adicionarEmMassa(unidadesEmMassaDTO)
+                .subscribe({
+                  next: () => {
+                    this.toastr.success(
+                      'Unidades criadas com sucesso!',
+                      'Operação Realizada com Sucesso!'
+                    );
+                  },
+                  error: (error: any) => this.tratarErros(error),
+                });
             }
           });
         }
 
-        this.toastr.success(`Condomínio ${this.condominioId ? 'atualizado' : 'criado'} com sucesso!`, 'Operação Realizada com Sucesso!');
+        this.toastr.success(
+          `Condomínio ${
+            this.condominioId ? 'atualizado' : 'criado'
+          } com sucesso!`,
+          'Operação Realizada com Sucesso!'
+        );
         this.router.navigate(['/condominios']);
       },
       error: (error: any) => this.tratarErros(error),
-      complete: () => this.spinner.hide()
+      complete: () => this.spinner.hide(),
     });
   }
 
@@ -131,7 +150,7 @@ export class DetalhesCondominioComponent implements OnInit {
     if (cep) {
       this.spinner.show();
       this.cepService.buscarPorCep(cep).subscribe({
-        next: dados => {
+        next: (dados) => {
           this.spinner.hide();
           if (dados.erro) {
             this.toastr.error('CEP não encontrado!', 'Houve um erro!');
@@ -143,7 +162,7 @@ export class DetalhesCondominioComponent implements OnInit {
               logradouro: dados.logradouro,
               bairro: dados.bairro,
               cidade: dados.localidade,
-              estado: dados.uf
+              estado: dados.uf,
             });
 
             this.desabilitarCamposEndereco();
@@ -154,13 +173,13 @@ export class DetalhesCondominioComponent implements OnInit {
           this.toastr.error('Erro ao buscar o CEP!', 'Houve um erro!');
 
           this.habilitarCamposEndereco();
-        }
+        },
       });
     }
   }
 
   private definirOperacao(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.condominioId = Number(params.get('id')) || 0;
 
       if (this.condominioId == 0) {
@@ -188,26 +207,42 @@ export class DetalhesCondominioComponent implements OnInit {
           this.toastr.error(error.message, 'Houve um erro!');
           console.error(error);
         },
-        complete: () => this.spinner.hide()
+        complete: () => this.spinner.hide(),
       });
     }
   }
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      nome: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
       cnpj: ['', [Validators.required, ValidadorCampos.ValidaCNPJ]],
       email: ['', [Validators.required, Validators.email]],
       telefone: ['', [Validators.required, Validators.minLength(10)]],
       cep: ['', [Validators.required, Validators.minLength(8)]],
       logradouro: [{ value: '', disabled: true }],
-      numero: ['', [Validators.required, Validators.pattern("^[1-9][0-9]*$")]],
+      numero: ['', [Validators.required, Validators.pattern('^[1-9][0-9]*$')]],
       bairro: [{ value: '', disabled: true }],
       cidade: [{ value: '', disabled: true }],
       estado: [{ value: '', disabled: true }],
-      quantidadeUnidades: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      quantidadeAndares: ['', [Validators.required, Validators.min(1), Validators.max(40)]],
-      quantidadeBlocos: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
+      quantidadeUnidades: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(10)],
+      ],
+      quantidadeAndares: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(40)],
+      ],
+      quantidadeBlocos: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(20)],
+      ],
     });
   }
 
@@ -216,13 +251,27 @@ export class DetalhesCondominioComponent implements OnInit {
     this.formulario.get('logradouro')?.setValidators([Validators.required]);
 
     this.formulario.get('bairro')?.enable();
-    this.formulario.get('bairro')?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(50)]);
+    this.formulario
+      .get('bairro')
+      ?.setValidators([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]);
 
     this.formulario.get('cidade')?.enable();
-    this.formulario.get('cidade')?.setValidators([Validators.required, Validators.minLength(3), Validators.maxLength(50)]);
+    this.formulario
+      .get('cidade')
+      ?.setValidators([
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(50),
+      ]);
 
     this.formulario.get('estado')?.enable();
-    this.formulario.get('estado')?.setValidators([Validators.minLength(2), Validators.maxLength(2)]);
+    this.formulario
+      .get('estado')
+      ?.setValidators([Validators.minLength(2), Validators.maxLength(2)]);
   }
 
   private desabilitarCamposEndereco() {
@@ -250,14 +299,15 @@ export class DetalhesCondominioComponent implements OnInit {
             this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
-      }
+      },
     });
   }
 
   private atualizarMascaraTelefone(value: string): void {
     if (value) {
       const numbers = value.replace(/\D/g, '');
-      this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+      this.mascaraTelefone =
+        numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
     } else {
       this.mascaraTelefone = '(00) 0000-00009';
     }

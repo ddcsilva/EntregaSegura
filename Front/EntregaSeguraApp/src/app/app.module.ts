@@ -4,52 +4,55 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
-import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
-import { MatLegacyCheckboxModule as MatCheckboxModule } from '@angular/material/legacy-checkbox';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatLegacyFormFieldModule as MatFormFieldModule } from '@angular/material/legacy-form-field';
-import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
-import { MatLegacyRadioModule as MatRadioModule } from '@angular/material/legacy-radio';
-import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
-import { MatLegacySliderModule as MatSliderModule } from '@angular/material/legacy-slider';
-import { MatLegacySlideToggleModule as MatSlideToggleModule } from '@angular/material/legacy-slide-toggle';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 // Material Navigation
-import { MatLegacyMenuModule as MatMenuModule } from '@angular/material/legacy-menu';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 // Material Layout
-import { MatLegacyCardModule as MatCardModule } from '@angular/material/legacy-card';
+import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatLegacyListModule as MatListModule } from '@angular/material/legacy-list';
+import { MatListModule } from '@angular/material/list';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTreeModule } from '@angular/material/tree';
 // Material Buttons & Indicators
-import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatLegacyChipsModule as MatChipsModule } from '@angular/material/legacy-chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
-import { MatLegacyProgressBarModule as MatProgressBarModule } from '@angular/material/legacy-progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
 // Material Popups & Modals
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
-import { MatLegacyDialogModule as MatDialogModule } from '@angular/material/legacy-dialog';
-import { MatLegacySnackBarModule as MatSnackBarModule } from '@angular/material/legacy-snack-bar';
-import { MatLegacyTooltipModule as MatTooltipModule } from '@angular/material/legacy-tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
-import { MatLegacyPaginatorIntl as MatPaginatorIntl, MatLegacyPaginatorModule as MatPaginatorModule } from '@angular/material/legacy-paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatLegacyTableModule as MatTableModule } from '@angular/material/legacy-table';
+import { MatTableModule } from '@angular/material/table';
 import { CondominiosComponent } from './components/condominios/condominios.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { FormatarCnpjPipe } from './shared/helpers/formatar-cnpj.pipe';
@@ -72,100 +75,99 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 import { LoginComponent } from './components/login/login.component';
-import { TokenInterceptor } from './helpers/interceptors/token.interceptor';
+import { tokenInterceptor } from './helpers/interceptors/token.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
-registerLocaleData(ptBr)
+registerLocaleData(ptBr);
 
-@NgModule({ declarations: [
-        AppComponent,
-        FormatarTelefonePipe,
-        FormatarCnpjPipe,
-        CondominiosComponent,
-        ExclusaoDialogComponent,
-        DetalhesCondominioComponent,
-        TituloComponent,
-        ConfirmacaoDialogComponent,
-        TransportadorasComponent,
-        DetalhesTransportadoraComponent,
-        UnidadesComponent,
-        DetalhesUnidadeComponent,
-        MoradoresComponent,
-        DetalhesMoradorComponent,
-        FuncionariosComponent,
-        DetalhesFuncionarioComponent,
-        MainComponent,
-        EntregasComponent,
-        DetalhesEntregaComponent,
-        LoginComponent,
-        DashboardComponent
-    ],
-    schemas: [
-        CUSTOM_ELEMENTS_SCHEMA
-    ],
-    bootstrap: [AppComponent], imports: [
-        // Angular Modules
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        FormsModule,
-        ReactiveFormsModule,
-        // Angular Material Modules
-        MatAutocompleteModule,
-        MatCheckboxModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatRadioModule,
-        MatSelectModule,
-        MatSliderModule,
-        MatSlideToggleModule,
-        MatMenuModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatCardModule,
-        MatDividerModule,
-        MatExpansionModule,
-        MatGridListModule,
-        MatListModule,
-        MatStepperModule,
-        MatTabsModule,
-        MatTreeModule,
-        MatButtonModule,
-        MatButtonToggleModule,
-        MatBadgeModule,
-        MatChipsModule,
-        MatIconModule,
-        MatProgressSpinnerModule,
-        MatProgressBarModule,
-        MatRippleModule,
-        MatBottomSheetModule,
-        MatDialogModule,
-        MatSnackBarModule,
-        MatTooltipModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatTableModule,
-        // Third Party Modules
-        NgxMaskModule.forRoot(),
-        NgxSpinnerModule,
-        ToastrModule.forRoot(),
-        LayoutModule], providers: [
-        {
-            provide: LOCALE_ID,
-            useValue: "pt-BR"
-        },
-        {
-            provide: MatPaginatorIntl,
-            useValue: obterPaginatorIntlPortugues()
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: TokenInterceptor,
-            multi: true
-        },
-        provideHttpClient(withInterceptorsFromDi())
-    ] })
-export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    FormatarTelefonePipe,
+    FormatarCnpjPipe,
+    CondominiosComponent,
+    ExclusaoDialogComponent,
+    DetalhesCondominioComponent,
+    TituloComponent,
+    ConfirmacaoDialogComponent,
+    TransportadorasComponent,
+    DetalhesTransportadoraComponent,
+    UnidadesComponent,
+    DetalhesUnidadeComponent,
+    MoradoresComponent,
+    DetalhesMoradorComponent,
+    FuncionariosComponent,
+    DetalhesFuncionarioComponent,
+    MainComponent,
+    EntregasComponent,
+    DetalhesEntregaComponent,
+    LoginComponent,
+    DashboardComponent,
+  ],
+  imports: [
+    // Angular Modules
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // Angular Material Modules
+    MatAutocompleteModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatListModule,
+    MatStepperModule,
+    MatTabsModule,
+    MatTreeModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatBadgeModule,
+    MatChipsModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule,
+    MatRippleModule,
+    MatBottomSheetModule,
+    MatDialogModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
+    // Third Party Modules
+    NgxMaskDirective,
+    NgxSpinnerModule,
+    ToastrModule.forRoot(),
+    LayoutModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt-BR',
+    },
+    {
+      provide: MatPaginatorIntl,
+      useValue: obterPaginatorIntlPortugues(),
+    },
+    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideNgxMask(),
+  ],
+  bootstrap: [AppComponent],
+})
+export class AppModule {}

@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
-import { MatLegacyPaginator as MatPaginator } from '@angular/material/legacy-paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTable as MatTable, MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
@@ -14,13 +14,21 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
 @Component({
   selector: 'app-moradores',
   templateUrl: './moradores.component.html',
-  styleUrls: ['./moradores.component.scss']
+  styleUrls: ['./moradores.component.scss'],
 })
 export class MoradoresComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Moradores';
   public moradores: Morador[] = [];
-  public colunas: string[] = ['nome', 'telefone', 'ramal', 'nomeCondominio', 'descricaoUnidade', 'acoes'];
-  public dataSource: MatTableDataSource<Morador> = new MatTableDataSource<Morador>();
+  public colunas: string[] = [
+    'nome',
+    'telefone',
+    'ramal',
+    'nomeCondominio',
+    'descricaoUnidade',
+    'acoes',
+  ];
+  public dataSource: MatTableDataSource<Morador> =
+    new MatTableDataSource<Morador>();
   public filtroMorador: string = '';
   private destroy$ = new Subject<void>();
 
@@ -34,7 +42,7 @@ export class MoradoresComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
@@ -57,7 +65,7 @@ export class MoradoresComponent implements OnInit, OnDestroy {
 
   public excluirMorador(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
-    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+    dialogRef.afterClosed().subscribe((confirmacaoExclusao) => {
       if (confirmacaoExclusao) {
         this.moradorService.excluir(id).subscribe({
           next: () => {
@@ -66,34 +74,39 @@ export class MoradoresComponent implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             this.exibirErros(error);
-          }
+          },
         });
       }
     });
   }
 
   private obterMoradores(): void {
-    this.moradorService.obterMoradores().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (response) => {
-        this.moradores = response;
-        this.dataSource = new MatTableDataSource<Morador>(this.moradores);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.renderRows();
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.exibirErros(error);
-        this.spinner.hide();
-      }
-    });
+    this.moradorService
+      .obterMoradores()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.moradores = response;
+          this.dataSource = new MatTableDataSource<Morador>(this.moradores);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.table.renderRows();
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.exibirErros(error);
+          this.spinner.hide();
+        },
+      });
   }
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
       this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
+      erro.forEach((mensagemErro) =>
+        this.toastr.error(mensagemErro, 'Houve um erro!')
+      );
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Houve um erro!');
     }
