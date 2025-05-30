@@ -6,7 +6,7 @@ export function ValidarAmbiente(env: unknown): boolean {
     return false;
   }
 
-  const required = ['production', 'version', 'api.baseUrl', 'auth.tokenKey'];
+  const required = ['production', 'version', 'api.baseUrl', 'autenticacao.tokenKey'];
 
   return required.every(path => {
     const value = path

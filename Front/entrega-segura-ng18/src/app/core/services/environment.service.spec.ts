@@ -184,7 +184,7 @@ describe('EnvironmentService', () => {
       expect(service.config).toHaveProperty('version');
       expect(service.config).toHaveProperty('appName');
       expect(service.config).toHaveProperty('api');
-      expect(service.config).toHaveProperty('auth');
+      expect(service.config).toHaveProperty('autenticacao');
       expect(service.config).toHaveProperty('features');
       expect(service.config).toHaveProperty('ui');
       expect(service.config).toHaveProperty('logging');
@@ -194,15 +194,15 @@ describe('EnvironmentService', () => {
       expect(service.config.api).toHaveProperty('baseUrl');
       expect(service.config.api).toHaveProperty('timeout');
       expect(service.config.api).toHaveProperty('endpoints');
-      expect(service.config.api.endpoints).toHaveProperty('auth');
+      expect(service.config.api.endpoints).toHaveProperty('autenticacao');
       expect(service.config.api.endpoints).toHaveProperty('entregas');
     });
 
-    it('deve ter configurações de auth válidas', () => {
-      expect(service.config.auth).toHaveProperty('tokenKey');
-      expect(service.config.auth).toHaveProperty('sessionTimeout');
-      expect(service.config.auth).toHaveProperty('refreshThreshold');
-      expect(service.config.auth).toHaveProperty('enableAutoRefresh');
+    it('deve ter configurações de autenticacao válidas', () => {
+      expect(service.config.autenticacao).toHaveProperty('tokenKey');
+      expect(service.config.autenticacao).toHaveProperty('sessionTimeout');
+      expect(service.config.autenticacao).toHaveProperty('refreshThreshold');
+      expect(service.config.autenticacao).toHaveProperty('enableAutoRefresh');
     });
   });
 
@@ -251,7 +251,7 @@ describe('EnvironmentService', () => {
     it('deve acessar configurações aninhadas', () => {
       expect(service.config.api.timeout).toBe(30000);
       expect(service.config.api.retryAttempts).toBe(3);
-      expect(service.config.auth.sessionTimeout).toBe(480);
+      expect(service.config.autenticacao.sessionTimeout).toBe(480);
       expect(service.config.ui.theme).toBe('light');
       expect(service.config.logging.level).toBe('debug');
     });

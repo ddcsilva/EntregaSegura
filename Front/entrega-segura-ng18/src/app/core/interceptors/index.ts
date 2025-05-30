@@ -1,1 +1,1 @@
-export * from './auth.interceptor';
+export * from './autenticacao.interceptor';

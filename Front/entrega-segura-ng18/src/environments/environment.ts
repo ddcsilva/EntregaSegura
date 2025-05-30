@@ -10,7 +10,7 @@ export const environment: Environment = {
     timeout: 30000,
     retryAttempts: 3,
     endpoints: {
-      auth: '/api/usuario',
+      autenticacao: '/api/usuario',
       entregas: '/api/entregas',
       condominios: '/api/condominios',
       usuarios: '/api/usuarios',
@@ -18,7 +18,7 @@ export const environment: Environment = {
     },
   },
 
-  auth: {
+  autenticacao: {
     tokenKey: 'entrega_segura_dev_token',
     sessionTimeout: 480,
     refreshThreshold: 30,

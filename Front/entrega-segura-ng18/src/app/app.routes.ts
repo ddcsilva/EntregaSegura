@@ -5,7 +5,7 @@ import { Papel } from '@core/models';
 export const routes: Routes = [
   {
     path: 'autenticacao',
-    loadChildren: () => import('./features/auth/auth.routes').then(r => r.authRoutes),
+    loadChildren: () => import('./features/autenticacao/autenticacao.routes').then(r => r.autenticacaoRoutes),
   },
   {
     path: 'dashboard',

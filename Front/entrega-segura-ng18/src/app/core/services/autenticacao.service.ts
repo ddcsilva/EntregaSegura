@@ -16,7 +16,7 @@ export class AutenticacaoService {
   private readonly router = inject(Router);
   private readonly tokenStorage = inject(TokenStorageService);
 
-  private readonly urlApi = `${environment.api.baseUrl}${environment.api.endpoints.auth}`;
+  private readonly urlApi = `${environment.api.baseUrl}${environment.api.endpoints.autenticacao}`;
 
   private readonly estadoAutenticacao = signal<EstadoAutenticacao>({
     usuario: null,
@@ -85,7 +85,7 @@ export class AutenticacaoService {
       erro: null,
     });
 
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/autenticacao/login']);
   }
 
   private processarLoginSucesso(resposta: Autenticacao): void {

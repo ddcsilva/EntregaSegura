@@ -3,11 +3,11 @@ import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHeaders, HttpContext 
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
-import { authInterceptor } from './auth.interceptor';
+import { autenticacaoInterceptor } from './autenticacao.interceptor';
 import { AutenticacaoService } from '@core/services/autenticacao.service';
 import { TokenStorageService } from '@core/services/token-storage.service';
 
-describe('authInterceptor', () => {
+describe('autenticacaoInterceptor', () => {
   let autenticacaoService: jest.Mocked<AutenticacaoService>;
   let tokenStorage: jest.Mocked<TokenStorageService>;
 
@@ -46,7 +46,7 @@ describe('authInterceptor', () => {
     mockNext.mockClear();
   });
 
-  describe('requests with authentication headers', () => {
+  describe('testes com headers de autenticação', () => {
     beforeEach(() => {
       tokenStorage.obterToken.mockReturnValue(validToken);
       tokenStorage.verificarTokenExpirado.mockReturnValue(false);
@@ -62,7 +62,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
             expect(tokenStorage.obterToken).toHaveBeenCalled();
@@ -87,7 +87,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: () => done(),
         });
       });
@@ -104,14 +104,14 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: () => done(),
         });
       });
     });
   });
 
-  describe('requests without authentication', () => {
+  describe('testes sem headers de autenticação', () => {
     it('deve proceder sem adicionar header quando token não existe', done => {
       tokenStorage.obterToken.mockReturnValue(null);
       const req = new HttpRequest('GET', 'http://localhost:3000/api/entregas');
@@ -124,7 +124,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
             expect(tokenStorage.obterToken).toHaveBeenCalled();
@@ -148,7 +148,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
             expect(tokenStorage.obterToken).toHaveBeenCalled();
@@ -160,7 +160,7 @@ describe('authInterceptor', () => {
     });
   });
 
-  describe('response handling', () => {
+  describe('tratamento de respostas', () => {
     it('deve propagar resposta de sucesso normalmente', done => {
       tokenStorage.obterToken.mockReturnValue(validToken);
       tokenStorage.verificarTokenExpirado.mockReturnValue(false);
@@ -173,7 +173,7 @@ describe('authInterceptor', () => {
       mockNext.mockReturnValue(of(successResponse));
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(successResponse);
             done();
@@ -194,7 +194,7 @@ describe('authInterceptor', () => {
       mockNext.mockReturnValue(throwError(() => unauthorizedError));
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           error: error => {
             expect(error).toBe(unauthorizedError);
             expect(autenticacaoService.logout).toHaveBeenCalled();
@@ -216,7 +216,7 @@ describe('authInterceptor', () => {
       mockNext.mockReturnValue(throwError(() => serverError));
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           error: error => {
             expect(error).toBe(serverError);
             expect(autenticacaoService.logout).not.toHaveBeenCalled();
@@ -238,7 +238,7 @@ describe('authInterceptor', () => {
       mockNext.mockReturnValue(throwError(() => forbiddenError));
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           error: error => {
             expect(error).toBe(forbiddenError);
             expect(autenticacaoService.logout).not.toHaveBeenCalled();
@@ -264,7 +264,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
             expect(tokenStorage.obterToken).toHaveBeenCalled();
@@ -289,7 +289,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: response => {
             expect(response).toBe(expectedResponse);
             expect(tokenStorage.obterToken).toHaveBeenCalled();
@@ -320,7 +320,7 @@ describe('authInterceptor', () => {
       });
 
       TestBed.runInInjectionContext(() => {
-        authInterceptor(req, mockNext).subscribe({
+        autenticacaoInterceptor(req, mockNext).subscribe({
           next: () => done(),
         });
       });

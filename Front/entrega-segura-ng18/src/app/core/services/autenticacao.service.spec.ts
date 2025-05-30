@@ -227,7 +227,7 @@ describe('AutenticacaoService', () => {
       expect(service.carregando()).toBe(false);
       expect(service.erro()).toBeNull();
       expect(tokenStorage.removerToken).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login']);
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login']);
     });
   });
 

@@ -10,7 +10,7 @@ interface JwtPayload {
   providedIn: 'root',
 })
 export class TokenStorageService {
-  private readonly TOKEN_KEY = environment.auth.tokenKey;
+  private readonly TOKEN_KEY = environment.autenticacao.tokenKey;
 
   salvarToken(token: string): void {
     try {

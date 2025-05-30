@@ -119,7 +119,7 @@ describe('autenticacaoGuard', () => {
 
       expect(result).toBe(false);
       expect(autenticacaoService.estaAutenticado).toHaveBeenCalled();
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/dashboard' },
       });
     });
@@ -130,7 +130,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/admin/configuracoes' },
       });
     });
@@ -141,7 +141,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/entregas?status=pendente&page=2' },
       });
     });
@@ -152,7 +152,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/dashboard#relatorios' },
       });
     });
@@ -163,7 +163,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/' },
       });
     });
@@ -176,7 +176,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '/dashboard' },
       });
     });
@@ -189,7 +189,7 @@ describe('autenticacaoGuard', () => {
       const result = TestBed.runInInjectionContext(() => autenticacaoGuard(mockRoute, mockState));
 
       expect(result).toBe(false);
-      expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
+      expect(router.navigate).toHaveBeenCalledWith(['/autenticacao/login'], {
         queryParams: { returnUrl: '' },
       });
     });
@@ -227,7 +227,7 @@ describe('autenticacaoGuard', () => {
   });
 
   describe('integração com injeção de dependências', () => {
-    it('deve injetar AuthService corretamente', () => {
+    it('deve injetar AutenticacaoService corretamente', () => {
       autenticacaoService.estaAutenticado.mockReturnValue(true);
 
       TestBed.runInInjectionContext(() => {

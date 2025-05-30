@@ -8,7 +8,7 @@ export interface Environment {
     timeout: number;
     retryAttempts: number;
     endpoints: {
-      auth: string;
+      autenticacao: string;
       entregas: string;
       condominios: string;
       usuarios: string;
@@ -16,7 +16,7 @@ export interface Environment {
     };
   };
 
-  auth: {
+  autenticacao: {
     tokenKey: string;
     sessionTimeout: number;
     refreshThreshold: number;

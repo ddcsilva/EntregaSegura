@@ -17,7 +17,7 @@
     </div>
 
     <!-- Formulário -->
-    <form class="mt-8 space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()" data-testid="login-form">
+    <form class="mt-8 space-y-6" [formGroup]="formularioLogin" (ngSubmit)="aoEntrar()" data-testid="login-form">
       <!-- Email -->
       <div>
         <label for="login" class="block text-sm font-medium text-gray-700"> Email ou Login </label>
@@ -30,12 +30,12 @@
             required
             formControlName="login"
             class="relative block w-full appearance-none rounded-lg border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-            [class.border-red-500]="isFieldInvalid('login')"
+            [class.border-red-500]="verificarCampoInvalido('login')"
             placeholder="Digite seu email"
             data-testid="login-input"
           />
           <!-- Erro do email -->
-          <p *ngIf="isFieldInvalid('login')" class="mt-1 text-sm text-red-600" data-testid="login-error">
+          <p *ngIf="verificarCampoInvalido('login')" class="mt-1 text-sm text-red-600" data-testid="login-error">
             Email é obrigatório
           </p>
         </div>
@@ -48,12 +48,12 @@
           <input
             id="senha"
             name="senha"
-            [type]="showPassword() ? 'text' : 'password'"
+            [type]="mostrarSenha() ? 'text' : 'password'"
             autocomplete="current-password"
             required
             formControlName="senha"
             class="relative block w-full appearance-none rounded-lg border border-gray-300 px-3 py-2 pr-10 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-primary-500 focus:outline-none focus:ring-primary-500 sm:text-sm"
-            [class.border-red-500]="isFieldInvalid('senha')"
+            [class.border-red-500]="verificarCampoInvalido('senha')"
             placeholder="Digite sua senha"
             data-testid="password-input"
           />
@@ -61,7 +61,7 @@
           <button
             type="button"
             class="absolute inset-y-0 right-0 flex items-center pr-3"
-            (click)="togglePasswordVisibility()"
+            (click)="alternarVisibilidadeSenha()"
             data-testid="password-toggle"
           >
             <svg
@@ -71,14 +71,14 @@
               viewBox="0 0 24 24"
             >
               <path
-                *ngIf="!showPassword()"
+                *ngIf="!mostrarSenha()"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
               />
               <path
-                *ngIf="showPassword()"
+                *ngIf="mostrarSenha()"
                 stroke-linecap="round"
                 stroke-linejoin="round"
                 stroke-width="2"
@@ -87,14 +87,18 @@
             </svg>
           </button>
           <!-- Erro da senha -->
-          <p *ngIf="isFieldInvalid('senha')" class="mt-1 text-sm text-red-600" data-testid="password-error">
+          <p *ngIf="verificarCampoInvalido('senha')" class="mt-1 text-sm text-red-600" data-testid="password-error">
             Senha é obrigatória
           </p>
         </div>
       </div>
 
       <!-- Erro geral -->
-      <div *ngIf="authService.erro()" class="rounded-lg border border-red-200 bg-red-50 p-4" data-testid="auth-error">
+      <div
+        *ngIf="autenticacaoService.erro()"
+        class="rounded-lg border border-red-200 bg-red-50 p-4"
+        data-testid="auth-error"
+      >
         <div class="flex">
           <svg class="h-5 w-5 text-red-400" fill="currentColor" viewBox="0 0 20 20">
             <path
@@ -104,7 +108,7 @@
             />
           </svg>
           <p class="ml-2 text-sm text-red-700">
-            {{ authService.erro() }}
+            {{ autenticacaoService.erro() }}
           </p>
         </div>
       </div>
@@ -112,15 +116,15 @@
       <!-- Botão de login -->
       <div>
         <es-button
-          type="submit"
-          variant="primary"
-          size="lg"
+          tipo="submit"
+          variante="primary"
+          tamanho="lg"
           [larguraTotal]="true"
-          [desabilitado]="loginForm.invalid"
-          [carregando]="authService.carregando()"
+          [desabilitado]="formularioLogin.invalid"
+          [carregando]="autenticacaoService.carregando()"
           data-testid="login-button"
         >
-          {{ authService.carregando() ? 'Entrando...' : 'Entrar' }}
+          {{ autenticacaoService.carregando() ? 'Entrando...' : 'Entrar' }}
         </es-button>
       </div>
     </form>

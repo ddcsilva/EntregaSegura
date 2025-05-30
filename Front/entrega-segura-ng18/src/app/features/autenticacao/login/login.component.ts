@@ -18,25 +18,22 @@ export class LoginComponent {
   private readonly fb = inject(FormBuilder);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
-  public readonly authService = inject(AutenticacaoService);
+  public readonly autenticacaoService = inject(AutenticacaoService);
 
-  // Signals para estado local
-  public readonly showPassword = signal(false);
+  public readonly mostrarSenha = signal(false);
 
-  // Formulário reativo
-  public readonly loginForm = this.fb.group({
+  public readonly formularioLogin = this.fb.group({
     login: ['', [Validators.required, Validators.email]],
     senha: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  // Submeter formulário
-  onSubmit(): void {
-    if (this.loginForm.invalid) return;
+  aoEntrar(): void {
+    if (this.formularioLogin.invalid) return;
 
-    const credentials: LoginRequest = this.loginForm.value as LoginRequest;
+    const credenciais: LoginRequest = this.formularioLogin.value as LoginRequest;
 
-    this.authService
-      .login(credentials)
+    this.autenticacaoService
+      .login(credenciais)
       .pipe(
         finalize(() => {
           // Form será resetado automaticamente em caso de erro
@@ -50,21 +47,19 @@ export class LoginComponent {
           this.router.navigate([returnUrl]);
         },
         error: () => {
-          // Erro será tratado pelo AuthService
+          // Erro será tratado pelo AutenticacaoService
           // Reset apenas a senha por segurança
-          this.loginForm.patchValue({ senha: '' });
+          this.formularioLogin.patchValue({ senha: '' });
         },
       });
   }
 
-  // Toggle visibilidade da senha
-  togglePasswordVisibility(): void {
-    this.showPassword.update(show => !show);
+  alternarVisibilidadeSenha(): void {
+    this.mostrarSenha.update(mostrar => !mostrar);
   }
 
-  // Verificar se campo tem erro
-  isFieldInvalid(fieldName: string): boolean {
-    const field = this.loginForm.get(fieldName);
-    return !!(field && field.invalid && (field.dirty || field.touched));
+  verificarCampoInvalido(nomeCampo: string): boolean {
+    const campo = this.formularioLogin.get(nomeCampo);
+    return !!(campo && campo.invalid && (campo.dirty || campo.touched));
   }
 }
