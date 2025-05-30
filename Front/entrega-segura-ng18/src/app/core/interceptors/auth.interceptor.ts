@@ -4,13 +4,13 @@ import { catchError, throwError } from 'rxjs';
 
 import { AuthService } from '@core/services/auth.service';
 import { TokenStorageService } from '@core/services/token-storage.service';
-import { environment } from '@environments/environment';
+import { environment } from '@environments';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const tokenStorage = inject(TokenStorageService);
 
-  const publicUrls = ['/api/usuario/autenticacao', '/api/public'];
+  const publicUrls = [`${environment.api.endpoints.auth}/autenticacao`, '/api/public'];
 
   const isPublicUrl = publicUrls.some(url => req.url.includes(url));
 

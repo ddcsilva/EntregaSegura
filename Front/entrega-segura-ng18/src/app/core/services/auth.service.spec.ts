@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { TokenStorageService } from './token-storage.service';
-import { AuthResponse, LoginRequest } from '@core/models';
+import { AuthResponse, LoginRequest, UserRole } from '@core/models';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -18,7 +18,7 @@ describe('AuthService', () => {
       id: 1,
       nome: 'Test User',
       email: 'test@test.com',
-      perfil: 'Administrador',
+      perfil: UserRole.ADMIN,
     },
   };
 
@@ -137,7 +137,154 @@ describe('AuthService', () => {
       service.login({ login: 'test', senha: 'test' }).subscribe();
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockAuthResponse);
 
-      expect(service.userRole()).toBe('Administrador');
+      expect(service.userRole()).toBe(UserRole.ADMIN);
+    });
+  });
+
+  describe('computed signals extras', () => {
+    it('deve testar canAccessAdmin com usuário admin', () => {
+      service.login({ login: 'admin', senha: 'admin' }).subscribe();
+      const mockResponse = {
+        ...mockAuthResponse,
+        user: { ...mockAuthResponse.user, perfil: UserRole.ADMIN },
+      };
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
+
+      expect(service.canAccessAdmin()).toBe(true);
+    });
+
+    it('deve testar canAccessAdmin com usuário não admin', () => {
+      service.login({ login: 'user', senha: 'user' }).subscribe();
+      const mockResponse = {
+        ...mockAuthResponse,
+        user: { ...mockAuthResponse.user, perfil: UserRole.SINDICO },
+      };
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
+
+      expect(service.canAccessAdmin()).toBe(false);
+    });
+
+    it('deve testar canAccessSindico com sindico', () => {
+      service.login({ login: 'sindico', senha: 'sindico' }).subscribe();
+      const mockResponse = {
+        ...mockAuthResponse,
+        user: { ...mockAuthResponse.user, perfil: UserRole.SINDICO },
+      };
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
+
+      expect(service.canAccessSindico()).toBe(true);
+    });
+
+    it('deve testar canAccessSindico com admin', () => {
+      service.login({ login: 'admin', senha: 'admin' }).subscribe();
+      const mockResponse = {
+        ...mockAuthResponse,
+        user: { ...mockAuthResponse.user, perfil: UserRole.ADMIN },
+      };
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
+
+      expect(service.canAccessSindico()).toBe(true);
+    });
+
+    it('deve testar canAccessSindico com usuário sem permissão', () => {
+      service.login({ login: 'user', senha: 'user' }).subscribe();
+      const mockResponse = {
+        ...mockAuthResponse,
+        user: { ...mockAuthResponse.user, perfil: UserRole.FUNCIONARIO },
+      };
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
+
+      expect(service.canAccessSindico()).toBe(false);
+    });
+  });
+
+  describe('private methods', () => {
+    it('deve testar setLoading', () => {
+      service.login({ login: 'test', senha: 'test' }).subscribe();
+
+      // Durante o login, isLoading deve ser true
+      expect(service.isLoading()).toBe(true);
+
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockAuthResponse);
+
+      // Após o login, isLoading deve ser false
+      expect(service.isLoading()).toBe(false);
+    });
+
+    it('deve testar clearError', () => {
+      // Primeiro, criar um erro
+      service.login({ login: 'wrong', senha: 'wrong' }).subscribe({
+        error: () => {},
+      });
+      httpMock
+        .expectOne(`${service['apiUrl']}/autenticacao`)
+        .flush({ message: 'Erro' }, { status: 401, statusText: 'Unauthorized' });
+
+      expect(service.error()).toBeTruthy();
+
+      // Fazer novo login que deve limpar o erro
+      service.login({ login: 'correct', senha: 'correct' }).subscribe();
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockAuthResponse);
+
+      expect(service.error()).toBeNull();
+    });
+  });
+
+  describe('edge cases', () => {
+    it('deve manter estado consistente após erro de rede', done => {
+      service.login({ login: 'test', senha: 'test' }).subscribe({
+        error: error => {
+          expect(service.isLoading()).toBe(false);
+          expect(service.error()).toBeTruthy();
+          expect(service.user()).toBeNull();
+          expect(service.token()).toBeNull();
+          done();
+        },
+      });
+
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).error(new ErrorEvent('Network error'));
+    });
+
+    it('deve lidar com resposta de login incompleta', () => {
+      const incompleteResponse = {
+        // Resposta sem token nem user
+      };
+
+      service.login({ login: 'test', senha: 'test' }).subscribe();
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(incompleteResponse);
+
+      // Quando a resposta não tem token nem user, o service mantém os valores undefined
+      expect(service.token()).toBeUndefined();
+      expect(service.user()).toBeUndefined();
+      expect(service.isAuthenticated()).toBe(false);
+    });
+
+    it('deve lidar com token inválido na resposta', () => {
+      const responseWithInvalidToken = {
+        token: '', // token vazio
+        user: mockAuthResponse.user,
+      };
+
+      service.login({ login: 'test', senha: 'test' }).subscribe();
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(responseWithInvalidToken);
+
+      // Token vazio não é considerado válido para autenticação
+      expect(service.token()).toBe('');
+      expect(service.isAuthenticated()).toBe(false); // Token vazio não autentica
+    });
+
+    it('deve lidar com user inválido na resposta', () => {
+      const responseWithInvalidUser = {
+        token: mockAuthResponse.token,
+        user: null, // user nulo
+      };
+
+      service.login({ login: 'test', senha: 'test' }).subscribe();
+      httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(responseWithInvalidUser);
+
+      // User nulo deve ser aceito como está
+      expect(service.user()).toBeNull();
+      expect(service.token()).toBe(mockAuthResponse.token);
     });
   });
 });

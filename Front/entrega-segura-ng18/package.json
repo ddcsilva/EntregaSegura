@@ -4,7 +4,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:dev": "ng serve --configuration development",
+    "start:staging": "ng serve --configuration staging",
+    "build:staging": "ng build --configuration staging",
+    "start:prod": "ng serve --configuration production",
     "build": "ng build",
+    "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch",
@@ -13,7 +18,9 @@
     "lint": "ng lint",
     "lint:fix": "ng lint --fix",
     "format": "prettier --write \"src/**/*.{ts,html,scss}\"",
-    "format:check": "prettier --check \"src/**/*.{ts,html,scss}\""
+    "format:check": "prettier --check \"src/**/*.{ts,html,scss}\"",
+    "analyze": "ng build --stats-json && npx webpack-bundle-analyzer dist/entrega-segura-ng18/stats.json",
+    "analyze:staging": "ng build --configuration staging --stats-json && npx webpack-bundle-analyzer dist/entrega-segura-ng18/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +46,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^29.5.14",
+    "@types/node": "^22.15.28",
     "angular-eslint": "19.6.0",
     "autoprefixer": "^10.4.21",
     "eslint": "^9.27.0",

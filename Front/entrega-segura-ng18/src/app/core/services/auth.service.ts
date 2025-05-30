@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
-import { environment } from '@environments/environment';
+import { environment } from '@environments';
 import { AuthState, LoginRequest, AuthResponse, User, JwtPayload } from '@core/models';
 import { TokenStorageService } from './token-storage.service';
 
@@ -15,7 +15,7 @@ export class AuthService {
   private readonly router = inject(Router);
   private readonly tokenStorage = inject(TokenStorageService);
 
-  private readonly apiUrl = `${environment.urlBaseApi}/api/usuario`;
+  private readonly apiUrl = `${environment.api.baseUrl}${environment.api.endpoints.auth}`;
 
   private readonly authState = signal<AuthState>({
     user: null,

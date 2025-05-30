@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from '@environments/environment';
+import { environment } from '@environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TokenStorageService {
-  private readonly TOKEN_KEY = 'entrega_segura_token';
+  private readonly TOKEN_KEY = environment.auth.tokenKey;
 
   setToken(token: string): void {
     try {

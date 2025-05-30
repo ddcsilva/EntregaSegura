@@ -24,6 +24,7 @@
       "@ui/*": ["app/ui/*"],
       "@layout/*": ["app/layout/*"],
       "@features/*": ["app/features/*"],
+      "@environments": ["environments/index"],
       "@environments/*": ["environments/*"]
     }
   },
