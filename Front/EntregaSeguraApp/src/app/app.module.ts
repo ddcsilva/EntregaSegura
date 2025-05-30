@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
 import { MatLegacyAutocompleteModule as MatAutocompleteModule } from '@angular/material/legacy-autocomplete';
@@ -78,99 +78,94 @@ import { LayoutModule } from '@angular/cdk/layout';
 
 registerLocaleData(ptBr)
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    FormatarTelefonePipe,
-    FormatarCnpjPipe,
-    CondominiosComponent,
-    ExclusaoDialogComponent,
-    DetalhesCondominioComponent,
-    TituloComponent,
-    ConfirmacaoDialogComponent,
-    TransportadorasComponent,
-    DetalhesTransportadoraComponent,
-    UnidadesComponent,
-    DetalhesUnidadeComponent,
-    MoradoresComponent,
-    DetalhesMoradorComponent,
-    FuncionariosComponent,
-    DetalhesFuncionarioComponent,
-    MainComponent,
-    EntregasComponent,
-    DetalhesEntregaComponent,
-    LoginComponent,
-    DashboardComponent
-  ],
-  imports: [
-    // Angular Modules
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    // Angular Material Modules
-    MatAutocompleteModule,
-    MatCheckboxModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatSlideToggleModule,
-    MatMenuModule,
-    MatSidenavModule,
-    MatToolbarModule,
-    MatCardModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatGridListModule,
-    MatListModule,
-    MatStepperModule,
-    MatTabsModule,
-    MatTreeModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    MatBadgeModule,
-    MatChipsModule,
-    MatIconModule,
-    MatProgressSpinnerModule,
-    MatProgressBarModule,
-    MatRippleModule,
-    MatBottomSheetModule,
-    MatDialogModule,
-    MatSnackBarModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatTableModule,
-    // Third Party Modules
-    NgxMaskModule.forRoot(),
-    NgxSpinnerModule,
-    ToastrModule.forRoot(),
-    LayoutModule
-  ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: "pt-BR"
-    },
-    {
-      provide: MatPaginatorIntl,
-      useValue: obterPaginatorIntlPortugues()
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        FormatarTelefonePipe,
+        FormatarCnpjPipe,
+        CondominiosComponent,
+        ExclusaoDialogComponent,
+        DetalhesCondominioComponent,
+        TituloComponent,
+        ConfirmacaoDialogComponent,
+        TransportadorasComponent,
+        DetalhesTransportadoraComponent,
+        UnidadesComponent,
+        DetalhesUnidadeComponent,
+        MoradoresComponent,
+        DetalhesMoradorComponent,
+        FuncionariosComponent,
+        DetalhesFuncionarioComponent,
+        MainComponent,
+        EntregasComponent,
+        DetalhesEntregaComponent,
+        LoginComponent,
+        DashboardComponent
+    ],
+    schemas: [
+        CUSTOM_ELEMENTS_SCHEMA
+    ],
+    bootstrap: [AppComponent], imports: [
+        // Angular Modules
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        // Angular Material Modules
+        MatAutocompleteModule,
+        MatCheckboxModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatRadioModule,
+        MatSelectModule,
+        MatSliderModule,
+        MatSlideToggleModule,
+        MatMenuModule,
+        MatSidenavModule,
+        MatToolbarModule,
+        MatCardModule,
+        MatDividerModule,
+        MatExpansionModule,
+        MatGridListModule,
+        MatListModule,
+        MatStepperModule,
+        MatTabsModule,
+        MatTreeModule,
+        MatButtonModule,
+        MatButtonToggleModule,
+        MatBadgeModule,
+        MatChipsModule,
+        MatIconModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule,
+        MatRippleModule,
+        MatBottomSheetModule,
+        MatDialogModule,
+        MatSnackBarModule,
+        MatTooltipModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatTableModule,
+        // Third Party Modules
+        NgxMaskModule.forRoot(),
+        NgxSpinnerModule,
+        ToastrModule.forRoot(),
+        LayoutModule], providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: "pt-BR"
+        },
+        {
+            provide: MatPaginatorIntl,
+            useValue: obterPaginatorIntlPortugues()
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: TokenInterceptor,
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }

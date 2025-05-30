@@ -1,11 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpEvent,
-  HttpInterceptor,
-  HttpErrorResponse
-} from '@angular/common/http';
+import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { EMPTY, Observable, catchError, throwError } from 'rxjs';
 import { AutenticacaoService } from '@app/services/autenticacao.service';
 import { ToastrService } from 'ngx-toastr';
