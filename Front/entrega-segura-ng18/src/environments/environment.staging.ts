@@ -1,15 +1,13 @@
 import { Environment } from './environment.interface';
 
 export const environment: Environment = {
-  // 🏗️ Build Configuration
-  production: false, // Ainda é ambiente de teste
+  production: false,
   version: '1.0.0-staging',
   appName: 'EntregaSegura Homologação',
 
-  // 🌐 API Configuration - Servidor de homologação
   api: {
     baseUrl: 'https://api-staging.entregasegura.com.br',
-    timeout: 15000, // Timeout mais restrito
+    timeout: 15000,
     retryAttempts: 2,
     endpoints: {
       auth: '/api/usuario',
@@ -20,44 +18,39 @@ export const environment: Environment = {
     },
   },
 
-  // 🔐 Authentication - Configurações realistas
   auth: {
     tokenKey: 'entrega_segura_staging_token',
-    sessionTimeout: 240, // 4 horas - mais realista
-    refreshThreshold: 15, // 15 minutos antes de expirar
+    sessionTimeout: 240,
+    refreshThreshold: 15,
     enableAutoRefresh: true,
   },
 
-  // 📊 Features - Configuração próxima à produção
   features: {
-    enableAnalytics: false, // Analytics de teste separado
-    enableDebugMode: false, // Debug desabilitado
-    enableMockData: false, // API real sempre
-    enableServiceWorker: true, // Testar PWA
-    enableErrorReporting: true, // Reportar erros para análise
+    enableAnalytics: false,
+    enableDebugMode: false,
+    enableMockData: false,
+    enableServiceWorker: true,
+    enableErrorReporting: true,
     enablePerformanceMonitoring: true,
   },
 
-  // 🎨 UI/UX - Configurações de produção
   ui: {
     theme: 'light',
-    itemsPerPage: 20, // Mesmo valor da produção
+    itemsPerPage: 20,
     animationsEnabled: true,
-    showBetaFeatures: false, // Ocultar features experimentais
+    showBetaFeatures: false,
     defaultLanguage: 'pt-BR',
   },
 
-  // 📝 Logging - Menos verbose
   logging: {
     level: 'info',
-    enableConsoleLog: false, // Console limpo
+    enableConsoleLog: false,
     enableRemoteLogging: true,
     logEndpoint: 'https://logs-staging.entregasegura.com.br/api/logs',
   },
 
-  // 🔗 External Services - Ambientes de teste
   external: {
-    googleAnalyticsId: 'GA-STAGING-ID', // Analytics de teste
+    googleAnalyticsId: 'GA-STAGING-ID',
     sentryDsn: 'https://staging-dsn@sentry.io/project-id',
   },
 };

@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { environment } from '@environments';
 
+interface JwtPayload {
+  exp: number;
+  [key: string]: unknown;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -48,7 +53,7 @@ export class TokenStorageService {
     }
   }
 
-  private decodeJwt(token: string): any {
+  private decodeJwt(token: string): JwtPayload {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     const jsonPayload = decodeURIComponent(
@@ -57,7 +62,7 @@ export class TokenStorageService {
         .map(c => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
         .join('')
     );
-    return JSON.parse(jsonPayload);
+    return JSON.parse(jsonPayload) as JwtPayload;
   }
 
   private isLocalStorageAvailable(): boolean {

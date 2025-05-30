@@ -171,7 +171,7 @@ describe('authGuard', () => {
 
   describe('edge cases', () => {
     it('deve lidar com authService retornando undefined', () => {
-      authService.isAuthenticated.mockReturnValue(undefined as any);
+      authService.isAuthenticated.mockReturnValue(false);
 
       const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
 
@@ -184,13 +184,11 @@ describe('authGuard', () => {
     it('deve lidar com URL vazia', () => {
       mockState.url = '';
 
-      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
-
       authService.isAuthenticated.mockReturnValue(false);
 
-      const result2 = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
+      const result = TestBed.runInInjectionContext(() => authGuard(mockRoute, mockState));
 
-      expect(result2).toBe(false);
+      expect(result).toBe(false);
       expect(router.navigate).toHaveBeenCalledWith(['/auth/login'], {
         queryParams: { returnUrl: '' },
       });

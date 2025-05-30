@@ -3,8 +3,13 @@ import { inject } from '@angular/core';
 
 import { AuthService } from '@core/services/auth.service';
 
-export const roleGuard = (allowedRoles: string[]): CanActivateFn => {
-  return (route, state) => {
+/**
+ * Guarda de rota baseada em papéis
+ * @param papeisPermitidos - Lista de papéis permitidos
+ * @returns true se o usuário tem um papel permitido, false caso contrário
+ */
+export const papelGuard = (papeisPermitidos: string[]): CanActivateFn => {
+  return () => {
     const authService = inject(AuthService);
     const router = inject(Router);
 
@@ -13,13 +18,12 @@ export const roleGuard = (allowedRoles: string[]): CanActivateFn => {
       return false;
     }
 
-    const userRole = authService.userRole();
+    const papelUsuario = authService.userRole();
 
-    if (userRole && allowedRoles.includes(userRole)) {
+    if (papelUsuario && papeisPermitidos.includes(papelUsuario)) {
       return true;
     }
 
-    // 🚫 Acesso negado - redirecionar para página apropriada
     router.navigate(['/dashboard']);
     return false;
   };

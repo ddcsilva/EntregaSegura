@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Component } from '@angular/core';
 
-import { roleGuard } from './role.guard';
+import { papelGuard } from './papel.guard';
 import { AuthService } from '@core/services/auth.service';
 import { UserRole } from '@core/models/user.model';
 
@@ -10,7 +10,7 @@ import { UserRole } from '@core/models/user.model';
 @Component({ template: '' })
 class MockComponent {}
 
-describe('roleGuard', () => {
+describe('papelGuard', () => {
   let authService: jest.Mocked<AuthService>;
   let router: jest.Mocked<Router>;
   let mockRoute: ActivatedRouteSnapshot;
@@ -84,7 +84,7 @@ describe('roleGuard', () => {
     });
 
     it('deve negar acesso e redirecionar para login quando não autenticado', () => {
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -107,7 +107,7 @@ describe('roleGuard', () => {
         authService.isAuthenticated.mockClear();
         router.navigate.mockClear();
 
-        const guard = roleGuard(allowedRoles);
+        const guard = papelGuard(allowedRoles);
 
         const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -124,7 +124,7 @@ describe('roleGuard', () => {
 
     it('deve permitir acesso para Administrador', () => {
       authService.userRole.mockReturnValue(UserRole.ADMIN);
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -136,7 +136,7 @@ describe('roleGuard', () => {
 
     it('deve permitir acesso para Sindico', () => {
       authService.userRole.mockReturnValue(UserRole.SINDICO);
-      const guard = roleGuard([UserRole.SINDICO]);
+      const guard = papelGuard([UserRole.SINDICO]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -148,7 +148,7 @@ describe('roleGuard', () => {
 
     it('deve permitir acesso quando usuário tem um dos roles permitidos', () => {
       authService.userRole.mockReturnValue(UserRole.SINDICO);
-      const guard = roleGuard([UserRole.ADMIN, UserRole.SINDICO]);
+      const guard = papelGuard([UserRole.ADMIN, UserRole.SINDICO]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -172,7 +172,7 @@ describe('roleGuard', () => {
         authService.userRole.mockClear();
         router.navigate.mockClear();
 
-        const guard = roleGuard(allowedRoles);
+        const guard = papelGuard(allowedRoles);
 
         const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -189,7 +189,7 @@ describe('roleGuard', () => {
 
     it('deve negar acesso e redirecionar para dashboard quando role não permitido', () => {
       authService.userRole.mockReturnValue(UserRole.FUNCIONARIO);
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -201,7 +201,7 @@ describe('roleGuard', () => {
 
     it('deve negar acesso quando role não está na lista permitida', () => {
       authService.userRole.mockReturnValue(UserRole.SINDICO);
-      const guard = roleGuard([UserRole.ADMIN, UserRole.FUNCIONARIO]);
+      const guard = papelGuard([UserRole.ADMIN, UserRole.FUNCIONARIO]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -225,7 +225,7 @@ describe('roleGuard', () => {
         authService.userRole.mockClear();
         router.navigate.mockClear();
 
-        const guard = roleGuard(allowedRoles);
+        const guard = papelGuard(allowedRoles);
 
         const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -242,7 +242,7 @@ describe('roleGuard', () => {
 
     it('deve negar acesso quando userRole retorna null', () => {
       authService.userRole.mockReturnValue(null);
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -251,8 +251,8 @@ describe('roleGuard', () => {
     });
 
     it('deve negar acesso quando userRole retorna undefined', () => {
-      authService.userRole.mockReturnValue(undefined as any);
-      const guard = roleGuard([UserRole.ADMIN]);
+      authService.userRole.mockReturnValue(null);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -262,7 +262,7 @@ describe('roleGuard', () => {
 
     it('deve negar acesso quando allowedRoles está vazio', () => {
       authService.userRole.mockReturnValue(UserRole.ADMIN);
-      const guard = roleGuard([]);
+      const guard = papelGuard([]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -271,8 +271,8 @@ describe('roleGuard', () => {
     });
 
     it('deve ser case sensitive com roles', () => {
-      authService.userRole.mockReturnValue('administrador' as any); // lowercase
-      const guard = roleGuard([UserRole.ADMIN]); // uppercase
+      authService.userRole.mockReturnValue('administrador' as UserRole); // lowercase
+      const guard = papelGuard([UserRole.ADMIN]); // uppercase
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -281,8 +281,8 @@ describe('roleGuard', () => {
     });
 
     it('deve lidar com espaços em branco nos roles', () => {
-      authService.userRole.mockReturnValue('Administrador ' as any); // com espaço
-      const guard = roleGuard([UserRole.ADMIN]); // sem espaço
+      authService.userRole.mockReturnValue('Administrador ' as UserRole); // com espaço
+      const guard = papelGuard([UserRole.ADMIN]); // sem espaço
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -293,14 +293,14 @@ describe('roleGuard', () => {
 
   describe('factory function', () => {
     it('deve retornar uma função guard válida', () => {
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       expect(typeof guard).toBe('function');
     });
 
     it('deve criar guards independentes para diferentes roles', () => {
-      const adminGuard = roleGuard([UserRole.ADMIN]);
-      const sindicoGuard = roleGuard([UserRole.SINDICO]);
+      const adminGuard = papelGuard([UserRole.ADMIN]);
+      const sindicoGuard = papelGuard([UserRole.SINDICO]);
 
       expect(adminGuard).not.toBe(sindicoGuard);
       expect(typeof adminGuard).toBe('function');
@@ -311,8 +311,8 @@ describe('roleGuard', () => {
       authService.isAuthenticated.mockReturnValue(true);
       authService.userRole.mockReturnValue(UserRole.ADMIN);
 
-      const adminOnlyGuard = roleGuard([UserRole.ADMIN]);
-      const sindicoOnlyGuard = roleGuard([UserRole.SINDICO]);
+      const adminOnlyGuard = papelGuard([UserRole.ADMIN]);
+      const sindicoOnlyGuard = papelGuard([UserRole.SINDICO]);
 
       const adminResult = TestBed.runInInjectionContext(() => adminOnlyGuard(mockRoute, mockState));
       const sindicoResult = TestBed.runInInjectionContext(() => sindicoOnlyGuard(mockRoute, mockState));
@@ -328,7 +328,7 @@ describe('roleGuard', () => {
       authService.isAuthenticated.mockReturnValue(true);
       authService.userRole.mockReturnValue(UserRole.ADMIN);
 
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -340,7 +340,7 @@ describe('roleGuard', () => {
       authService.isAuthenticated.mockReturnValue(true);
       authService.userRole.mockReturnValue(UserRole.SINDICO);
 
-      const guard = roleGuard([UserRole.ADMIN, UserRole.SINDICO]);
+      const guard = papelGuard([UserRole.ADMIN, UserRole.SINDICO]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 
@@ -352,7 +352,7 @@ describe('roleGuard', () => {
       authService.isAuthenticated.mockReturnValue(true);
       authService.userRole.mockReturnValue(UserRole.FUNCIONARIO);
 
-      const guard = roleGuard([UserRole.ADMIN]);
+      const guard = papelGuard([UserRole.ADMIN]);
 
       const result = TestBed.runInInjectionContext(() => guard(mockRoute, mockState));
 

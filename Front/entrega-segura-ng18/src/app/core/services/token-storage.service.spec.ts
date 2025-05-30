@@ -5,10 +5,12 @@ describe('TokenStorageService', () => {
   let service: TokenStorageService;
 
   // Mock token válido (não expira até 2099)
-  const validToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjQwOTI1NzE2MDB9.4n8a5JfK7VvEoVjWkc5jG3-ZKe3qKp1n2CjJj3TvNcw';
+  const validToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjQwOTI1NzE2MDB9.4n8a5JfK7VvEoVjWkc5jG3-ZKe3qKp1n2CjJj3TvNcw';
 
   // Mock token expirado (2020)
-  const expiredToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1Nzc4ODAwMDB9.invalid';
+  const expiredToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyLCJleHAiOjE1Nzc4ODAwMDB9.invalid';
 
   // Token malformado
   const malformedToken = 'invalid.token.here';
@@ -149,37 +151,44 @@ describe('TokenStorageService', () => {
     it('deve lidar com localStorage indisponível no setToken', () => {
       const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
 
-      // Mock da verificação de localStorage
-      const spy = jest.spyOn(service as any, 'isLocalStorageAvailable').mockReturnValue(false);
+      // Simular localStorage indisponível temporariamente
+      const originalLocalStorage = global.localStorage;
+      delete (global as any).localStorage;
 
       service.setToken('test-token');
 
-      // Não deve fazer nada quando localStorage não está disponível
+      // Restaurar localStorage
+      global.localStorage = originalLocalStorage;
+
+      // Verificar que o token não foi salvo
       expect(localStorage.getItem('entrega_segura_dev_token')).toBeNull();
 
-      spy.mockRestore();
       consoleSpy.mockRestore();
     });
 
     it('deve lidar com localStorage indisponível no getToken', () => {
-      // Mock da verificação de localStorage
-      const spy = jest.spyOn(service as any, 'isLocalStorageAvailable').mockReturnValue(false);
+      // Simular localStorage indisponível
+      const originalLocalStorage = global.localStorage;
+      delete (global as any).localStorage;
 
       const result = service.getToken();
 
-      expect(result).toBeNull();
+      // Restaurar localStorage
+      global.localStorage = originalLocalStorage;
 
-      spy.mockRestore();
+      expect(result).toBeNull();
     });
 
     it('deve lidar com localStorage indisponível no removeToken', () => {
-      // Mock da verificação de localStorage
-      const spy = jest.spyOn(service as any, 'isLocalStorageAvailable').mockReturnValue(false);
+      // Simular localStorage indisponível
+      const originalLocalStorage = global.localStorage;
+      delete (global as any).localStorage;
 
       // Não deve lançar erro
       expect(() => service.removeToken()).not.toThrow();
 
-      spy.mockRestore();
+      // Restaurar localStorage
+      global.localStorage = originalLocalStorage;
     });
   });
 });

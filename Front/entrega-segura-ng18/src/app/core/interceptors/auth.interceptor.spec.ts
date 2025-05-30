@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpRequest, HttpResponse, HttpErrorResponse, HttpStatusCode, HttpHeaders } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpRequest, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
 
@@ -11,7 +10,6 @@ import { TokenStorageService } from '@core/services/token-storage.service';
 describe('authInterceptor', () => {
   let authService: jest.Mocked<AuthService>;
   let tokenStorage: jest.Mocked<TokenStorageService>;
-  let router: jest.Mocked<Router>;
 
   const mockNext = jest.fn();
   const validToken = 'valid.jwt.token';
@@ -33,7 +31,6 @@ describe('authInterceptor', () => {
     };
 
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
       providers: [
         { provide: AuthService, useValue: authServiceMock },
         { provide: TokenStorageService, useValue: tokenStorageMock },
@@ -43,7 +40,6 @@ describe('authInterceptor', () => {
 
     authService = TestBed.inject(AuthService) as jest.Mocked<AuthService>;
     tokenStorage = TestBed.inject(TokenStorageService) as jest.Mocked<TokenStorageService>;
-    router = TestBed.inject(Router) as jest.Mocked<Router>;
 
     mockNext.mockClear();
     authService.logout.mockClear();
@@ -97,7 +93,7 @@ describe('authInterceptor', () => {
       const req = new HttpRequest('GET', 'http://localhost:3000/api/users', {});
       const expectedResponse = new HttpResponse({ status: 200 });
 
-      mockNext.mockImplementation((authReq: HttpRequest<any>) => {
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
         expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
         return of(expectedResponse);
       });
@@ -119,7 +115,7 @@ describe('authInterceptor', () => {
       const req = new HttpRequest('POST', 'http://localhost:3000/api/entregas', {}, { headers: originalHeaders });
       const expectedResponse = new HttpResponse({ status: 201 });
 
-      mockNext.mockImplementation((authReq: HttpRequest<any>) => {
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
         expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
         expect(authReq.headers.get('Content-Type')).toBe('application/json');
         expect(authReq.url).toBe(req.url);
@@ -282,7 +278,7 @@ describe('authInterceptor', () => {
       tokenStorage.getToken.mockReturnValue(validToken);
       tokenStorage.isTokenExpired.mockReturnValue(false);
 
-      mockNext.mockImplementation((authReq: HttpRequest<any>) => {
+      mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
         expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
         return of(expectedResponse);
       });
@@ -325,7 +321,7 @@ describe('authInterceptor', () => {
         const req = new HttpRequest(method, 'http://localhost:3000/api/test', {});
         const expectedResponse = new HttpResponse({ status: 200 });
 
-        mockNext.mockImplementation((authReq: HttpRequest<any>) => {
+        mockNext.mockImplementation((authReq: HttpRequest<unknown>) => {
           expect(authReq.headers.get('Authorization')).toBe(`Bearer ${validToken}`);
           expect(authReq.method).toBe(method);
           return of(expectedResponse);

@@ -88,7 +88,7 @@ describe('AuthService', () => {
       };
 
       service.login(credentials).subscribe({
-        error: error => {
+        error: () => {
           expect(service.error()).toBe('Credenciais inválidas');
           expect(service.isLoading()).toBe(false);
           done();
@@ -214,7 +214,9 @@ describe('AuthService', () => {
     it('deve testar clearError', () => {
       // Primeiro, criar um erro
       service.login({ login: 'wrong', senha: 'wrong' }).subscribe({
-        error: () => {},
+        error: () => {
+          // Error handler intencional para capturar erro de login
+        },
       });
       httpMock
         .expectOne(`${service['apiUrl']}/autenticacao`)
@@ -233,7 +235,7 @@ describe('AuthService', () => {
   describe('edge cases', () => {
     it('deve manter estado consistente após erro de rede', done => {
       service.login({ login: 'test', senha: 'test' }).subscribe({
-        error: error => {
+        error: () => {
           expect(service.isLoading()).toBe(false);
           expect(service.error()).toBeTruthy();
           expect(service.user()).toBeNull();

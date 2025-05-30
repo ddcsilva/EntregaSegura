@@ -213,7 +213,7 @@ describe('EnvironmentService', () => {
     });
 
     it('deve retornar false para feature inexistente', () => {
-      expect(service.isFeatureEnabled('nonExistentFeature' as any)).toBeUndefined();
+      expect(service.isFeatureEnabled('nonExistentFeature' as never)).toBeUndefined();
     });
 
     it('deve verificar logging por nível', () => {

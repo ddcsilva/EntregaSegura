@@ -1,29 +1,36 @@
 export * from './environment.interface';
 export { environment } from './environment';
 
-// 🔍 Helper para validar environment
-export function validateEnvironment(env: any): boolean {
+export function ValidarAmbiente(env: unknown): boolean {
+  if (!env || typeof env !== 'object') {
+    return false;
+  }
+
   const required = ['production', 'version', 'api.baseUrl', 'auth.tokenKey'];
 
   return required.every(path => {
-    const value = path.split('.').reduce((obj, key) => obj?.[key], env);
+    const value = path
+      .split('.')
+      .reduce(
+        (obj: unknown, key: string): unknown =>
+          obj && typeof obj === 'object' ? (obj as Record<string, unknown>)[key] : undefined,
+        env
+      );
     return value !== undefined && value !== null && value !== '';
   });
 }
 
-// 🚨 Verificação runtime de environment
-export function checkEnvironmentHealth(): void {
-  // Import direto aqui para evitar problemas
+export function verificarSituacaoAmbiente(): void {
   import('./environment')
     .then(({ environment }) => {
-      if (!validateEnvironment(environment)) {
-        console.error('❌ Environment configuration inválida!');
+      if (!ValidarAmbiente(environment)) {
+        console.error('Configuração do ambiente inválida!');
         console.table(environment);
-        throw new Error('Environment configuration está incompleta ou inválida');
+        throw new Error('Configuração do ambiente está incompleta ou inválida');
       }
 
       if (!environment.production) {
-        console.log('🔧 Rodando em modo desenvolvimento');
+        console.log('Executando em ambiente de desenvolvimento');
         console.table({
           Ambiente: environment.production ? 'Produção' : 'Desenvolvimento',
           Versão: environment.version,
@@ -34,6 +41,6 @@ export function checkEnvironmentHealth(): void {
       }
     })
     .catch(error => {
-      console.warn('Environment health check failed:', error.message);
+      console.warn('Verificação do ambiente falhou:', error.message);
     });
 }

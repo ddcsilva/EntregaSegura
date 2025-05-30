@@ -1,10 +1,11 @@
 import { Injectable, computed, signal, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 import { environment } from '@environments';
 import { AuthState, LoginRequest, AuthResponse, User, JwtPayload } from '@core/models';
+import { UserRole, isValidUserRole } from '@core/models';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -101,15 +102,17 @@ export class AuthService {
     }));
   }
 
-  private handleAuthError(error: any, defaultMessage: string): Observable<never> {
+  private handleAuthError(error: unknown, defaultMessage: string): Observable<never> {
     let errorMessage = defaultMessage;
 
-    if (error.error?.message) {
-      errorMessage = error.error.message;
-    } else if (error.status === 401) {
-      errorMessage = 'Credenciais inválidas';
-    } else if (error.status === 0) {
-      errorMessage = 'Servidor indisponível. Tente novamente.';
+    if (error instanceof HttpErrorResponse) {
+      if (error.error?.message) {
+        errorMessage = error.error.message;
+      } else if (error.status === 401) {
+        errorMessage = 'Credenciais inválidas';
+      } else if (error.status === 0) {
+        errorMessage = 'Servidor indisponível. Tente novamente.';
+      }
     }
 
     this.authState.update(state => ({
@@ -146,7 +149,7 @@ export class AuthService {
       id: parseInt(payload.Id),
       nome: payload.Nome,
       email: payload.Email,
-      perfil: payload.Perfil as any,
+      perfil: isValidUserRole(payload.Perfil) ? payload.Perfil : UserRole.MORADOR,
       foto: payload.Foto,
     };
   }

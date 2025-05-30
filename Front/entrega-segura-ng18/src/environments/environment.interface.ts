@@ -1,11 +1,8 @@
-// 📄 src/environments/environment.interface.ts
 export interface Environment {
-  // 🏗️ Build & Runtime Configuration
   production: boolean;
   version: string;
   appName: string;
 
-  // 🌐 API Configuration
   api: {
     baseUrl: string;
     timeout: number;
@@ -19,15 +16,13 @@ export interface Environment {
     };
   };
 
-  // 🔐 Authentication Configuration
   auth: {
     tokenKey: string;
-    sessionTimeout: number; // em minutos
-    refreshThreshold: number; // minutos antes da expiração
+    sessionTimeout: number;
+    refreshThreshold: number;
     enableAutoRefresh: boolean;
   };
 
-  // 📊 Features & Capabilities
   features: {
     enableAnalytics: boolean;
     enableDebugMode: boolean;
@@ -37,7 +32,6 @@ export interface Environment {
     enablePerformanceMonitoring: boolean;
   };
 
-  // 🎨 UI/UX Configuration
   ui: {
     theme: 'light' | 'dark' | 'auto';
     itemsPerPage: number;
@@ -46,7 +40,6 @@ export interface Environment {
     defaultLanguage: string;
   };
 
-  // 📝 Logging Configuration
   logging: {
     level: 'debug' | 'info' | 'warn' | 'error';
     enableConsoleLog: boolean;
@@ -54,7 +47,6 @@ export interface Environment {
     logEndpoint?: string;
   };
 
-  // 🔗 External Services (quando necessário)
   external?: {
     googleAnalyticsId?: string;
     sentryDsn?: string;
