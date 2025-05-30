@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { Observable, catchError, tap, throwError } from 'rxjs';
 
 import { environment } from '@environments';
-import { AuthState, LoginRequest, AuthResponse, User, JwtPayload } from '@core/models';
-import { UserRole, isValidUserRole } from '@core/models';
+import { AuthState, LoginRequest, AuthResponse, Usuario, JwtPayload } from '@core/models';
+import { Papel, ehPapelValido } from '@core/models';
 import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
@@ -144,12 +144,12 @@ export class AuthService {
     return JSON.parse(jsonPayload);
   }
 
-  private payloadToUser(payload: JwtPayload): User {
+  private payloadToUser(payload: JwtPayload): Usuario {
     return {
       id: parseInt(payload.Id),
       nome: payload.Nome,
       email: payload.Email,
-      perfil: isValidUserRole(payload.Perfil) ? payload.Perfil : UserRole.MORADOR,
+      perfil: ehPapelValido(payload.Perfil) ? payload.Perfil : Papel.MORADOR,
       foto: payload.Foto,
     };
   }

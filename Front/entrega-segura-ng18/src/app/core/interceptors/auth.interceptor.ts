@@ -10,11 +10,11 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
   const tokenStorage = inject(TokenStorageService);
 
-  const publicUrls = [`${environment.api.endpoints.auth}/autenticacao`, '/api/public'];
+  const urlsPublicas = [`${environment.api.endpoints.auth}/autenticacao`, '/api/public'];
 
-  const isPublicUrl = publicUrls.some(url => req.url.includes(url));
+  const ehUrlPublica = urlsPublicas.some(url => req.url.includes(url));
 
-  if (isPublicUrl) {
+  if (ehUrlPublica) {
     return next(req);
   }
 

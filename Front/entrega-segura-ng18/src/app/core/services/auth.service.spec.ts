@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from './auth.service';
 import { TokenStorageService } from './token-storage.service';
-import { AuthResponse, LoginRequest, UserRole } from '@core/models';
+import { AuthResponse, LoginRequest, Papel } from '@core/models';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -18,7 +18,7 @@ describe('AuthService', () => {
       id: 1,
       nome: 'Test User',
       email: 'test@test.com',
-      perfil: UserRole.ADMIN,
+      perfil: Papel.ADMIN,
     },
   };
 
@@ -137,7 +137,7 @@ describe('AuthService', () => {
       service.login({ login: 'test', senha: 'test' }).subscribe();
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockAuthResponse);
 
-      expect(service.userRole()).toBe(UserRole.ADMIN);
+      expect(service.userRole()).toBe(Papel.ADMIN);
     });
   });
 
@@ -146,7 +146,7 @@ describe('AuthService', () => {
       service.login({ login: 'admin', senha: 'admin' }).subscribe();
       const mockResponse = {
         ...mockAuthResponse,
-        user: { ...mockAuthResponse.user, perfil: UserRole.ADMIN },
+        user: { ...mockAuthResponse.user, perfil: Papel.ADMIN },
       };
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
 
@@ -157,7 +157,7 @@ describe('AuthService', () => {
       service.login({ login: 'user', senha: 'user' }).subscribe();
       const mockResponse = {
         ...mockAuthResponse,
-        user: { ...mockAuthResponse.user, perfil: UserRole.SINDICO },
+        user: { ...mockAuthResponse.user, perfil: Papel.SINDICO },
       };
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
 
@@ -168,7 +168,7 @@ describe('AuthService', () => {
       service.login({ login: 'sindico', senha: 'sindico' }).subscribe();
       const mockResponse = {
         ...mockAuthResponse,
-        user: { ...mockAuthResponse.user, perfil: UserRole.SINDICO },
+        user: { ...mockAuthResponse.user, perfil: Papel.SINDICO },
       };
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
 
@@ -179,7 +179,7 @@ describe('AuthService', () => {
       service.login({ login: 'admin', senha: 'admin' }).subscribe();
       const mockResponse = {
         ...mockAuthResponse,
-        user: { ...mockAuthResponse.user, perfil: UserRole.ADMIN },
+        user: { ...mockAuthResponse.user, perfil: Papel.ADMIN },
       };
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
 
@@ -190,7 +190,7 @@ describe('AuthService', () => {
       service.login({ login: 'user', senha: 'user' }).subscribe();
       const mockResponse = {
         ...mockAuthResponse,
-        user: { ...mockAuthResponse.user, perfil: UserRole.FUNCIONARIO },
+        user: { ...mockAuthResponse.user, perfil: Papel.FUNCIONARIO },
       };
       httpMock.expectOne(`${service['apiUrl']}/autenticacao`).flush(mockResponse);
 
