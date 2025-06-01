@@ -1,0 +1,114 @@
+<aside
+  class="fixed inset-y-0 left-0 z-50 w-64 transform bg-white shadow-lg transition-transform duration-300 ease-in-out md:relative md:translate-x-0"
+  [class.translate-x-0]="navegacaoService.sidebar()"
+  [class.-translate-x-full]="!navegacaoService.sidebar()"
+>
+  <div class="flex h-16 items-center justify-between border-b border-gray-200 px-4">
+    <div class="flex items-center space-x-2">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary-600">
+        <svg class="h-5 w-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+          />
+        </svg>
+      </div>
+      <span class="text-xl font-bold text-gray-900">EntregaSegura</span>
+    </div>
+
+    <button
+      *ngIf="navegacaoService.mobile()"
+      type="button"
+      class="rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+      (click)="navegacaoService.fecharSidebar()"
+      aria-label="Fechar menu"
+    >
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <nav class="flex-1 space-y-1 px-2 py-4">
+    <ng-container *ngFor="let item of navegacaoService.itensMenuPermitidos()">
+      <div *ngIf="!item.filhos || item.filhos.length === 0">
+        <a
+          [routerLink]="item.rota"
+          routerLinkActive="bg-primary-50 border-r-2 border-primary-500 text-primary-700"
+          [routerLinkActiveOptions]="{ exact: item.rota === '/dashboard' }"
+          class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          (click)="navegacaoService.navegarEFecharSidebar()"
+        >
+          <span class="material-icons mr-3 h-5 w-5" [attr.aria-hidden]="true">
+            {{ item.icone }}
+          </span>
+
+          <span class="flex-1">{{ item.label }}</span>
+
+          <span *ngIf="item.badge" class="ml-2 rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-600">
+            {{ item.badge }}
+          </span>
+        </a>
+      </div>
+
+      <div *ngIf="item.filhos && item.filhos.length > 0">
+        <button
+          type="button"
+          class="group flex w-full items-center rounded-md px-2 py-2 text-left text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+          [attr.aria-expanded]="verificarGrupoExpandido(item.label)"
+          (click)="alternarGrupo(item.label)"
+        >
+          <span class="material-icons mr-3 h-5 w-5" [attr.aria-hidden]="true">
+            {{ item.icone }}
+          </span>
+
+          <span class="flex-1">{{ item.label }}</span>
+
+          <svg
+            class="ml-2 h-4 w-4 transition-transform duration-200"
+            [class.rotate-90]="verificarGrupoExpandido(item.label)"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
+
+        <div *ngIf="verificarGrupoExpandido(item.label)" class="ml-6 mt-1 space-y-1">
+          <a
+            *ngFor="let filho of item.filhos"
+            [routerLink]="filho.rota"
+            routerLinkActive="bg-primary-50 border-r-2 border-primary-500 text-primary-700"
+            class="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+            (click)="navegacaoService.navegarEFecharSidebar()"
+          >
+            <span class="material-icons mr-3 h-4 w-4" [attr.aria-hidden]="true">
+              {{ filho.icone }}
+            </span>
+
+            <span>{{ filho.label }}</span>
+          </a>
+        </div>
+      </div>
+    </ng-container>
+  </nav>
+
+  <div class="border-t border-gray-200 p-4">
+    <div class="flex items-center space-x-3">
+      <div class="flex h-8 w-8 items-center justify-center rounded-full bg-gray-300 text-sm font-medium text-gray-700">
+        {{ obterIniciais() }}
+      </div>
+      <div class="min-w-0 flex-1">
+        <p class="truncate text-sm font-medium text-gray-900">
+          {{ autenticacaoService.usuario()?.nome }}
+        </p>
+        <p class="truncate text-xs text-gray-500">
+          {{ autenticacaoService.papel() }}
+        </p>
+      </div>
+    </div>
+  </div>
+</aside>

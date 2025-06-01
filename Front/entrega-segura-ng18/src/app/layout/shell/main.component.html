@@ -1,0 +1,20 @@
+<div class="flex h-screen bg-gray-50">
+  <div
+    *ngIf="navegacaoService.mobile() && navegacaoService.sidebar()"
+    class="fixed inset-0 z-40 bg-black bg-opacity-50 transition-opacity duration-300"
+    (click)="navegacaoService.fecharSidebar()"
+    aria-hidden="true"
+  ></div>
+
+  <es-sidebar></es-sidebar>
+
+  <div class="flex flex-1 flex-col overflow-hidden">
+    <es-header></es-header>
+
+    <main class="flex-1 overflow-auto bg-gray-50 p-4 md:p-6">
+      <div class="mx-auto max-w-7xl">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </div>
+</div>
