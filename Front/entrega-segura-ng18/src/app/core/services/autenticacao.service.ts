@@ -7,6 +7,7 @@ import { environment } from '@environments';
 import { EstadoAutenticacao, LoginRequest, Autenticacao, Usuario, JwtPayload } from '@core/models';
 import { Papel, ehPapelValido } from '@core/models';
 import { TokenStorageService } from './token-storage.service';
+import { LoggerService } from './logger.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,7 @@ export class AutenticacaoService {
   private readonly http = inject(HttpClient);
   private readonly router = inject(Router);
   private readonly tokenStorage = inject(TokenStorageService);
+  private readonly logger = inject(LoggerService);
 
   private readonly urlApi = `${environment.api.baseUrl}${environment.api.endpoints.autenticacao}`;
 
@@ -58,8 +60,17 @@ export class AutenticacaoService {
           usuario,
           token: tokenArmazenado,
         }));
+
+        this.logger.info(
+          'Usuário autenticado automaticamente',
+          {
+            usuarioId: usuario.id,
+            papel: usuario.papel,
+          },
+          'AutenticacaoService'
+        );
       } catch (error) {
-        console.warn('Token inválido encontrado, removendo:', error);
+        this.logger.warn('Token inválido encontrado, removendo', error, 'AutenticacaoService');
         this.tokenStorage.removerToken();
       }
     }
@@ -69,6 +80,14 @@ export class AutenticacaoService {
     this.definirCarregando(true);
     this.limparErro();
 
+    this.logger.debug(
+      'Iniciando processo de login',
+      {
+        email: credenciais.login,
+      },
+      'AutenticacaoService'
+    );
+
     return this.http.post<Autenticacao>(`${this.urlApi}/autenticacao`, credenciais).pipe(
       tap(resposta => this.processarLoginSucesso(resposta)),
       catchError(error => this.processarErroLogin(error, 'Erro ao fazer login'))
@@ -76,6 +95,8 @@ export class AutenticacaoService {
   }
 
   logout(): void {
+    const usuarioAtual = this.usuario();
+
     this.tokenStorage.removerToken();
 
     this.estadoAutenticacao.set({
@@ -84,6 +105,15 @@ export class AutenticacaoService {
       carregando: false,
       erro: null,
     });
+
+    this.logger.info(
+      'Usuário fez logout',
+      {
+        usuarioId: usuarioAtual?.id,
+        papel: usuarioAtual?.papel,
+      },
+      'AutenticacaoService'
+    );
 
     this.router.navigate(['/autenticacao/login']);
   }
@@ -100,6 +130,16 @@ export class AutenticacaoService {
       carregando: false,
       erro: null,
     }));
+
+    this.logger.info(
+      'Login realizado com sucesso',
+      {
+        usuarioId: usuario.id,
+        papel: usuario.papel,
+        email: usuario.email,
+      },
+      'AutenticacaoService'
+    );
   }
 
   private processarErroLogin(erro: unknown, mensagemPadrao: string): Observable<never> {
@@ -113,6 +153,18 @@ export class AutenticacaoService {
       } else if (erro.status === 0) {
         mensagemErro = 'Servidor indisponível. Tente novamente.';
       }
+
+      this.logger.warn(
+        'Erro no login',
+        {
+          status: erro.status,
+          message: erro.error?.message,
+          url: erro.url,
+        },
+        'AutenticacaoService'
+      );
+    } else {
+      this.logger.error('Erro inesperado no login', erro, 'AutenticacaoService');
     }
 
     this.estadoAutenticacao.update(estado => ({

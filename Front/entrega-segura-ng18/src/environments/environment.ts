@@ -1,4 +1,5 @@
 import { Environment } from './environment.interface';
+import { TIMEOUTS, PAGINATION, STORAGE_KEYS, LOG_LEVELS } from '../app/core/constants/app.constants';
 
 export const environment: Environment = {
   production: false,
@@ -7,7 +8,7 @@ export const environment: Environment = {
 
   api: {
     baseUrl: 'https://localhost:5001',
-    timeout: 30000,
+    timeout: TIMEOUTS.API_REQUEST,
     retryAttempts: 3,
     endpoints: {
       autenticacao: '/api/usuario',
@@ -19,9 +20,9 @@ export const environment: Environment = {
   },
 
   autenticacao: {
-    tokenKey: 'entrega_segura_dev_token',
-    sessionTimeout: 480,
-    refreshThreshold: 30,
+    tokenKey: `${STORAGE_KEYS.TOKEN}_dev`,
+    sessionTimeout: TIMEOUTS.SESSION,
+    refreshThreshold: TIMEOUTS.REFRESH_THRESHOLD,
     enableAutoRefresh: true,
   },
 
@@ -36,14 +37,14 @@ export const environment: Environment = {
 
   ui: {
     theme: 'light',
-    itemsPerPage: 10,
+    itemsPerPage: PAGINATION.DEFAULT_PAGE_SIZE,
     animationsEnabled: true,
     showBetaFeatures: true,
     defaultLanguage: 'pt-BR',
   },
 
   logging: {
-    level: 'debug',
+    level: LOG_LEVELS.DEBUG,
     enableConsoleLog: true,
     enableRemoteLogging: false,
   },

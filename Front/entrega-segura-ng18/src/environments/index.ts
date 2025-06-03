@@ -1,46 +1,89 @@
-export * from './environment.interface';
-export { environment } from './environment';
+import { isDevMode } from '@angular/core';
+import { environment as devEnvironment } from './environment';
+import { environment as stagingEnvironment } from './environment.staging';
+import { environment as prodEnvironment } from './environment.prod';
+import { Environment } from './environment.interface';
 
-export function ValidarAmbiente(env: unknown): boolean {
-  if (!env || typeof env !== 'object') {
-    return false;
+// Export da interface para uso externo
+export * from './environment.interface';
+
+/**
+ * Determina qual environment usar baseado no modo de build
+ */
+function determinarEnvironment(): Environment {
+  // Em modo produção, usar ambiente de produção
+  if (!isDevMode()) {
+    return prodEnvironment;
   }
 
-  const required = ['production', 'version', 'api.baseUrl', 'autenticacao.tokenKey'];
+  // Verificar se há configuração específica na URL (útil para staging)
+  const url = window.location.hostname;
 
-  return required.every(path => {
-    const value = path
-      .split('.')
-      .reduce(
-        (obj: unknown, key: string): unknown =>
-          obj && typeof obj === 'object' ? (obj as Record<string, unknown>)[key] : undefined,
-        env
-      );
-    return value !== undefined && value !== null && value !== '';
-  });
+  if (url.includes('staging') || url.includes('homolog')) {
+    return stagingEnvironment;
+  }
+
+  // Padrão: desenvolvimento
+  return devEnvironment;
 }
 
-export function verificarSituacaoAmbiente(): void {
-  import('./environment')
-    .then(({ environment }) => {
-      if (!ValidarAmbiente(environment)) {
-        console.error('Configuração do ambiente inválida!');
-        console.table(environment);
-        throw new Error('Configuração do ambiente está incompleta ou inválida');
-      }
+/**
+ * Environment ativo baseado no contexto
+ */
+export const environment = determinarEnvironment();
 
-      if (!environment.production) {
-        console.log('Executando em ambiente de desenvolvimento');
-        console.table({
-          Ambiente: environment.production ? 'Produção' : 'Desenvolvimento',
-          Versão: environment.version,
-          API: environment.api.baseUrl,
-          Debug: environment.features.enableDebugMode,
-          'Mock Data': environment.features.enableMockData,
-        });
-      }
-    })
-    .catch(error => {
-      console.warn('Verificação do ambiente falhou:', error.message);
-    });
+/**
+ * Verifica se a configuração do ambiente está válida
+ */
+export function verificarSituacaoAmbiente(): void {
+  try {
+    // Verificações básicas
+    if (!environment.api?.baseUrl) {
+      throw new Error('API baseUrl não configurada');
+    }
+
+    if (!environment.autenticacao?.tokenKey) {
+      throw new Error('Token key não configurada');
+    }
+
+    // Log do ambiente ativo (apenas console para evitar dependência circular)
+    if (isDevMode()) {
+      console.log(`🚀 EntregaSegura iniciado em modo: ${environment.production ? 'PRODUÇÃO' : 'DESENVOLVIMENTO'}`);
+      console.log(`📡 API: ${environment.api.baseUrl}`);
+      console.log(`🔧 Versão: ${environment.version}`);
+      console.log(`📊 Debug: ${environment.features?.enableDebugMode ? 'Ativado' : 'Desativado'}`);
+    }
+
+    // Aviso para ambiente de produção
+    if (environment.production && environment.features?.enableDebugMode) {
+      console.warn('⚠️ Debug mode ativado em produção - verificar configuração');
+    }
+  } catch (error: any) {
+    console.error('❌ Configuração do ambiente inválida!', error.message);
+
+    // Em produção, não expor detalhes do erro
+    if (environment.production) {
+      throw new Error('Erro na configuração da aplicação');
+    } else {
+      throw error;
+    }
+  }
+}
+
+/**
+ * Utilitários para verificação de features
+ */
+export function isFeatureEnabled(feature: keyof NonNullable<Environment['features']>): boolean {
+  return environment.features?.[feature] ?? false;
+}
+
+export function getApiEndpoint(endpoint: keyof NonNullable<Environment['api']['endpoints']>): string {
+  const baseUrl = environment.api.baseUrl;
+  const endpointPath = environment.api.endpoints?.[endpoint];
+
+  if (!endpointPath) {
+    throw new Error(`Endpoint '${endpoint}' não configurado`);
+  }
+
+  return `${baseUrl}${endpointPath}`;
 }
