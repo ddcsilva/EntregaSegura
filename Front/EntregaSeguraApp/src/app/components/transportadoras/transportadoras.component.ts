@@ -15,13 +15,14 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
 @Component({
   selector: 'app-transportadoras',
   templateUrl: './transportadoras.component.html',
-  styleUrls: ['./transportadoras.component.scss']
+  styleUrls: ['./transportadoras.component.scss'],
 })
 export class TransportadorasComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Transportadoras';
   public transportadoras: Transportadora[] = [];
   public colunas: string[] = ['nome', 'telefone', 'cnpj', 'email', 'acoes'];
-  public dataSource: MatTableDataSource<Transportadora> = new MatTableDataSource<Transportadora>();
+  public dataSource: MatTableDataSource<Transportadora> =
+    new MatTableDataSource<Transportadora>();
   public filtroTransportadora: string = '';
   private destroy$ = new Subject<void>();
 
@@ -35,7 +36,7 @@ export class TransportadorasComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
@@ -58,43 +59,53 @@ export class TransportadorasComponent implements OnInit, OnDestroy {
 
   public excluirTransportadora(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
-    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+    dialogRef.afterClosed().subscribe((confirmacaoExclusao) => {
       if (confirmacaoExclusao) {
         this.transportadoraService.excluir(id).subscribe({
           next: () => {
-            this.toastr.success('Transportadora excluída com sucesso', 'Sucesso!');
+            this.toastr.success(
+              'Transportadora excluída com sucesso',
+              'Sucesso!'
+            );
             this.obterTransportadoras();
           },
           error: (error: any) => {
             this.exibirErros(error);
-          }
+          },
         });
       }
     });
   }
 
   private obterTransportadoras(): void {
-    this.transportadoraService.obterTransportadoras().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (response) => {
-        this.transportadoras = response;
-        this.dataSource = new MatTableDataSource<Transportadora>(this.transportadoras);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.renderRows();
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.exibirErros(error);
-        this.spinner.hide();
-      }
-    });
+    this.transportadoraService
+      .obterTransportadoras()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.transportadoras = response;
+          this.dataSource = new MatTableDataSource<Transportadora>(
+            this.transportadoras
+          );
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.table.renderRows();
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.exibirErros(error);
+          this.spinner.hide();
+        },
+      });
   }
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
       this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
+      erro.forEach((mensagemErro) =>
+        this.toastr.error(mensagemErro, 'Houve um erro!')
+      );
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Houve um erro!');
     }

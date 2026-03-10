@@ -5,10 +5,12 @@ using System.Text.RegularExpressions;
 using AutoMapper;
 using EntregaSegura.Application.DTOs;
 using EntregaSegura.Application.Interfaces;
+using EntregaSegura.Application.Options;
 using EntregaSegura.Domain.Entities;
 using EntregaSegura.Domain.Entities.Enums;
 using EntregaSegura.Domain.Interfaces;
 using EntregaSegura.Domain.Validations;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace EntregaSegura.Application.Services;
@@ -17,13 +19,16 @@ public class UsuarioService : BaseService, IUsuarioService
 {
     private readonly IUsuarioRepository _usuarioRepository;
     private readonly IMapper _mapper;
+    private readonly JwtOptions _jwtOptions;
 
     public UsuarioService(IUsuarioRepository usuarioRepository,
                              IMapper mapper,
+                             IOptions<JwtOptions> jwtOptions,
                              INotificadorErros notificador) : base(notificador)
     {
         _usuarioRepository = usuarioRepository;
         _mapper = mapper;
+        _jwtOptions = jwtOptions.Value;
     }
 
     public async Task<UsuarioDTO> ObterUsuarioPorLoginAsync(string login, bool rastrearAlteracoes = false)
@@ -80,6 +85,16 @@ public class UsuarioService : BaseService, IUsuarioService
 
     public string GerarToken(UsuarioDTO usuarioDTO)
     {
+        if (string.IsNullOrEmpty(_jwtOptions.Key))
+        {
+            throw new InvalidOperationException("JWT Key não configurada. Verifique as configurações da aplicação.");
+        }
+
+        if (_jwtOptions.Key.Length < 32)
+        {
+            throw new InvalidOperationException("JWT Key deve ter pelo menos 32 caracteres para garantir segurança adequada.");
+        }
+
         var perfil = "";
         switch (usuarioDTO.Perfil)
         {
@@ -98,14 +113,19 @@ public class UsuarioService : BaseService, IUsuarioService
         }
 
         var jwtTokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes("ChaveSecretaParaCriacaoDoToken");
+        var key = Encoding.UTF8.GetBytes(_jwtOptions.Key);
         var identity = new ClaimsIdentity(new Claim[]
         {
             new Claim("Id", usuarioDTO.Pessoa.Id.ToString()),
             new Claim("Nome", usuarioDTO.Pessoa.Nome),
             new Claim("Email", usuarioDTO.Pessoa.Email),
             new Claim("Perfil", perfil),
-            new Claim("Foto", usuarioDTO.Foto ?? "")
+            new Claim("Foto", usuarioDTO.Foto ?? ""),
+            new Claim(JwtRegisteredClaimNames.Sub, usuarioDTO.Pessoa.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new Claim(JwtRegisteredClaimNames.Iat,
+                new DateTimeOffset(DateTime.UtcNow).ToUnixTimeSeconds().ToString(),
+                ClaimValueTypes.Integer64)
         });
 
         var credentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256);
@@ -113,7 +133,9 @@ public class UsuarioService : BaseService, IUsuarioService
         var tokenDescriptor = new SecurityTokenDescriptor
         {
             Subject = identity,
-            Expires = DateTime.UtcNow.AddDays(1),
+            Expires = DateTime.UtcNow.AddHours(_jwtOptions.ExpireHours),
+            Issuer = _jwtOptions.Issuer,
+            Audience = _jwtOptions.Audience,
             SigningCredentials = credentials
         };
 

@@ -1,0 +1,151 @@
+<div class="space-y-6">
+  <!-- 🎯 Header do Dashboard -->
+  <div class="border-b border-gray-200 pb-4">
+    <h1 class="text-2xl font-bold text-gray-900">Olá, {{ obterPrimeiroNome() }}! 👋</h1>
+    <p class="mt-1 text-gray-600">Aqui está um resumo das suas atividades hoje.</p>
+  </div>
+
+  <!-- 📊 Grid de Widgets -->
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+    <div
+      *ngFor="let widget of widgetsPermitidos()"
+      class="overflow-hidden rounded-lg bg-white shadow transition-shadow duration-200 hover:shadow-md"
+    >
+      <div class="p-6">
+        <!-- Header do widget -->
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-lg"
+              [ngClass]="obterClassesIcone(widget.cor)"
+            >
+              <span class="material-icons h-6 w-6 text-white">
+                {{ widget.icone }}
+              </span>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-600">{{ widget.titulo }}</p>
+            </div>
+          </div>
+
+          <!-- Menu de ações (futuro) -->
+          <button
+            type="button"
+            class="rounded-md p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            aria-label="Opções do widget"
+          >
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Valor principal -->
+        <div class="mt-4">
+          <p class="text-3xl font-bold" [ngClass]="obterClassesTexto(widget.cor)">
+            {{ widget.valor }}
+          </p>
+
+          <!-- Subtítulo -->
+          <p *ngIf="widget.subtitulo" class="mt-1 text-sm text-gray-500">
+            {{ widget.subtitulo }}
+          </p>
+
+          <!-- Tendência -->
+          <div *ngIf="widget.tendencia" class="mt-2 flex items-center space-x-2">
+            <svg
+              class="h-4 w-4"
+              [class.text-green-500]="widget.tendencia.tipo === 'aumento'"
+              [class.text-red-500]="widget.tendencia.tipo === 'diminuicao'"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                *ngIf="widget.tendencia.tipo === 'aumento'"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"
+              />
+              <path
+                *ngIf="widget.tendencia.tipo === 'diminuicao'"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6"
+              />
+            </svg>
+            <span
+              class="text-sm font-medium"
+              [class.text-green-600]="widget.tendencia.tipo === 'aumento'"
+              [class.text-red-600]="widget.tendencia.tipo === 'diminuicao'"
+            >
+              {{ widget.tendencia.valor }}%
+            </span>
+            <span class="text-sm text-gray-500">vs. mês anterior</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 📈 Seção de atividades recentes -->
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
+    <!-- Entregas recentes -->
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <div class="border-b border-gray-200 p-6">
+        <h3 class="text-lg font-medium text-gray-900">Entregas Recentes</h3>
+      </div>
+      <div class="p-6">
+        <div class="space-y-4">
+          <div *ngFor="let entrega of entregasRecentes()" class="flex items-center space-x-4">
+            <div class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
+              <span class="material-icons h-5 w-5 text-blue-600">inventory</span>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="truncate text-sm font-medium text-gray-900">
+                {{ entrega.descricao }}
+              </p>
+              <p class="text-sm text-gray-500">{{ entrega.morador }} • {{ entrega.tempo }}</p>
+            </div>
+            <span
+              class="inline-flex rounded-full px-2 py-1 text-xs font-medium"
+              [ngClass]="obterClassesStatus(entrega.status)"
+            >
+              {{ entrega.status }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Atividades do sistema -->
+    <div class="overflow-hidden rounded-lg bg-white shadow">
+      <div class="border-b border-gray-200 p-6">
+        <h3 class="text-lg font-medium text-gray-900">Atividades do Sistema</h3>
+      </div>
+      <div class="p-6">
+        <div class="space-y-4">
+          <div *ngFor="let atividade of atividadesRecentes()" class="flex items-start space-x-4">
+            <div
+              class="flex h-10 w-10 items-center justify-center rounded-full"
+              [ngClass]="obterClassesAtividade(atividade.tipo)"
+            >
+              <span class="material-icons h-5 w-5">{{ atividade.icone }}</span>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="text-sm text-gray-900">{{ atividade.descricao }}</p>
+              <p class="text-sm text-gray-500">{{ atividade.tempo }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

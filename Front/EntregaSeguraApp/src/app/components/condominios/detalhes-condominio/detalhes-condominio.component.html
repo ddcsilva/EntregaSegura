@@ -20,7 +20,7 @@
 
                             <!-- Campo - Nome -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Nome</mat-label>
                                     <input formControlName="nome" matInput placeholder="Nome">
                                     <mat-icon matSuffix>business</mat-icon>
@@ -38,7 +38,7 @@
 
                             <!-- Campo - CNPJ -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>CNPJ</mat-label>
                                     <input formControlName="cnpj" matInput placeholder="CNPJ" mask="00.000.000/0000-00"
                                         required>
@@ -54,7 +54,7 @@
 
                             <!-- Campo - E-mail -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>E-mail</mat-label>
                                     <input formControlName="email" matInput placeholder="E-mail" required email>
                                     <mat-icon matSuffix>mail</mat-icon>
@@ -69,7 +69,7 @@
 
                             <!-- Campo - Telefone -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Telefone</mat-label>
                                     <input formControlName="telefone" matInput placeholder="Telefone"
                                         [mask]="mascaraTelefone" required>
@@ -88,7 +88,7 @@
                             <!-- Campo - CEP -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <mat-form-field appearance="standard">
+                                    <mat-form-field appearance="outline">
                                         <mat-label>CEP</mat-label>
                                         <input formControlName="cep" matInput placeholder="CEP" mask="00000-000"
                                             (blur)="buscarCep($event)" required>
@@ -108,7 +108,7 @@
 
                             <!-- Campo - Logradouro -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Logradouro</mat-label>
                                     <input formControlName="logradouro" matInput placeholder="Logradouro" required>
                                     <mat-icon matSuffix>location_on</mat-icon>
@@ -117,7 +117,7 @@
 
                             <!-- Campo - Número -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Numero</mat-label>
                                     <input formControlName="numero" matInput placeholder="Numero" type="text" required
                                         mask="9999">
@@ -133,7 +133,7 @@
 
                             <!-- Campo - Bairro -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Bairro</mat-label>
                                     <input formControlName="bairro" matInput placeholder="Bairro" required>
                                     <mat-icon matSuffix>place</mat-icon>
@@ -142,7 +142,7 @@
 
                             <!-- Campo - Cidade -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Cidade</mat-label>
                                     <input formControlName="cidade" matInput placeholder="Cidade" required>
                                     <mat-icon matSuffix>place</mat-icon>
@@ -151,7 +151,7 @@
 
                             <!-- Campo - Estado -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Estado</mat-label>
                                     <input formControlName="estado" matInput placeholder="Estado" required>
                                     <mat-icon matSuffix>place</mat-icon>
@@ -162,7 +162,7 @@
 
                             <!-- Campo - Quantidade Blocos no Condomínio -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Quantidade Blocos</mat-label>
                                     <input formControlName="quantidadeBlocos" matInput placeholder="Quantidade Blocos"
                                         type="number" required>
@@ -181,7 +181,7 @@
 
                             <!-- Campo - Quantidade Andares por Bloco -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Quantidade Andares por Blocos</mat-label>
                                     <input formControlName="quantidadeAndares" matInput placeholder="Quantidade Andares"
                                         type="number" required>
@@ -200,7 +200,7 @@
 
                             <!-- Campo - Quantidade Unidades por Andar -->
                             <div class="col-md-6">
-                                <mat-form-field appearance="standard">
+                                <mat-form-field appearance="outline">
                                     <mat-label>Quantidade Unidades por Andar</mat-label>
                                     <input formControlName="quantidadeUnidades" matInput
                                         placeholder="Quantidade Unidades" type="number" required>

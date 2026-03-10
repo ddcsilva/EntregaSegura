@@ -14,13 +14,20 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
 @Component({
   selector: 'app-funcionarios',
   templateUrl: './funcionarios.component.html',
-  styleUrls: ['./funcionarios.component.scss']
+  styleUrls: ['./funcionarios.component.scss'],
 })
 export class FuncionariosComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Funcionários';
   public funcionarios: Funcionario[] = [];
-  public colunas: string[] = ['nome', 'telefone', 'cargo', 'nomeCondominio', 'acoes'];
-  public dataSource: MatTableDataSource<Funcionario> = new MatTableDataSource<Funcionario>();
+  public colunas: string[] = [
+    'nome',
+    'telefone',
+    'cargo',
+    'nomeCondominio',
+    'acoes',
+  ];
+  public dataSource: MatTableDataSource<Funcionario> =
+    new MatTableDataSource<Funcionario>();
   public filtroFuncionario: string = '';
   private destroy$ = new Subject<void>();
 
@@ -34,7 +41,7 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
@@ -57,7 +64,7 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
 
   public excluirFuncionario(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
-    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+    dialogRef.afterClosed().subscribe((confirmacaoExclusao) => {
       if (confirmacaoExclusao) {
         this.funcionarioService.excluir(id).subscribe({
           next: () => {
@@ -66,34 +73,41 @@ export class FuncionariosComponent implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             this.exibirErros(error);
-          }
+          },
         });
       }
     });
   }
 
   private obterFuncionarios(): void {
-    this.funcionarioService.obterFuncionarios().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (response) => {
-        this.funcionarios = response;
-        this.dataSource = new MatTableDataSource<Funcionario>(this.funcionarios);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.renderRows();
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.exibirErros(error);
-        this.spinner.hide();
-      }
-    });
+    this.funcionarioService
+      .obterFuncionarios()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.funcionarios = response;
+          this.dataSource = new MatTableDataSource<Funcionario>(
+            this.funcionarios
+          );
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.table.renderRows();
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.exibirErros(error);
+          this.spinner.hide();
+        },
+      });
   }
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
       this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
+      erro.forEach((mensagemErro) =>
+        this.toastr.error(mensagemErro, 'Houve um erro!')
+      );
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Houve um erro!');
     }

@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import ptBr from '@angular/common/locales/pt';
 // Material Form Controls
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -45,11 +45,14 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // Material Data tables
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { CondominiosComponent } from './components/condominios/condominios.component';
-import { NgxMaskModule } from 'ngx-mask';
+import { provideNgxMask, NgxMaskDirective } from 'ngx-mask';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ToastrModule } from 'ngx-toastr';
 import { FormatarCnpjPipe } from './shared/helpers/formatar-cnpj.pipe';
@@ -72,11 +75,11 @@ import { MainComponent } from './components/main/main.component';
 import { EntregasComponent } from './components/entregas/entregas.component';
 import { DetalhesEntregaComponent } from './components/entregas/detalhes-entrega/detalhes-entrega.component';
 import { LoginComponent } from './components/login/login.component';
-import { TokenInterceptor } from './helpers/interceptors/token.interceptor';
+import { tokenInterceptor } from './helpers/interceptors/token.interceptor';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 
-registerLocaleData(ptBr)
+registerLocaleData(ptBr);
 
 @NgModule({
   declarations: [
@@ -100,14 +103,13 @@ registerLocaleData(ptBr)
     EntregasComponent,
     DetalhesEntregaComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     // Angular Modules
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
     // Angular Material Modules
@@ -148,29 +150,24 @@ registerLocaleData(ptBr)
     MatSortModule,
     MatTableModule,
     // Third Party Modules
-    NgxMaskModule.forRoot(),
+    NgxMaskDirective,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
-    LayoutModule
+    LayoutModule,
   ],
-  schemas: [
-    CUSTOM_ELEMENTS_SCHEMA
-  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     {
       provide: LOCALE_ID,
-      useValue: "pt-BR"
+      useValue: 'pt-BR',
     },
     {
       provide: MatPaginatorIntl,
-      useValue: obterPaginatorIntlPortugues()
+      useValue: obterPaginatorIntlPortugues(),
     },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
-      multi: true
-    }
+    provideHttpClient(withInterceptors([tokenInterceptor])),
+    provideNgxMask(),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

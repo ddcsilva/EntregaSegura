@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { UsuarioService } from '@app/services/usuario.service';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, map } from 'rxjs';
@@ -7,7 +7,7 @@ import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class PossuiPerfilGuard implements CanActivate {
+export class PossuiPerfilGuard  {
   constructor(
     private usuarioService: UsuarioService,
     private toastr: ToastrService,

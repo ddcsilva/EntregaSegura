@@ -14,7 +14,7 @@ import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.se
 @Component({
   selector: 'app-detalhes-unidade',
   templateUrl: './detalhes-unidade.component.html',
-  styleUrls: ['./detalhes-unidade.component.scss']
+  styleUrls: ['./detalhes-unidade.component.scss'],
 })
 export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
   public titulo: string = '';
@@ -37,7 +37,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
     private readonly spinner: NgxSpinnerService,
     private readonly tratamentoErrosService: TratamentoErrosService,
     private readonly dialog: MatDialog
-  ) { }
+  ) {}
 
   get formControl(): any {
     return this.formulario.controls;
@@ -75,11 +75,14 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
 
     operacao.subscribe({
       next: () => {
-        this.toastr.success(`Unidade ${this.unidadeId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
+        this.toastr.success(
+          `Unidade ${this.unidadeId ? 'atualizada' : 'criada'} com sucesso!`,
+          'Sucesso!'
+        );
         this.router.navigate(['/unidades']);
       },
       error: (error: any) => this.tratarErros(error),
-      complete: () => this.spinner.hide()
+      complete: () => this.spinner.hide(),
     });
   }
 
@@ -91,7 +94,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
   }
 
   private definirOperacao(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.unidadeId = Number(params.get('id')) || 0;
 
       if (this.unidadeId == 0) {
@@ -119,28 +122,34 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
           this.toastr.error(error.message, 'Houve um erro!');
           console.error(error);
         },
-        complete: () => this.spinner.hide()
+        complete: () => this.spinner.hide(),
       });
     }
   }
 
   private carregarCondominios() {
-    this.condominioService.obterCondominios().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (condominios: Condominio[]) => {
-        this.condominios = condominios;
-      },
-      error: (error: any) => {
-        this.tratarErros(error);
-      }
-    });
+    this.condominioService
+      .obterCondominios()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (condominios: Condominio[]) => {
+          this.condominios = condominios;
+        },
+        error: (error: any) => {
+          this.tratarErros(error);
+        },
+      });
   }
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
       bloco: ['', [Validators.required, Validators.min(1), Validators.max(20)]],
       andar: ['', [Validators.required, Validators.min(1), Validators.max(40)]],
-      numero: ['', [Validators.required, Validators.min(1), Validators.max(10)]],
-      condominioId: ['', Validators.required]
+      numero: [
+        '',
+        [Validators.required, Validators.min(1), Validators.max(10)],
+      ],
+      condominioId: ['', Validators.required],
     });
   }
 
@@ -162,7 +171,7 @@ export class DetalhesUnidadeComponent implements OnInit, OnDestroy {
             this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
-      }
+      },
     });
   }
 }

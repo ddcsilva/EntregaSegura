@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,7 +13,7 @@ import { TratamentoErrosService } from '@app/shared/services/tratamento-erros.se
 @Component({
   selector: 'app-detalhes-transportadora',
   templateUrl: './detalhes-transportadora.component.html',
-  styleUrls: ['./detalhes-transportadora.component.scss']
+  styleUrls: ['./detalhes-transportadora.component.scss'],
 })
 export class DetalhesTransportadoraComponent implements OnInit {
   public titulo: string = '';
@@ -33,7 +33,7 @@ export class DetalhesTransportadoraComponent implements OnInit {
     private readonly spinner: NgxSpinnerService,
     private readonly tratamentoErrosService: TratamentoErrosService,
     private readonly dialog: MatDialog
-  ) { }
+  ) {}
 
   get formControl(): any {
     return this.formulario.controls;
@@ -57,7 +57,8 @@ export class DetalhesTransportadoraComponent implements OnInit {
       return;
     }
 
-    const transportadora: Partial<Transportadora> = this.formulario.getRawValue();
+    const transportadora: Partial<Transportadora> =
+      this.formulario.getRawValue();
     let operacao: Observable<Transportadora>;
 
     if (this.novaTransportadora) {
@@ -69,11 +70,16 @@ export class DetalhesTransportadoraComponent implements OnInit {
 
     operacao.subscribe({
       next: () => {
-        this.toastr.success(`Transportadora ${this.transportadoraId ? 'atualizada' : 'criada'} com sucesso!`, 'Sucesso!');
+        this.toastr.success(
+          `Transportadora ${
+            this.transportadoraId ? 'atualizada' : 'criada'
+          } com sucesso!`,
+          'Sucesso!'
+        );
         this.router.navigate(['/transportadoras']);
       },
       error: (error: any) => this.tratarErros(error),
-      complete: () => this.spinner.hide()
+      complete: () => this.spinner.hide(),
     });
   }
 
@@ -85,7 +91,7 @@ export class DetalhesTransportadoraComponent implements OnInit {
   }
 
   private definirOperacao(): void {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.transportadoraId = Number(params.get('id')) || 0;
 
       if (this.transportadoraId == 0) {
@@ -102,36 +108,52 @@ export class DetalhesTransportadoraComponent implements OnInit {
     if (!this.novaTransportadora) {
       this.spinner.show();
 
-      this.transportadoraService.obterTransportadoraPorId(this.transportadoraId).subscribe({
-        next: (transportadora: Transportadora) => {
-          this.transportadora = { ...transportadora };
-          this.formulario.patchValue(this.transportadora);
-          this.titulo = 'Edição: ' + this.transportadora.nome;
-        },
-        error: (error: any) => {
-          this.spinner.hide();
-          this.toastr.error(error.message, 'Houve um erro!');
-          console.error(error);
-        },
-        complete: () => this.spinner.hide()
-      });
+      this.transportadoraService
+        .obterTransportadoraPorId(this.transportadoraId)
+        .subscribe({
+          next: (transportadora: Transportadora) => {
+            this.transportadora = { ...transportadora };
+            this.formulario.patchValue(this.transportadora);
+            this.titulo = 'Edição: ' + this.transportadora.nome;
+          },
+          error: (error: any) => {
+            this.spinner.hide();
+            this.toastr.error(error.message, 'Houve um erro!');
+            console.error(error);
+          },
+          complete: () => this.spinner.hide(),
+        });
     }
   }
 
   private validarformulario(): void {
     this.formulario = this.formBuilder.group({
-      nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]],
+      nome: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(100),
+        ],
+      ],
       cnpj: ['', [ValidadorCampos.ValidaCNPJ]],
       email: ['', [Validators.email]],
-      telefone: ['', [Validators.minLength(10)]]
+      telefone: ['', [Validators.minLength(10)]],
     });
   }
 
-  private atualizarTransportadora(transportadora: Transportadora): Observable<Transportadora> {
-    return this.transportadoraService.atualizar(transportadora.id, transportadora);
+  private atualizarTransportadora(
+    transportadora: Transportadora
+  ): Observable<Transportadora> {
+    return this.transportadoraService.atualizar(
+      transportadora.id,
+      transportadora
+    );
   }
 
-  private criarTransportadora(transportadora: Transportadora): Observable<Transportadora> {
+  private criarTransportadora(
+    transportadora: Transportadora
+  ): Observable<Transportadora> {
     return this.transportadoraService.criar(transportadora);
   }
 
@@ -145,14 +167,15 @@ export class DetalhesTransportadoraComponent implements OnInit {
             this.toastr.error(mensagem.trim(), 'Houve um erro!');
           }
         }
-      }
+      },
     });
   }
 
   private atualizarMascaraTelefone(value: string): void {
     if (value) {
       const numbers = value.replace(/\D/g, '');
-      this.mascaraTelefone = numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
+      this.mascaraTelefone =
+        numbers.length > 10 ? '(00) 00000-0000' : '(00) 0000-00009';
     } else {
       this.mascaraTelefone = '(00) 0000-00009';
     }

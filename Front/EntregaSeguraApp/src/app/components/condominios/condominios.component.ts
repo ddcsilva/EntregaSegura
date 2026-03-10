@@ -14,13 +14,21 @@ import { ExclusaoDialogComponent } from '@app/shared/components/exclusao-dialog/
 @Component({
   selector: 'app-condominios',
   templateUrl: './condominios.component.html',
-  styleUrls: ['./condominios.component.scss']
+  styleUrls: ['./condominios.component.scss'],
 })
 export class CondominiosComponent implements OnInit, OnDestroy {
   public titulo: string = 'Lista de Condomínios';
   public condominios: Condominio[] = [];
-  public colunas: string[] = ['nome', 'telefone', 'bairro', 'cidade', 'estado', 'acoes'];
-  public dataSource: MatTableDataSource<Condominio> = new MatTableDataSource<Condominio>();
+  public colunas: string[] = [
+    'nome',
+    'telefone',
+    'bairro',
+    'cidade',
+    'estado',
+    'acoes',
+  ];
+  public dataSource: MatTableDataSource<Condominio> =
+    new MatTableDataSource<Condominio>();
   public filtroCondominio: string = '';
   private destroy$ = new Subject<void>();
 
@@ -34,7 +42,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private spinner: NgxSpinnerService,
     private dialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.spinner.show();
@@ -57,7 +65,7 @@ export class CondominiosComponent implements OnInit, OnDestroy {
 
   public excluirCondominio(id: number) {
     const dialogRef = this.dialog.open(ExclusaoDialogComponent);
-    dialogRef.afterClosed().subscribe(confirmacaoExclusao => {
+    dialogRef.afterClosed().subscribe((confirmacaoExclusao) => {
       if (confirmacaoExclusao) {
         this.condominioService.excluir(id).subscribe({
           next: () => {
@@ -66,34 +74,41 @@ export class CondominiosComponent implements OnInit, OnDestroy {
           },
           error: (error: any) => {
             this.exibirErros(error);
-          }
+          },
         });
       }
     });
   }
 
   private obterCondominios(): void {
-    this.condominioService.obterCondominios().pipe(takeUntil(this.destroy$)).subscribe({
-      next: (response) => {
-        this.condominios = response;
-        this.dataSource = new MatTableDataSource<Condominio>(this.condominios);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.renderRows();
-        this.spinner.hide();
-      },
-      error: (error) => {
-        this.exibirErros(error);
-        this.spinner.hide();
-      }
-    });
+    this.condominioService
+      .obterCondominios()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          this.condominios = response;
+          this.dataSource = new MatTableDataSource<Condominio>(
+            this.condominios
+          );
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+          this.table.renderRows();
+          this.spinner.hide();
+        },
+        error: (error) => {
+          this.exibirErros(error);
+          this.spinner.hide();
+        },
+      });
   }
 
   private exibirErros(erro: any) {
     if (typeof erro === 'string') {
       this.toastr.error(erro, 'Houve um erro!');
     } else if (erro instanceof Array) {
-      erro.forEach(mensagemErro => this.toastr.error(mensagemErro, 'Houve um erro!'));
+      erro.forEach((mensagemErro) =>
+        this.toastr.error(mensagemErro, 'Houve um erro!')
+      );
     } else {
       this.toastr.error(erro.message || 'Erro ao excluir', 'Houve um erro!');
     }
